@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="540" Id="Workplace" Left="8" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="760" WorkArea="true">
+		<Static Align="Center" BKColor="user2" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,18" Height="37" Id="Static0" Left="6" TabOrder="1" Text="사업장&#32;정보" Top="7" VAlign="Middle" Width="743"></Static>
+		<Button BKColor="user1" Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="28" Id="btn_addDetailCode" Left="20" TabOrder="2" Text="추가" Top="48" Width="60"></Button>
+		<Button BKColor="user1" Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="28" Id="btn_delDetailCode" Left="86" TabOrder="3" Text="삭제" Top="48" Width="60"></Button>
+		<Button BKColor="user1" Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="28" Id="btn_batchCode" Left="152" TabOrder="4" Text="저장" Top="48" Width="60"></Button>
+		<Static Font="한컴&#32;바겐세일&#32;M,12" Height="456" Id="Static1" Left="376" TabOrder="5" Text="상세정보" Top="72" Type="Groupbox" Width="365"></Static>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static2" Left="400" TabOrder="6" Text="사업장코드" Top="96" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_workplace" Column="WORKPLACE_CODE" Enable="FALSE" Height="27" Id="edt_workplaceCode" Left="512" Readonly="TRUE" TabOrder="7" Top="97" Width="170"></Edit>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static3" Left="400" TabOrder="8" Text="사업장명" Top="156" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_workplace" Column="WORKPLACE_NAME" Height="27" Id="edt_workplaceName" Left="512" TabOrder="9" Top="156" Width="170"></Edit>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static4" Left="400" TabOrder="10" Text="대표자명" Top="185" VAlign="Middle" Width="110"></Static>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static5" Left="400" TabOrder="11" Text="업태" Top="270" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_workplace" Column="WORKPLACE_BUSINESS_CONDITIONS" Height="27" Id="edt_workplaceBusinessConditions" Left="512" TabOrder="12" Top="270" Width="170"></Edit>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static7" Left="400" TabOrder="17" Text="상세주소" Top="383" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_workplace" Column="WORKPLACE_DETAIL_ADDRESS" Height="27" Id="edt_workplaceDetailAddress" Left="512" TabOrder="18" Top="383" Width="220"></Edit>
+		<Edit BindDataset="gds_workplace" Column="WORKPLACE_BASIC_ADDRESS" Enable="FALSE" Height="27" Id="edt_workplaceBasicAddress" Left="512" TabOrder="16" Top="355" Width="220"></Edit>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static8" Left="400" TabOrder="15" Text="기본주소" Top="355" VAlign="Middle" Width="110"></Static>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static9" Left="400" TabOrder="13" Text="우편번호" Top="326" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_workplace" Column="WORKPLACE_ZIP_CODE" Enable="FALSE" Height="27" Id="edt_workplaceZipCode" Left="512" TabOrder="14" Top="326" Width="120"></Edit>
+		<Edit BindDataset="gds_workplace" Column="WORKPLACE_FAX_NUMBER" Height="27" Id="edt_workplaceFaxNumber" Left="512" TabOrder="22" Top="439" Width="170"></Edit>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static13" Left="400" TabOrder="21" Text="팩스번호" Top="439" VAlign="Middle" Width="110"></Static>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static14" Left="400" TabOrder="19" Text="전화번호" Top="411" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_workplace" Column="WORKPLACE_TEL_NUMBER" Height="27" Id="edt_workplaceTelNubmer" Left="512" TabOrder="20" Top="411" Width="170"></Edit>
+		<Button BKColor="user1" Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="28" Id="Button0" Left="632" TabOrder="23" Text="조회" Top="327" Width="49"></Button>
+		<Grid BindDataset="gds_workplace" BoldHead="true" Bottom="528" Enable="true" EndLineColor="default" Height="448" Id="Grid0" InputPanel="FALSE" Left="16" LineColor="default" Right="356" TabOrder="24" TabStop="true" Top="80" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="340">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="59"/>
+						<col width="108"/>
+						<col width="50"/>
+						<col width="87"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="사업장코드"/>
+						<cell col="1" display="text" text="사업자명"/>
+						<cell col="2" display="text" text="대표자명"/>
+						<cell col="3" display="text" text="사업장&#32;전화번호"/>
+					</head>
+					<body>
+						<cell col="0" colid="WORKPLACE_CODE" display="text"/>
+						<cell col="1" colid="WORKPLACE_NAME" display="text"/>
+						<cell col="2" colid="WORKPLACE_CEO_NAME" display="text"/>
+						<cell col="3" colid="WORKPLACE_TEL_NUMBER" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static6" Left="400" TabOrder="25" Text="회사코드" Top="126" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_workplace" Column="COMPANY_CODE" Enable="FALSE" Height="27" Id="edt_companyCode" Left="512" Readonly="TRUE" TabOrder="26" Top="126" Width="170"></Edit>
+		<Edit BindDataset="gds_workplace" Column="WORKPLACE_CEO_NAME" Height="27" Id="edt_workplaceCeoName" Left="512" TabOrder="27" Top="185" Width="170"></Edit>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static10" Left="400" TabOrder="28" Text="사업자등록번호" Top="214" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_workplace" Column="BUSINESS_LICENSE_NUMBER" Height="27" Id="edt_businessLicenseNumber" Left="512" TabOrder="29" Top="214" Width="170"></Edit>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static11" Left="400" TabOrder="30" Text="법인등록번호" Top="242" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_workplace" Column="CORPORATION_LICENSE_NUMBER" Height="27" Id="edt_corporationLicenseNumber" Left="512" TabOrder="31" Top="242" Width="170"></Edit>
+		<Edit BindDataset="gds_workplace" Column="WORKPLACE_ESTABLISH_DATE" Height="27" Id="edt_workplaceEstablishDate" Left="512" TabOrder="33" Top="465" Width="170"></Edit>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static12" Left="400" TabOrder="32" Text="설립년월일" Top="467" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_workplace" Column="WORKPLACE_BUSINESS_ITEMS" Height="27" Id="edt_workplaceBusinessItems" Left="512" TabOrder="35" Top="298" Width="170"></Edit>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static15" Left="400" TabOrder="34" Text="종목" Top="298" VAlign="Middle" Width="110"></Static>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static16" Left="400" TabOrder="36" Text="본점여부" Top="495" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_workplace" Column="IS_MAIN_OFFICE" Height="27" Id="edt_isMainOffice" Left="512" TabOrder="37" Top="493" Width="170"></Edit>
+	</Form>
+	<Script></Script>
+</Window>

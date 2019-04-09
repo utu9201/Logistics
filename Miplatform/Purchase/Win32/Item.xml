@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="766" Id="Item" Left="8" OnLoadCompleted="Item_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1330" WorkArea="true">
+		<Static Align="Center" BKColor="gold" Border="SunkenEdge" Font="한컴산뜻돋움,18,Bold" Height="38" Id="Static0" Left="8" TabOrder="1" Text="품목관리" Top="8" VAlign="Middle" Width="1289"></Static>
+		<Grid AutoFit="TRUE" BindDataset="gds_item" BkColor2="default" BoldHead="true" Bottom="728" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="616" Id="Grid0" InputPanel="FALSE" Left="16" LineColor="default" MinWidth="100" Right="1302" RowHeight="25" TabOrder="2" TabStop="true" Top="112" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1286">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="80"/>
+						<col width="112"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="59"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="120"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="품목코드"/>
+						<cell col="1" display="text" text="품목명"/>
+						<cell col="2" display="text" text="품목군코드"/>
+						<cell col="3" display="text" text="품목분류"/>
+						<cell col="4" display="text" text="단위"/>
+						<cell col="5" display="text" text="손실율"/>
+						<cell col="6" display="text" text="소요일"/>
+						<cell col="7" display="text" text="표준단가"/>
+					</head>
+					<body>
+						<cell col="0" colid="ITEM_CODE" display="text"/>
+						<cell col="1" colid="ITEM_NAME" display="text"/>
+						<cell col="2" colid="ITEM_GROUP_CODE" display="text"/>
+						<cell col="3" colid="ITEM_CLASSIFICATION" display="text"/>
+						<cell col="4" colid="UNIT_OF_STOCK" display="text"/>
+						<cell col="5" colid="LOSS_RATE" display="text"/>
+						<cell col="6" colid="LEAD_TIME" display="text"/>
+						<cell col="7" colid="STANDARD_UNIT_PRICE" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+function Item_OnLoadCompleted(obj)
+{
+	
+			http.Sync=true;
+	
+	transaction("findItemList",
+				"svcPurchase::item.do?method=findItemList",
+				"",
+				"gds_item=gds_item",
+				"",
+				"callback");
+
+			
+	//initSession(false);
+	http.Sync=false;	
+	
+	
+}
+
+function comb_item_OnChanged(obj, strCode, strText, nOldIndex, nNewIndex){
+	gds_item.filter("ITEM_CODE='"+strText+"'");
+}
+function Button1_OnClick(obj)
+{
+	gds_item.unfilter();
+}
+]]></Script>
+</Window>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="776" Id="Delivery" Left="8" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1330" WorkArea="true">
+		<Static Align="Center" BKColor="gold" Border="SunkenEdge" Font="한컴산뜻돋움,18,Bold" Height="37" Id="Static0" Left="8" TabOrder="1" Text="창고관리" Top="8" VAlign="Middle" Width="1289"></Static>
+		<Grid AutoFit="TRUE" BkColor2="default" BoldHead="true" Bottom="760" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" Height="661" Id="Grid0" InputPanel="FALSE" Left="11" LineColor="default" MinWidth="100" Right="1301" TabOrder="2" TabStop="true" Top="99" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1290"></Grid>
+		<Button BKColor="gold" Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="btn_addDetailCode" Left="1063" TabOrder="3" Text="추가" Top="48" Width="76"></Button>
+		<Button BKColor="gold" Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="btn_delDetailCode" Left="1143" TabOrder="4" Text="삭제" Top="48" Width="76"></Button>
+		<Button BKColor="gold" Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="Button0" Left="1223" TabOrder="5" Text="저장" Top="48" Width="76"></Button>
+	</Form>
+	<Script></Script>
+</Window>

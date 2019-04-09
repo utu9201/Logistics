@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="766" Id="BOM" Left="8" OnLoadCompleted="BOM_OnLoadCompleted" PidAttrib="7" Title="BOM&#32;관리" Top="8" Ver="1.0" Width="1334" WorkArea="true">
+		<Tab BKSelColor="goldenrod" Border="SunkenEdge" Font="한컴산뜻돋움,13,Bold" Height="728" Id="tab_bom" Left="16" OnChanged="tab_bom_OnChanged" TabOrder="1" Top="16" Width="1288">
+			<Contents>
+				<TabPage BorderColor="black" Font="한컴산뜻돋움,11,Bold" Height="691" Id="tab1" Left="2" TabOrder="1" Text="BOM&#32;관리" Top="35" Width="1284">
+					<Static Align="Center" BKColor="gold" Border="SunkenEdge" Font="한컴산뜻돋움,18,Bold" Height="37" Id="Static0" Left="6" TabOrder="1" Text="BOM&#32;관리" Top="9" VAlign="Middle" Width="1258"></Static>
+					<Combo CodeColumn="ITEM_CODE" DataColumn="ITEM_NAME" Font="한컴산뜻돋움,11" Height="36" Id="combo_bom" INDEX="0" InnerDataset="gds_item" Left="12" OnChanged="combo_bom_OnChanged" TabOrder="2" Top="62" Width="228"></Combo>
+					<Static Font="한컴산뜻돋움,11" Height="35" Id="Static1" Left="263" TabOrder="3" Text="품목코드로&#32;필터링이&#32;가능합니다" Top="70" Width="220"></Static>
+					<Button BKColor="gold" Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="Button0" Left="488" OnClick="tab_bom_tab1_Button0_OnClick" TabOrder="4" Text="필터해제" Top="60" Width="88"></Button>
+					<Grid AutoFit="TRUE" BindDataset="gds_bom" BkColor2="default" BoldHead="true" Bottom="677" Enable="true" EndLineColor="default" Font="함초롬돋움,11" HeadHeight="30" Height="568" Id="grd_bom" InputPanel="FALSE" Left="8" LineColor="default" MinWidth="100" Right="1272" RowHeight="25" TabOrder="5" TabStop="true" Top="109" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1264">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="0"/>
+									<col width="250"/>
+									<col width="250"/>
+									<col width="250"/>
+									<col width="250"/>
+									<col width="118"/>
+								</columns>
+								<head>
+									<cell col="0" display="text" text="NO"/>
+									<cell col="1" display="text" text="품목코드"/>
+									<cell col="2" display="text" text="품목명"/>
+									<cell col="3" display="text" text="상위품목코드"/>
+									<cell col="4" display="text" text="상위품목명"/>
+									<cell col="5" display="text" text="정미수량"/>
+								</head>
+								<body>
+									<cell col="0" colid="NO" display="text"/>
+									<cell col="1" colid="ITEM_CODE" display="text" expr="Space((parseInt(LEV)&#32;-&#32;1)&#32;*&#32;3)&#32;+&#32;item_code"/>
+									<cell col="2" colid="ITEM_CODE" combocol="ITEM_CODE" combodataset="gds_item" combodisplaynltext="true" combotext="ITEM_NAME" display="combo" edit="combo"/>
+									<cell col="3" colid="PARENT_ITEM_CODE" display="text"/>
+									<cell col="4" colid="PARENT_ITEM_CODE" combocol="ITEM_CODE" combodataset="gds_item" combotext="ITEM_NAME" display="combo"/>
+									<cell col="5" colid="NET_AMOUNT" display="text"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+				</TabPage>
+				<TabPage BorderColor="black" FixedFont="한컴산뜻돋움,11,Bold" Font="한컴산뜻돋움,11,Bold" Height="691" Id="tab2" Left="2" TabOrder="1" Text="정전개로&#32;보기" Top="35" Width="1284">
+					<Static Align="Center" BKColor="gold" Border="SunkenEdge" Font="한컴산뜻돋움,18,Bold" Height="37" Id="Static0" Left="6" TabOrder="1" Text="BOM&#32;조회" Top="9" VAlign="Middle" Width="1258"></Static>
+					<Combo CodeColumn="ITEM_CODE" DataColumn="ITEM_NAME" Height="36" Id="combo_bomForward" InnerDataset="gds_item" Left="12" OnChanged="tab_bom_tab2_combo_bomForward_OnChanged" TabOrder="2" Top="62" Width="228"></Combo>
+					<Static Font="한컴산뜻돋움,11" Height="35" Id="Static1" Left="263" TabOrder="3" Text="품목코드를&#32;선택해주세요" Top="71" Width="178"></Static>
+					<Grid AutoFit="TRUE" BindDataset="gds_bomDeploy" BkColor2="default" BoldHead="true" Bottom="678" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="568" Id="Grid0" InputPanel="FALSE" Left="8" LineColor="default" MinWidth="100" Right="1264" RowHeight="25" TabOrder="4" TabStop="true" Top="110" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1256">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="80"/>
+									<col width="87"/>
+									<col width="123"/>
+									<col width="86"/>
+									<col width="49"/>
+									<col width="72"/>
+									<col width="136"/>
+								</columns>
+								<head>
+									<cell col="0" display="text" text="품목코드"/>
+									<cell col="1" display="text" text="상위품목코드"/>
+									<cell col="2" display="text" text="품목명"/>
+									<cell col="3" display="text" text="소요일"/>
+									<cell col="4" display="text" text="손실율"/>
+									<cell col="5" display="text" text="정미수량"/>
+									<cell col="6" display="text" text="상위품목명"/>
+								</head>
+								<body>
+									<cell col="0" colid="ITEM_CODE" display="text"/>
+									<cell col="1" colid="PARENT_ITEM_CODE" display="text"/>
+									<cell col="2" colid="ITEM_NAME" display="text"/>
+									<cell col="3" colid="LEAD_TIME" display="text"/>
+									<cell col="4" colid="LOSS_RATE" display="text"/>
+									<cell col="5" colid="NET_AMOUNT" display="text"/>
+									<cell col="6" colid="PARENT_ITEM_NAME" display="text"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+				</TabPage>
+				<TabPage BorderColor="black" Font="한컴산뜻돋움,11,Bold" Height="691" Id="tab3" Left="2" TabOrder="1" Text="역전개로&#32;보기" Top="35" Width="1284">
+					<Static Align="Center" BKColor="gold" Border="SunkenEdge" Font="한컴산뜻돋움,18,Bold" Height="37" Id="Static0" Left="6" TabOrder="1" Text="BOM&#32;조회" Top="9" VAlign="Middle" Width="1258"></Static>
+					<Combo CodeColumn="ITEM_CODE" DataColumn="ITEM_NAME" Height="36" Id="combo_bomReverse" InnerDataset="gds_item" Left="12" OnChanged="tab_bom_tab3_combo_bomReverse_OnChanged" TabOrder="2" Top="62" Width="228"></Combo>
+					<Static Font="한컴산뜻돋움,11" Height="35" Id="Static1" Left="265" TabOrder="3" Text="품목코드를&#32;선택해주세요" Top="71" Width="177"></Static>
+					<Grid AutoFit="TRUE" BindDataset="gds_bomDeploy" BkColor2="default" BoldHead="true" Bottom="678" Enable="true" EndLineColor="default" HeadHeight="30" Height="568" Id="grd_bomDeploy" InputPanel="FALSE" Left="8" LineColor="default" MinWidth="100" Right="1272" RowHeight="25" TabOrder="4" TabStop="true" Top="110" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1264">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="80"/>
+									<col width="94"/>
+									<col width="143"/>
+									<col width="85"/>
+									<col width="63"/>
+									<col width="70"/>
+									<col width="129"/>
+								</columns>
+								<head>
+									<cell col="0" display="text" text="품목코드"/>
+									<cell col="1" display="text" text="상위품목코드"/>
+									<cell col="2" display="text" text="품목명"/>
+									<cell col="3" display="text" text="소요일"/>
+									<cell col="4" display="text" text="손실율"/>
+									<cell col="5" display="text" text="정미수량"/>
+									<cell col="6" display="text" text="상위품목명"/>
+								</head>
+								<body>
+									<cell col="0" colid="ITEM_CODE" display="text"/>
+									<cell col="1" colid="PARENT_ITEM_CODE" display="text"/>
+									<cell col="2" colid="ITEM_NAME" display="text"/>
+									<cell col="3" colid="LEAD_TIME" display="text"/>
+									<cell col="4" colid="LOSS_RATE" display="text"/>
+									<cell col="5" colid="NET_AMOUNT" display="text"/>
+									<cell col="6" colid="PARENT_ITEM_NAME" display="text"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+				</TabPage>
+			</Contents>
+		</Tab>
+	</Form>
+	<Script><![CDATA[function callback(a, b, c) {
+trace(a);
+trace(b);
+trace(c);
+}
+
+function BOM_OnLoadCompleted(obj)
+{
+	
+		http.Sync=true;
+	
+	transaction("findBomList",
+				"svcPurchase::bom.do?method=findBomList",
+				"",
+				"gds_bom=gds_bom",
+				"",
+				"callback");
+	
+	
+	transaction("findItemList",
+				"svcPurchase::item.do?method=findItemList",
+				"",
+				"gds_item=gds_item",
+				"",
+				"callback");
+			
+	//initSession(false);
+	http.Sync=false;	
+	gds_item.filter("ITEM_CLASSIFICATION='IT-CI'");
+		
+}
+
+
+
+function tab_bom_tab2_combo_bomForward_OnChanged(obj,strCode,strText,nOldIndex,nNewIndex)
+{
+
+		transaction("findBomDeployList",
+			"svcPurchase::/bom.do?method=findBomDeployList",
+			"",
+			"gds_bomDeploy=gds_bomDeploy",
+			"itemCode ='" + strCode +"' deployCondition='forward'",
+			"callback"
+	);		
+}
+
+function tab_bom_tab3_combo_bomReverse_OnChanged(obj,strCode,strText,nOldIndex,nNewIndex)
+{
+	
+	transaction("findBomDeployList2",
+			"svcPurchase::/bom.do?method=findBomDeployList",
+			"",
+			"gds_bomDeploy=gds_bomDeploy",
+			"itemCode ='" + strCode +"' deployCondition='reverse'",
+			"callback"
+			);
+	
+	
+}
+
+function tab_bom_OnChanged(obj,nOldIndex,nNewindex)
+{
+	
+	if(nNewindex==1 || nNewindex==2){
+	gds_item.unfilter();
+		gds_bomDeploy.DeleteAll();
+	}else if(nNewindex==0){
+			transaction("findBomList",
+				"svcPurchase::bom.do?method=findBomList",
+				"",
+				"gds_bom=gds_bom",
+				"",
+				"callback");
+				
+		}
+}
+
+function tab_bom_tab1_Button0_OnClick(obj)
+{
+	gds_bomDeploy.UnFilter();
+	gds_bom.UnFilter();
+}
+
+function combo_bom_OnChanged(obj, strCode, strText, nOldIndex, nNewIndex){
+	var sFilter;
+	 trace(strCode);
+	  trace((strCode,3,4));
+	sFilter += " || pos(PARENT_ITEM_CODE,"+quote(substr(strCode,3)) + ") >= 0";
+        trace((strCode,3,4));
+	gds_bom.Filter(sFilter);
+	
+}
+
+
+function tab_bom_tab1_btn_addBom_OnClick(obj)
+{
+	dialog("Purchase::AddBomDialog.xml","");	
+}
+]]></Script>
+</Window>

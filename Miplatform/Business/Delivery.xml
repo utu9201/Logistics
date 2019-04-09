@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="540" Id="Delivery" Left="8" OnLoadCompleted="Delivery_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="760" WorkArea="true">
+		<Static Align="Center" BKColor="user2" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,18" Height="37" Id="Static0" Left="6" TabOrder="1" Text="납품등록" Top="7" VAlign="Middle" Width="743"></Static>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static2" Left="16" TabOrder="2" Text="수주목록" Top="90" VAlign="Middle" Width="110"></Static>
+		<Grid BindDataset="gds_contract" BkColor2="default" BoldHead="true" Bottom="300" Enable="true" EndLineColor="default" Height="180" Id="grd_contract" InputPanel="FALSE" Left="16" LineColor="default" OnCellDBLClick="grd_contract_OnCellDblClick" Right="392" TabOrder="3" TabStop="true" Top="120" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="376">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="108"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="수주번호"/>
+						<cell col="1" display="text" text="수주일자"/>
+						<cell col="2" display="text" text="거래처명"/>
+						<cell col="3" display="text" text="담당자"/>
+					</head>
+					<body>
+						<cell col="0" colid="CONTRACT_NO" display="text"/>
+						<cell col="1" colid="CONTRACT_DATE" display="text"/>
+						<cell col="2" colid="CUSTOMER_CODE" display="text"/>
+						<cell col="3" colid="PERSON_CODE_IN_CHARGE" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static1" Left="401" TabOrder="4" Text="미납&#32;수주품목" Top="88" VAlign="Middle" Width="110"></Static>
+		<Grid BindDataset="gds_contractDetail" BkColor2="default" BoldHead="true" Bottom="300" Enable="true" EndLineColor="default" Height="180" Id="grd_contractDetail" InputPanel="FALSE" Left="400" LineColor="default" OnCellDBLClick="grd_contractDetail_OnCellDblClick" Right="744" TabOrder="5" TabStop="true" Top="120" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="344">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="113"/>
+						<col width="53"/>
+						<col width="58"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="품명"/>
+						<cell col="1" display="text" text="수량"/>
+						<cell col="2" display="text" text="단위"/>
+						<cell col="3" display="text" text="납기일"/>
+					</head>
+					<body>
+						<cell col="0" colid="ITEM_NAME" display="text"/>
+						<cell col="1" colid="CONTRACT_AMOUNT" display="text"/>
+						<cell col="2" colid="UNIT_OF_CONTRACT" display="text"/>
+						<cell col="3" colid="DUE_DATE_OF_CONTRACT" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static3" Left="16" TabOrder="6" Text="창고별&#32;재고목록" Top="312" VAlign="Middle" Width="110"></Static>
+		<Grid BindDataset="gds_stock" BkColor2="default" BoldHead="true" Bottom="524" Enable="true" EndLineColor="default" Height="180" Id="grd_stock" InputPanel="FALSE" Left="11" LineColor="default" Right="307" TabOrder="7" TabStop="true" Top="344" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="296">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="122"/>
+						<col width="48"/>
+						<col width="43"/>
+						<col width="57"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="품명"/>
+						<cell col="1" display="text" text="재고"/>
+						<cell col="2" display="text" text="단위"/>
+						<cell col="3" display="text" text="제품"/>
+					</head>
+					<body>
+						<cell col="0" colid="ITEM_NAME" display="text"/>
+						<cell col="1" colid="STOCK_AMOUNT" display="text"/>
+						<cell col="2" colid="UNIT_OF_STOCK" display="text"/>
+						<cell col="3" colid="DESCRIPTION" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static4" Left="336" TabOrder="8" Text="납품&#32;완료&#32;목록" Top="312" VAlign="Middle" Width="110"></Static>
+		<Grid BindDataset="gds_deliveryResult" BkColor2="default" BoldHead="true" Bottom="524" Enable="true" EndLineColor="default" Height="180" Id="grd_deliveryResult" InputPanel="FALSE" Left="328" LineColor="default" Right="744" TabOrder="9" TabStop="true" Top="344" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="416">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="110"/>
+						<col width="63"/>
+						<col width="46"/>
+						<col width="80"/>
+						<col width="84"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="품목명"/>
+						<cell col="1" display="text" text="납품수량"/>
+						<cell col="2" display="text" text="단위"/>
+						<cell col="3" display="text" text="납품일자"/>
+						<cell col="4" display="text" text="업체"/>
+					</head>
+					<body>
+						<cell col="0" colid="ITEM_NAME" display="text"/>
+						<cell col="1" colid="DELIVERY_AMOUNT" display="text"/>
+						<cell col="2" colid="UNIT_OF_DELIVERY_RESULT" display="text"/>
+						<cell col="3" colid="DELIVERY_DATE" display="text"/>
+						<cell col="4" colid="CUSTOMER_CODE" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button BKColor="user1" Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="28" Id="Button0" Left="456" OnClick="Button0_OnClick" TabOrder="10" Text="납품&#32;전체조회" Top="312" Width="96"></Button>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴&#32;바겐세일&#32;M,12" Height="27" Id="Static6" Left="16" TabOrder="11" Text="판매처" Top="48" VAlign="Middle" Width="110"></Static>
+		<Edit Height="27" Id="Edit0" Left="129" TabOrder="12" Top="48" Width="150"></Edit>
+		<Button BKColor="user1" Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="28" Id="Button1" Left="280" TabOrder="13" Text="검색" Top="48" Width="49"></Button>
+		<Static Font="맑은&#32;고딕,9" Height="50" Id="Static7" Left="520" TabOrder="14" Text="미납&#32;수주폼목을&#32;더블&#32;클릭하시면&#13;&#10;납품&#32;완료목록에&#32;등록하실&#32;수&#32;있습니다" Top="86" Width="246"></Static>
+		<Button BKColor="user1" Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="28" Id="btn_registDelivery" Left="664" OnClick="btn_registDelivery_OnClick" TabOrder="15" Text="납품등록" Top="312" Width="72"></Button>
+	</Form>
+	<Script><![CDATA[
+function Delivery_OnLoadCompleted(obj)
+{
+	
+	http.Sync=true;
+	
+	transaction("findContractList",
+				"svcBusiness::contract.do?method=findContractList",
+				"",
+				"gds_contract=gds_contract",
+				"",
+				"callback");
+
+
+	transaction("findContractDetailList",
+				"svcBusiness::contract.do?method=findContractDetailList",
+				"",
+				"gds_contractDetail=gds_contractDetail",
+				"",
+				"callback");
+	
+	
+	transaction("findDeliveryResultList",
+				"svcBusiness::deliveryResult.do?method=findDeliveryResultList",
+				"",
+				"gds_deliveryResult=gds_deliveryResult",
+				"",
+				"callback");
+
+
+
+	transaction("findStockList",
+				"svcPurchase::stock.do?method=findStockList",
+				"",
+				"gds_stock=gds_stock",
+				"",
+				"callback");
+			
+	
+	http.Sync=false;	
+
+
+	gds_contract.Filter("DELIVERY_RESULT_STATUS!='Y'");
+
+	gds_contractDetail.Filter("CONTRACT_DETAIL_NO='xx'");
+	
+	gds_deliveryResult.Filter("DESCRIPTION='xx'");
+	
+}
+
+
+
+
+
+
+var customerCode;
+
+var contractRow;
+
+var contract;
+
+
+function grd_contract_OnCellDblClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+
+	contractRow = gds_contract.rowposition;
+	
+	contract = gds_contract.GetColumn(nRow,"CONTRACT_NO");
+	
+	customerCode = gds_contract.GetColumn(nRow,"CUSTOMER_CODE");
+	
+	gds_contractDetail.Filter("CONTRACT_NO='"+contract+"'");
+	
+	
+}
+
+
+
+
+
+
+var num = 1;
+
+function grd_contractDetail_OnCellDblClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	
+	var cdItemCode = gds_contractDetail.GetColumn(nRow,"ITEM_CODE");
+	
+	// 창고 ITEMCODE ROW 구함
+	var findStock = gds_stock.FindRow("ITEM_CODE",cdItemCode);
+	
+	
+	var cdAmount = gds_contractDetail.GetColumn(nRow,"CONTRACT_AMOUNT");
+	
+	var stockAmount = gds_stock.GetColumn(findStock,"STOCK_AMOUNT");
+
+	var amount0 = parseInt(stockAmount) - parseInt(cdAmount);
+	
+	
+	if(amount0 < 0){
+	
+		alert("재고수량이 부족합니다");
+	
+	}else{
+	
+		var day = Today();
+		
+		var contractDetailNo = gds_contractDetail.GetColumn(nRow,"CONTRACT_DETAIL_NO");
+		
+		var itemCode = gds_contractDetail.GetColumn(nRow,"ITEM_CODE");
+
+		var itemName = gds_contractDetail.GetColumn(nRow,"ITEM_NAME");
+		
+		var unitOfDeliveryResult = gds_contractDetail.GetColumn(nRow,"UNIT_OF_CONTRACT");
+		
+		var deliveryAmount = gds_contractDetail.GetColumn(nRow,"CONTRACT_AMOUNT");
+		
+		
+		var deliveryRow = gds_deliveryResult.AddRow();
+		
+		
+		gds_deliveryResult.SetColumn(deliveryRow,"DELIVERY_NO",'DE'+day+"-0"+(num++));
+		
+		gds_deliveryResult.SetColumn(deliveryRow,"CONTRACT_DETAIL_NO",contractDetailNo);
+		
+		gds_deliveryResult.SetColumn(deliveryRow,"WAREHOUSE_CODE","WHS-01");	
+		
+		gds_deliveryResult.SetColumn(deliveryRow,"ITEM_CODE",itemCode);		
+		
+		gds_deliveryResult.SetColumn(deliveryRow,"ITEM_NAME",itemName);		
+		
+		gds_deliveryResult.SetColumn(deliveryRow,"UNIT_OF_DELIVERY_RESULT",unitOfDeliveryResult);
+				
+		gds_deliveryResult.SetColumn(deliveryRow,"DELIVERY_AMOUNT",deliveryAmount);
+							
+		gds_deliveryResult.SetColumn(deliveryRow,"CUSTOMER_CODE",customerCode);
+									
+		gds_deliveryResult.SetColumn(deliveryRow,"DELIVERY_DATE",day);		
+										
+		gds_deliveryResult.SetColumn(deliveryRow,"DESCRIPTION","납품등록");
+											
+		gds_stock.SetColumn(findStock,"STOCK_AMOUNT",amount0);
+											
+		gds_contractDetail.SetColumn(nRow,"DELIVERY_STATUS",'Y');
+		
+		gds_contractDetail.Filter("DELIVERY_STATUS!='Y' && CONTRACT_NO='"+contract+"'");
+		
+		
+		
+		if(gds_contractDetail.count=0)
+		{
+			gds_contract.SetColumn(contractRow,"DELIVERY_RESULT_STATUS",'Y');
+			
+			gds_contract.Filter("DELIVERY_RESULT_STATUS!='Y'");
+			
+		}
+	
+		
+	
+	}
+	
+		
+}
+
+
+
+function btn_registDelivery_OnClick(obj)
+{
+	
+	if(confirm("납품을 등록하시겠습니까?")){
+	
+	
+	http.Sync=true;
+	
+		transaction(
+		"registDeliveryResult",
+		"svcBusiness::deliveryResult.do?method=registDeliveryResult",
+		"gds_contract=gds_contract:u gds_contractDetail=gds_contractDetail:u gds_stock=gds_stock:u gds_deliveryResult=gds_deliveryResult:u",
+		"gds_prm=gds_prm",
+		"",
+		"callback");
+		
+	http.Sync=false;
+	
+	
+	}
+	
+	gds_deliveryResult.Filter("DESCRIPTION!='Y'");
+	
+}
+
+
+
+function callback(trid, ErrorCode, ErrorMsg){
+
+
+	if(trid=="registDeliveryResult"){
+		if(ErrorCode >= 0){
+			alert("저장이 완료되었습니다");
+		}
+	}
+}
+
+function Button0_OnClick(obj)
+{
+	gds_deliveryResult.UnFilter();
+}
+]]></Script>
+</Window>

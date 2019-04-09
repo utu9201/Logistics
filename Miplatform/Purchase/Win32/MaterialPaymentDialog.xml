@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="720" Id="MaterialPaymentDialog" Left="8" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1200" WorkArea="true">
+		<Grid AutoFit="TRUE" BindDataset="gds_materialPayment" BkColor2="default" BoldHead="true" Bottom="704" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="696" Id="Grid0" InputPanel="FALSE" Left="8" LineColor="default" MinWidth="100" Right="1184" RowHeight="25" TabOrder="1" TabStop="true" Top="8" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1176">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="121"/>
+						<col width="116"/>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="코드"/>
+						<cell col="1" display="text" text="출고일"/>
+						<cell col="2" display="text" text="작업지시번호"/>
+						<cell col="3" display="text" text="품목명"/>
+						<cell col="4" display="text" text="출고량"/>
+						<cell col="5" display="text" text="단위"/>
+					</head>
+					<body>
+						<cell col="0" colid="ITEM_CODE" display="text"/>
+						<cell col="1" colid="PAYMENT_DATE" display="text"/>
+						<cell col="2" colid="WORK_INSTRUCTION_NO" display="text"/>
+						<cell col="3" colid="ITEM_NAME" display="text"/>
+						<cell col="4" colid="PAYMENT_AMOUNT" display="text"/>
+						<cell col="5" colid="UNIT_PAYMENT" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script></Script>
+</Window>

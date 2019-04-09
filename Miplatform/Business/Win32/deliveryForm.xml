@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="776" Id="deliveryResultForm" Left="8" OnInit="deliveryForm_OnLoadCompleted" PidAttrib="7" Title="deliveryForm" Top="8" Ver="1.0" Width="1330" WorkArea="true">
+		<Static Align="Center" Border="SunkenEdge" BorderColor="goldenrod" Font="한컴산뜻돋움,18,Bold" Height="37" Id="Static0" Left="16" Style="BUTTON_STYLE" TabOrder="1" Text="납품완료확인" Top="16" VAlign="Middle" Width="1289"></Static>
+		<Grid AutoFit="TRUE" BindDataset="gds_deliveryResult" BkColor2="default" BoldHead="true" Bottom="752" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="672" Id="grd_contract" InputPanel="FALSE" Left="40" LineColor="default" MinWidth="100" Right="1312" RowHeight="25" Style="BUTTON_STYLE" TabOrder="2" TabStop="true" Top="80" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1272">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="98"/>
+						<col width="189"/>
+						<col width="52"/>
+						<col width="122"/>
+						<col width="38"/>
+						<col width="32"/>
+						<col width="80"/>
+						<col width="83"/>
+						<col width="60"/>
+					</columns>
+					<head>
+						<cell autosizing="keep" col="0" display="text" text="납품번호"/>
+						<cell autosizing="keep" col="1" display="text" text="수주상세번호"/>
+						<cell autosizing="keep" col="2" display="text" text="상품코드"/>
+						<cell autosizing="keep" col="3" display="text" text="상품명"/>
+						<cell autosizing="keep" col="4" display="text" text="수량"/>
+						<cell autosizing="keep" col="5" display="text" text="단위"/>
+						<cell autosizing="keep" col="6" display="text" text="납품일"/>
+						<cell autosizing="keep" col="7" display="text" text="내용"/>
+						<cell autosizing="keep" col="8" display="text" text="거래처"/>
+					</head>
+					<body>
+						<cell col="0" colid="DELIVERY_NO" display="text"/>
+						<cell col="1" colid="CONTRACT_DETAIL_NO" display="text"/>
+						<cell col="2" colid="ITEM_CODE" display="text"/>
+						<cell col="3" colid="ITEM_NAME" display="text"/>
+						<cell col="4" colid="DELIVERY_AMOUNT" display="text"/>
+						<cell col="5" colid="UNIT_OF_DELIVERY_RESULT" display="text"/>
+						<cell col="6" colid="DELIVERY_DATE" display="text"/>
+						<cell col="7" colid="DESCRIPTION" display="text"/>
+						<cell col="8" colid="CUSTOMER_CODE" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[function deliveryForm_OnLoadCompleted(obj)
+{
+					
+		transaction("findCompleteDeliveryList",
+				"svcBusiness::deliveryResult.do?method=findDeliveryResultList",
+				"",
+				"gds_deliveryResult=gds_deliveryResult",
+				"",
+				"");
+}]]></Script>
+</Window>

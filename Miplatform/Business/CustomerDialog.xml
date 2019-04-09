@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="300" Id="CustomerDialog" Left="8" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="300" WorkArea="true">
+		<Grid BkColor2="default" BoldHead="true" Bottom="282" Enable="true" EndLineColor="default" Height="265" Id="Grid0" InputPanel="FALSE" Left="14" LineColor="default" Right="281" TabOrder="1" TabStop="true" Top="17" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="267"></Grid>
+	</Form>
+	<Script></Script>
+</Window>

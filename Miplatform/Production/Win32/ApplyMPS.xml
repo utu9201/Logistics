@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Enable="FALSE" Height="744" Id="ApplyMPS" Left="8" OnLoadCompleted="ApplyMPS_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1334" WorkArea="true">
+		<Grid AutoFit="TRUE" BindDataset="gds_mps" BkColor2="default" BoldHead="true" Bottom="432" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="344" Id="grd_applyMps" InputPanel="FALSE" Left="8" LineColor="default" MinWidth="100" Right="1317" RowHeight="25" ScrollCell="true" Style="BUTTON_STYLE" TabOrder="1" TabStop="true" Top="88" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1309">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="99"/>
+						<col width="117"/>
+						<col width="99"/>
+						<col width="39"/>
+						<col width="80"/>
+						<col width="56"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="55"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="주생산계획번호"/>
+						<cell col="1" display="text" text="수주상세일렬번호"/>
+						<cell col="2" display="text" text="품목명"/>
+						<cell col="3" display="text" text="단위"/>
+						<cell col="4" display="text" text="계획일자"/>
+						<cell col="5" display="text" text="계획수량"/>
+						<cell col="6" display="text" text="납기일"/>
+						<cell col="7" display="text" text="예정마감일자"/>
+						<cell col="8" display="text" text="적용상태"/>
+					</head>
+					<body>
+						<cell col="0" colid="MPS_NO" display="text" scrollbar="both"/>
+						<cell col="1" colid="CONTRACT_DETAIL_NO" display="text" scrollbar="both"/>
+						<cell col="2" colid="ITEM_NAME" display="text" scrollbar="both"/>
+						<cell col="3" colid="UNIT_OF_MPS" display="text" scrollbar="both"/>
+						<cell col="4" colid="MPS_PLAN_DATE" display="text" scrollbar="both"/>
+						<cell col="5" colid="MPS_PLAN_AMOUNT" display="text" scrollbar="both"/>
+						<cell col="6" colid="DUE_DATE_OF_MPS" display="text" scrollbar="both"/>
+						<cell col="7" colid="SCHEDULED_END_DATE" display="text" scrollbar="both"/>
+						<cell col="8" colid="MRP_APPLY_STATUS" display="text" scrollbar="both"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+function ApplyMPS_OnLoadCompleted(obj)
+{
+
+	
+
+}
+
+
+
+
+function btn_mpSearch_OnClick(obj)
+{
+			transaction("findRangedContractDetailList",
+				"svcBusiness::contract.do?method=findContractDetailList",
+				"",
+				"gds_contractDetail=gds_contractDetail",
+				"fromDate='"+Calendar0.Text+"' toDate='"+Calendar1.Text+"'",
+				"callback");
+	
+}
+
+function callback(){
+	gds_mps.filter();
+}]]></Script>
+</Window>

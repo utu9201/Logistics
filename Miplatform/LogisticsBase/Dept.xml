@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="540" Id="Dept" Left="8" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="760" WorkArea="true">
+		<Static Align="Center" BKColor="user2" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,18" Height="37" Id="Static0" Left="8" TabOrder="1" Text="부서관리" Top="8" VAlign="Middle" Width="743"></Static>
+		<Button BKColor="user1" Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="28" Id="btn_addDept" Left="556" TabOrder="2" Text="추가" Top="54" Width="60"></Button>
+		<Button BKColor="user1" Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="28" Id="btn_delDept" Left="622" TabOrder="3" Text="삭제" Top="54" Width="60"></Button>
+		<Button BKColor="user1" Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="28" Id="btn_batchCode" Left="688" TabOrder="4" Text="저장" Top="54" Width="60"></Button>
+		<Grid BindDataset="gds_dept" BkColor2="default" BoldHead="true" Bottom="496" Enable="true" EndLineColor="default" Height="400" Id="Grid0" InputPanel="FALSE" Left="16" LineColor="default" Right="744" TabOrder="5" TabStop="true" Top="96" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="728">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="70"/>
+						<col width="100"/>
+						<col width="70"/>
+						<col width="100"/>
+						<col width="70"/>
+						<col width="100"/>
+						<col width="100"/>
+						<col width="100"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="부서코드"/>
+						<cell col="1" display="text" text="부서명"/>
+						<cell col="2" display="text" text="사업장코드"/>
+						<cell col="3" display="text" text="사업장명"/>
+						<cell col="4" display="text" text="회사코드"/>
+						<cell col="5" display="text" text="회사명"/>
+						<cell col="6" display="text" text="부서신설일"/>
+						<cell col="7" display="text" text="부서폐쇄일"/>
+					</head>
+					<body>
+						<cell col="0" colid="DEPT_CODE" display="text"/>
+						<cell col="1" colid="DEPT_NAME" display="text"/>
+						<cell col="2" colid="WORKPLACE_CODE" display="text"/>
+						<cell col="3" colid="WORKPLACE_NAME" display="text"/>
+						<cell col="4" colid="COMPANY_CODE" display="text"/>
+						<cell col="5" colid="COMPANY_NAME" display="text"/>
+						<cell col="6" colid="DEPT_START_DATE" display="text"/>
+						<cell col="7" colid="DEPT_END_DATE" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script></Script>
+</Window>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="700" Id="MRPGatheringDialog" Left="8" OnClick="MRPGatheringDialog_OnClick" OnLoadCompleted="MRPGatheringDialog_OnLoadCompleted" PidAttrib="7" Title="MrpDialog" Top="8" Ver="1.0" Width="1200" WorkArea="true">
+		<Grid AutoFit="TRUE" BindDataset="gds_mrpOpenTemp" BkColor2="default" BoldHead="true" Bottom="680" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="649" Id="Grid0" InputPanel="FALSE" Left="20" LineColor="default" MinWidth="100" OnCellClick="MRPGatheringDialog_OnClick" Right="1179" RowHeight="25" TabOrder="1" TabStop="true" Top="31" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1159">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="147"/>
+						<col width="80"/>
+						<col width="110"/>
+						<col width="144"/>
+						<col width="66"/>
+						<col width="84"/>
+						<col width="109"/>
+						<col width="90"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell align="center" col="0" display="text" font="한컴산뜻돋움,11" text="주생산계획번호"/>
+						<cell align="center" col="1" display="text" font="한컴산뜻돋움,11" text="BOM번호"/>
+						<cell align="center" col="2" display="text" font="한컴산뜻돋움,11" text="품목코드"/>
+						<cell align="center" col="3" display="text" font="한컴산뜻돋움,11" text="품목명"/>
+						<cell align="center" col="4" display="text" font="한컴산뜻돋움,11" text="단위"/>
+						<cell align="center" col="5" display="text" font="한컴산뜻돋움,11" text="수주수량"/>
+						<cell align="center" col="6" display="text" font="한컴산뜻돋움,11" text="발주일자"/>
+						<cell align="center" col="7" display="text" font="한컴산뜻돋움,11" text="소요일자"/>
+						<cell align="center" col="8" display="text" font="한컴산뜻돋움,11" text="누적손실률"/>
+						<cell align="center" col="9" display="text" font="한컴산뜻돋움,11" text="계획수량"/>
+						<cell align="center" col="10" display="text" font="한컴산뜻돋움,11" text="요청수량"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="MPS_NO" display="text" font="한컴산뜻돋움,11"/>
+						<cell align="center" col="1" colid="BOM_NO" display="text" font="한컴산뜻돋움,11"/>
+						<cell col="2" colid="ITEM_CODE" display="text" font="한컴산뜻돋움,11"/>
+						<cell align="left" bkimagealign="left" col="3" colid="ITEM_NAME" display="combo" font="한컴산뜻돋움,11"/>
+						<cell align="center" col="4" colid="UNIT_OF_MRP" display="text" font="한컴산뜻돋움,11"/>
+						<cell align="center" col="5" colid="PLAN_AMOUNT" display="text" font="한컴산뜻돋움,11"/>
+						<cell align="center" col="6" colid="ORDER_DATE" display="combo" font="한컴산뜻돋움,11"/>
+						<cell align="center" col="7" colid="REQUIRED_DATE" display="combo" font="한컴산뜻돋움,11"/>
+						<cell col="8" colid="TOTAL_LOSS_RATE" display="text" font="한컴산뜻돋움,11"/>
+						<cell col="9" colid="CACULATED_AMOUNT" display="text" font="한컴산뜻돋움,11"/>
+						<cell col="10" colid="REQUIRED_AMOUNT" display="text" font="한컴산뜻돋움,11"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+function MRPGatheringDialog_OnLoadCompleted(obj)
+{
+
+	http.Sync=true;
+	
+		transaction("findMrpList",
+				"svcProduction::mrp.do?method=findMrpList",
+				"",
+				"gds_mrp=gds_mrp",
+				"",
+				"callback");
+		
+	http.Sync=false;
+	
+	gds_mps.Filter("MRP_APPLY_STATUS!='Y'");
+	
+	
+
+	
+	
+}
+
+function  MRPGatheringDialog_OnClick(){
+close(true);
+}
+
+
+function mrpCallback(){
+gds_mps.Filter("MRP_APPLY_STATUS!='Y'");
+}]]></Script>
+</Window>

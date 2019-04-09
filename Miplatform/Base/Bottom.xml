@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="57" Id="Bottom" Left="8" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="757" WorkArea="true">
+		<Static Align="Center" Font="한컴&#32;바겐세일&#32;M,10" Height="47" Id="Static0" Left="5" TabOrder="1" Text="Copyright&#32;&#32;HOHZ&#32;Corp.&#32;All&#32;rights&#32;reserved." Top="1" Width="745"></Static>
+	</Form>
+	<Script></Script>
+</Window>

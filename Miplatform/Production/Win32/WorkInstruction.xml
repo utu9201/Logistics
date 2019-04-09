@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form DragMode="TRUE" Height="766" Id="WorkInstruction" Left="8" OnLoadCompleted="WorkInstruction_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1330" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="ds_yn" LastLoadDataOnly="1">
+				<Contents>
+					<colinfo id="YorN" size="256" summ="default" type="STRING"/>
+					<record>
+						<YorN>Y</YorN>
+					</record>
+					<record>
+						<YorN>N</YorN>
+					</record>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴산뜻돋움,18,Bold" Height="37" Id="Static0" Left="8" Style="BUTTON_STYLE" TabOrder="1" Text="작업지시" Top="8" VAlign="Middle" Width="1289"></Static>
+		<Grid AutoFit="TRUE" BindDataset="gds_mrpGathering" BkColor2="default" BoldHead="true" Bottom="374" Enable="true" EndLineColor="default" HeadHeight="30" Height="265" Id="grd_mrpGathering" InputPanel="FALSE" Left="16" LineColor="default" MinWidth="100" Right="1290" RowHeight="25" Style="BUTTON_STYLE" TabOrder="2" TabStop="true" Top="109" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1274">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="117"/>
+						<col width="113"/>
+						<col width="59"/>
+						<col width="63"/>
+						<col width="85"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="소요량취합번호"/>
+						<cell col="1" display="text" text="품목명"/>
+						<cell col="2" display="text" text="단위"/>
+						<cell col="3" display="text" text="필요수량"/>
+						<cell col="4" display="text" text="작업지시일"/>
+					</head>
+					<body>
+						<cell col="0" colid="MRP_GATHERING_NO" display="text"/>
+						<cell col="1" colid="ITEM_NAME" display="text" expr="trim(ITEM_NAME)"/>
+						<cell col="2" colid="UNIT_OF_MRP_GATHERING" display="text"/>
+						<cell col="3" colid="NECESSARY_AMOUNT" display="text"/>
+						<cell col="4" colid="CLAIM_DATE" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Grid AutoFit="TRUE" BindDataset="gds_workInstruction" BkColor2="default" BoldHead="true" Bottom="757" Enable="true" EndLineColor="default" HeadHeight="30" Height="325" Id="grd_workInsturction" InputPanel="FALSE" Left="19" LineColor="default" MinWidth="100" Right="1296" RowHeight="25" Style="BUTTON_STYLE" TabOrder="3" TabStop="true" Top="432" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1277">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="260"/>
+						<col width="166"/>
+						<col width="131"/>
+						<col width="61"/>
+						<col width="112"/>
+						<col width="298"/>
+						<col width="119"/>
+						<col width="128"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="작업지시번호"/>
+						<cell col="1" display="text" text="작업지시일자"/>
+						<cell col="2" display="text" text="품목명"/>
+						<cell col="3" display="text" text="단위"/>
+						<cell col="4" display="text" text="지시수량"/>
+						<cell col="5" display="text" text="소요량취합번호"/>
+						<cell col="6" display="text" text="작업지시상태"/>
+						<cell col="7" display="text" text="생산완료상태"/>
+					</head>
+					<body>
+						<cell col="0" colid="WORK_INSTRUCTION_NO" display="text"/>
+						<cell col="1" colid="INSTRUCTION_DATE" display="text"/>
+						<cell col="2" colid="ITEM_NAME" display="text" expr="trim(ITEM_NAME)"/>
+						<cell col="3" colid="UNIT_OF_WORK_INSTRUCTION" display="text"/>
+						<cell col="4" colid="WORK_INSTRUCTION_AMOUNT" display="text"/>
+						<cell col="5" colid="MRP_GATHERING_NO" display="text"/>
+						<cell col="6" colid="WORK_INSTRUCTION_STATUS" display="text"/>
+						<cell col="7" colid="PRODUCTION_STATUS" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="btn_registWorkInstruction" Left="1208" OnClick="btn_registWorkInstruction_OnClick" Style="BUTTON_STYLE" TabOrder="4" Text="저장" Top="56" Width="80"></Button>
+		<Button Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="btn_addWorkInstruction" Left="664" OnClick="btn_addWorkInstruction_OnClick" Style="BUTTON_STYLE" TabOrder="5" Text="▼" Top="380" Width="76"></Button>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="44" Id="Static1" Left="1056" Style="BUTTON_STYLE" TabOrder="6" Text="생산여부완료&#32;필터" Top="380" VAlign="Middle" Width="146"></Static>
+		<Combo CodeColumn="YorN" DataColumn="YorN" Font="한컴산뜻돋움,11" Height="36" Id="Combo0" InnerDataset="ds_yn" Left="1216" OnChanged="OnChanged" Style="BUTTON_STYLE" TabOrder="7" Top="384" Width="76"></Combo>
+	</Form>
+	<Script><![CDATA[#include "Script::serialTempleteCode.js"
+var filter = "WORK_INSTRUCTION_STATUS!='Y'";
+
+function WorkInstruction_OnLoadCompleted(obj) {
+    grd_mrpGathering.Redraw = false;
+    grd_workInsturction.Redraw = false;
+    trace(filter);
+    http.Sync = true;
+
+    transaction("findMrpGatheringList",
+        "svcProduction::mrp.do?method=findMrpGatheringList",
+        "",
+        "gds_mrpGathering=gds_mrpGathering",
+        "",
+        "callback");
+
+
+    transaction("findWorkInstructionList",
+        "svcProduction::workInstruction.do?method=findWorkInstructionList",
+        "",
+        "gds_workInstruction=gds_workInstruction",
+        "",
+        "callback");
+
+
+    http.Sync = false;
+
+
+    gds_mrpGathering.Filter("ORDER_OR_PRODUCTION_STATUS!='구매' && ON_GOING_PROCESS_STATUS!='Y'");
+
+    gds_workInstruction.Filter("WORK_INSTRUCTION_STATUS!='Y'");
+
+
+    http.Sync = true;
+
+
+    transaction("findStockList",
+        "svcPurchase::stock.do?method=findStockList",
+        "",
+        "gds_stock=gds_stock",
+        "",
+        "callback"
+    );
+
+    transaction("findMaterialPaymentList",
+        "svcPurchase::stock.do?method=findMaterialPaymentList",
+        "",
+        "gds_materialPayment=gds_materialPayment",
+        "",
+        "callback"
+    );
+
+    grd_mrpGathering.Redraw = true;
+    grd_workInsturction.Redraw = true;
+    http.Sync = false;
+
+
+    gds_materialPayment.Filter("PAYMENT_DATE=null");
+
+}
+
+
+//  작업시지를 위한 넘버
+var num = 1;
+var canDelivery; //납품가능여부
+var stockAlert;
+// 재고가 없으면 false
+
+
+
+#include "Script::serialTempleteCode.js"
+// 작업지시 추가 버튼
+function btn_addWorkInstruction_OnClick(obj) {
+
+    var check = true;
+
+    // 선택한 소요량 취합 로우
+    var mrpNum = gds_mrpGathering.rowposition;
+
+    var strCode = gds_mrpGathering.GetColumn(mrpNum, "ITEM_CODE");
+
+
+
+
+    // BOM 리스트 들고옴 
+    http.Sync = true;
+    transaction("findBomDeployList",
+        "svcPurchase::/bom.do?method=findBomDeployList",
+        "",
+        "gds_bomDeploy=gds_bomDeploy",
+        "itemCode ='" + strCode + "' deployCondition='forward'",
+        "callback"
+    );
+
+    http.Sync = false;
+    trace("phase1");
+    var mrpAmount = gds_mrpGathering.GetColumn(mrpNum, "NECESSARY_AMOUNT");
+
+    gds_bomDeploy.UnFilter();
+
+
+    //완제품 재고확인
+    for (var e = 0; e < gds_bomDeploy.RowCount(); e++) {
+        trace("phase0-2 횟수" + (e + 1) + "번");
+        var bomItemCode = gds_bomDeploy.GetColumn(e, "ITEM_CODE");
+        bomItemCode = Trim(bomItemCode);
+        IF(bomItemCode = strCode){
+            trace("phase0-2 ITEM_CODE=" + bomItemCode);
+
+            // 창고 ITEMCODE ROW 구함
+            var findStock = gds_stock.FindRow("ITEM_CODE", bomItemCode);
+
+            // 창고 재고 구함
+            var stock = gds_stock.GetColumn(findStock, "STOCK_AMOUNT");
+
+            //  창고 남는재고 = 창고 재고 - 총소요수량
+            var re = parseInt(stock) - parseInt(mrpAmount);
+            trace("phase0-2 출고후예상재고" + re);
+
+
+
+            if (re > 0) {
+                trace("phase0-3");
+
+                // 당장 납품 가능하다면 
+                TRACE(RE);
+                canDelivery = "납품가능";
+                TRACE(RE + canDelivery);
+                BREAK;
+            }
+
+
+        }
+    }
+
+    gds_bomDeploy.UnFilter();
+    gds_bomDeploy.Filter("ITEM_CLASSIFICATION='IT-MA'");
+
+
+    for (var e = 0; e < gds_bomDeploy.RowCount(); e++) {
+        trace("phase2 횟수" + (e + 1) + "번");
+        var bomItemCode = gds_bomDeploy.GetColumn(e, "ITEM_CODE");
+        bomItemCode = Trim(bomItemCode);
+        trace("phase2 ITEM_CODE" + bomItemCode);
+        // BOM 정미수량 들고옴
+        var bomAmount = gds_bomDeploy.GetColumn(e, "NET_AMOUNT");
+        trace("phase2 NET_AMOUNT" + bomAmount);
+
+        //  총 소요수량 = BOM 정미수량 * 소요량취합수량 
+        var amount = parseInt(bomAmount) * parseInt(mrpAmount);
+
+        // 창고 ITEMCODE ROW 구함
+        var findStock = gds_stock.FindRow("ITEM_CODE", bomItemCode);
+
+        // 창고 재고 구함
+        var stock = gds_stock.GetColumn(findStock, "STOCK_AMOUNT");
+
+        //  창고 남는재고 = 창고 재고 - 총소요수량
+        var re = parseInt(stock) - parseInt(amount);
+        trace("phase2 작업후예상재고" + re);
+
+        if (re < 0) {
+            trace("phase3");
+            IF(canDelivery.LENGTH > 1){
+
+            } ELSE{
+                TRACE(bomItemCode + "의 재고부족");// 재고가 없는 아이템이 있다면 
+                div_mainView.Url = "Purchase::GiveOrder.xml";
+                check = false;
+            }
+        }
+
+
+    }
+
+
+
+    if (check) {
+
+        trace("phase4" + check + "재고있음");
+        trace("phase5 작업지시계산");
+
+        var mrpGatheringNo;
+        var itemCode;
+        var itemName;
+        var instructionDate;
+        var unitOfWorkInstruction;
+        var workInstructionAmount;
+
+        var workInstructionNo;
+        mrpGatheringNo = gds_mrpGathering.GetColumn(mrpNum, "MRP_GATHERING_NO");
+
+        var day = toDay();
+        if (gds_mrpGathering.count >= 0 && mrpGatheringNo.length > 3) {
+
+            mrpGatheringNo = gds_mrpGathering.GetColumn(mrpNum, "MRP_GATHERING_NO");
+
+            trace("phase6" + mrpGatheringNo);
+            itemCode = gds_mrpGathering.GetColumn(mrpNum, "ITEM_CODE");
+            itemName = gds_mrpGathering.GetColumn(mrpNum, "ITEM_NAME");
+            instructionDate = gds_mrpGathering.GetColumn(mrpNum, "CLAIM_DATE");
+            unitOfWorkInstruction = gds_mrpGathering.GetColumn(mrpNum, "UNIT_OF_MRP_GATHERING");
+            workInstructionAmount = gds_mrpGathering.GetColumn(mrpNum, "NECESSARY_AMOUNT");
+
+
+            var instructionNum = gds_workInstruction.AddRow();
+
+            gds_workInstruction.SetColumn(instructionNum, "WORK_INSTRUCTION_NO", seqSerialNo("WIT", "WIT_SEQ"));
+
+            gds_workInstruction.SetColumn(instructionNum, "MRP_GATHERING_NO", mrpGatheringNo);
+            gds_workInstruction.SetColumn(instructionNum, "ITEM_CODE", itemCode);
+            gds_workInstruction.SetColumn(instructionNum, "ITEM_NAME", itemName);
+            gds_workInstruction.SetColumn(instructionNum, "INSTRUCTION_DATE", instructionDate);
+            gds_workInstruction.SetColumn(instructionNum, "UNIT_OF_WORK_INSTRUCTION", unitOfWorkInstruction);
+            gds_workInstruction.SetColumn(instructionNum, "WORK_INSTRUCTION_AMOUNT", workInstructionAmount);
+
+            workInstructionNo = gds_workInstruction.GetColumn(instructionNum, "WORK_INSTRUCTION_NO");
+        }
+
+        for (var e = 0; e < gds_bomDeploy.count; e++) {
+
+            var instbomItemCode = gds_bomDeploy.GetColumn(e, "ITEM_CODE");
+            instbomItemCode = Trim(instbomItemCode);
+
+            var instBomItemName = gds_bomDeploy.GetColumn(e, "ITEM_NAME");
+            trace("phase6 instBomItemName" + instBomItemName + "");
+            // BOM 정미수량 들고옴
+            var instBomAmount = gds_bomDeploy.GetColumn(e, "NET_AMOUNT");
+
+            //  총 소요수량 = 소요량취합수량 
+            var instAmount = parseInt(mrpAmount);
+
+            // 창고 ITEMCODE ROW 구함
+            var findStock = gds_stock.FindRow("ITEM_CODE", instbomItemCode);
+
+            // 창고 재고 구함
+            var oldStock = gds_stock.GetColumn(findStock, "STOCK_AMOUNT");
+            trace("phase6 재고감소전" + oldStock + "개");
+
+            //  창고 남는재고 = 창고 재고 - 총소요수량
+            var newStock = parseInt(oldStock) - parseInt(instAmount);
+            trace("phase6 재고감소후" + newStock + "개");
+            // 창고에 남는 재고 셋팅 
+            //안전재고 확인
+            var safetyStock = gds_stock.GetColumn(findStock, "SAFETY_ALLOWANCE_AMOUNT");
+
+            if (gds_mrpGathering.count >= 0 && mrpGatheringNo.length > 3) {
+                trace("phase6-1 재고감소처리");
+                gds_stock.SetColumn(findStock, "STOCK_AMOUNT", newStock);
+            }
+
+            stockAlert = parseInt(newStock) - parseInt(safetyStock);
+            if (stockAlert < 0) {
+                trace("phase6-2 안전재고 경보");
+
+                stockAlert = instBomItemName + "의 안전재고를 확보하지 못했습니다";
+            }
+
+
+            // 출고처리 
+
+            var mpNo = gds_materialPayment.GetRowCount();
+
+            if (gds_mrpGathering.count >= 0) {
+
+
+
+                gds_materialPayment.AddRow();
+                gds_materialPayment.SetColumn(mpNo, "RELEASE_NO", seqSerialNo("RWH", "RWH_SEQ"));
+                gds_materialPayment.SetColumn(mpNo, "ITEM_CODE", instbomItemCode);
+
+                gds_materialPayment.SetColumn(mpNo, "PAYMENT_DATE", day);
+
+                gds_materialPayment.SetColumn(mpNo, "WORK_INSTRUCTION_NO", workInstructionNo);
+
+                gds_materialPayment.SetColumn(mpNo, "ITEM_NAME", instBomItemName);
+                gds_materialPayment.SetColumn(mpNo, "PAYMENT_AMOUNT", instAmount);
+                gds_materialPayment.SetColumn(mpNo, "UNIT_PAYMENT", 'EA');
+                trace("phase7 지시번호" + workInstructionNo);
+            }
+
+        }
+
+
+
+
+
+
+
+        gds_mrpGathering.SetColumn(mrpNum, "ON_GOING_PROCESS_STATUS", 'Y');
+
+        gds_mrpGathering.Filter("ORDER_OR_PRODUCTION_STATUS!='구매' && ON_GOING_PROCESS_STATUS!='Y'");
+
+        if (stockAlert.length > 1) {
+            alert(stockAlert);
+        }
+
+    } // 재고가 있으면 여기까
+
+    else {
+        IF(canDelivery.LENGTH > 1){
+            alert(canDelivery);
+        }
+        ELSE{
+            trace("phase8 창고데이터 확인필요");
+            alert("재고가 부족합니다");
+        }
+
+    }
+
+
+
+}
+
+
+
+
+
+
+function btn_registWorkInstruction_OnClick(obj) {
+
+    if (confirm("작업지시 및 자재출고를 등록하시겠습니까?")) {
+
+        if (gds_workInstruction.count >= 0) {
+            for (var i = 0; i <= gds_workInstruction.count; i++) {
+                gds_workInstruction.SetColumn(i, "WORK_INSTRUCTION_STATUS", 'Y');
+                gds_workInstruction.SetColumn(i, "PRODUCTION_STATUS", 'N');
+            }
+        }
+
+
+
+        http.Sync = true;
+        grd_mrpGathering.Redraw = false;
+        grd_workInsturction.Redraw = false;
+        transaction(
+            "registWorkInstruction",
+            "svcProduction::workInstruction.do?method=registWorkInstruction",
+            "gds_workInstruction=gds_workInstruction:u gds_mrpGathering=gds_mrpGathering:u gds_materialPayment=gds_materialPayment:u gds_stock=gds_stock:u",
+            "gds_workInstruction=gds_workInstruction gds_mrpGathering=gds_mrpGathering",
+            "",
+            "callback");
+    }
+
+
+    transaction("findStockList",
+        "svcPurchase::stock.do?method=findStockList",
+        "",
+        "gds_stock=gds_stock",
+        "",
+        "callback"
+    );
+
+    gds_workInstruction.Filter("WORK_INSTRUCTION_STATUS!='Y'");
+
+    gds_materialPayment.Filter("PAYMENT_DATE=null");
+
+    grd_mrpGathering.Redraw = true;
+    grd_workInsturction.Redraw = true;
+    http.Sync = false;
+
+
+
+
+}
+
+
+
+
+function callback(trid, ErrorCode, ErrorMsg) {
+
+
+
+
+    gds_mrpGathering.Filter("ORDER_OR_PRODUCTION_STATUS!='구매' && ON_GOING_PROCESS_STATUS!='Y'");
+
+    gds_workInstruction.Filter("WORK_INSTRUCTION_STATUS!='Y'");
+
+
+
+
+    if (trid == "registWorkInstruction") {
+        if (ErrorCode >= 0) {
+            gds_mrpGathering.Filter("ORDER_OR_PRODUCTION_STATUS!='구매' && ON_GOING_PROCESS_STATUS!='Y'");
+
+            gds_workInstruction.Filter("WORK_INSTRUCTION_STATUS!='Y'");
+
+
+            alert("저장이 완료되었습니다");
+            Reload();
+        }
+    }
+
+}
+
+function btn_materialPaymentDialog_OnClick(obj) {
+
+    dialog("Purchase::MaterialPaymentDialog.xml", "");
+}
+
+function OnChanged(obj, strCode, strText, nOldIndex, nNewIndex) {
+    gds_workInstruction.filter("PRODUCTION_STATUS='" + strText + "'");
+}
+
+
+]]></Script>
+</Window>

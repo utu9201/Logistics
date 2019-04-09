@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="776" Id="Estimate" Left="8" OnLoadCompleted="Estimate_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1330" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="ds_customer">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,18" Height="37" Id="Static0" Left="24" Style="BUTTON_STYLE" TabOrder="1" Text="견적등록" VAlign="Middle" Width="1264"></Static>
+		<Grid AutoEnter="TRUE" AutoFit="TRUE" AutoSelect="TRUE" BindDataset="gds_estimate" BkColor2="default" BoldHead="true" Bottom="392" CellEditAutoSize="TRUE" ColSelect="TRUE" Editable="TRUE" Enable="true" EndLineColor="default" HeadHeight="25" Height="312" Id="grd_estimate" InputPanel="FALSE" Left="24" LineColor="default" MinWidth="100" OnCellClick="grd_estimate_OnCellClick" OnCellDBLClick="grd_estimate_OnCellDblClick" OnExpandEdit="grd_estimate_OnExpandEdit" Right="1288" RowHeight="25" Style="BUTTON_STYLE" TabOrder="2" TabStop="FALSE" Top="80" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1264">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="135"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="66"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="견적번호"/>
+						<cell col="1" combotext="DETAIL_CODE_NAME" display="text" text="거래처명"/>
+						<cell col="2" display="text" text="견적일자"/>
+						<cell col="3" display="text" text="견적요청자"/>
+						<cell col="4" display="text" text="유효일자"/>
+						<cell col="5" display="text" text="담당자"/>
+						<cell col="6" display="text" text="수주여부"/>
+					</head>
+					<body>
+						<cell col="0" colid="ESTIMATE_NO" display="text"/>
+						<cell col="1" colid="CUSTOMER_CODE" combocol="DETAIL_CODE" combodataset="ds_customer" combotext="DETAIL_CODE_NAME" display="combo" edit="combo"/>
+						<cell col="2" colid="ESTIMATE_DATE" display="text" edit="expand" Mask="@@@@/@@/@@"/>
+						<cell col="3" colid="ESTIMATE_REQUESTER" display="text" edit="normal"/>
+						<cell col="4" colid="EFFECTIVE_DATE" display="text" edit="expand" Mask="####/##/##"/>
+						<cell col="5" colid="PERSON_CODE_IN_CHARGE" combocol="EMP_CODE" combodataset="gds_employee" combotext="EMP_NAME" display="combo"/>
+						<cell col="6" colid="CONTRACT_STATUS" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Grid AutoFit="TRUE" AutoSelect="TRUE" BindDataset="gds_estimateDetail" BkColor2="default" BoldHead="true" Bottom="744" CellEditAutoSize="TRUE" CellMoving="TRUE" Enable="true" EndLineColor="default" HeadHeight="25" Height="312" Id="grd_estimateDetail" InputPanel="FALSE" Left="24" LineColor="default" MinWidth="100" Right="1288" RowHeight="25" Style="BUTTON_STYLE" TabOrder="3" TabStop="FALSE" Top="432" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1264">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="180"/>
+						<col width="80"/>
+						<col width="117"/>
+						<col width="40"/>
+						<col width="91"/>
+						<col width="49"/>
+						<col width="101"/>
+						<col width="101"/>
+					</columns>
+					<head>
+						<cell bkcolor="darkgoldenrod" col="0" display="text" text="견적상세변호"/>
+						<cell bkcolor="darkgoldenrod" col="1" display="text" text="품목코드"/>
+						<cell bkcolor="darkgoldenrod" col="2" display="text" text="품목명"/>
+						<cell bkcolor="darkgoldenrod" col="3" display="text" text="단위"/>
+						<cell bkcolor="darkgoldenrod" col="4" display="text" text="납기일"/>
+						<cell bkcolor="darkgoldenrod" col="5" display="text" text="견적수량"/>
+						<cell bkcolor="darkgoldenrod" col="6" display="text" text="견적단가"/>
+						<cell bkcolor="darkgoldenrod" col="7" display="text" text="합계액"/>
+					</head>
+					<body>
+						<cell col="0" colid="ESTIMATE_DETAIL_NO" display="text"/>
+						<cell col="1" colid="ITEM_CODE" display="text"/>
+						<cell col="2" colid="ITEM_NAME" display="text" expr="Trim(item_name)"/>
+						<cell col="3" colid="UNIT_OF_ESTIMATE" display="text"/>
+						<cell col="4" colid="DUE_DATE_OF_ESTIMATE" display="text" edit="mask" Mask="####/##/##"/>
+						<cell col="5" colid="ESTIMATE_AMOUNT" display="text"/>
+						<cell col="6" colid="UNIT_PRICE_OF_ESTIMATE" display="currency"/>
+						<cell col="7" colid="SUM_PRICE_OF_ESTIMATE" display="currency" expr="TONUMBER(ESTIMATE_AMOUNT)*TONUMBER(UNIT_PRICE_OF_ESTIMATE)"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button Color="WINDOW" Font="Tahoma,16" Height="36" Id="btn_addEstimate" Left="864" OnClick="btn_addEstimate_OnClick" Style="BUTTON_STYLE" TabOrder="4" Text="견적추가" Top="40" Width="112"></Button>
+		<Button Color="WINDOW" Font="Tahoma,16" Height="36" Id="btn_registerEstimate" Left="24" OnClick="btn_registerEstimate_OnClick" Style="BUTTON_STYLE" TabOrder="5" Text="견적상세등록" Top="393" Width="160"></Button>
+		<Button Color="WINDOW" Font="Tahoma,16" Height="36" Id="btn_delDetailCode" Left="1176" OnClick="btn_delDetailCode_OnClick" Style="BUTTON_STYLE" TabOrder="6" Text="삭제" Top="40" Width="112"></Button>
+		<Calendar BorderColor="goldenrod" ClickedTextColor="BTNTEXT" Color="goldenrod" DayFont="함초롬돋움,9" Height="164" Id="Calendar0" Left="1344" MonthOnly="TRUE" OnChanged="Calendar0_OnChanged" SaturdayTextColor="blue" Style="BUTTON_STYLE" SundayTextColor="red" TabOrder="7" Top="247" Visible="FALSE" Width="168"></Calendar>
+		<Calendar Border="Default" Dateformat="yyyyMMdd" Height="36" Id="fromDate" Left="24" SaturdayTextColor="blue" SundayTextColor="red" TabOrder="8" Top="40" Width="100"></Calendar>
+		<Static Color="user1" Font="돋움,11,Bold" Height="36" Id="Static1" Left="128" TabOrder="9" Text="부터" Top="40" VAlign="Bottom" Width="35"></Static>
+		<Calendar Dateformat="yyyyMMdd" Height="36" Id="toDate" Left="168" SaturdayTextColor="blue" SundayTextColor="red" TabOrder="10" Top="40" Width="90"></Calendar>
+		<Static Color="user1" Font="돋움,11,Bold" Height="36" Id="Static2" Left="264" TabOrder="11" Text="까지" Top="40" VAlign="Bottom" Width="46"></Static>
+		<Button Color="MENU" Font="돋움,12,Bold" Height="36" Id="btn_search_period" Left="304" OnClick="btn_search_period_OnClick" TabOrder="12" Text="기간조회" Top="40" Width="106"></Button>
+		<Combo CodeColumn="DETAIL_CODE" DataColumn="DETAIL_CODE_NAME" Height="36" Id="Combo_Customer" InnerDataset="ds_customer" Left="424" TabOrder="13" Text="Combo_Customer" Top="40" Width="106"></Combo>
+		<Button Color="WINDOW" Font="Tahoma,16" Height="36" Id="btn_search_customer" Left="536" OnClick="btn_search_customer_OnClick" TabOrder="14" Text="거래처조회" Top="40" Width="146"></Button>
+		<Button Color="WINDOW" Font="Tahoma,16" Height="36" Id="btn_estimate" Left="696" OnClick="btn_estimate_OnClick" Style="BUTTON_STYLE" TabOrder="15" Text="견적&#32;전체조회" Top="40" Width="160"></Button>
+		<Button Color="WINDOW" Font="Tahoma,16" Height="36" Id="btn_save_estimate" Left="1056" OnClick="btn_save_estimate_OnClick" Style="BUTTON_STYLE" TabOrder="16" Text="저장" Top="40" Width="112"></Button>
+	</Form>
+	<Script><![CDATA[
+function Estimate_OnLoadCompleted(obj) {
+    grd_estimate.Redraw = false;
+    grd_estimateDetail.Redraw = false;
+    http.Sync = true;
+    transaction("findEstimateList",
+        "svcBusiness::estimate.do?method=findEstimateList",
+        "", "gds_estimate=gds_estimate", "empCode=" + global_empCode, "callback");
+
+    gds_estimate.Filter("ESTIMATE_NO='xx'");
+    gds_estimateDetail.Filter("ESTIMATE_NO='xx'");
+    //grd_estimate.Redraw=true;
+    http.Sync = false;
+    detailCodeFilter();
+}
+
+
+var nRow;
+var scode;
+function callback(trid, ErrorCode, ErrorMsg) {
+
+    //gds_estimateDetail.Filter("ESTIMATE_NO='xx'");
+
+
+    if (trid == "findEstimateList") {
+        if (ErrorCode >= 0) {
+            gds_estimate.Filter("CONTRACT_STATUS='xx'");
+            gds_estimateDetail.Filter("ESTIMATE_NO='xx'");
+            this.gds_estimateDetail.Filter(" ESTIMATE_NO=='xx");
+
+            transaction("findEstimateDetailList",
+                "svcBusiness::estimate.do?method=findEstimateDetailList",
+                "",
+                "gds_estimateDetail=gds_estimateDetail",
+                "",
+                "callback");
+
+        }
+    }
+    if (trid == "findEstimateDetailList") {
+        if (ErrorCode >= 0) {
+            gds_estimateDetail.Filter("ESTIMATE_NO='xx'");
+        } else { alert(ErrorMsg); }
+    }
+    if(trid == "registerEstimateDetail"){
+      if (ErrorCode >= 0) {
+            gds_estimateDetail.Filter("ESTIMATE_NO='xx'");
+        } else { alert(ErrorMsg); }
+    
+    }
+    
+    grd_estimateDetail.Color = "black";
+    grd_estimate.Color = "black";
+    grd_estimate.Redraw = true;
+    grd_estimateDetail.Redraw = true;
+}
+
+//견적 번호를 가져오기위해 include 하는 거임 
+// #include "Script::serialTempleteCode.js"
+var num = 0;
+function btn_addEstimate_OnClick(obj) {
+
+
+    // transaction("makeEstimateCode",
+    // "svcBusiness::estimate.do?method=makeEstimateCode",
+    // "", "gds_estimate=gds_estimate", "empCode="+global_empCode, "callback");
+
+
+
+
+    var rowNum = gds_estimate.AddRow();
+
+    gds_estimate.SetColumn(rowNum, "PERSON_CODE_IN_CHARGE", global_empCode);
+    var day = toDay();
+    gds_estimate.SetColumn(rowNum, "ESTIMATE_NO", "새 견적번호" + num++);
+
+
+}
+
+
+
+
+// 달력 
+
+var calRow = "";
+var calCell = "";
+
+
+var isShowCalendar = false;
+function grd_estimate_OnExpandEdit(obj, nRow, nCell, strVal, nPivotIndex) {
+
+    if (nCell == 2 || nCell == 4) // expand가 2번째 이거나 4번째 Cell이면
+    {
+
+        var arr = array();
+        isShowCalendar = true;
+        calRow = nRow;
+        calCell = nCell;
+        arr = grd_estimate.GetCellRect(nRow, nCell); // Grid Cell의 좌표 얻어오기
+        Calendar0.Top = grd_estimate.Top + arr[3];  // Calendar의 위치 선정
+        Calendar0.Left = grd_estimate.Left + arr[0]; // Calendar의 위치 선정
+        Calendar0.Visible = true;  // Calendar 나타나게 하기
+    }
+
+}
+
+
+function Calendar0_OnChanged(obj, strOldText, strNewText) {
+    if (calCell == 2) {
+        gds_estimate.SetColumn(calRow, "ESTIMATE_DATE", strNewText); // 위치, DataSet 필드명, 새날자
+
+    } else {
+        gds_estimate.SetColumn(calRow, "EFFECTIVE_DATE", strNewText); // 위치, DataSet 필드명, 새날자
+
+    }
+    Calendar0.Visible = false;// Calendar 사라지게 하기
+
+}
+
+
+
+function detailCodeFilter() {
+
+    gds_codeDetail.Filter("DIVISION_CODE_NO='CL-01'");
+    ds_customer.copyF(gds_codeDetail);
+    gds_codeDetail.Unfilter();
+
+
+}
+
+
+function btn_registerEstimate_OnClick(obj) {
+
+
+    var lastno = gds_estimate.GetRowCount();
+
+    global_estimate = gds_estimate.GetColumn(lastno - 1, "ESTIMATE_NO");
+    //var batch = gds_estimate.GetRowType(lastno);
+
+    if (dialog("Business::EstimateDetailDialog.xml", "")) {
+
+        alert("저장이완료되었습니다");
+        Reload();
+    }
+
+
+}
+
+
+
+
+function btn_search_customer_OnClick(obj) {
+    gds_estimate.Filter("CUSTOMER_CODE ='" + Combo_Customer.Value + "'");
+}
+
+
+function grd_estimate_OnCellDblClick(obj, nRow, nCell, nX, nY, nPivotIndex) {
+
+
+    var status = gds_estimate.GetColumn(nRow, "CONTRACT_STATUS");
+    nRow = this.gds_estimate.rowposition;
+    scode = this.gds_estimate.GetColumn(nRow, "ESTIMATE_NO");
+    this.gds_estimateDetail.Filter(" ESTIMATE_NO=='" + scode + "'");
+
+    if (status == "Y") {
+
+        grd_estimate.Editable = false;
+        alert("수주여부가 등록되면 수정할수 없습니다");
+        return;
+    } else {
+        grd_estimate.Editable = true;
+        grd_estimate.ShowEditor();
+        grd_estimate.ComboDropDown();
+    }
+
+
+}
+
+
+function grd_estimate_OnCellClick(obj, nRow, nCell, nX, nY, nPivotIndex) {
+    if (isShowCalendar) {
+        Calendar0.Visible = false;
+        isShowCalendar = false;
+    }
+
+    global_estimate = gds_estimate.GetColumn(nRow, "ESTIMATE_NO");
+
+
+    gds_estimateDetail.Filter("ESTIMATE_NO='" + global_estimate + "'");
+    var status = gds_estimate.GetColumn(nRow, "CONTRACT_STATUS");
+
+    //trace(gds_estimate.GetColumn(nRow, "EFFECTIVE_DATE"));
+
+    if (status == "Y") {
+        grd_estimate.Editable = false;
+        //alert("수주여부가 등록되면 수정할수 없습니다");
+        return;
+    } else {
+        grd_estimate.Editable = true;
+
+        grd_estimate.ShowEditor();
+        grd_estimate.ComboDropDown();
+
+    }
+
+
+}
+#include "Script::ahramDeleter.js"
+function btn_delDetailCode_OnClick(obj) {
+    var status = gds_estimate.GetColumn(gds_estimate.row, "CONTRACT_STATUS");
+
+    if (status == "Y") {
+        grd_estimate.Editable = false;
+        alert("수주여부가 등록되면 수정할수 없습니다");
+        return;
+    } else {
+        ahramDeleter(gds_estimate, gds_estimateDetail);
+        transaction("delEstimateList",
+            "svcBusiness::estimate.do?method=registerEstimateDetail",
+            "gds_estimate=gds_estimate:u gds_estimateDetail=gds_estimateDetail:u",
+            "", "", "callback");
+    }
+}
+function btn_estimate_OnClick(obj) {
+    gds_estimate.unfilter();
+}
+
+function btn_search_period_OnClick(obj) {
+    gds_estimate.Filter("ESTIMATE_DATE > " + fromDate.Text + " && ESTIMATE_DATE < " + toDate.Text);
+}
+
+function btn_save_estimate_OnClick(obj) {
+    var estimateColAmount = gds_estimate.GetColCount();
+    var estimateRow = gds_estimate.row;
+    var estimateRowAmount = gds_estimateDetail.GetRowCount();
+
+    var estimateColId;
+    for (var i = 0; i < estimateColAmount; i++) {
+    
+        estimateColId = gds_estimate.GetColID(i);
+        
+        if (estimateColId != 'description' && estimateColId != 'contract_status' &&
+            gds_estimate.GetColumn(estimateRow, estimateColID) = null) {
+            
+            alert("모든 항목을 입력해주세요.");
+            return;
+        }
+    }
+    
+ grd_estimate.Redraw = false;
+            grd_estimateDetail.Redraw = false;
+            grd_estimateDetailDialog.Redraw = false;
+
+    var estimateDetailColAmount = gds_estimateDetail.GetColCount();
+    var estimateDetailRowAmount = gds_estimateDetail.GetRowCount();
+
+    for (var j = 0; j < estimateDetailRowAmount; j++) {
+        var sum_price_of_estimate = parseInt(gds_estimateDetail.GetColumn(j, "estimate_amount")) *
+            parseInt(gds_estimateDetail.GetColumn(j, "UNIT_PRICE_OF_ESTIMATE"));
+        gds_estimateDetail.SetColumn(j, "sum_price_of_estimate", sum_price_of_estimate);
+
+
+        for (var k = 0; k < estimateDetailColAmount; k++) {
+            var estimateDetailColId = gds_estimateDetail.GetColID(k);
+            if (estimateDetailColId != 'description' &&
+                gds_estimateDetail.GetColumn(j, estimateDetailColId) = null) {
+                alert("모든 항목을 입력해주세요.");
+                return;
+            }
+        }
+    }
+
+    if (gds_estimateDetail.GetRowCount() > 0) {
+        if (confirm("견적을 저장하시겠습니까?")) {
+            http.Sync = true;
+           
+
+            transaction(
+                "registerEstimateDetail",
+                "svcBusiness::/estimate.do?method=registerEstimateDetail",
+                "gds_estimate=gds_estimate:u gds_estimateDetail=gds_estimateDetail:u",
+                "gds_estimate=gds_estimate gds_estimateDetail=gds_estimateDetail",
+                "empCode=" + global_empCode,
+                "callback"
+            );
+
+            http.Sync = false;
+        }
+    } else {
+        alert("견적 상세를 등록해주세요.");
+    }
+
+grd_estimate.Redraw = true;
+            grd_estimateDetail.Redraw = true;
+            grd_estimateDetailDialog.Redraw = true;
+
+}
+]]></Script>
+</Window>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="736" Id="form_ReportForm" Left="8" OnLoadCompleted="form_ReportForm_OnLoadCompleted" PidAttrib="7" Title="ReportForm" Top="8" Ver="1.0" Width="824" WorkArea="true"></Form>
+	<Script><![CDATA[function form_ReportForm_OnLoadCompleted(obj){
+trace("a");
+	web_report.Run();
+} ]]></Script>
+</Window>

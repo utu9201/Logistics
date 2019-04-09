@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Font="Consolas,11" Height="776" Id="Delivery" Left="8" OnLoadCompleted="Delivery_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1330" WorkArea="true">
+		<Static Align="Center" BKColor="INACTIVECAPTION" Border="SunkenEdge" Font="Consolas,18" Height="40" Id="Static0" Left="24" Style="BUTTON_STYLE" TabOrder="1" Text="납품등록" Top="8" VAlign="Middle" Width="1280"></Static>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="Consolas,11" Height="44" Id="Static2" Left="24" Style="BUTTON_STYLE" TabOrder="2" Text="수주목록" Top="72" VAlign="Middle" Width="118"></Static>
+		<Grid AutoFit="TRUE" BindDataset="gds_contract" BkColor2="default" BoldHead="true" Bottom="404" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="284" Id="grd_contract" InputPanel="FALSE" Left="24" LineColor="default" MinWidth="100" OnCellDBLClick="grd_contract_OnCellDblClick" Right="696" RowHeight="25" Style="BUTTON_STYLE" TabOrder="3" TabStop="true" Top="120" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="672">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="336"/>
+						<col width="118"/>
+						<col width="106"/>
+						<col width="108"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="수주번호"/>
+						<cell col="1" display="text" text="수주일자"/>
+						<cell col="2" display="text" text="거래처명"/>
+						<cell col="3" display="text" text="담당자"/>
+					</head>
+					<body>
+						<cell col="0" colid="CONTRACT_NO" display="text"/>
+						<cell col="1" colid="CONTRACT_DATE" display="text" edit="mask" Mask="@@@@/@@/@@"/>
+						<cell col="2" colid="CUSTOMER_CODE" display="text"/>
+						<cell col="3" colid="PERSON_CODE_IN_CHARGE" combocol="EMP_CODE" combodataset="gds_employee" combotext="EMP_NAME" display="combo"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="Consolas,11" Height="44" Id="Static1" Left="736" Style="BUTTON_STYLE" TabOrder="4" Text="미납&#32;수주품목" Top="72" VAlign="Middle" Width="134"></Static>
+		<Grid AutoFit="TRUE" BindDataset="gds_contractDetail" BkColor2="default" BoldHead="true" Bottom="404" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="284" Id="grd_contractDetail" InputPanel="FALSE" Left="736" LineColor="default" MinWidth="100" OnCellClick="grd_contractDetail_OnCellClick" Right="1304" RowHeight="25" Style="BUTTON_STYLE" TabOrder="5" TabStop="true" Top="120" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="568">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="179"/>
+						<col width="120"/>
+						<col width="102"/>
+						<col width="134"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="품명"/>
+						<cell col="1" display="text" text="수량"/>
+						<cell col="2" display="text" text="단위"/>
+						<cell col="3" display="text" text="납기일"/>
+					</head>
+					<body>
+						<cell col="0" colid="ITEM_NAME" display="text"/>
+						<cell col="1" colid="CONTRACT_AMOUNT" display="text"/>
+						<cell col="2" colid="UNIT_OF_CONTRACT" display="text"/>
+						<cell col="3" colid="DUE_DATE_OF_CONTRACT" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="Consolas,11" Height="44" Id="Static3" Left="24" Style="BUTTON_STYLE" TabOrder="6" Text="창고별&#32;재고목록" Top="426" VAlign="Middle" Width="150"></Static>
+		<Grid AutoFit="TRUE" BindDataset="gds_stock" BkColor2="default" BoldHead="true" Bottom="756" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="284" Id="grd_stock" InputPanel="FALSE" Left="24" LineColor="default" MinWidth="100" Right="696" RowHeight="25" Style="BUTTON_STYLE" TabOrder="7" TabStop="true" Top="472" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="672">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="201"/>
+						<col width="139"/>
+						<col width="139"/>
+						<col width="171"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="품명"/>
+						<cell col="1" display="text" text="재고"/>
+						<cell col="2" display="text" text="단위"/>
+						<cell col="3" display="text" text="제품"/>
+					</head>
+					<body>
+						<cell col="0" colid="ITEM_NAME" display="text"/>
+						<cell col="1" colid="STOCK_AMOUNT" display="text"/>
+						<cell col="2" colid="UNIT_OF_STOCK" display="text"/>
+						<cell col="3" colid="DESCRIPTION" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="Consolas,11" Height="44" Id="Static4" Left="736" Style="BUTTON_STYLE" TabOrder="8" Text="납품&#32;완료&#32;목록" Top="426" VAlign="Middle" Width="150"></Static>
+		<Grid AutoFit="TRUE" BindDataset="gds_deliveryResult" BkColor2="default" BoldHead="true" Bottom="759" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="284" Id="grd_deliveryResult" InputPanel="FALSE" Left="736" LineColor="default" MinWidth="100" Right="1304" RowHeight="25" Style="BUTTON_STYLE" TabOrder="9" TabStop="true" Top="475" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="568">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="168"/>
+						<col width="74"/>
+						<col width="64"/>
+						<col width="126"/>
+						<col width="114"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="품목명"/>
+						<cell col="1" display="text" text="납품수량"/>
+						<cell col="2" display="text" text="단위"/>
+						<cell col="3" display="text" text="납품일자"/>
+						<cell col="4" display="text" text="업체"/>
+					</head>
+					<body>
+						<cell col="0" colid="ITEM_NAME" display="text"/>
+						<cell col="1" colid="DELIVERY_AMOUNT" display="text"/>
+						<cell col="2" colid="UNIT_OF_DELIVERY_RESULT" display="text"/>
+						<cell col="3" colid="DELIVERY_DATE" display="text"/>
+						<cell col="4" colid="CUSTOMER_CODE" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button Color="WINDOW" Font="Consolas,12" Height="44" Id="Button0" Left="888" OnClick="Button0_OnClick" Style="BUTTON_STYLE" TabOrder="10" Text="납품&#32;전체조회" Top="424" Width="144"></Button>
+		<Button BKColor="burlywood" BorderColor="BTNSHADOW" Color="WINDOW" Font="Consolas,12" Height="44" Id="btn_registDelivery" Left="1215" OnClick="btn_registDelivery_OnClick" Style="BUTTON_STYLE" TabOrder="11" Text="납품등록" Top="426" Width="89"></Button>
+	</Form>
+	<Script><![CDATA[#include "Script::serialTempleteCode.js"
+function Delivery_OnLoadCompleted(obj) {
+    grd_contract.Redraw = false;
+    grd_contractDetail.Redraw = false;
+    grd_stock.Redraw = false;
+    grd_deliveryResult.Redraw = false;
+    http.Sync = true;
+
+    transaction("findContractList",
+				"svcBusiness::contract.do?method=findContractList",
+				"",
+				"gds_contract=gds_contract",
+				"",
+				"callback");
+
+    transaction("findContractDetailList",
+				"svcBusiness::contract.do?method=findContractDetailList",
+				"",
+				"gds_contractDetail=gds_contractDetail",
+				"",
+				"callback");
+
+
+    transaction("findDeliveryResultList",
+				"svcBusiness::deliveryResult.do?method=findDeliveryResultList",
+				"",
+				"gds_deliveryResult=gds_deliveryResult",
+				"",
+				"callback");
+
+    transaction("findStockList",
+				"svcPurchase::stock.do?method=findStockList",
+				"",
+				"gds_stock=gds_stock",
+				"",
+				"callback");
+
+    gds_contract.Filter("DELIVERY_RESULT_STATUS!='Y'");
+    gds_contractDetail.Filter("CONTRACT_DETAIL_NO='xx'");
+    gds_deliveryResult.Filter("DESCRIPTION='xx'");
+    
+    grd_contract.Redraw = true;
+    grd_contractDetail.Redraw = true;
+    grd_stock.Redraw = true;
+    grd_deliveryResult.Redraw = true;
+    http.Sync = false;
+}
+
+
+var customerCode;
+var contractRow;
+var contract;
+
+function grd_contract_OnCellDblClick(obj, nRow, nCell, nX, nY, nPivotIndex) {
+    contractRow = gds_contract.rowposition;
+    contract = gds_contract.GetColumn(nRow, "CONTRACT_NO");
+    customerCode = gds_contract.GetColumn(nRow, "CUSTOMER_CODE");
+    gds_contractDetail.Filter("CONTRACT_NO='" + contract + "'&&DELIVERY_STATUS!='Y'");
+}
+
+
+var num = 1;
+function grd_contractDetail_OnCellDblClick(obj, nRow, nCell, nX, nY, nPivotIndex) {
+
+}
+
+
+function btn_registDelivery_OnClick(obj) {
+    if (confirm("납품을 등록하시겠습니까?")) {
+
+        grd_contract.Redraw = false;
+        grd_contractDetail.Redraw = false;
+        grd_stock.Redraw = false;
+        grd_deliveryResult.Redraw = false;
+//도대체 gds_prm 을 왜 들고 오는지 이해를 할수가 없다
+        transaction("registDeliveryResult",
+					"svcBusiness::deliveryResult.do?method=registDeliveryResult",
+					"gds_deliveryResult=gds_deliveryResult:u",
+					"gds_prm=gds_prm",
+					"",
+					"callback");
+
+        // gds_deliveryResult.Filter("DESCRIPTION!='Y'");	왜있는지 모르겠다	
+
+        grd_contract.Redraw = true;
+        grd_contractDetail.Redraw = true;
+        grd_stock.Redraw = true;
+        grd_deliveryResult.Redraw = true;
+    }
+}
+
+function callback(trid, ErrorCode, ErrorMsg) {
+    if (trid == "registDeliveryResult") {
+        if (ErrorCode >= 0) {
+            alert("저장이 완료되었습니다");
+            Reload();
+        } else {
+            alert(ErrorMsg);
+        }
+    }
+}
+
+function Button0_OnClick(obj) {
+    gds_deliveryResult.UnFilter();
+}
+
+
+
+function deliver(deliveryAmount, deliveryCause, nRow, findStock){
+    var stockAmount = gds_stock.GetColumn(findStock, "STOCK_AMOUNT");
+    var amount = parseInt(stockAmount) - parseInt(deliveryAmount);
+    if (amount < 0) {
+        alert("재고수량이 부족합니다");
+        return 'X';
+	} else {
+		//gds_deliveryResult.SetColumn(deliveryRow, "DELIVERY_NO", seqSerialNo("DEV", "SERIAL_SEQ"));
+		//프로시저에서 해줄거임       
+		
+		//납품완료 세팅 하는 함수
+		set_grd_deliveryresult(nRow, deliveryAmount, deliveryCause);				
+        gds_stock.SetColumn(findStock, "STOCK_AMOUNT", amount);
+        //trace(gds_stock.getColumn(findStock, "STOCK_AMOUNT"));
+        return 'Y';
+    }
+}
+
+function set_grd_deliveryresult(nRow, deliveryAmount, deliveryCause){
+	var day = Today();		
+	var contractDetailNo = gds_contractDetail.GetColumn(nRow, "CONTRACT_DETAIL_NO");		
+	var itemCode = gds_contractDetail.GetColumn(nRow, "ITEM_CODE");		
+	var itemName = gds_contractDetail.GetColumn(nRow, "ITEM_NAME");		
+	var unitOfDeliveryResult = gds_contractDetail.GetColumn(nRow, "UNIT_OF_CONTRACT");
+	
+	
+	//var deliveryAmount = gds_contractDetail.GetColumn(nRow, "CONTRACT_AMOUNT");
+	var deliveryRow = gds_deliveryResult.AddRow();
+	
+	gds_deliveryResult.SetColumn(deliveryRow, "CONTRACT_DETAIL_NO", contractDetailNo);
+	gds_deliveryResult.SetColumn(deliveryRow, "WAREHOUSE_CODE", "WHS-01");
+	gds_deliveryResult.SetColumn(deliveryRow, "ITEM_CODE", itemCode);
+	gds_deliveryResult.SetColumn(deliveryRow, "ITEM_NAME", itemName);
+	gds_deliveryResult.SetColumn(deliveryRow, "UNIT_OF_DELIVERY_RESULT", unitOfDeliveryResult);
+	gds_deliveryResult.SetColumn(deliveryRow, "DELIVERY_AMOUNT", deliveryAmount);
+	gds_deliveryResult.SetColumn(deliveryRow, "CUSTOMER_CODE", customerCode);
+	gds_deliveryResult.SetColumn(deliveryRow, "DELIVERY_DATE", day);
+	gds_deliveryResult.SetColumn(deliveryRow, "DESCRIPTION", deliveryCause);
+}
+
+function grd_contractDetail_OnCellClick(obj, nRow, nCell, nX, nY, nPivotIndex) {     
+    var deliver_verification;
+    var dialogResult=Dialog("Business::deliveryDialog.xml",350,350);
+		trace(dialogResult);
+	var dialogResultArray=split(dialogResult,"+");
+		trace(dialogResultArray);
+    
+    var cdItemCode = gds_contractDetail.GetColumn(nRow, "ITEM_CODE");
+	
+    // 창고 ITEMCODE ROW 구함
+    var findStock = gds_stock.FindRow("ITEM_CODE", cdItemCode);
+
+    var cdAmount = parseInt(gds_contractDetail.GetColumn(nRow, "CONTRACT_AMOUNT"));
+    var deliveryAmount = parseInt(dialogResultArray[0]);
+    var deliveryCause = dialogResultArray[1];
+    
+    if (deliveryAmount > cdAmount || deliveryAmount <= 0) {
+        alert("수량을 확인해 주세요.");
+        return;
+    }else if(deliveryAmount < cdAmount){ //주문한 수량보다 적게 납품시...
+		deliver_verification = deliver(deliveryAmount, deliveryCause, nRow, findStock);
+		gds_contractDetail.SetColumn(nRow, "CONTRACT_AMOUNT", cdAmount - deliveryAmount);
+		
+    }else if(deliveryAmount == cdAmount){ //주문한 수량을 납품
+		deliver_verification = deliver(deliveryAmount, deliveryCause, nRow, findStock);
+		if(deliver_verification = 'Y'){
+		gds_contractDetail.SetColumn(nRow, "DELIVERY_STATUS", 'Y');
+		 //gds_contractDetail.SetColumn(nRow, "DELIVERY_STATUS", 'Y');
+        if (gds_contractDetail.GetColumn(nRow, "MPS_APPLY_STATUS") != "Y") {
+            gds_contractDetail.SetColumn(nRow, "MPS_APPLY_STATUS", 'D');
+        }
+        gds_contractDetail.Filter("DELIVERY_STATUS!='Y' && CONTRACT_NO='" + contract + "'");
+        if (gds_contractDetail.count = 0) {
+            gds_contract.SetColumn(contractRow, "DELIVERY_RESULT_STATUS", 'Y');
+            gds_contract.Filter("DELIVERY_RESULT_STATUS!='Y'");
+        }
+    }
+    }else if(deliver_verification = 'X'){
+    return;
+    }
+    
+}
+
+]]></Script>
+</Window>

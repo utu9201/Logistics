@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="businessUrlHandlerMapping"
+          class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+
+        <property name="order" value="1"/>
+        <property name="alwaysUseFullPath" value="false"/>
+        <property name="mappings">
+            <props>
+                <prop key="estimate.do">estimateController</prop>
+                <prop key="contract.do">contractController</prop>
+                <prop key="customer.do">customerController</prop>
+                <prop key="deliveryResult.do">deliveryResultController</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="estimateController" class="net.plang.logistics.business.controller.EstimateController"
+          p:businessServiceFacade-ref="businessServiceFacade"
+    />
+    <bean id="contractController" class="net.plang.logistics.business.controller.ContractController"
+          p:businessServiceFacade-ref="businessServiceFacade"
+    />
+    <bean id="customerController" class="net.plang.logistics.business.controller.CustomerController"
+          p:businessServiceFacade-ref="businessServiceFacade"
+    />
+    <bean id="deliveryResultController" class="net.plang.logistics.business.controller.DeliveryResultController"
+          p:businessServiceFacade-ref="businessServiceFacade"
+    />
+</beans>

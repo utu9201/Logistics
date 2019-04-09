@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="baseServiceFacade"
+          class="net.plang.base.sf.BaseServiceFacadeImpl"
+          p:baseApplicationService-ref="baseApplicationService"
+    />
+
+    <bean id="baseApplicationService"
+          class="net.plang.base.applicationService.BaseApplicationServiceImpl"
+          p:codeDAO-ref="codeDAO"
+          p:codeDetailDAO-ref="codeDetailDAO"
+          p:menuDAO-ref="menuDAO"
+          p:employeeDAO-ref="employeeDAO"
+    />
+    <bean id="codeDAO"
+          class="net.plang.base.dao.CodeDAOImpl"
+          parent="iBatisSupportDao"
+    />
+
+    <bean id="codeDetailDAO"
+          class="net.plang.base.dao.CodeDetailDAOImpl"
+          parent="iBatisSupportDao"
+    />
+    <bean id="menuDAO"
+          class="net.plang.base.dao.MenuDAOImpl"
+          parent="iBatisSupportDao"
+    />
+    <bean id="mailApplicationService"
+          class="net.plang.base.applicationService.MailApplicationServiceImpl"
+          p:javaMailSender-ref="javaMailSender"
+          p:reportDAO-ref="reportDAO"
+    />
+    <bean id="reportDAO"
+          class="net.plang.base.dao.ReportDAOImpl"
+          parent="iBatisSupportDao"
+    />
+    <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="port" value="587"/>
+        <property name="username" value="seoulittestmail"/>
+        <property name="password" value="tjdnf123!"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+
+    </bean>
+
+    <bean id="employeeDAO"
+          class="net.plang.hr.emp.dao.EmployeeDAOImpl"
+          parent="iBatisSupportDao"
+    />
+    <bean class="net.plang.base.sf.MailServiceFacadeImpl"
+          id="mailServiceFacade" p:mailApplicationService-ref="mailApplicationService"/>
+</beans>

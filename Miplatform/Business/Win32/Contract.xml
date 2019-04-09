@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="776" Id="Contract" Left="8" OnInit="Contract_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1330" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="ds_contractType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴산뜻돋움,18,Bold" Height="37" Id="Static0" Left="8" Style="BUTTON_STYLE" TabOrder="1" Text="수주관리" Top="8" VAlign="Middle" Width="1297"></Static>
+		<Grid AutoFit="TRUE" BindDataset="gds_contract" BkColor2="default" BoldHead="true" Bottom="416" Editable="TRUE" Enable="true" EndLineColor="default" Font="Default,11,Bold" HeadHeight="30" Height="312" Id="grd_contract" InputPanel="FALSE" Left="16" LineColor="default" MinWidth="100" OnCellClick="grd_contract_OnCellClick" Right="1296" RowHeight="25" TabOrder="2" TabStop="true" Top="104" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1280">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="317"/>
+						<col width="293"/>
+						<col width="141"/>
+						<col width="156"/>
+						<col width="161"/>
+						<col width="133"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="수주일련번호"/>
+						<cell col="1" display="text" text="견적일련번호"/>
+						<cell col="2" display="text" text="수주일자"/>
+						<cell col="3" display="text" text="거래처명"/>
+						<cell col="4" display="text" text="수주요청자"/>
+						<cell col="5" display="text" text="수주담당자명"/>
+					</head>
+					<body>
+						<cell col="0" colid="CONTRACT_NO" display="text" expandsize="18" font="한컴산뜻돋움,11"/>
+						<cell col="1" colid="ESTIMATE_NO" display="text" expandsize="18" font="한컴산뜻돋움,11"/>
+						<cell col="2" colid="CONTRACT_DATE" display="text" edit="mask" expandsize="18" font="한컴산뜻돋움,11" Mask="####/##/##"/>
+						<cell col="3" colid="CUSTOMER_CODE" combocol="DETAIL_CODE" combodataset="gds_codeDetail" combotext="DETAIL_CODE_NAME" display="combo" expandsize="18" font="한컴산뜻돋움,11"/>
+						<cell col="4" colid="CONTRACT_REQUESTER" display="text" expandsize="18" font="한컴산뜻돋움,11"/>
+						<cell col="5" colid="PERSON_CODE_IN_CHARGE" combocol="EMP_CODE" combodataset="gds_employee" combotext="EMP_NAME" display="combo" expandsize="18" font="한컴산뜻돋움,11"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Grid AutoFit="TRUE" BindDataset="gds_contractDetail" BkColor2="default" BoldHead="true" Bottom="760" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11,Bold" HeadHeight="30" Height="336" Id="grd_contractDetail" InputPanel="FALSE" Left="16" LineColor="default" MinWidth="100" Right="1296" RowHeight="25" TabOrder="3" TabStop="true" Top="424" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1280">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="434"/>
+						<col width="180"/>
+						<col width="80"/>
+						<col width="180"/>
+						<col width="80"/>
+						<col width="180"/>
+						<col width="180"/>
+						<col width="97"/>
+						<col width="97"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="수주상세일렬번호"/>
+						<cell col="1" display="text" text="품목명"/>
+						<cell col="2" display="text" text="단위"/>
+						<cell col="3" display="text" text="납기일"/>
+						<cell col="4" display="text" text="수주수량"/>
+						<cell col="5" display="text" text="수주단가"/>
+						<cell col="6" display="text" text="합계액"/>
+						<cell col="7" display="text" text="MPS적용"/>
+						<cell col="8" display="text" text="납품"/>
+					</head>
+					<body>
+						<cell col="0" colid="CONTRACT_DETAIL_NO" display="text" font="한컴산뜻돋움,11"/>
+						<cell col="1" colid="ITEM_NAME" display="text" expr="trim(item_name)" font="한컴산뜻돋움,11"/>
+						<cell col="2" colid="UNIT_OF_CONTRACT" display="text" font="한컴산뜻돋움,11"/>
+						<cell col="3" colid="DUE_DATE_OF_CONTRACT" display="text" edit="mask" font="한컴산뜻돋움,11" Mask="####/##/##"/>
+						<cell col="4" colid="CONTRACT_AMOUNT" display="text" font="한컴산뜻돋움,11"/>
+						<cell col="5" colid="UNIT_PRICE_OF_CONTRACT" display="number" font="한컴산뜻돋움,11" Mask="###,###,###,##0"/>
+						<cell col="6" colid="SUM_PRICE_OF_CONTRACT" display="number" expr="TONUMBER(CONTRACT_AMOUNT)*TONUMBER(UNIT_PRICE_OF_CONTRACT)" font="한컴산뜻돋움,11" Mask="###,###,###,##0"/>
+						<cell col="7" colid="MPS_APPLY_STATUS" display="text" font="한컴산뜻돋움,11"/>
+						<cell col="8" colid="DELIVERY_STATUS" display="text" font="한컴산뜻돋움,11"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button Color="WINDOW" Font="함초롬바탕,14,Bold" Height="44" Id="btn_registerContract" Left="1190" OnClick="btn_registerContract_OnClick" Style="BUTTON_STYLE" TabOrder="4" Text="저장" Top="57" Width="112"></Button>
+		<Button Color="WINDOW" Font="함초롬바탕,14,Bold" Height="44" Id="btn_estimateInfo" Left="16" OnClick="btn_estimateInfo_OnClick" Style="BUTTON_STYLE" TabOrder="5" Text="견적정보로&#32;추가" Top="57" Width="184"></Button>
+		<Button Color="WINDOW" Font="함초롬바탕,14,Bold" Height="44" Id="btn_delContract" Left="1064" OnClick="btn_delContract_OnClick" Style="BUTTON_STYLE" TabOrder="6" Text="삭제" Top="57" Width="112"></Button>
+		<Button Color="WINDOW" Font="함초롬바탕,14,Bold" Height="44" Id="btn_search_contract" Left="840" OnClick="btn_search_contract_OnClick" TabOrder="7" Text="수주정보전체조회" Top="57" Width="190"></Button>
+		<Button Color="WINDOW" Font="함초롬바탕,14,Bold" Height="44" Id="btn_search_period" Left="488" OnClick="btn_search_period_OnClick" TabOrder="8" Text="기간조회" Top="57" Width="190"></Button>
+		<Calendar Dateformat="yyyyMMdd" Height="44" Id="fromDate" Left="208" SaturdayTextColor="blue" SundayTextColor="red" TabOrder="9" Top="57" Width="90"></Calendar>
+		<Calendar Dateformat="yyyyMMdd" Height="44" Id="toDate" Left="344" SaturdayTextColor="blue" SundayTextColor="red" TabOrder="10" Top="57" Width="90"></Calendar>
+		<Static Color="user1" Font="돋움,11,Bold" Height="44" Id="Static1" Left="304" TabOrder="11" Text="부터" Top="57" VAlign="Bottom" Width="35"></Static>
+		<Static Color="user1" Font="돋움,11,Bold" Height="44" Id="Static2" Left="448" TabOrder="12" Text="까지" Top="57" VAlign="Bottom" Width="46"></Static>
+		<Button Color="WINDOW" Font="함초롬바탕,14,Bold" Height="44" Id="btn_send_mail" Left="688" OnClick="btn_send_mail_OnClick" TabOrder="13" Text="메일보내기" Top="57" Width="126"></Button>
+	</Form>
+	<Script><![CDATA[
+function Contract_OnLoadCompleted(obj) {
+
+    grd_contract.Redraw = false;
+    grd_contractDetail.Redraw = false;
+    http.Sync = true;
+
+    transaction("findContractList",
+        "svcBusiness::contract.do?method=findContractList",
+        "",
+        "gds_contract=gds_contract",
+        "",
+        "callback");
+
+
+    transaction("findContractDetailList",
+        "svcBusiness::contract.do?method=findContractDetailList",
+        "",
+        "gds_contractDetail=gds_contractDetail",
+        "",
+        "callback");
+
+
+    //initSession(false);
+
+    http.Sync = false;
+    this.gds_contract.Filter("CONTRACT_NO=='xx'");
+    this.gds_contractDetail.Filter("CONTRACT_NO=='xx'");
+
+
+    detailCodeFilter();
+
+}
+
+
+
+function detailCodeFilter() {
+
+    gds_codeDetail.Filter("DIVISION_CODE_NO='CT'");
+    ds_contractType.CopyF(gds_codeDetail);
+
+    gds_codeDetail.Unfilter();
+
+    grd_contract.Redraw = true;
+    grd_contractDetail.Redraw = true;
+}
+
+
+
+
+var customerCode;
+var estimateNo;
+var personCodeInCharge;
+var contractRequester;
+var num = 1;
+// #include "Script::serialTempleteCode.js"
+function btn_estimateInfo_OnClick(obj) {
+    if (dialog("Business::EstimateDialog.xml", "")) {
+        trace(estimateNo);
+        gds_estimateDetail.Filter("ESTIMATE_NO='" + estimateNo + "'");
+
+        var rowNum = gds_contract.GetRowCount() - 1;
+
+        // var contractNo = contractCodeNo(today());
+        var contractNo = "새 수주번호" + num++;
+
+        gds_contract.SetColumn(rowNum, "CONTRACT_NO", contractNo);
+        gds_contract.SetColumn(rowNum, "CUSTOMER_CODE", customerCode);
+        gds_contract.SetColumn(rowNum, "PERSON_CODE_IN_CHARGE", personCodeInCharge);
+        gds_contract.SetColumn(rowNum, "CONTRACT_DATE", today());
+        gds_contract.SetColumn(rowNum, "CONTRACT_TYPE", "CT-01");
+        gds_contract.SetColumn(rowNum, "CONTRACT_REQUESTER", contractRequester);
+        trace("CONTRACT_REQUESTER" + contractRequester);
+        var itemCode;
+        var itemName;
+        var unitOfEstimate;
+        var dueDateOfEstimate;
+        var estimateAmount;
+        var unitPriceOfEstimate;
+        var sumPriceOfEstimate;
+
+
+        for (var i = 0; i < gds_estimateDetail.count; i++) {
+
+            itemCode = gds_estimateDetail.GetColumn(i, "ITEM_CODE");
+            itemName = gds_estimateDetail.GetColumn(i, "ITEM_NAME");
+            unitOfEstimate = gds_estimateDetail.GetColumn(i, "UNIT_OF_ESTIMATE");
+            dueDateOfEstimate = gds_estimateDetail.GetColumn(i, "DUE_DATE_OF_ESTIMATE");
+            estimateAmount = gds_estimateDetail.GetColumn(i, "ESTIMATE_AMOUNT");
+            unitPriceOfEstimate = gds_estimateDetail.GetColumn(i, "UNIT_PRICE_OF_ESTIMATE");
+            sumPriceOfEstimate = gds_estimateDetail.GetColumn(i,"SUM_PRICE_OF_ESTIMATE");
+
+            var contractDetailRowNum = gds_contractDetail.GetRowCount();
+
+            gds_contractDetail.AddRow();
+            gds_contractDetail.SetColumn(contractDetailRowNum, "CONTRACT_DETAIL_NO", i + 1);
+            gds_contractDetail.SetColumn(contractDetailRowNum, "CONTRACT_NO", contractNo);
+            gds_contractDetail.SetColumn(contractDetailRowNum, "ITEM_CODE", itemCode);
+            gds_contractDetail.SetColumn(contractDetailRowNum, "ITEM_NAME", itemName);
+            gds_contractDetail.SetColumn(contractDetailRowNum, "UNIT_OF_CONTRACT", unitOfEstimate);
+            gds_contractDetail.SetColumn(contractDetailRowNum, "DUE_DATE_OF_CONTRACT", dueDateOfEstimate);
+            gds_contractDetail.SetColumn(contractDetailRowNum, "CONTRACT_AMOUNT", estimateAmount);
+            gds_contractDetail.SetColumn(contractDetailRowNum, "UNIT_PRICE_OF_CONTRACT", unitPriceOfEstimate);
+            gds_contractDetail.SetColumn(contractDetailRowNum, "SUM_PRICE_OF_CONTRACT", sumPriceOfEstimate);
+            gds_contractDetail.SetColumn(contractDetailRowNum, "MPS_APPLY_STATUS", "");
+            gds_contractDetail.SetColumn(contractDetailRowNum, "DELIVERY_STATUS", "N");
+        }
+        gds_contractDetail.Filter("CONTRACT_NO='" + contractNo + "'");
+
+    }
+     // else {
+        // alert("이미 수주된 견적이거나 선택한 견적이 없습니다");
+    // }
+
+
+}
+
+
+
+function grd_contract_OnCellClick(obj, nRow, nCell, nX, nY, nPivotIndex) {
+
+    var contract = gds_contract.GetColumn(nRow, "CONTRACT_NO");
+    gds_contractDetail.Filter("CONTRACT_NO='" + contract + "'");
+
+}
+
+function btn_registerContract_OnClick(obj) {
+
+    if (confirm("수주를 저장하시겠습니까?")) {
+        http.Sync = false;
+        grd_contract.Redraw = false;
+        grd_contractDetail.Redraw = false;
+        transaction(
+            "registerContract",
+            "svcBusiness::/contract.do?method=registerContract",
+            "gds_contract=gds_contract:u gds_contractDetail=gds_contractDetail:u",
+            "gds_contract=gds_contract gds_contractDetail=gds_contractDetail",
+            "",
+            "callback");
+
+        http.Sync = true;
+
+    }
+
+
+}
+
+
+function callback(trid, ErrorCode, ErrorMsg) {
+
+    if (trid == "registerContract") {
+        if (ErrorCode >= 0) {
+
+            alert("저장이 완료되었습니다");
+            Reload();
+        } else { alert(ErrorMsg); }
+    }
+
+}
+
+#include "Script::ahramDeleter.js"
+function btn_delContract_OnClick(obj) {
+    var status = gds_contractDetail.GetColumn(0, "MPS_APPLY_STATUS");
+
+    if (status != "Y") {
+        ahramDeleter(gds_contract, gds_contractDetail);
+        transaction(
+            "registerContract",
+            "svcBusiness::/contract.do?method=registerContract",
+            "gds_contract=gds_contract:u gds_contractDetail=gds_contractDetail:u",
+            "gds_contract=gds_contract gds_contractDetail=gds_contractDetail",
+            "",
+            "callback");
+
+    } else { alert("mps적용중"); }
+
+
+}
+
+function btn_search_contract_OnClick(obj) {
+    gds_contract.UnFilter();
+}
+
+function btn_search_period_OnClick(obj) {
+    gds_contract.Filter("CONTRACT_DATE > " + parseInt(fromDate.Text) +
+     " && CONTRACT_DATE < " + parseInt(toDate.Text));
+}
+
+
+function btn_send_mail_OnClick(obj)
+{
+	//선택된 contract
+	var row = gds_contract.rowposition;
+	var contractNo = gds_contract.GetColumn(row,"CONTRACT_NO");
+	
+	if(substr(contractNo, 0, 1) ='새'){
+		alert("수주 등록을 해야 메일을 보내실 수 있습니다.");
+	}else{
+		 transaction(
+            "sendContractReport",
+            "svcBase::mail.do?method=sendContractReport",
+            "",
+            "",
+            "contractNo =" +contractNo ,
+            "callback");
+            
+	}
+}
+]]></Script>
+</Window>

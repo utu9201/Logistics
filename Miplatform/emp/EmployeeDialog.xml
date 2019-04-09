@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="300" Id="EmployeeDialog" Left="8" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="300" WorkArea="true">
+		<Grid BindDataset="gds_employee" BkColor2="default" BoldHead="true" Bottom="294" Enable="true" EndLineColor="default" Height="286" Id="grd_employee" InputPanel="FALSE" Left="8" LineColor="default" OnCellClick="grd_employee_OnCellDblClick" OnCellDBLClick="grd_employee_OnCellDblClick" Right="294" TabOrder="1" TabStop="true" Top="8" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="286">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="48"/>
+						<col width="105"/>
+						<col width="105"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="No"/>
+						<cell col="1" display="text" text="사원코드"/>
+						<cell col="2" display="text" text="사원명"/>
+					</head>
+					<body>
+						<cell col="0" display="text"/>
+						<cell col="1" colid="EMP_CODE" display="text"/>
+						<cell col="2" colid="EMP_NAME" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+function grd_employee_OnCellDblClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+
+	var empCode = gds_employee.GetColumn(nRow, "EMP_CODE");
+	//var authorityCode = gdsEmployee.GetColumn(nRow, "AUTHORITY_CODE");
+	var empName = gds_employee.GetColumn(nRow, "EMP_NAME");	
+	var deptCode = gds_employee.GetColumn(nRow, "DEPT_CODE");
+	var positionCode = gds_employee.GetColumn(nRow, "POSITION_CODE");
+	var password = gds_employee.GetColumn(nRow, "USER_PW");	
+	global_empCode = empCode;
+	//globalAuthorityCode = authorityCode;
+	global_empName = empName;
+ 	global_deptCode = deptCode; 
+ 	global_positionCode = positionCode;
+	parent.edt_empName.text = empName;
+	parent.setPassword(password);
+	close();
+	
+}
+
+
+
+]]></Script>
+</Window>

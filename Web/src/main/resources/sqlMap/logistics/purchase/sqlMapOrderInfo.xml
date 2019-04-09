@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="orderInfo">
+    <!-- orderInfoDAO -->
+
+    <typeAlias alias="orderInfoTO" type="net.plang.logistics.purchase.to.OrderInfoTO"/>
+
+    <resultMap class="orderInfoTO" id="orderInfoResult">
+
+        <result property="orderNo" column="ORDER_NO"/>
+        <result property="customerCode" column="CUSTOMER_CODE"/>
+        <result property="orderDate" column="ORDER_DATE"/>
+        <result property="personCodeInCharge" column="PERSON_CODE_IN_CHARGE"/>
+        <result property="description" column="DESCRIPTION"/>
+        <result property="orderInfoStatus" column="ORDER_INFO_STATUS"/>
+    </resultMap>
+    <select id="selectOrderInfoList" resultMap="orderInfoResult">
+        SELECT ORDER_NO
+             , CUSTOMER_CODE
+             , ORDER_DATE
+             , PERSON_CODE_IN_CHARGE
+             , DESCRIPTION
+             , ORDER_INFO_STATUS
+        FROM ORDER_INFO
+    </select>
+    <insert id="insertOrderInfo" parameterClass="orderInfoTO">
+
+        INSERT INTO ORDER_INFO
+        VALUES ( #orderNo#
+               , #customerCode#
+               , #orderDate#
+               , #personCodeInCharge#
+               , #description#
+               , #orderInfoStatus#)
+
+    </insert>
+    <update id="updateOrderInfo" parameterClass="orderInfoTO">
+
+        UPDATE ORDER_INFO
+        SET CUSTOMER_CODE         = #customerCode#
+          , ORDER_DATE            = #orderDate#
+          , PERSON_CODE_IN_CHARGE = #personCodeInCharge#
+          , DESCRIPTION           = #description#
+          , ORDER_INFO_STATUS     = #orderInfoStatus#
+        WHERE ORDER_NO = #orderNo#
+    </update>
+    <!-- stockDAO -->
+
+    <typeAlias alias="stockTO" type="net.plang.logistics.purchase.to.StockTO"/>
+    <resultMap class="stockTO" id="stockResult">
+
+        <result property="warehouseCode" column="WAREHOUSE_CODE"/>
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="deliveryNo" column="DELIVERY_NO"/>
+        <result property="productionResultNo" column="PRODUCTION_RESULT_NO"/>
+        <result property="inputItemNo" column="INPUT_ITEM_NO"/>
+        <result property="itemName" column="ITEM_NAME"/>
+        <result property="unitOfStock" column="UNIT_OF_STOCK"/>
+        <result property="safetyAllowanceAmount" column="SAFETY_ALLOWANCE_AMOUNT"/>
+        <result property="stockAmount" column="STOCK_AMOUNT"/>
+        <result property="description" column="DESCRIPTION"/>
+    </resultMap>
+
+    <select id="selectStockList" resultMap="stockResult">
+
+        SELECT WAREHOUSE_CODE
+             , ITEM_CODE
+             , DELIVERY_NO
+             , PRODUCTION_RESULT_NO
+             , INPUT_ITEM_NO
+             , ITEM_NAME
+             , UNIT_OF_STOCK
+             , SAFETY_ALLOWANCE_AMOUNT
+             , STOCK_AMOUNT
+             , DESCRIPTION
+        FROM STOCK
+
+    </select>
+    <insert id="insertStock" parameterClass="stockTO">
+
+        INSERT INTO STOCK
+        VALUES ( #warehouseCode#
+               , #itemCode#
+               , #deliveryNo#
+               , #productionResultNo#
+               , #inputItemNo#
+               , #itemName#
+               , #unitOfStock#
+               , #safetyAllowanceAmount#
+               , #stockAmount#
+               , #description#)
+
+    </insert>
+    <update id="updateStock" parameterClass="stockTO">
+
+        UPDATE STOCK
+        SET DELIVERY_NO             = #deliveryNo#
+          , PRODUCTION_RESULT_NO    = #productionResultNo#
+          , INPUT_ITEM_NO           = #inputItemNo#
+          , ITEM_NAME               = #itemName#
+          , UNIT_OF_STOCK           = #unitOfStock#
+          , SAFETY_ALLOWANCE_AMOUNT = #safetyAllowanceAmount#
+          , STOCK_AMOUNT            = #stockAmount#
+          , DESCRIPTION             = #description#
+        WHERE WAREHOUSE_CODE = #warehouseCode#
+          AND ITEM_CODE = #itemCode#
+
+    </update>
+    <delete id="deleteStock" parameterClass="stockTO">
+
+        DELETE
+        FROM STOCK
+        WHERE WAREHOUSE_CODE = #warehouseCode#
+          AND ITEM_CODE = #itemCode#
+    </delete>
+    <!-- materialPaymentDAO -->
+
+    <typeAlias alias="materialPaymentTO" type="net.plang.logistics.purchase.to.MaterialPaymentTO"/>
+    <resultMap class="materialPaymentTO" id="materialPaymentResult">
+
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="paymentDate" column="PAYMENT_DATE"/>
+        <result property="workInstructionNo" column="WORK_INSTRUCTION_NO"/>
+        <result property="itemName" column="ITEM_NAME"/>
+        <result property="paymentAmount" column="PAYMENT_AMOUNT"/>
+        <result property="unitPayment" column="UNIT_PAYMENT"/>
+        <result property="description" column="DESCRIPTION"/>
+
+    </resultMap>
+    <select id="selectMaterialPaymentList" resultMap="materialPaymentResult">
+
+        SELECT ITEM_CODE
+             , PAYMENT_DATE
+             , WORK_INSTRUCTION_NO
+             , ITEM_NAME
+             , PAYMENT_AMOUNT
+             , UNIT_PAYMENT
+             , DESCRIPTION
+        FROM MATERIAL_PAYMENT
+
+    </select>
+    <insert id="insertMaterialPayment" parameterClass="materialPaymentTO">
+
+        INSERT INTO MATERIAL_PAYMENT
+        VALUES ( #itemCode#
+               , #paymentDate#
+               , #workInstructionNo#
+               , #itemName#
+               , #paymentAmount#
+               , #unitPayment#
+               , #description#)
+
+    </insert>
+    <!-- warehousingDAO -->
+
+    <typeAlias alias="warehousingTO" type="net.plang.logistics.purchase.to.WarehousingTO"/>
+    <resultMap class="warehousingTO" id="warehousingResult">
+
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="orderNo" column="ORDER_NO"/>
+        <result property="itemName" column="ITEM_NAME"/>
+        <result property="orderAmount" column="ORDER_AMOUNT"/>
+        <result property="warehousingAmount" column="WAREHOUSING_AMOUNT"/>
+        <result property="unitWarehousing" column="UNIT_WAREHOUSING"/>
+        <result property="customer" column="CUSTOMER"/>
+        <result property="description" column="DESCRIPTION"/>
+        <result property="warehousingDate" column="WAREHOUSING_DATE"/>
+
+    </resultMap>
+    <select id="selectWarehousingList" resultMap="warehousingResult">
+
+        SELECT ITEM_CODE
+             , ORDER_NO
+             , ITEM_NAME
+             , ORDER_AMOUNT
+             , WAREHOUSING_AMOUNT
+             , UNIT_WAREHOUSING
+             , CUSTOMER
+             , DESCRIPTION
+             , WAREHOUSING_DATE
+        FROM WAREHOUSING
+
+    </select>
+    <insert id="insertWarehousing" parameterClass="warehousingTO">
+
+        INSERT INTO WAREHOUSING
+        VALUES ( #itemCode#
+               , #orderNo#
+               , #itemName#
+               , #orderAmount#
+               , #warehousingAmount#
+               , #unitWarehousing#
+               , #customer#
+               , #description#
+               , #warehousingDate#)
+
+    </insert>
+    <update id="updateWarehousing" parameterClass="warehousingTO">
+
+        UPDATE WAREHOUSING
+        SET ORDER_NO           = #orderNo#
+          , ITEM_NAME          = #itemName#
+          , ORDER_AMOUNT       = #orderAmount#
+          , WAREHOUSING_AMOUNT = #warehousingAmount#
+          , UNIT_WAREHOUSING   = #unitWarehousing#
+          , CUSTOMER           = #customer#
+          , DESCRIPTION        = #description#
+          , WAREHOUSING_DATE   = #warehousingDate#
+        WHERE ITEM_CODE = #itemCode#
+
+    </update>
+
+</sqlMap>

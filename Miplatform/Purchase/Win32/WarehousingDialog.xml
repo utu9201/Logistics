@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="543" Id="WarehousingDialog" Left="8" PidAttrib="7" Title="WarehousingDialog" Top="8" Ver="1.0" Width="800" WorkArea="true">
+		<Grid AutoFit="TRUE" BindDataset="gds_orderDetail" BkColor2="default" BoldHead="true" Bottom="522" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="410" Id="grd_orderDetail" InputPanel="FALSE" Left="8" LineColor="default" MinWidth="100" Right="783" RowHeight="25" TabOrder="1" TabStop="true" Top="112" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="775">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="120"/>
+						<col width="54"/>
+						<col width="50"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="품명"/>
+						<cell col="1" display="text" text="발주수량"/>
+						<cell col="2" display="text" text="단위"/>
+						<cell col="3" display="text" text="입고예정일"/>
+					</head>
+					<body>
+						<cell col="0" colid="ITEM_NAME" display="text"/>
+						<cell col="1" colid="ORDER_AMOUNT" display="text" edit="lowernum"/>
+						<cell col="2" colid="UNIT_OF_ORDER" display="text"/>
+						<cell col="3" colid="DUE_DATE_OF_ORDER" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Static Align="Center" BKColor="goldenrod" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="44" Id="st_warDialog" Left="8" TabOrder="2" Text="발주품입고등록" VAlign="Middle" Width="776"></Static>
+		<Button BKColor="goldenrod" Height="42" Id="btn_addInven" Left="610" OnClick="btn_addInven_OnClick" TabOrder="3" Text="일괄입고" Top="57" Width="168"></Button>
+	</Form>
+	<Script><![CDATA[var warehousingNo;
+
+function btn_addInven_OnClick(obj)
+{
+	orderDeteilRow = gds_orderDetail.rowposition;
+	
+	
+	
+	var odItemCode = gds_orderDetail.GetColumn(nRow,"ITEM_CODE");
+	
+	// 창고 ITEMCODE ROW 구함
+	var findStock = gds_stock.FindRow("ITEM_CODE",odItemCode);
+	
+	
+	var odAmount = gds_orderDetail.GetColumn(nRow,"ORDER_AMOUNT");
+	
+	var stockAmount = gds_stock.GetColumn(findStock,"STOCK_AMOUNT");
+
+	var amount0 = parseInt(stockAmount) + parseInt(odAmount);
+	
+	var day = Today();
+	
+	var itemCode = gds_orderDetail.getColumn(nRow,"ITEM_CODE");
+	var itemName = gds_orderDetail.getColumn(nRow,"ITEM_NAME");
+	var orderNo0 = gds_orderDetail.getColumn(nRow,"ORDER_DETAIL_NO");
+	var orderAmount = gds_orderDetail.getColumn(nRow,"ORDER_AMOUNT");	
+	var unitWarehousing = gds_orderDetail.getColumn(nRow,"UNIT_OF_ORDER");
+	
+	warehousingNo = gds_warehousing.AddRow();
+	
+	gds_warehousing.SetColumn(warehousingNo,"ITEM_CODE",itemCode);			
+	gds_warehousing.SetColumn(warehousingNo,"ORDER_NO",orderNo0);
+	gds_warehousing.SetColumn(warehousingNo,"ITEM_NAME",itemName);
+	gds_warehousing.SetColumn(warehousingNo,"ORDER_AMOUNT",orderAmount);
+	gds_warehousing.SetColumn(warehousingNo,"WAREHOUSING_AMOUNT",orderAmount);
+	gds_warehousing.SetColumn(warehousingNo,"UNIT_WAREHOUSING",unitWarehousing);
+	gds_warehousing.SetColumn(warehousingNo,"CUSTOMER",customerCode);
+	gds_warehousing.SetColumn(warehousingNo,"WAREHOUSING_DATE",day);
+	gds_warehousing.SetColumn(warehousingNo,"DESCRIPTION",'Y');
+	
+	gds_orderDetail.SetColumn(orderDeteilRow,"DELIVERY_SCHEDULE_DATE",day);
+	if(){
+	gds_orderDetail.SetColumn(orderDeteilRow,"ORDER_DETAIL_STATUS",'H');
+	gds_orderDetail.SetColumn(orderDeteilRow,"ORDER_AMOUNT",'Y');
+	}else{
+	gds_orderDetail.SetColumn(orderDeteilRow,"ORDER_DETAIL_STATUS",'Y');
+	gds_orderDetail.SetColumn(orderDeteilRow,"ORDER_AMOUNT",'Y');
+	
+	}
+	gds_stock.SetColumn(findStock,"STOCK_AMOUNT",amount0);
+	
+	
+	gds_orderDetail.Filter("ORDER_DETAIL_STATUS!='Y' && ORDER_NO='"+orderNo+"'");
+	
+	
+	if(gds_orderDetail.count=0)
+	{
+		
+	gds_orderInfo.SetColumn(orderRow,"DESCRIPTION",'Y');
+	
+		
+	gds_orderInfo.Filter("DESCRIPTION!='Y'");
+	
+	
+	}
+}
+]]></Script>
+</Window>

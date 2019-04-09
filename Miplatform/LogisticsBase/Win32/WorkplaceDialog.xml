@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="320" Id="WorkplaceDialog" Left="8" PidAttrib="7" Title="WorkplaceDialog" Top="8" Ver="1.0" Width="464" WorkArea="true">
+		<Grid AutoEnterType="Key" AutoSelect="TRUE" BindDataset="gds_workplace" BoldHead="true" Bottom="286" Enable="true" EndLineColor="default" HeadHeight="25" Height="271" Id="grd_workplace" InputPanel="FALSE" Left="8" LineColor="default" OnCellClick="grd_workplace_OnCellDblClick" OnCellDBLClick="grd_workplace_OnCellDblClick" Right="353" RowHeight="25" Style="BUTTON_STYLE" TabOrder="1" TabStop="true" Top="15" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="345">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="44"/>
+						<col width="154"/>
+						<col width="125"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="No"/>
+						<cell col="1" display="text" text="사업장코드"/>
+						<cell col="2" display="text" text="사업자명"/>
+					</head>
+					<body>
+						<cell col="0" display="text"/>
+						<cell col="1" colid="WORKPLACE_CODE" display="text"/>
+						<cell col="2" colid="WORKPLACE_NAME" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+function grd_workplace_OnCellDblClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	var workplaceName = gds_workplace.GetColumn(nRow, "WORKPLACE_NAME");	
+	
+	global_workplaceName = workplaceName;
+	
+	parent.edt_workplace.text = workplaceName;
+	close();
+}
+]]></Script>
+</Window>

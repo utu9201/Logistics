@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="376" Id="DeptDialog" Left="8" PidAttrib="7" Title="DeptDialog" Top="8" Ver="1.0" Width="440" WorkArea="true">
+		<Grid AutoFit="TRUE" BindDataset="gds_dept" BkColor2="default" BoldHead="true" Bottom="351" ColSizing="TRUE" Enable="true" EndLineColor="default" HeadHeight="25" Height="327" Id="grd_workplace" InputPanel="FALSE" Left="16" LineColor="default" MinWidth="100" OnCellClick="grd_dept_OnCellClick" Right="417" RowHeight="25" Style="BUTTON_STYLE" TabOrder="1" TabStop="true" Top="24" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="401">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="44"/>
+						<col width="151"/>
+						<col width="198"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="No"/>
+						<cell col="1" display="text" text="부서코드"/>
+						<cell col="2" display="text" text="부서명"/>
+					</head>
+					<body>
+						<cell col="0" display="text"/>
+						<cell col="1" colid="DEPT_CODE" display="text"/>
+						<cell col="2" colid="DEPT_NAME" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+function grd_dept_OnCellClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	var deptCode = gds_dept.GetColumn(nRow, "DEPT_CODE");	
+	var deptName = gds_dept.GetColumn(nRow, "DEPT_NAME");	
+	parent.edt_dept.text =deptCode ;
+	global_deptCode = deptCode;
+	close();
+}
+]]></Script>
+</Window>

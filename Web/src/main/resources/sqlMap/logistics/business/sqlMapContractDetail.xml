@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="contractDetail">
+
+    <!-- contractDetailDAO -->
+
+    <typeAlias alias="contractDetailTO" type="net.plang.logistics.business.to.ContractDetailTO"/>
+    <resultMap class="contractDetailTO" id="contractDetailResult">
+
+        <result property="contractDetailNo" column="CONTRACT_DETAIL_NO"/>
+        <result property="contractNo" column="CONTRACT_NO"/>
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="itemName" column="ITEM_NAME"/>
+        <result property="unitOfContract" column="UNIT_OF_CONTRACT"/>
+        <result property="dueDateOfContract" column="DUE_DATE_OF_CONTRACT"/>
+        <result property="contractAmount" column="CONTRACT_AMOUNT"/>
+        <result property="unitPriceOfContract" column="UNIT_PRICE_OF_CONTRACT"/>
+        <result property="sumPriceOfContract" column="SUM_PRICE_OF_CONTRACT"/>
+        <result property="mpsApplyStatus" column="MPS_APPLY_STATUS"/>
+        <result property="deliveryStatus" column="DELIVERY_STATUS"/>
+        <result property="description" column="DESCRIPTION"/>
+        <result property="deliveryRemain" column="DELIVERY_REMAIN"/>
+    </resultMap>
+    <select id="selectContractDetailList" resultMap="contractDetailResult">
+
+        SELECT CONTRACT_DETAIL_NO
+             , CONTRACT_NO
+             , ITEM_CODE
+             , ITEM_NAME
+             , UNIT_OF_CONTRACT
+             , DUE_DATE_OF_CONTRACT
+             , CONTRACT_AMOUNT
+             , UNIT_PRICE_OF_CONTRACT
+             , SUM_PRICE_OF_CONTRACT
+             , MPS_APPLY_STATUS
+             , DELIVERY_STATUS
+             , DESCRIPTION
+             , DELIVERY_REMAIN
+        FROM CONTRACT_DETAIL
+
+    </select>
+
+    <select id="selectRangedContractDetailList" parameterClass="map" resultMap="contractDetailResult">
+
+        SELECT CONTRACT_DETAIL_NO
+             , CONTRACT_NO
+             , ITEM_CODE
+             , ITEM_NAME
+             , UNIT_OF_CONTRACT
+             , DUE_DATE_OF_CONTRACT
+             , CONTRACT_AMOUNT
+             , UNIT_PRICE_OF_CONTRACT
+             , SUM_PRICE_OF_CONTRACT
+             , MPS_APPLY_STATUS
+             , DELIVERY_STATUS
+             , DESCRIPTION
+             , DELIVERY_REMAIN
+        FROM CONTRACT_DETAIL
+        WHERE DUE_DATE_OF_CONTRACT BETWEEN #fromDate# AND #toDate#
+
+    </select>
+
+    <insert id="insertContractDetail" parameterClass="contractDetailTO">
+
+        INSERT INTO CONTRACT_DETAIL
+        ( CONTRACT_DETAIL_NO, CONTRACT_NO, ITEM_CODE, ITEM_NAME
+        , UNIT_OF_CONTRACT, DUE_DATE_OF_CONTRACT, CONTRACT_AMOUNT
+        , UNIT_PRICE_OF_CONTRACT, SUM_PRICE_OF_CONTRACT
+        , MPS_APPLY_STATUS, DELIVERY_STATUS, DESCRIPTION, DELIVERY_REMAIN)
+        VALUES ( #contractDetailNo#
+               , #contractNo#
+               , #itemCode#
+               , #itemName#
+               , #unitOfContract#
+               , #dueDateOfContract#
+               , #contractAmount#
+               , #unitPriceOfContract#
+               , #sumPriceOfContract#
+               , #mpsApplyStatus#
+               , #deliveryStatus#
+               , #description#
+               , #deliveryRemain#)
+
+    </insert>
+    <update id="updateContractDetail" parameterClass="contractDetailTO">
+
+        UPDATE CONTRACT_DETAIL
+        SET CONTRACT_NO            = #contractNo#
+          , ITEM_CODE              = #itemCode#
+          , ITEM_NAME              = #itemName#
+          , UNIT_OF_CONTRACT       = #unitOfContract#
+          , DUE_DATE_OF_CONTRACT   = #dueDateOfContract#
+          , CONTRACT_AMOUNT        = #contractAmount#
+          , UNIT_PRICE_OF_CONTRACT = #unitPriceOfContract#
+          , SUM_PRICE_OF_CONTRACT  = #sumPriceOfContract#
+          , MPS_APPLY_STATUS       = #mpsApplyStatus#
+          , DELIVERY_STATUS        = #deliveryStatus#
+          , DESCRIPTION            = #description#
+          , DELIVERY_REMAIN=#deliveryRemain#
+        WHERE CONTRACT_DETAIL_NO = #contractDetailNo#
+
+    </update>
+    <delete id="deleteContractDetail"
+            parameterClass="contractDetailTO">
+        DELETE
+        FROM CONTRACT_DETAIL
+        WHERE CONTRACT_DETAIL_NO = #contractDetailNo#
+          AND CONTRACT_NO = #contractNo#
+    </delete>
+</sqlMap>

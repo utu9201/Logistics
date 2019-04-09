@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="emp">
+<!-- employeeDAO -->
+
+	<typeAlias alias="employeeTO" type="net.plang.hr.emp.to.EmployeeTO"/>
+
+	<resultMap class="employeeTO" id="employeeResult">
+
+		<result property="empCode" column="EMP_CODE" />
+		<result property="empName" column="EMP_NAME" />
+		<result property="companyCode" column="COMPANY_CODE" />
+		<result property="workplaceCode" column="WORKPLACE_CODE" />
+		<result property="deptCode" column="DEPT_CODE" />
+		<result property="positionCode" column="POSITION_CODE" />
+		<result property="socialSecurityNumber" column="SOCIAL_SECURITY_NUMBER" />
+		<result property="birthDate" column="BIRTH_DATE" />
+		<result property="gender" column="GENDER" />
+		<result property="email" column="EMAIL" />
+		<result property="phoneNumber" column="PHONE_NUMBER" />
+		<result property="image" column="IMAGE" />
+		<result property="userPw" column="USER_PW" />
+		<result property="zipCode" column="ZIP_CODE" />
+		<result property="basicAddress" column="BASIC_ADDRESS" />
+		<result property="detailAddress" column="DETAIL_ADDRESS" />
+		<result property="levelOfEducation" column="LEVEL_OF_EDUCATION" />
+		<result property="userOrNot" column="USER_OR_NOT" />
+
+	</resultMap>
+	<select id="selectEmployeeList" resultMap="employeeResult">
+
+		SELECT
+		EMP_CODE, EMP_NAME, COMPANY_CODE, WORKPLACE_CODE
+		, DEPT_CODE, POSITION_CODE, SOCIAL_SECURITY_NUMBER
+		, BIRTH_DATE, GENDER, EMAIL, PHONE_NUMBER, IMAGE
+		, USER_PW, ZIP_CODE, BASIC_ADDRESS, DETAIL_ADDRESS
+		, LEVEL_OF_EDUCATION, USER_OR_NOT
+		FROM EMPLOYEE
+	</select>
+
+	<select id="selectEmployee" resultMap="employeeResult">
+
+		SELECT
+		EMP_CODE, EMP_NAME, COMPANY_CODE, WORKPLACE_CODE
+		, DEPT_CODE, POSITION_CODE, SOCIAL_SECURITY_NUMBER
+		, BIRTH_DATE, GENDER, EMAIL, PHONE_NUMBER, IMAGE
+		, USER_PW, ZIP_CODE, BASIC_ADDRESS, DETAIL_ADDRESS
+		, LEVEL_OF_EDUCATION, USER_OR_NOT
+		FROM EMPLOYEE
+		WHERE EMP_CODE=#empCode#
+
+	</select>
+	<insert id="insertEmpoyee" parameterClass="employeeTO">
+
+		INSERT INTO EMPLOYEE(
+		EMP_CODE, EMP_NAME, COMPANY_CODE, WORKPLACE_CODE
+		, DEPT_CODE, POSITION_CODE, SOCIAL_SECURITY_NUMBER
+		, BIRTH_DATE, GENDER, EMAIL, PHONE_NUMBER, IMAGE
+		, USER_PW, ZIP_CODE, BASIC_ADDRESS, DETAIL_ADDRESS
+		, LEVEL_OF_EDUCATION, USER_OR_NOT
+		)
+		VALUES
+		( #empCode#, #empName#, #companyCode#, #workplaceCode#, #deptCode#,
+	#positionCode#, #socialSecurityNumber#, #birthDate#, #gender#, #email#,
+	#phoneNumber#, #image#, #userPw#, #zipCode#, #basicAddress#, #detailAddress#,
+	#levelOfEducation#, #userOrNot#
+		 )
+
+	</insert>
+	<update id="updateEmpoyee" parameterClass="employeeTO">
+
+		UPDATE EMPLOYEE SET
+		DEPT_CODE = #deptCode#
+		, POSITION_CODE = #positionCode#
+		, SOCIAL_SECURITY_NUMBER = #socialSecurityNumber#
+		, BIRTH_DATE =#birthDate#,
+		, GENDER =  #gender#
+		, EMAIL = #email#
+		, IMAGE = #image#
+		, ZIP_CODE =#zipCode#
+		, BASIC_ADDRESS = #basicAddress#
+		, DETAIL_ADDRESS = #detailAddress#
+		WHERE
+		EMP_CODE =  #empCode#
+	</update>
+
+<delete id="deleteEmpoyee" parameterClass="employeeTO">
+		DELETE FROM EMPLOYEE
+		WHERE EMP_CODE =  #empCode#
+	</delete>
+</sqlMap>

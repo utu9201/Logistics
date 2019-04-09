@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="orderGathering">
+    <!-- orderGatheringDAO -->
+
+    <typeAlias alias="orderGatheringTO" type="net.plang.logistics.purchase.to.OrderGatheringTO"/>
+
+    <insert id="insertOrderGathering" parameterClass="orderGatheringTO">
+        INSERT INTO ORDER_GATHERING
+        VALUES (#orderGatheringNo#,#orderNo#, #itemCode#, #deliveryScheduleDate#, #orderAmount#, #unitOfOrder#,
+                #orderDetailStatus#,
+                #description#)
+    </insert>
+
+    <select id="selectOrderGatheringList" resultClass="orderGatheringTO">
+        select ITEM_CODE              as itemCode
+             , DELIVERY_SCHEDULE_DATE as deliveryScheduleDate
+             , ORDER_AMOUNT           as orderAmount
+             , UNIT_OF_ORDER          as unitOfOrder
+             , ORDER_DETAIL_STATUS    as orderDetailStatus
+             , DESCRIPTION            as description
+             , ORDER_GATHERING_NO     as orderGatheringNo
+             , ORDER_NO               AS orderNo
+        from ORDER_GATHERING
+
+    </select>
+    <update id="updateOrderGatheringList" parameterClass="orderGatheringTO">
+        update ORDER_GATHERING
+        set ORDER_DETAIL_STATUS = 'Y',
+            ORDER_NO            = #orderNo#
+        where ORDER_GATHERING_NO = #orderGatheringNo#
+    </update>
+    <select id="selectOrderGatheringNo" resultClass="String">
+        select 'ORDG' || to_char(sysdate, 'YYYYMMDD') || '-' || ORDER_GATHERING_SEQ.nextval
+        from dual
+    </select>
+
+</sqlMap>

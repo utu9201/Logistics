@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="776" Id="Customer" Left="8" OnLoadCompleted="Customer_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1330" WorkArea="true">
+		<Static Align="Center" Border="SunkenEdge" Font="한컴산뜻돋움,18,Bold" Height="37" Id="Static0" Left="8" Style="BUTTON_STYLE" TabOrder="1" Text="거래처&#32;관리" Top="8" VAlign="Middle" Width="1289"></Static>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOW" Font="함초롬돋움&#32;확장,14,Bold" Height="44" Id="Static6" Left="23" Style="BUTTON_STYLE" TabOrder="2" Text="거래처명" Top="48" VAlign="Middle" Width="110"></Static>
+		<Edit Font="한컴산뜻돋움,11" Height="44" Id="txt_search" Left="136" Style="BUTTON_STYLE" TabOrder="3" Top="48" Width="150"></Edit>
+		<Button Color="WINDOW" Font="함초롬돋움&#32;확장,14,Bold" Height="45" Id="btn_search" Left="287" OnClick="btn_search_OnClick" Style="BUTTON_STYLE" TabOrder="4" Text="조회" Top="48" Width="65"></Button>
+		<Button Color="WINDOW" Font="함초롬돋움&#32;확장,14,Bold" Height="45" Id="btn_addDetailCode" Left="976" OnClick="btn_addDetailCode_OnClick" Style="BUTTON_STYLE" TabOrder="5" Text="추가" Top="48" Width="92"></Button>
+		<Button Color="WINDOW" Font="함초롬돋움&#32;확장,14,Bold" Height="45" Id="btn_delDetailCode" Left="1088" OnClick="btn_delDetailCode_OnClick" Style="BUTTON_STYLE" TabOrder="6" Text="삭제" Top="48" Width="92"></Button>
+		<Button BKColor="goldenrod" Color="WINDOW" Font="함초롬돋움&#32;확장,14,Bold" Height="45" Id="btn_batchCode" Left="1200" OnClick="btn_batchCode_OnClick" Style="BUTTON_STYLE" TabOrder="7" Text="저장" Top="48" Width="92"></Button>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="35" Id="Static2" Left="712" Style="BUTTON_STYLE" TabOrder="8" Text="거래처코드" Top="120" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_customer" Column="CUSTOMER_CODE" Enable="FALSE" Font="한컴산뜻돋움,11" Height="35" Id="edt_customerCode" Left="824" LeftMargin="10" Readonly="TRUE" Style="BUTTON_STYLE" TabOrder="9" Top="120" Width="350"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="35" Id="Static3" Left="711" Style="BUTTON_STYLE" TabOrder="10" Text="거래처명" Top="169" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_customer" Column="CUSTOMER_NAME" Font="한컴산뜻돋움,11" Height="35" Id="edt_customerName" Left="824" LeftMargin="10" Style="BUTTON_STYLE" TabOrder="11" Top="169" Width="350"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="35" Id="Static4" Left="711" Style="BUTTON_STYLE" TabOrder="12" Text="사업자등록번호" Top="218" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_customer" Column="BUSINESS_LICENSE_NUMBER" Font="한컴산뜻돋움,11" Height="35" Id="edt_businessLicenseNumber" Left="824" LeftMargin="10" Style="BUTTON_STYLE" TabOrder="13" Top="218" Width="350"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="35" Id="Static5" Left="711" Style="BUTTON_STYLE" TabOrder="14" Text="대표자명" Top="259" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_customer" Column="CUSTOMER_CEO" Font="한컴산뜻돋움,11" Height="35" Id="edt_customerCeo" Left="824" LeftMargin="10" Style="BUTTON_STYLE" TabOrder="15" Top="259" Width="350"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="35" Id="Static7" Left="711" Style="BUTTON_STYLE" TabOrder="21" Text="상세주소" Top="593" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_customer" Column="CUSTOMER_DETAIL_ADDRESS" Font="한컴산뜻돋움,11" Height="35" Id="edt_detailAddress" Left="824" LeftMargin="10" Style="BUTTON_STYLE" TabOrder="22" Top="593" Width="350"></Edit>
+		<Edit BindDataset="gds_customer" Column="CUSTOMER_BASIC_ADDRESS" Enable="FALSE" Font="한컴산뜻돋움,11" Height="35" Id="edt_address" Left="824" LeftMargin="10" Style="BUTTON_STYLE" TabOrder="20" Top="536" Width="350"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="35" Id="Static8" Left="712" Style="BUTTON_STYLE" TabOrder="19" Text="기본주소" Top="536" VAlign="Middle" Width="110"></Static>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="35" Id="Static9" Left="711" Style="BUTTON_STYLE" TabOrder="17" Text="우편번호" Top="479" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_customer" Column="CUSTOMER_ZIP_CODE" Enable="FALSE" Font="한컴산뜻돋움,11" Height="35" Id="edt_zipCode" ImeMode="none" Left="824" LeftMargin="10" Style="BUTTON_STYLE" TabOrder="18" Top="479" Width="350"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="35" Id="Static10" Left="711" Style="BUTTON_STYLE" TabOrder="16" Text="업태" Top="365" VAlign="Middle" Width="110"></Static>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="35" Id="Static11" Left="711" Style="BUTTON_STYLE" TabOrder="27" Text="거래형태" Top="308" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_customer" Column="CUSTOMER_FAX_NUMBER" Font="한컴산뜻돋움,11" Height="35" Id="edt_customerFaxNumber" Left="824" LeftMargin="10" Style="BUTTON_STYLE" TabOrder="26" Top="707" Width="350"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="35" Id="Static13" Left="711" Style="BUTTON_STYLE" TabOrder="25" Text="팩스번호" Top="707" VAlign="Middle" Width="110"></Static>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="35" Id="Static14" Left="711" Style="BUTTON_STYLE" TabOrder="23" Text="전화번호" Top="650" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_customer" Column="CUSTOMER_TEL_NUMBER" Font="한컴산뜻돋움,11" Height="35" Id="edt_customerTelNumber" Left="824" LeftMargin="10" Style="BUTTON_STYLE" TabOrder="24" Top="650" Width="350"></Edit>
+		<Button Color="WINDOW" Font="함초롬돋움&#32;확장,14,Bold" Height="35" Id="Button0" Left="1124" OnClick="btn_addr_OnClick" Style="BUTTON_STYLE" TabOrder="28" Text="조회" Top="479" Width="49"></Button>
+		<Grid AutoFit="TRUE" AutoSelect="TRUE" BindDataset="gds_customer" BkColor2="default" BoldHead="true" Bottom="763" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="664" Id="Grid0" InputPanel="FALSE" Left="16" LineColor="default" MinWidth="100" Right="676" RowHeight="25" Style="BUTTON_STYLE" TabOrder="29" TabStop="true" Top="99" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="660">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="57"/>
+						<col width="97"/>
+						<col width="67"/>
+						<col width="113"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="회사코드"/>
+						<cell col="1" display="text" text="회사명"/>
+						<cell col="2" display="text" text="대표자명"/>
+						<cell col="3" display="text" text="회사&#32;전화번호"/>
+					</head>
+					<body>
+						<cell col="0" colid="CUSTOMER_CODE" display="text"/>
+						<cell col="1" colid="CUSTOMER_NAME" display="text"/>
+						<cell col="2" colid="CUSTOMER_CEO" display="text"/>
+						<cell col="3" colid="CUSTOMER_TEL_NUMBER" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Edit BindDataset="gds_customer" Column="CUSTOMER_BUSINESS_CONDITIONS" Font="한컴산뜻돋움,11" Height="35" Id="edt_customerBusinessConditions" Left="824" LeftMargin="10" Style="BUTTON_STYLE" TabOrder="30" Top="365" Width="350"></Edit>
+		<Edit BindDataset="gds_customer" Column="CUSTOMER_TYPE" Font="한컴산뜻돋움,11" Height="35" Id="edt_customerType" Left="824" LeftMargin="10" Style="BUTTON_STYLE" TabOrder="31" Top="308" Width="350"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="35" Id="Static12" Left="711" Style="BUTTON_STYLE" TabOrder="32" Text="종목" Top="422" VAlign="Middle" Width="110"></Static>
+		<Edit BindDataset="gds_customer" Column="CUSTOMER_BUSINESS_ITEMS" Font="한컴산뜻돋움,11" Height="35" Id="edt_cutomerBusinessItems" Left="825" LeftMargin="10" Style="BUTTON_STYLE" TabOrder="33" Top="422" Width="350"></Edit>
+	</Form>
+	<Script><![CDATA[#include "Script::serialTempleteCode.js"
+function Customer_OnLoadCompleted(obj)
+{
+	
+		http.Sync=true;
+	
+	transaction("findCustomerList",
+				"svcBusiness::customer.do?method=findCustomerList",
+				"",
+				"gds_customer=gds_customer",
+				"",
+				"callback");
+			
+	//initSession(false);
+	http.Sync=false;	
+	
+
+	
+	
+}
+#include "Script::minSearcher.js"
+function btn_search_OnClick(obj)
+{	
+	var customer = txt_search.text;
+	minSearcher(customer,"CUSTOMER_NAME",gds_customer);
+	
+}
+
+function btn_addDetailCode_OnClick(obj)
+{
+
+	var rowNum = gds_customer.AddRow();
+	gds_customer.SetColumn(rowNum,"CUSTOMER_CODE",templeteCodeNo(gds_customer,"CUSTOMER_CODE"));
+	
+}
+
+function btn_delDetailCode_OnClick(obj)
+{
+	gds_customer.DeleteRow(gds_customer.row);
+}
+
+function btn_batchCode_OnClick(obj)
+{
+		Transaction("registcustomer","svcManagement::dept.do?method=batchCustomerList","gds_customer=gds_customer:u","gds_customer=gds_customer","","callback");
+       trace(http.SendHttpStr);
+}
+
+
+function callback(trid , ErorrCode , ErorrMsg){
+	
+	if(trid=="registcustomer"){
+		if(ErorrCode >= 0 ){
+			alert("저장완료");
+		}
+		
+	}
+	 
+	
+}
+function btn_addr_OnClick(obj)
+{
+	Dialog ("Base::PostInfoForm.xml",350,350);
+}
+]]></Script>
+</Window>

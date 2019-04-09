@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="766" Id="MPS" Left="8" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1330" WorkArea="true">
+		<Tab BKSelColor="gold" Border="SunkenEdge" Font="한컴산뜻돋움,13,Bold" Height="731" Id="Tab0" Left="9" SelColor="default" TabOrder="1" Top="21" Width="1303">
+			<Contents>
+				<TabPage BorderColor="black" Height="701" Id="tab1" Left="2" TabOrder="1" Text="입고처리&#32;및&#32;내역" Top="28" Width="1299">
+					<Div Font="돋움체,8" Height="698" Id="Div0" Left="8" TabOrder="1" Text="Div0" Top="7" Url="Purchase::Warehousing" Width="1285">
+						<Contents></Contents>
+					</Div>
+				</TabPage>
+				<TabPage BorderColor="black" Height="701" Id="tab2" Left="2" TabOrder="1" Text="출고내역조회" Top="28" Width="1299">
+					<Div Font="굴림체,8" Height="698" Id="Div0" Left="9" TabOrder="1" Text="Div0" Top="10" Url="Purchase::MaterialPayment" Width="1285">
+						<Contents></Contents>
+					</Div>
+				</TabPage>
+			</Contents>
+		</Tab>
+	</Form>
+	<Script></Script>
+</Window>

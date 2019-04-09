@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="orderDetail">
+
+    <!-- orderDetailDAO -->
+
+    <typeAlias alias="orderDetailTO" type="net.plang.logistics.purchase.to.OrderDetailTO"/>
+
+    <resultMap class="orderDetailTO" id="orderDetailResult">
+
+        <result property="orderDetailNo" column="ORDER_DETAIL_NO"/>
+        <result property="orderGatheringNo" column="ORDER_GATHERING_NO"/>
+        <result property="orderNo" column="ORDER_NO"/>
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="itemName" column="ITEM_NAME"/>
+        <result property="unitOfOrder" column="UNIT_OF_ORDER"/>
+        <result property="orderDate" column="ORDER_DATE"/>
+        <result property="deliveryScheduleDate" column="DELIVERY_SCHEDULE_DATE"/>
+        <result property="orderAmount" column="ORDER_AMOUNT"/>
+        <result property="unitPriceOfOrder" column="UNIT_PRICE_OF_ORDER"/>
+        <result property="sumPriceOfOrder" column="SUM_PRICE_OF_ORDER"/>
+        <result property="description" column="DESCRIPTION"/>
+        <result property="mrpGatheringNo" column="MRP_GATHERING_NO"/>
+        <result property="orderDetailStatus" column="ORDER_DETAIL_STATUS"/>
+        <result property="warehousingStatus" column="WAREHOUSING_STATUS"/>
+    </resultMap>
+    <select id="selectOrderDetailList" resultMap="orderDetailResult">
+        SELECT ORDER_DETAIL_NO
+             , ORDER_GATHERING_NO
+             , ORDER_NO
+             , ITEM_CODE
+             , ITEM_NAME
+             , UNIT_OF_ORDER
+             , ORDER_DATE
+             , DELIVERY_SCHEDULE_DATE
+             , ORDER_AMOUNT
+             , UNIT_PRICE_OF_ORDER
+             , SUM_PRICE_OF_ORDER
+             , mrp_gathering_no
+             , DESCRIPTION
+             , MRP_GATHERING_NO
+             , ORDER_DETAIL_STATUS
+             , WAREHOUSING_STATUS
+        FROM ORDER_DETAIL
+    </select>
+    <insert id="insertOrderDetail" parameterClass="orderDetailTO">
+
+        INSERT INTO ORDER_DETAIL( ORDER_DETAIL_NO, ORDER_GATHERING_NO, ORDER_NO, ITEM_CODE, ITEM_NAME
+                                , UNIT_OF_ORDER, ORDER_DATE, DELIVERY_SCHEDULE_DATE
+                                , ORDER_AMOUNT, UNIT_PRICE_OF_ORDER, SUM_PRICE_OF_ORDER
+                                , DESCRIPTION, MRP_GATHERING_NO, ORDER_DETAIL_STATUS, WAREHOUSING_STATUS)
+        VALUES ( #orderDetailNo#
+               , #orderGatheringNo#
+               , #orderNo#
+               , #itemCode#
+               , #itemName#
+               , #unitOfOrder#
+               , #orderDate#
+               , #deliveryScheduleDate#
+               , #orderAmount#
+               , #unitPriceOfOrder#
+               , #sumPriceOfOrder#
+               , #description#
+               , #mrpGatheringNo#
+               , #orderDetailStatus#
+               , #warehousingStatus#)
+
+    </insert>
+    <update id="updateOrderDetail" parameterClass="orderDetailTO">
+        UPDATE ORDER_DETAIL
+        SET ITEM_CODE              = #itemCode#
+          , ORDER_GATHERING_NO     = #orderGatheringNo#
+          , ITEM_NAME              = #itemName#
+          , UNIT_OF_ORDER          = #unitOfOrder#
+          , ORDER_DATE             = #orderDate#
+          , DELIVERY_SCHEDULE_DATE = #deliveryScheduleDate#
+          , ORDER_AMOUNT           = #orderAmount#
+          , UNIT_PRICE_OF_ORDER    = #unitPriceOfOrder#
+          , SUM_PRICE_OF_ORDER     = #sumPriceOfOrder#
+          , DESCRIPTION            = #description#
+          , ORDER_DETAIL_STATUS    = #orderDetailStatus#
+          , WAREHOUSING_STATUS     = #warehousingStatus#
+        WHERE ORDER_DETAIL_NO = #orderDetailNo#
+    </update>
+
+    <parameterMap class="map" id="orderParameter">
+        <parameter property="orderDetailNo" mode="IN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="orderNo" mode="IN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="orderGatheringNo" mode="IN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="empCode" mode="IN" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <parameter property="errorCode" mode="OUT" javaType="java.lang.Integer" jdbcType="DECIMAL"/>
+        <parameter property="errorMsg" mode="OUT" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </parameterMap>
+
+
+    <procedure id="callCancelOrder"
+               parameterMap="orderParameter">
+        {call P_CANCEL_ORDER(?,?,?,?,?,?)}
+    </procedure>
+
+</sqlMap>

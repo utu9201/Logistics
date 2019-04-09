@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="720" Id="deliveryHistoryDialog" Left="8" OnInit="InventoryHistory_OnLoadCompleted" PidAttrib="7" Title="deliveryHistoryDialog" Top="8" Ver="1.0" Width="1200" WorkArea="true">
+		<Static Align="Center" BKColor="goldenrod" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,12,Bold" Height="44" Id="Static6" Left="22" TabOrder="1" Text="재고이력조회" Top="16" VAlign="Middle" Width="157"></Static>
+		<Grid BindDataset="gds_deliveryResult" BkColor2="default" BoldHead="true" Bottom="712" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="25" Height="640" Id="grd_delveryHistory" InputPanel="FALSE" Left="18" LineColor="default" Right="1192" RowHeight="25" TabOrder="2" TabStop="true" Top="72" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1174">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="220"/>
+						<col width="107"/>
+						<col width="131"/>
+						<col width="98"/>
+						<col width="105"/>
+						<col width="157"/>
+						<col width="347"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="작업지시번호"/>
+						<cell col="1" display="text" text="제품코드"/>
+						<cell col="2" display="text" text="제품명"/>
+						<cell col="3" display="text" text="출고수량"/>
+						<cell col="4" display="text" text="단위"/>
+						<cell col="5" display="text" text="출고일"/>
+						<cell col="6" display="text" text="수주상세번호"/>
+					</head>
+					<body>
+						<cell col="0" colid="DELIVERY_NO" display="text"/>
+						<cell col="1" colid="ITEM_CODE" display="text"/>
+						<cell col="2" colid="ITEM_NAME" display="text"/>
+						<cell col="3" colid="DELIVERY_AMOUNT" display="text"/>
+						<cell col="4" colid="UNIT_OF_DELIVERY_RESULT" display="text"/>
+						<cell col="5" colid="DELIVERY_DATE" display="text"/>
+						<cell col="6" colid="CONTRACT_DETAIL_NO" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[var itemCode;
+function InventoryHistory_OnLoadCompleted(obj)
+{		
+	transaction("findDeliveryResultList",
+				"svcBusiness::deliveryResult.do?method=findDeliveryResultList",
+				"",
+				"gds_deliveryResult=gds_deliveryResult",
+				"",
+				"callback");
+		
+	
+		
+
+}
+
+function callback(){
+	 gds_deliveryResult.filter("ITEM_CODE='"+itemCode+"'");
+	 trace(itemCode);
+}]]></Script>
+</Window>

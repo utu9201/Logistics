@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="bom">
+    <!-- bomDAO -->
+    <typeAlias alias="bomTO" type="net.plang.logistics.purchase.to.BomTO"/>
+
+    <resultMap class="bomTO" id="bomResult">
+
+        <result property="no" column="NO"/>
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="parentItemCode" column="PARENT_ITEM_CODE"/>
+        <result property="netAmount" column="NET_AMOUNT"/>
+        <result property="description" column="DESCRIPTION"/>
+        <result property="lev" column="lev"/>
+    </resultMap>
+    <typeAlias alias="bomDeployTO" type="net.plang.logistics.purchase.to.BomDeployTO"/>
+
+    <resultMap class="bomDeployTO" id="bomDeployResult">
+
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="parentItemCode" column="PARENT_ITEM_CODE"/>
+        <result property="itemName" column="ITEM_NAME"/>
+        <result property="itemClassification" column="ITEM_CLASSIFICATION"/>
+        <result property="leadTime" column="LEAD_TIME"/>
+        <result property="lossRate" column="LOSS_RATE"/>
+        <result property="netAmount" column="NET_AMOUNT"/>
+        <result property="standardUnitPrice" column="STANDARD_UNIT_PRICE"/>
+        <result property="parentItemName" column="PARENT_ITEM_NAME"/>
+    </resultMap>
+    <select id="selectBomList" resultMap="bomResult">
+        SELECT NO
+             , ITEM_CODE
+             , PARENT_ITEM_CODE
+             , NET_AMOUNT
+             , DESCRIPTION
+             , LEVEL AS LEV
+        FROM bill_of_material
+        START WITH PARENT_ITEM_CODE IS NULL
+        CONNECT BY PRIOR ITEM_CODE = PARENT_ITEM_CODE
+    </select>
+
+    <!--
+
+        <select id="selectBomDeployList" parameterClass="java.util.Map" resultMap="bomDeployResult">
+
+                   SELECT
+            ITEMBOM.ITEM_CODE
+             , ITEMBOM.PARENT_ITEM_CODE
+            , ITEMBOM.ITEM_NAME
+            , ITEMBOM.ITEM_CLASSIFICATION
+               , ITEMBOM.LEAD_TIME
+            , ITEMBOM.LOSS_RATE
+            , ITEMBOM.NET_AMOUNT
+            , ITEMBOM.STANDARD_UNIT_PRICE
+               , EM.ITEM_NAME AS PARENT_ITEM_NAME
+            FROM
+            (SELECT
+             B.ITEM_CODE
+              , B.PARENT_ITEM_CODE
+               , I.ITEM_NAME
+               , I.LEAD_TIME
+               , NVL(I.LOSS_RATE,0) LOSS_RATE
+               , B.NET_AMOUNT
+               , I.ITEM_CLASSIFICATION
+               , I.STANDARD_UNIT_PRICE
+            FROM BOM B , ITEM I
+            WHERE I.ITEM_CODE = B.ITEM_CODE
+            START WITH B.ITEM_CODE = #itemCode#
+               CONNECT BY
+               <isEqual property="deployCondition" compareValue="forward" >
+               PRIOR B.ITEM_CODE  =  B.PARENT_ITEM_CODE
+              ORDER BY B.NO) ITEMBOM
+              , ITEM EM
+              WHERE ITEMBOM.PARENT_ITEM_CODE = EM.ITEM_CODE
+              AND ITEMBOM.PARENT_ITEM_CODE = #itemCode#
+            </isEqual>
+
+            <isEqual property="deployCondition" compareValue="reverse" >
+            PRIOR B.PARENT_ITEM_CODE  = B.ITEM_CODE
+             ORDER BY B.NO) ITEMBOM, ITEM EM
+              WHERE ITEMBOM.PARENT_ITEM_CODE = EM.ITEM_CODE(+)
+
+            </isEqual>
+     -->
+    <!--
+
+        </select> -->
+    <select id="selectBomDeployList2" parameterClass="java.util.Map" resultMap="bomDeployResult">
+
+        SELECT BM.ITEM_CODE
+            , BM.PARENT_ITEM_CODE
+            , BM.ITEM_NAME
+            , BM.ITEM_CLASSIFICATION
+            , BM.LEAD_TIME
+            , BM.LOSS_RATE
+            , BM.STANDARD_UNIT_PRICE
+            , BM.NET_AMOUNT
+            , IT.ITEM_NAME AS PARENT_ITEM_NAME
+        FROM (
+        SELECT B.LV
+            , LPAD(' ', (B.LV - 1) * 3, ' ') || b.ITEM_CODE AS ITEM_CODE
+            , B.PARENT_ITEM_CODE
+            , I.ITEM_NAME
+            , B.NET_AMOUNT
+            , I.ITEM_CLASSIFICATION
+            , I.LEAD_TIME
+            , NVL(I.LOSS_RATE, 0) AS LOSS_RATE
+            , I.STANDARD_UNIT_PRICE
+            , ROW_NUMBER() OVER (ORDER BY ROWNUM) AS RN
+        FROM (SELECT LEVEL AS LV, ITEM_CODE, PARENT_ITEM_CODE, NET_AMOUNT
+        FROM bill_of_material
+        START WITH ITEM_CODE =#itemCode#
+        CONNECT BY NOCYCLE
+
+
+        <isEqual property="deployCondition" compareValue="forward">
+            PRIOR ITEM_CODE=PARENT_ITEM_CODE) B, ITEM I
+            WHERE B.ITEM_CODE=I.ITEM_CODE ) BM, ITEM IT
+            WHERE BM.PARENT_ITEM_CODE=IT.ITEM_CODE(+)
+            ORDER BY BM.RN
+
+        </isEqual>
+
+        <isEqual property="deployCondition" compareValue="reverse">
+            ITEM_CODE= PRIOR PARENT_ITEM_CODE) B, ITEM I
+            WHERE B.ITEM_CODE=I.ITEM_CODE ) BM, ITEM IT
+            WHERE BM.PARENT_ITEM_CODE=IT.ITEM_CODE(+)
+            ORDER BY BM.RN
+        </isEqual>
+
+    </select>
+
+</sqlMap>

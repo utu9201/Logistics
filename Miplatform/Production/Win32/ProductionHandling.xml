@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="766" Id="ProductionHandling" Left="8" OnLoadCompleted="ProductionHandling_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1330" WorkArea="true">
+		<Static Align="Center" Border="SunkenEdge" Font="한컴산뜻돋움,18,Bold" Height="37" Id="Static0" Left="8" Style="BUTTON_STYLE" TabOrder="1" Text="생산실적등록" Top="8" VAlign="Middle" Width="1289"></Static>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="44" Id="Static2" Left="12" Style="BUTTON_STYLE" TabOrder="2" Text="작업지시목록" Top="62" VAlign="Middle" Width="116"></Static>
+		<Grid AutoFit="TRUE" BindDataset="gds_workInstruction" BkColor2="default" BoldHead="true" Bottom="376" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="255" Id="grd_workInsturction" InputPanel="FALSE" Left="8" LineColor="default" MinWidth="100" OnCellDBLClick="grd_workInsturction_OnCellDblClick" Right="1304" RowHeight="25" Style="BUTTON_STYLE" TabOrder="3" TabStop="true" Top="121" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1296">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="102"/>
+						<col width="95"/>
+						<col width="115"/>
+						<col width="61"/>
+						<col width="57"/>
+						<col width="110"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="작업지시번호"/>
+						<cell col="1" display="text" text="작업지시일자"/>
+						<cell col="2" display="text" text="품목명"/>
+						<cell col="3" display="text" text="단위"/>
+						<cell col="4" display="text" text="지시수량"/>
+						<cell col="5" display="text" text="소요량취합번호"/>
+						<cell col="6" display="text" text="작업지시"/>
+					</head>
+					<body>
+						<cell col="0" colid="WORK_INSTRUCTION_NO" display="text"/>
+						<cell col="1" colid="INSTRUCTION_DATE" display="text"/>
+						<cell col="2" colid="ITEM_NAME" display="text"/>
+						<cell col="3" colid="UNIT_OF_WORK_INSTRUCTION" display="text"/>
+						<cell col="4" colid="WORK_INSTRUCTION_AMOUNT" display="text"/>
+						<cell col="5" colid="MRP_GATHERING_NO" display="text"/>
+						<cell col="6" colid="WORK_INSTRUCTION_STATUS" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="44" Id="Static3" Left="16" Style="BUTTON_STYLE" TabOrder="4" Text="생산실적목록" Top="392" VAlign="Middle" Width="118"></Static>
+		<Grid AutoFit="TRUE" BindDataset="gds_prm" BkColor2="default" BoldHead="true" Bottom="767" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="311" Id="grd_prm" InputPanel="FALSE" Left="8" LineColor="default" MinWidth="100" Right="1301" RowHeight="25" Style="BUTTON_STYLE" TabOrder="5" TabStop="true" Top="456" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1293">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="108"/>
+						<col width="120"/>
+						<col width="80"/>
+						<col width="116"/>
+						<col width="42"/>
+						<col width="80"/>
+						<col width="65"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="생산실적번호"/>
+						<cell col="1" display="text" text="작업지시번호"/>
+						<cell col="2" display="text" text="코드"/>
+						<cell col="3" display="text" text="품명"/>
+						<cell col="4" display="text" text="단위"/>
+						<cell col="5" display="text" text="생산일자"/>
+						<cell col="6" display="text" text="생산수량"/>
+					</head>
+					<body>
+						<cell col="0" colid="PRODUCTION_RESULT_NO" display="text"/>
+						<cell col="1" colid="WORK_INSTRUCTION_NO" display="text"/>
+						<cell col="2" colid="ITEM_CODE" display="text"/>
+						<cell col="3" colid="ITEM_NAME" display="text"/>
+						<cell col="4" colid="UNIT_OF_PRODUCTION_RESULT" display="text"/>
+						<cell col="5" colid="PRODUCTION_DATE" display="text"/>
+						<cell col="6" colid="PRODUCTION_AMOUNT" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="btn_registPrm" Left="1168" OnClick="btn_registPrm_OnClick" Style="BUTTON_STYLE" TabOrder="6" Text="생산실적등록" Top="392" Width="124"></Button>
+		<Static Font="한컴산뜻돋움,11" Height="42" Id="Static7" Left="1076" Style="BUTTON_STYLE" TabOrder="7" Text="작업지시&#32;목록을&#32;더블&#32;클릭하시면&#13;&#10;생산실적을&#32;등록하실&#32;수&#32;있습니다" Top="65" Width="222"></Static>
+	</Form>
+	<Script><![CDATA[#include "Script::serialTempleteCode.js"
+function ProductionHandling_OnLoadCompleted(obj)
+{
+	
+grd_workInsturction.Redraw=false;
+grd_prm.Redraw=false; 
+		http.Sync=true;
+		
+		transaction("findWorkInstructionList",
+				"svcProduction::workInstruction.do?method=findWorkInstructionList",
+				"",
+				"gds_workInstruction=gds_workInstruction",
+				"",
+				"callback");
+				
+				
+		transaction("findPrmList",
+				"svcProduction::prm.do?method=findPrmList",
+				"",
+				"gds_prm=gds_prm",
+				"",
+				"callback");
+		
+		
+		
+		transaction("findStockList",
+				"svcPurchase::stock.do?method=findStockList",
+				"",
+				"gds_stock=gds_stock",
+				"",
+				"callback"
+			);
+			
+		
+		transaction("findWarehousingList",
+				"svcPurchase::stock.do?method=findWarehousingList",
+				"",
+				"gds_warehousing=gds_warehousing",
+				"",
+				"callback"
+			);
+		gds_prm.Filter("PRODUCTION_RESULT_NO=null");
+	
+		gds_workInstruction.Filter("PRODUCTION_STATUS!='Y'");			
+				
+		
+grd_workInsturction.Redraw=true;
+grd_prm.Redraw=true; 
+		http.Sync=false;
+	
+	
+	
+}
+
+var num = 1;
+function grd_workInsturction_OnCellDblClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	
+	var workInstructionNo = gds_workInstruction.GetColumn(nRow,"WORK_INSTRUCTION_NO");
+	var itemCode = gds_workInstruction.GetColumn(nRow,"ITEM_CODE");
+	var itemName = gds_workInstruction.GetColumn(nRow,"ITEM_NAME");
+	var unitOfProductionResult = gds_workInstruction.GetColumn(nRow,"UNIT_OF_WORK_INSTRUCTION");
+	var productionAmount = gds_workInstruction.GetColumn(nRow,"WORK_INSTRUCTION_AMOUNT");
+	
+	var day = Today();
+	
+	var prmRow = gds_prm.AddRow();
+	var prmNo=templeteNo(today(),gds_prm,"PRODUCTION_RESULT_NO","PRM");
+	trace(prmNo);
+	gds_prm.SetColumn(prmRow,"PRODUCTION_RESULT_NO",prmNo);
+	gds_prm.SetColumn(prmRow,"WORK_INSTRUCTION_NO",workInstructionNo);
+	gds_prm.SetColumn(prmRow,"PRODUCTION_DATE",day);
+	gds_prm.SetColumn(prmRow,"PRODUCTION_AMOUNT",productionAmount);
+	gds_prm.SetColumn(prmRow,"ITEM_CODE",itemCode);
+	gds_prm.SetColumn(prmRow,"ITEM_NAME",itemName);
+	gds_prm.SetColumn(prmRow,"UNIT_OF_PRODUCTION_RESULT",unitOfProductionResult);
+	
+	//var orderNo = gds_prm.GetColumn(prmRow,"PRODUCTION_RESULT_NO");
+	
+	var warehousingRow = gds_warehousing.AddRow();
+			
+	gds_warehousing.SetColumn(warehousingRow,"ITEM_CODE",itemCode);				
+	gds_warehousing.SetColumn(warehousingRow,"ORDER_NO",prmNo);	
+	gds_warehousing.SetColumn(warehousingRow,"ITEM_NAME",itemName);
+	gds_warehousing.SetColumn(warehousingRow,"ORDER_AMOUNT",productionAmount);
+	gds_warehousing.SetColumn(warehousingRow,"WAREHOUSING_AMOUNT",productionAmount);		
+	gds_warehousing.SetColumn(warehousingRow,"UNIT_WAREHOUSING",unitOfProductionResult);		
+	gds_warehousing.SetColumn(warehousingRow,"CUSTOMER",'BRC-01');
+	gds_warehousing.SetColumn(warehousingRow,"WAREHOUSING_DATE",day);
+	gds_warehousing.SetColumn(warehousingRow,"DESCRIPTION",'Y');
+	gds_warehousing.SetColumn(warehousingRow,"WAREHOUSING_NO",seqSerialNo("PMH","WH_SEQ"));
+
+	// 창고 ITEMCODE ROW 구함
+	var findStock = gds_stock.FindRow("ITEM_CODE", itemCode);
+	
+	// 창고 재고 들고옴
+	var amount0 = gds_stock.GetColumn(itemCode,"STOCK_AMOUNT");
+	
+	// 창고재고 + 생산한 재고
+	var setAmount = parseInt(amount0) + parseInt(productionAmount);
+	
+	
+	gds_stock.SetColumn(findStock,"STOCK_AMOUNT",setAmount);
+	
+	gds_workInstruction.SetColumn(nRow,"PRODUCTION_STATUS",'Y');
+	
+	gds_workInstruction.Filter("PRODUCTION_STATUS!='Y'");
+	
+
+}
+
+function btn_registPrm_OnClick(obj)
+{
+	
+	if(confirm("생산실적을 등록하시겠습니까?")){
+	http.Sync=true;	
+		
+
+grd_workInsturction.Redraw=false;
+grd_prm.Redraw=false; 
+	if(gds_workInstruction.count >= 0 ){
+	for(var i = 0 ; i <= gds_workInstruction.count ; i++)
+	{
+	 gds_workInstruction.SetColumn(i,"WORK_INSTRUCTION_STATUS",'Y');
+	}
+	}
+	
+	
+
+		transaction(
+		"registPrm",
+		"svcProduction::prm.do?method=registPrm",
+		"gds_workInstruction=gds_workInstruction:u gds_prm=gds_prm:u gds_stock=gds_stock:u gds_warehousing=gds_warehousing:u",
+		"gds_prm=gds_prm",
+		"",
+		"callback");
+	}
+	
+	
+	
+	gds_prm.Filter("PRODUCTION_RESULT_NO=null");
+	grd_workInsturction.Redraw=true;
+grd_prm.Redraw=true;
+	http.Sync=false;
+}
+
+
+
+
+function callback(trid, ErrorCode, ErrorMsg){
+
+	
+	if(trid="registPrm"){
+		if(ErrorCode >= 0){
+			
+			alert("저장이 완료되었습니다");
+			Reload();
+		}else{alert(ErrorMsg);}
+	}
+	
+}]]></Script>
+</Window>

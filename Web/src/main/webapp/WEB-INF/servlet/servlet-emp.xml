@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="empUrlHandlerMapping"
+          class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+
+        <property name="order" value="1"/>
+        <property name="alwaysUseFullPath" value="false"/>
+        <property name="mappings">
+            <props>
+                <prop key="employee.do">employeeController</prop>
+                <!-- <prop key="/hr/emp/dept.do">deptController</prop> -->
+            </props>
+        </property>
+
+    </bean>
+
+    <bean id="employeeController" class="net.plang.hr.emp.controller.EmployeeController"
+          p:empServiceFacade-ref="empServiceFacade"
+    />
+</beans>

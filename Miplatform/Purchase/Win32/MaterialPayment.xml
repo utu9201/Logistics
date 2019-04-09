@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="766" Id="MaterialPayment" Left="8" OnLoadCompleted="MaterialPayment_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1330" WorkArea="true">
+		<Grid AutoFit="TRUE" BindDataset="gds_materialPayment" BkColor2="default" BoldHead="true" Bottom="753" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="737" Id="grd_materialPayment" InputPanel="FALSE" Left="8" LineColor="default" MinWidth="100" Right="1316" RowHeight="25" TabOrder="1" TabStop="true" Top="16" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1308">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="98"/>
+						<col width="128"/>
+						<col width="80"/>
+						<col width="75"/>
+						<col width="80"/>
+						<col width="154"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="코드"/>
+						<cell col="1" display="text" text="품명"/>
+						<cell col="2" display="text" text="출고수량"/>
+						<cell col="3" display="text" text="단위"/>
+						<cell col="4" display="text" text="출고일"/>
+						<cell col="5" display="text" text="출고지시번호"/>
+					</head>
+					<body>
+						<cell col="0" colid="ITEM_CODE" display="text"/>
+						<cell col="1" colid="ITEM_NAME" display="text"/>
+						<cell col="2" colid="PAYMENT_AMOUNT" display="text"/>
+						<cell col="3" colid="UNIT_PAYMENT" display="text"/>
+						<cell col="4" colid="PAYMENT_DATE" display="text"/>
+						<cell col="5" colid="WORK_INSTRUCTION_NO" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+function MaterialPayment_OnLoadCompleted(obj)
+{
+	
+	
+	
+	http.Sync=true;
+			
+			
+		transaction("findMaterialPaymentList",
+				"svcPurchase::stock.do?method=findMaterialPaymentList",
+				"",
+				"gds_materialPayment=gds_materialPayment",
+				"",
+				"callback"
+			);
+		
+		http.Sync=false;
+		
+		gds_materialPayment.Filter("ITEM_CODE!=null");
+}
+]]></Script>
+</Window>

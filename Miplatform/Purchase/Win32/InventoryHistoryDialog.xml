@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="720" Id="InventoryHistoryDialog" Left="8" OnInit="InventoryHistory_OnLoadCompleted" PidAttrib="7" Title="InventoryHistoryDialog" Top="8" Ver="1.0" Width="1200" WorkArea="true">
+		<Static Align="Center" BKColor="goldenrod" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,12,Bold" Height="44" Id="Static6" Left="14" TabOrder="1" Text="재고이력조회" Top="8" VAlign="Middle" Width="157"></Static>
+		<Grid BindDataset="gds_materialPayment" BkColor2="default" BoldHead="true" Bottom="704" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="25" Height="640" Id="grd_invenHistory" InputPanel="FALSE" Left="10" LineColor="default" Right="1184" RowHeight="25" TabOrder="2" TabStop="true" Top="64" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1174">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="220"/>
+						<col width="178"/>
+						<col width="211"/>
+						<col width="203"/>
+						<col width="155"/>
+						<col width="196"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="작업지시번호"/>
+						<cell col="1" display="text" text="제품코드"/>
+						<cell col="2" display="text" text="제품명"/>
+						<cell col="3" display="text" text="출고수량"/>
+						<cell col="4" display="text" text="단위"/>
+						<cell col="5" display="text" text="출고일"/>
+					</head>
+					<body>
+						<cell col="0" colid="WORK_INSTRUCTION_NO" display="text"/>
+						<cell col="1" colid="ITEM_CODE" display="text"/>
+						<cell col="2" colid="ITEM_NAME" display="text"/>
+						<cell col="3" colid="PAYMENT_AMOUNT" display="text"/>
+						<cell col="4" colid="UNIT_PAYMENT" display="text"/>
+						<cell col="5" colid="PAYMENT_DATE" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[var itemCode;
+function InventoryHistory_OnLoadCompleted(obj)
+{		
+		transaction("findMaterialPaymentList",
+				"svcPurchase::stock.do?method=findMaterialPaymentList",
+				"",
+				"gds_materialPayment=gds_materialPayment",
+				"",
+				"callback"
+			);
+		
+	
+		
+
+}
+
+function callback(){
+	gds_materialPayment.filter("ITEM_CODE='"+itemCode+"'");
+	trace(itemCode);
+}]]></Script>
+</Window>

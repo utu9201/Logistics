@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="businessServiceFacade"
+		class="net.plang.logistics.business.sf.BusinessServiceFacadeImpl"
+		p:businessApplicationService-ref="businessApplicationService"
+		/>
+
+	<bean id="businessApplicationService"
+		class="net.plang.logistics.business.applicationService.BusinessApplicationServiceImpl"
+		p:estimateDAO-ref="estimateDAO"
+		p:estimateDetailDAO-ref="estimateDetailDAO"
+		p:contractDAO-ref="contractDAO"
+		p:contractDetailDAO-ref="contractDetailDAO"
+		p:customerDAO-ref="customerDAO"
+		p:deliveryResultDAO-ref="deliveryResultDAO"
+		p:purchaseApplicationService-ref="purchaseApplicationService"
+		/>
+
+	<bean id="estimateDAO"
+		class="net.plang.logistics.business.dao.EstimateDAOImpl"
+		parent="iBatisSupportDao"
+		/>
+
+	<bean id="estimateDetailDAO"
+		class="net.plang.logistics.business.dao.EstimateDetailDAOImpl"
+		parent="iBatisSupportDao"
+		/>
+	<bean id="contractDAO"
+		class="net.plang.logistics.business.dao.ContractDAOImpl"
+		parent="iBatisSupportDao"
+		/>
+	<bean id="contractDetailDAO"
+		class="net.plang.logistics.business.dao.ContractDetailDAOImpl"
+		parent="iBatisSupportDao"
+		/>
+	<bean id="customerDAO"
+		class="net.plang.logistics.business.dao.CustomerDAOImpl"
+		parent="iBatisSupportDao"
+		/>
+<bean id="deliveryResultDAO"
+	  class="net.plang.logistics.business.dao.DeliveryResultDAOImpl"
+	  parent="iBatisSupportDao"/>
+		</beans>

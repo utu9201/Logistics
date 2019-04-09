@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="300" Id="CompanyDialog" Left="8" PidAttrib="7" Title="CompanyDialog" Top="8" Ver="1.0" Width="300" WorkArea="true">
+		<Grid BindDataset="gds_company" BoldHead="true" Bottom="287" Enable="true" EndLineColor="default" Height="271" Id="grd_company" InputPanel="FALSE" Left="8" LineColor="default" OnCellDBLClick="grd_company_OnCellDblClick" Right="289" Style="BUTTON_STYLE" TabOrder="1" TabStop="true" Top="16" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="281">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="38"/>
+						<col width="108"/>
+						<col width="108"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="No"/>
+						<cell col="1" display="text" text="회사코드"/>
+						<cell col="2" display="text" text="회사명"/>
+					</head>
+					<body>
+						<cell col="0" display="text"/>
+						<cell col="1" colid="COMPANY_CODE" display="text"/>
+						<cell col="2" colid="COMPANY_NAME" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+function grd_company_OnCellDblClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	
+	
+	var companyName = gds_company.GetColumn(nRow, "COMPANY_NAME");	
+	var companyCode = gds_company.GetColumn(nRow, "COMPANY_CODE");	
+	global_company = companyCode;
+	
+	parent.edt_company.text = companyName;
+	close();
+	
+}
+
+
+]]></Script>
+</Window>

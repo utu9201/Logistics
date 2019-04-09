@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gold" Height="750" Id="MainForm" Left="8" OnLoadCompleted="MainForm_OnLoadCompleted" PidAttrib="7" scroll="false" Title="New&#32;Form" Top="8" Ver="1.0" Width="1400" WorkArea="true">
+		<Image DragImageID="background" FillType="STRETCH" Height="803" Id="Image1" ImageID="background" Left="-8" TabOrder="14" Transparent="TRUE" Width="1552" WordWrap="TRUE"></Image>
+		<Static Border="Sunken" Height="162" Id="Static0" Left="7" TabOrder="1" Top="85" Width="201"></Static>
+		<TreeView BindDataset="gds_menu" Height="481" Id="tree_view" Left="8" LevelColumn="MENU_ORDER" OnClick="tree_view_OnClick" TabOrder="2" TEXTColumn="MENU_NAME" Top="256" Width="200"></TreeView>
+		<Div Border="Sunken" Height="580" Id="div_mainView" Left="214" TabOrder="3" Text="Div0" Top="88" Width="1170">
+			<Contents></Contents>
+		</Div>
+		<Static Font="한컴&#32;바겐세일&#32;M,13" Height="120" Id="Static1" Left="16" TabOrder="4" Text="로그인&#32;정보" Top="88" Type="Groupbox" Width="183"></Static>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="24" Id="Static2" Left="25" TabOrder="5" Text="부서명" Top="115" VAlign="Middle" Width="60"></Static>
+		<Edit Align="CENTER" Height="28" Id="edt_deptName" InputPanel="FALSE" Left="87" TabOrder="6" Top="112" Width="95"></Edit>
+		<Edit Align="CENTER" BindDataset="__VARBIND__" Column="global_empName" Height="28" Id="edt_empName" InputPanel="FALSE" Left="87" TabOrder="8" Top="170" Width="95"></Edit>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="24" Id="Static3" Left="25" TabOrder="7" Text="사원명" Top="171" VAlign="Middle" Width="60"></Static>
+		<Edit Align="CENTER" Height="28" Id="edt_positionName" InputPanel="FALSE" Left="87" TabOrder="10" Top="141" Width="95"></Edit>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="24" Id="Static4" Left="25" TabOrder="9" Text="직급" Top="143" VAlign="Middle" Width="60"></Static>
+		<Button BKColor="goldenrod" Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="24" Id="btn_logout" Left="30" TabOrder="11" Text="로그아웃" Top="216" Width="71"></Button>
+		<Button BKColor="goldenrod" Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="24" Id="btn_exit" Left="114" TabOrder="12" Text="종료" Top="216" Width="71"></Button>
+		<Static Align="Center" Font="Cooper&#32;Blk&#32;BT,48" Height="72" Id="Static5" Left="464" TabOrder="13" Text="HOHZ&#32;ERP" Width="389"></Static>
+		<Static Align="Center" BindDataset="gds_workplace" Font="Tahoma,20" Height="56" Id="BottomUrl" Left="211" TabOrder="15" Text="Copyright&#32;&#32;HOHZ&#32;Corp.&#32;All&#32;rights&#32;reserved." Top="679" VAlign="Middle" Width="1170" WordWrap="TRUE"></Static>
+	</Form>
+	<Script><![CDATA[#include "Script::basic.js" // 트랜젝션 관리 함수모음 임폴트
+function MainForm_OnLoadCompleted(obj) // jq그리드와 마찬가지로 폼이 완성됨과 동시에 실행
+{
+	this.BottomUrl.url = "Base::Bottom.xml"; // BottomUrl 콤포넌트의 텍스트 내용 주소
+
+  // mainView.Url="Base::Welcome.xml";
+   window.Width=1024;
+   window.Height=750;
+   window.Left=200;
+   window.top=30;
+   basicTransaction(); // 베이식.js 내의 함수
+   
+   
+  var deptRow = gds_dept.FindRow("DEPT_CODE",global_deptCode);
+   //gds_dept에서DEPT_CODE가 global_deptCode(로그인할때 변수에 올라간듯)인 것으로 검색해옴 FindRow의 반환형은 숫자.
+  
+   var dept = gds_dept.GetColumn(deptRow , "DEPT_NAME");   //jq그리드처럼 숫자,칼럼이름 넣고 칼럼밸류 가져온다.
+   this.edt_deptName.text = dept; //가져온 밸류값이 텍스트필드에 등록. 당황스럽게도 editable 이어서 그냥 지울수있다. 
+
+   var positionRow = gds_position.FindRow("POSITION_CODE",global_positionCode); // 직책과 관련해서 위와 같은 로직이 반복
+   var position = gds_position.GetColumn(positionRow , "POSITION_NAME");   
+   this.edt_positionName.text = position;
+
+   
+
+}
+
+
+function tree_view_OnClick(obj,nOldRow,nNewRow) //우측의 메뉴 클릭에 연결
+{
+	var url = gds_menu.GetColumn(nNewRow, "URL"); // 
+	//if(nNewRow.Length() != 0)
+		div_mainView.URL = url;
+}
+
+
+]]></Script>
+</Window>

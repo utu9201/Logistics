@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="766" Id="GiveOrder" Left="8" OnLoadCompleted="GiveOrder_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1330" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="ds_customer">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="ds_item">
+				<Contents>
+					<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="STANDARD_UNIT_PRICE" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="ds_orderGathering">
+				<Contents>
+					<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="UNIT_OF_ORDER" size="256" summ="default" type="STRING"/>
+					<colinfo id="DELIVERY_SCHEDULE_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="AMOUNT" size="256" summ="default" type="STRING"/>
+					<colinfo id="ORDER_AMOUNT" size="256" summ="default" type="STRING"/>
+					<colinfo id="ORDER_DETAIL_STATUS" size="256" summ="default" type="STRING"/>
+					<colinfo id="ORDER_GATHERING_NO" size="256" summ="default" type="STRING"/>
+					<colinfo id="ORDER_NO" size="256" summ="default" type="STRING"/>
+					<colinfo id="NEED_AMOUNT" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Align="Center" BKColor="gold" Border="SunkenEdge" Font="한컴산뜻돋움,18,Bold" Height="38" Id="Static0" Left="8" TabOrder="1" Text="발주관리" Top="8" VAlign="Middle" Width="1289"></Static>
+		<Grid AutoFit="TRUE" BindDataset="gds_orderInfo" BkColor2="default" BoldHead="true" Bottom="348" Editable="TRUE" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="228" Id="grd_orderInfo" InputPanel="FALSE" Left="648" LineColor="default" MinWidth="100" OnCellClick="grd_orderInfo_OnCellClick" Right="1296" RowHeight="25" TabOrder="2" TabStop="true" Top="120" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="648">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="116"/>
+						<col width="85"/>
+						<col width="93"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="발주번호"/>
+						<cell col="1" display="text" text="발주일자"/>
+						<cell col="2" display="text" text="구매처"/>
+						<cell col="3" display="text" text="발주담당자"/>
+					</head>
+					<body>
+						<cell col="0" colid="ORDER_NO" display="text"/>
+						<cell col="1" colid="ORDER_DATE" display="text"/>
+						<cell col="2" colid="CUSTOMER_CODE" combocol="DETAIL_CODE" combodataset="ds_customer" combotext="DETAIL_CODE_NAME" display="combo" edit="combo"/>
+						<cell col="3" colid="PERSON_CODE_IN_CHARGE" combocol="EMP_CODE" combodataset="gds_employee" combotext="EMP_NAME" display="combo"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Static Align="Center" BKColor="goldenrod" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="44" Id="Static1" Left="8" TabOrder="3" Text="발주대기품목" Top="64" VAlign="Middle" Width="140"></Static>
+		<Grid AutoEnter="TRUE" AutoFit="TRUE" AutoSelect="TRUE" BindDataset="gds_orderGathering" BkColor2="default" BoldHead="true" Bottom="348" ColSelect="TRUE" Editable="TRUE" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="228" Id="grd_orderGathering" InputPanel="FALSE" Left="8" LineColor="default" MinWidth="100" OnCellClick="grd_mrpGathering_OnCellClick" Right="628" RowHeight="25" TabOrder="4" TabStop="FALSE" Top="120" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="620">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="50"/>
+						<col width="86"/>
+						<col width="52"/>
+						<col width="52"/>
+						<col width="68"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="품목코드"/>
+						<cell col="1" display="text" text="품명"/>
+						<cell col="2" display="text" text="필요수량"/>
+						<cell col="3" display="text" text="발주수량"/>
+						<cell col="4" display="text" text="단위"/>
+						<cell col="5" display="text" text="입고예정일"/>
+					</head>
+					<body>
+						<cell col="0" colid="ITEM_CODE" display="text"/>
+						<cell col="1" colid="ITEM_CODE" combocol="ITEM_CODE" combodataset="gds_item" combotext="ITEM_NAME" display="combo"/>
+						<cell col="2" colid="NEED_AMOUNT" display="text" edit="normal"/>
+						<cell col="3" colid="ORDER_AMOUNT" display="text" edit="normal"/>
+						<cell col="4" colid="UNIT_OF_ORDER" display="text"/>
+						<cell col="5" colid="DELIVERY_SCHEDULE_DATE" display="text" Mask="##/##/##"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Grid AutoFit="TRUE" BindDataset="gds_orderDetail" BkColor2="default" BoldHead="true" Bottom="751" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="343" Id="grd_orderDetail" InputPanel="FALSE" Left="8" LineColor="default" MinWidth="100" Right="1296" RowHeight="25" TabOrder="5" TabStop="true" Top="408" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1288">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="244"/>
+						<col width="66"/>
+						<col width="48"/>
+						<col width="43"/>
+						<col width="80"/>
+						<col width="108"/>
+						<col width="73"/>
+						<col width="130"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="발주상세번호"/>
+						<cell col="1" display="text" text="코드"/>
+						<cell col="2" display="text" text="발주수량"/>
+						<cell col="3" display="text" text="단위"/>
+						<cell col="4" display="text" text="발주일자"/>
+						<cell col="5" display="text" text="입고예정일"/>
+						<cell col="6" display="text" text="단가"/>
+						<cell col="7" display="text" text="합계"/>
+						<cell col="8" display="text" text="입고상태"/>
+					</head>
+					<body>
+						<cell col="0" colid="ORDER_DETAIL_NO" display="text"/>
+						<cell col="1" colid="ITEM_CODE" display="text"/>
+						<cell col="2" colid="ORDER_AMOUNT" display="text"/>
+						<cell col="3" colid="UNIT_OF_ORDER" display="text"/>
+						<cell col="4" display="text" expr="today()" LimitDec="0" Mask="####/##/##"/>
+						<cell col="5" colid="ORDER_GATHERING_NO" combocol="ORDER_GATHERING_NO" combodataset="gds_orderGathering" combotext="DELIVERY_SCHEDULE_DATE" display="combo" edit="mask" Mask="@@/@@/@@"/>
+						<cell col="6" colid="UNIT_PRICE_OF_ORDER" display="currency"/>
+						<cell col="7" colid="SUM_PRICE_OF_ORDER" display="currency"/>
+						<cell align="center" col="8" colid="WAREHOUSING_STATUS" display="text" expr="decode(WAREHOUSING_STATUS,&apos;Y&apos;,&apos;Y&apos;,&apos;N&apos;)"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button BKColor="goldenrod" Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="btn_registerOrder" Left="1192" OnClick="btn_registerOrder_OnClick" TabOrder="6" Text="발주등록" Top="352" Width="100"></Button>
+		<Button BKColor="goldenrod" Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="btn_addOrder" Left="1184" OnClick="btn_addOrder_OnClick" TabOrder="7" Text="발주추가" Top="61" Width="100"></Button>
+		<Button BKColor="goldenrod" Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="btn_orderGathering" Left="488" OnClick="btn_orderGathering_OnClick" TabOrder="8" Text="소요량&#32;발주취합" Top="64" Width="140"></Button>
+		<Button BKColor="goldenrod" Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="btn_addOderDetail" Left="608" OnClick="btn_addOderDetail_OnClick" TabOrder="9" Text="▼" Top="360" Width="60"></Button>
+		<Button BKColor="goldenrod" Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="btn_" Left="8" OnClick="btn_find_orderList_OnClick" TabOrder="10" Text="발주조회" Top="360" Width="100"></Button>
+		<Button BKColor="goldenrod" Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="btn_order_cancel" Left="120" OnClick="btn_order_cancel_OnClick" TabOrder="11" Text="발주취소" Top="360" Width="100"></Button>
+	</Form>
+	<Script><![CDATA[
+function GiveOrder_OnLoadCompleted(obj) {
+    grd_mrpGathering.Redraw = false;
+    grd_orderInfo.Redraw = false;
+    grd_orderDetail.Redraw = false;
+
+    http.Sync = true;
+
+    transaction("findOrderInfoList",
+        "svcPurchase::order.do?method=findOrderInfoList",
+        "",
+        "gds_orderInfo=gds_orderInfo",
+        "",
+        "callback");
+
+    transaction("findOrderGathringList",
+        "svcPurchase::order.do?method=findOrderGatheringList",
+        "",
+        "gds_orderGathering=gds_orderGathering",
+        "",
+        "callback");
+
+    //ORDERDETAIL의 DELIVERY_DATE를 세팅하기위해서 여기서 COPY해줍니다.
+    ds_orderGathering.Copy(gds_orderGathering);
+
+    transaction("findOrderDetailList",
+        "svcPurchase::order.do?method=findOrderDetailList",
+        "",
+        "gds_orderDetail=gds_orderDetail",
+        "",
+        "callback");
+
+    transaction("findItemList",
+        "svcPurchase::item.do?method=findItemList",
+        "",
+        "gds_item=gds_item",
+        "",
+        "callback");
+
+    gds_orderGathering.Filter("ORDER_DETAIL_STATUS = NULL");
+    gds_codeDetail.Filter("DIVISION_CODE_NO='CL-01'");
+    ds_customer.copyF(gds_codeDetail);
+
+    ds_item.CopyF(gds_item);
+
+
+    gds_orderInfo.Filter("ORDER_INFO_STATUS!='Y'");
+
+
+    gds_orderDetail.Filter("ORDER_DETAIL_STATUS='xx'");
+    grd_mrpGathering.Redraw = true;
+    grd_orderInfo.Redraw = true;
+    grd_orderDetail.Redraw = true;
+    http.Sync = false;
+
+}
+
+#include "Script::serialTempleteCode.js"
+function btn_addOrder_OnClick(obj) {
+    var rowNum = gds_orderInfo.AddRow();
+    var day = toDay();
+    var filter = "ORDER_INFO_STATUS!='Y'";
+    gds_orderInfo.SetColumn(rowNum, "ORDER_NO", seqSerialNo("ORD", "SERIAL_SEQ"));
+
+    gds_orderInfo.SetColumn(rowNum, "ORDER_DATE", day);
+
+    gds_orderInfo.SetColumn(rowNum, "PERSON_CODE_IN_CHARGE", global_empCode);
+}
+
+
+var num = 1;
+
+function btn_addOderDetail_OnClick(obj) {
+    //orderNum = rowNum
+    //orderNo = 발주번호....
+    var orderGNum = gds_orderGathering.rowposition;
+    var orderNum = gds_orderInfo.rowposition;
+    var customer = gds_orderInfo.GetColumn(orderNum, "CUSTOMER_CODE");
+    if (orderNum == -1) {
+        alert("발주서를 선택해주세요");
+    } else {
+        if (Type(customer) != "null") {
+            orderNo = gds_orderInfo.GetColumn(orderNum, "ORDER_NO");
+
+            gds_orderGathering.SetColumn(orderGNum, "ORDER_DETAIL_STATUS", 'Y');
+
+            gds_orderGathering.SetColumn(orderGNum, "ORDER_NO", orderNo);
+
+
+            var itemCode0 = gds_orderGathering.GetColumn(orderGNum, "ITEM_CODE");
+            var findItemRow = gds_item.FindRow("ITEM_CODE", itemCode0);
+            var unitPrice = gds_item.GetColumn(findItemRow, "STANDARD_UNIT_PRICE");
+
+            var mrpGatheringNo; // 소요량 취합번호
+            var itemCode;
+            var itemName;
+            var unitOfOrder; // 단위
+
+            var dueDateOfOrder; // 입고예정일	
+            var orderAmount; // 발주수량
+            var orderGatheringNo;
+            var deliveryScheduleDate;
+
+            itemCode = gds_orderGathering.GetColumn(orderGNum, "ITEM_CODE");
+            itemName = gds_orderGathering.GetColumn(orderGNum, "ITEM_NAME");
+            unitOfOrder = gds_orderGathering.GetColumn(orderGNum, "UNIT_OF_ORDER");
+            orderGatheringNo = gds_orderGathering.GetColumn(orderGNum, "ORDER_GATHERING_NO");
+            deliveryScheduleDate = gds_orderGathering.GetColumn(orderGNum, "DELIVERY_SCHEDULE_DATE");
+            orderAmount = gds_orderGathering.GetColumn(orderGNum, "ORDER_AMOUNT");
+            
+            
+            trace("giveorder 110 : " + deliveryScheduleDate);
+
+            gds_orderGathering.Filter("ORDER_DETAIL_STATUS != 'Y'");
+            var orderDNum = gds_orderDetail.AddRow();
+            gds_orderDetail.SetColumn(orderDNum, "ORDER_NO", orderNo);
+            gds_orderDetail.SetColumn(orderDNum, "ORDER_DETAIL_NO", orderNo + "-0" + (num++));
+            gds_orderDetail.SetColumn(orderDNum, "ORDER_GATHERING_NO", orderGatheringNo);
+            gds_orderDetail.SetColumn(orderDNum, "ITEM_CODE", itemCode);
+            gds_orderDetail.SetColumn(orderDNum, "ITEM_NAME", itemName);
+            gds_orderDetail.SetColumn(orderDNum, "UNIT_OF_ORDER", unitOfOrder);
+            gds_orderDetail.SetColumn(orderDNum, "ORDER_DATE", today());
+            gds_orderDetail.SetColumn(orderDNum, "DELIVERY_SCHEDULE_DATE", deliveryScheduleDate);
+            gds_orderDetail.SetColumn(orderDNum, "ORDER_AMOUNT", orderAmount);
+            gds_orderDetail.SetColumn(orderDNum, "MRP_GATHERING_NO", mrpGatheringNo);
+            gds_orderDetail.SetColumn(orderDNum, "UNIT_PRICE_OF_ORDER", unitPrice);
+            var sum = parseInt(unitPrice) * parseInt(orderAmount);
+            gds_orderDetail.SetColumn(orderDNum, "SUM_PRICE_OF_ORDER", ABS(sum));
+            //gds_orderGathering.Filter("ORDER_GATHERING_STATUS!='Y' || ORDER_AMOUNT > 0");
+
+
+        } else {
+            alert("업체를 선택해주세요");
+        }
+    }
+}
+
+function grd_orderInfo_OnCellClick(obj, nRow, nCell, nX, nY, nPivotIndex) {
+
+    var selOrderNo = gds_orderInfo.GetColumn(nRow, "ORDER_NO");
+
+    gds_orderDetail.Filter("ORDER_NO='" + selOrderNo + "'");
+
+}
+
+function btn_registerOrder_OnClick(obj) {
+
+    if (confirm("발주를 등록하시겠습니까?")) {
+        if (gds_orderInfo.count >= 0) {
+            for (var i = 0; i <= gds_orderInfo.count; i++) {
+                gds_orderInfo.SetColumn(i, "ORDER_INFO_STATUS", 'Y');
+            }
+        }
+        http.Sync = true;
+        //grd_orderGathering.Redraw = false;
+        //grd_orderInfo.Redraw = false;
+        //grd_orderDetail.Redraw = false;
+    gds_orderGathering.Filter("ORDER_DETAIL_STATUS = NULL");
+    gds_orderInfo.Filter("ORDER_INFO_STATUS!='Y'");
+    gds_orderDetail.Filter("ORDER_DETAIL_STATUS='xx'");
+        //trace(gds_orderDetail.SaveXML());
+        transaction(
+            "registerOrder",
+            "svcPurchase::/order.do?method=registerOrder",
+            "gds_orderInfo=gds_orderInfo:u gds_orderDetail=gds_orderDetail:u gds_orderGathering=gds_orderGathering:u",
+            "",
+            "",
+            "callback");
+    }
+    http.Sync = false;
+
+}
+function callback(trid, ErrorCode, ErrorMsg) {
+
+    if (trid == "registerOrder") {
+        if (ErrorCode >= 0) {
+            alert("저장이 완료되었습니다");
+            Reload();
+        }
+    }
+}
+
+function btn_orderGathering_OnClick(obj) {
+    dialog("Purchase::OrderGatheringDialog.xml", "");
+}
+
+function btn_find_orderList_OnClick(obj) {
+    gds_orderDetail.UnFilter();
+}
+
+function grd_mrpGathering_OnCellClick(obj, nRow, nCell, nX, nY, nPivotIndex) {
+    gds_mrpGathering.Editable = true;
+    grd_mrpGathering.Editable = true;
+}
+var errorMsg;
+var errorCode;
+function btn_order_cancel_OnClick(obj) {
+    var orderDetailRowNo = gds_orderDetail.rowposition;
+    grd_orderDetail.Redraw = false;
+    gds_orderDetail.DeleteRow(orderDetailRowNo);
+
+    var wareHousingStatus = gds_orderDetail.GetColumn(orderDetailRowNo, "WAREHOUSING_STATUS");
+    trace(wareHousingStatus);
+    if(wareHousingStatus = 'Y'){
+        alert("이미 입고가 되어서 취소가 불가능합니다");
+    }else {
+        http.Sync = true;
+        transaction(
+            "cancelOrder",
+            "svcPurchase::/order.do?method=cancelOrder",
+            "gds_orderDetail=gds_orderDetail:u",
+            "",
+            "empCode = " + global_empCode,
+            "");
+        http.Sync = false;
+        if (ErrorCode >= 0) {
+            alert(errorMsg);
+            Reload();
+        } else {
+            alert(errorMsg);
+        }
+        grd_orderDetail.Redraw = true;
+    }
+}
+]]></Script>
+</Window>

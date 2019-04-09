@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="white" Height="784" Id="authorityManagementForm" Left="8" OnLoadCompleted="authorityManagementForm_OnLoadCompleted" PidAttrib="7" scroll="false" Title="authorityManagementForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Static Align="Center" Border="Flat" BorderColor="HIGHLIGHT" Color="user1" Font="MD개성체,16" Height="30" Id="formtitle" Style="BUTTON_STYLE" TabOrder="1" Text="사용자&#32;권한관리" VAlign="Middle" Width="953"></Static>
+		<Static Align="Center" BKColor="lavender" Color="user4" Font="MD개성체,14" Height="24" Id="Static4" Left="15" TabOrder="12" Text="사원&#32;권한&#32;조회" Top="76" Width="167"></Static>
+		<Static BKColor="lavender" Color="user4" Font="MD개성체,16" Height="24" Id="Static5" Left="608" TabOrder="5" Text="사원이름" Top="72" Width="117"></Static>
+		<Edit Align="CENTER" BKColor="lemonchiffon" Font="MD개성체,11" Height="30" Id="empName" Left="735" TabOrder="6" Top="71" Width="121"></Edit>
+		<Button Cursor="HAND" Font="MD개성체,11" Height="30" Id="searchBtn" Left="864" OnClick="searchBtn_OnClick" Style="BUTTON_STYLE" TabOrder="7" Text="조회" Top="72" Width="60"></Button>
+		<Grid AutoFit="TRUE" BindDataset="dsEmployee" BkColor2="default" BoldHead="true" Bottom="247" Enable="true" EndLineColor="default" Font="MD개성체,11" HeadHeight="25" Height="136" Id="EmployeeGrid" InputPanel="FALSE" Left="15" LineColor="default" MinWidth="100" Right="940" RowHeight="20" Style="BUTTON_STYLE" TabOrder="4" TabStop="true" Top="111" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="925">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="52"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="0"/>
+					</columns>
+					<head>
+						<cell bkcolor="lavender" col="0" display="text" font="MD개성체,11" text="NO"/>
+						<cell bkcolor="lavender" col="1" display="text" font="MD개성체,11" text="사원번호"/>
+						<cell bkcolor="lavender" col="2" display="text" font="MD개성체,11" text="사원명"/>
+						<cell bkcolor="lavender" col="3" display="text" font="MD개성체,11" text="부서코드"/>
+						<cell bkcolor="lavender" col="4" display="text" font="MD개성체,11" text="권한코드"/>
+						<cell bkcolor="lavender" col="5" display="text" font="MD개성체,11" text="직급코드"/>
+						<cell bkcolor="lavender" col="6" display="text" font="LG&#32;PC,11" text="PASSWORD"/>
+					</head>
+					<body>
+						<cell align="center" col="0" display="text" expr="currow+1" font="MD개성체,11"/>
+						<cell align="center" col="1" colid="EMP_CODE" display="text" font="MD개성체,11"/>
+						<cell align="center" col="2" colid="EMP_NAME" display="text" font="MD개성체,11"/>
+						<cell align="center" col="3" colid="DEPT_CODE" display="text" font="MD개성체,11"/>
+						<cell align="center" col="4" colid="AUTHORITY_CODE" display="text" font="MD개성체,11"/>
+						<cell align="center" col="5" colid="POSITION_CODE" display="text" font="MD개성체,11"/>
+						<cell col="6" colid="PASSWORD" display="text" font="MD개성체,11"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Grid AutoEnter="TRUE" AutoFit="TRUE" BindDataset="dsAuthority" BkColor2="default" BoldHead="true" Bottom="708" Enable="true" EndLineColor="default" Font="MD개성체,11" HeadHeight="25" Height="400" Id="authorityGrid" InputPanel="FALSE" Left="15" LineColor="default" MinWidth="100" OnCellClick="authorityGrid_OnCellClick" OnCellPosChanged="authorityGrid_OnCellPosChanged" Right="263" RowHeight="20" Style="BUTTON_STYLE" TabOrder="2" TabStop="true" Top="308" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="248">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell bkcolor="lavender" col="0" display="text" font="MD개성체,11" text="권한코드"/>
+						<cell bkcolor="lavender" col="1" display="text" font="MD개성체,11" text="권한명"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="AUTHORITY_CODE" display="text" edit="normal" font="MD개성체,11"/>
+						<cell align="center" col="1" colid="AUTHORITY_NAME" display="text" edit="normal" font="MD개성체,11"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Grid AutoFit="TRUE" BindDataset="dsMenuAuthority" BkColor2="default" BoldHead="true" Bottom="703" Enable="true" EndLineColor="default" Font="MD개성체,11" HeadHeight="25" Height="400" Id="menuAuthorityGrid" InputPanel="FALSE" Left="279" LineColor="default" MinWidth="100" Right="559" RowHeight="20" Style="BUTTON_STYLE" TabOrder="3" TabStop="true" Top="303" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="280">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="20"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="0"/>
+						<col width="0"/>
+					</columns>
+					<head>
+						<cell bkcolor="lavender" col="0" display="text" font="MD개성체,11" limit="-1" text="NO"/>
+						<cell bkcolor="lavender" col="1" display="text" font="MD개성체,11" limit="-1" text="메뉴코드"/>
+						<cell bkcolor="lavender" col="2" display="text" font="MD개성체,11" limit="-1" text="메뉴명"/>
+						<cell bkcolor="lavender" col="3" display="text" font="MD개성체,11" limit="-1" text="AUTHORITY_CODE"/>
+						<cell bkcolor="lavender" col="4" display="text" font="MD개성체,11" limit="-1" text="AUTHORITY_NAME"/>
+					</head>
+					<body>
+						<cell align="center" col="0" display="text" expr="currow+1" font="MD개성체,11" limit="-1"/>
+						<cell align="center" col="1" colid="MENU_CODE" display="text" font="MD개성체,11" limit="-1"/>
+						<cell align="center" col="2" colid="MENU_NAME" display="text" font="MD개성체,11" limit="-1"/>
+						<cell col="3" colid="AUTHORITY_CODE" display="text" font="MD개성체,11" limit="-1"/>
+						<cell col="4" colid="AUTHORITY_NAME" display="text" font="MD개성체,11" limit="-1"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button BorderColor="SCROLLBAR" Color="user1" Cursor="HAND" Font="LG&#32;PC,18,Bold" Height="29" Id="menuDeleteBtn" Left="573" OnClick="menuDeleteBtn_OnClick" Style="BUTTON_STYLE" TabOrder="10" Text="-" Top="509" Width="29"></Button>
+		<Button BorderColor="SCROLLBAR" Color="user1" Cursor="HAND" Font="LG&#32;PC,16" Height="29" Id="menuAddBtn" Left="573" OnClick="menuAddBtn_OnClick" Style="BUTTON_STYLE" TabOrder="11" Text="+" Top="458" Width="29"></Button>
+		<Button BKColor="gold" Color="HIGHLIGHT" Cursor="HAND" Face3dColor="APPWORKSPACE" Font="MD개성체,12" Height="28" Id="removeAuthorityBtn" Left="112" OnClick="removeAuthorityBtn_OnClick" TabOrder="8" Text="권한삭제" Top="712" Width="89"></Button>
+		<Button BKColor="gold" Color="HIGHLIGHT" Cursor="HAND" Face3dColor="APPWORKSPACE" Font="MD개성체,12" Height="28" Id="cancelBtn" Left="744" OnClick="cancelBtn_OnClick" TabOrder="9" Text="일괄취소" Top="720" Width="96"></Button>
+		<Static Align="Center" Border="Flat" BorderColor="HIGHLIGHT" Color="user1" Font="MD개성체,12" Height="36" Id="Static1" Left="15" Style="BUTTON_STYLE" TabOrder="13" Text="권한" Top="271" VAlign="Middle" Width="248"></Static>
+		<Static Align="Center" Border="Flat" BorderColor="HIGHLIGHT" Color="user1" Font="MD개성체,12" Height="36" Id="Static3" Left="279" Style="BUTTON_STYLE" TabOrder="14" Text="권한별&#32;접근가능&#32;메뉴" Top="271" VAlign="Middle" Width="280"></Static>
+		<Static Align="Center" Border="Flat" BorderColor="HIGHLIGHT" Color="user1" Font="MD개성체,12" Height="36" Id="Static2" Left="618" Style="BUTTON_STYLE" TabOrder="15" Text="전체&#32;메뉴" Top="271" VAlign="Middle" Width="320"></Static>
+		<Button BKColor="gold" Color="HIGHLIGHT" Cursor="HAND" Face3dColor="APPWORKSPACE" Font="MD개성체,12" Height="28" Id="addAuthorityBtn" Left="16" OnClick="addAuthorityBtn_OnClick" TabOrder="16" Text="권한추가" Top="712" Width="88"></Button>
+		<Button BKColor="gold" Color="HIGHLIGHT" Cursor="HAND" Face3dColor="APPWORKSPACE" Font="MD개성체,12" Height="28" Id="saveBtn" Left="848" OnClick="saveBtn_OnClick" TabOrder="17" Text="일괄저장" Top="720" Width="97"></Button>
+		<TreeView BindDataset="dsMenu" Expand="FALSE" Font="MD개성체,11" HasLines="FALSE" Height="400" Id="menuTree" Left="615" LevelColumn="LEVEL" Style="BUTTON_STYLE" TabOrder="18" TEXTColumn="MENU_NAME" Top="311" Width="320"></TreeView>
+	</Form>
+	<Script><![CDATA[
+
+function authorityManagementForm_OnLoadCompleted(obj)
+{
+	http.Sync=true;
+	
+	empName.text="이름 입력";
+	
+	transaction("findEmployeeList",
+				"svcBase::/employee.do?method=findEmployeeList",
+				"",
+				"dsEmployee=dsEmployee",
+				"",
+				"callback");
+	
+	transaction("findAuthorityList",
+				"svcBase::/authority.do?method=findAuthorityList",
+				"",
+				"dsAuthority=dsAuthority",
+				"",
+				"callback");
+	
+	
+	transaction("findMenuAuthorityListAll",
+				"svcBase::/authority.do?method=findMenuAuthorityListAll",
+				"",
+				"dsMenuAuthority=dsMenuAuthority",
+				"",
+				"callback");
+	
+
+	
+	dsMenuAuthority.Filter("AUTHORITY_CODE='"+dsAuthority.GetColumn(dsAuthority.row,"AUTHORITY_CODE")+"'");
+	
+	
+	transaction("findMenuList",
+				"svcBase::/menu.do?method=findMenuList",
+				"",
+				"dsMenu=dsMenu",
+				"",
+				"callback");
+	
+		
+	http.Sync=false;
+}
+
+
+
+
+
+
+
+
+function authorityGrid_OnCellClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	var authorityCode=dsAuthority.GetColumn(dsAuthority.row,"AUTHORITY_CODE");
+	dsMenuAuthority.filter("AUTHORITY_CODE='"+authorityCode+"'");
+}
+
+
+
+
+
+
+
+function authorityGrid_OnCellPosChanged(obj,nRow,nCell,nOldRow,nOldCell,nPivotIndex,nOldPivotIndex)
+{
+	var authorityCode=dsAuthority.GetColumn(dsAuthority.row,"AUTHORITY_CODE");
+	dsMenuAuthority.filter("AUTHORITY_CODE='"+authorityCode+"'");
+}
+
+
+
+
+
+
+
+function menuAddBtn_OnClick(obj)
+{
+	var MenuCode = dsMenu.GetColumn(dsMenu.row, "MENU_CODE");
+	var MenuName = dsMenu.GetColumn(dsMenu.row, "MENU_NAME"); 
+	var AuthorityCode = dsAuthority.GetColumn(dsAuthority.row, "AUTHORITY_CODE");
+	var AuthorityName = dsAuthority.GetColumn(dsAuthority.row, "AUTHORITY_NAME");
+	var flag=0;
+
+	
+	
+	for(var index=0 ; index<dsMenuAuthority.GetCount() ; index++){
+	
+		if(MenuCode==dsMenuAuthority.GetColumn(index,"MENU_CODE")){
+			flag=1;
+	
+	}
+	
+}	
+	if(flag==0){
+	
+	dsMenuAuthority.AddRow();
+	dsMenuAuthority.SetColumn(dsMenuAuthority.row,"MENU_CODE",MenuCode);
+	dsMenuAuthority.SetColumn(dsMenuAuthority.row,"MENU_NAME",MenuName);
+	dsMenuAuthority.SetColumn(dsMenuAuthority.row,"AUTHORITY_CODE",AuthorityCode);
+	dsMenuAuthority.SetColumn(dsMenuAuthority.row,"AUTHORITY_NAME",AuthorityName);
+		
+	}else{
+		alert("이미 존재하는 메뉴입니다");
+		flag=0;
+	}
+	
+}
+
+
+
+
+
+function menuDeleteBtn_OnClick(obj)
+{
+	dsMenuAuthority.DeleteRow(dsMenuAuthority.row);
+}
+
+
+
+
+
+function addAuthorityBtn_OnClick(obj)
+{
+	dsAuthority.AddRow();
+	
+}
+
+
+function removeAuthorityBtn_OnClick(obj)
+{
+	var authorityCode = dsAuthority.GetColumn(dsAuthority.row, "AUTHORITY_CODE");
+			
+	dsEmployee.Filter("AUTHORITY_CODE='"+authorityCode+"'");
+		
+	if(dsEmployee.GetRowCount() !=0){
+		alert("권한이 등록된 사원이 존재하여 삭제 할 수 없습니다");
+	}else{
+		dsAuthority.DeleteRow(dsAuthority.row);
+		
+		alert("권한이 삭제 되었습니다.");
+	}
+}
+
+
+
+function cancelBtn_OnClick(obj)  //일괄취소 버튼을 누를 시
+{
+	reload();
+}
+
+
+
+
+function saveBtn_OnClick(obj)  //일괄 저장버튼 누를 시
+{
+	if(confirm(" 일괄저장 하시겠습니까? ")){
+		transaction(
+			"batchAuthority",
+			"svcBase::/authority.do?method=batchAuthority",
+			"dsAuthority=dsAuthority:u dsMenuAuthority=dsMenuAuthority:u",
+			"dsAuthority=dsAuthority dsMenuAuthority=dsMenuAuthority",
+			"",
+			"callback"
+		);
+	
+	Reload();
+	}
+	
+	
+				
+}
+
+
+
+
+
+
+function searchBtn_OnClick(obj) // 사원 조회버튼 눌렀을시
+{
+	dsEmployee.unfilter();
+	dsEmployee.Filter("EMP_NAME='"+empName.Text+"'");
+}
+
+
+
+
+function callback(trid, ErrorCode, ErrorMsg) {
+	
+	
+	if(trid=='batchAuthority'){
+		if(ErrorCode!=0){
+			alert("권한 저장 중 오류 발생");
+		}else{
+			alert("권한 저장 완료");
+			Reload();
+		}	
+	}
+}
+]]></Script>
+</Window>

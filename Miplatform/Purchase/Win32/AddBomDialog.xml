@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="400" Id="AddBomDialog" Left="8" PidAttrib="7" Title="AddBomDialog" Top="8" Ver="1.0" Width="976" WorkArea="true">
+		<Button Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="36" Id="btn_addBom" Left="784" Style="BUTTON_STYLE" TabOrder="1" Text="추가" Top="68" Width="76"></Button>
+		<Button Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="36" Id="btn_registerBom" Left="864" Style="BUTTON_STYLE" TabOrder="2" Text="BOM등록" Top="68" Width="76"></Button>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,18" Height="37" Id="Static0" Left="16" Style="BUTTON_STYLE" TabOrder="3" Text="BOM&#32;등록" Top="12" VAlign="Middle" Width="936"></Static>
+		<Grid BindDataset="gds_addBom" BkColor2="default" BoldHead="true" Bottom="356" Enable="true" EndLineColor="default" HeadHeight="25" Height="227" Id="grd_addBom" InputPanel="FALSE" Left="2" LineColor="default" Right="959" RowHeight="25" Style="BUTTON_STYLE" TabOrder="4" TabStop="true" Top="129" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="957">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="80"/>
+						<col width="127"/>
+						<col width="80"/>
+						<col width="98"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell col="0" colid="ITEM_NAME" display="text" text="품목명"/>
+						<cell col="1" colid="PARENT_ITEM_CODE" display="text" text="상위품목코드"/>
+						<cell col="2" colid="ITEM_CODE" display="text" text="품목코드"/>
+						<cell col="3" colid="ITEM_GROUP_CODE" display="text" text="품목군코드"/>
+						<cell col="4" colid="ITEM_CLASSIFICATION" display="text" text="품목분류"/>
+						<cell col="5" colid="UNIT_OF_STOCK" display="text" text="단위"/>
+						<cell col="6" colid="NET_AMOUNT" display="text" text="정미수량"/>
+						<cell col="7" colid="LOSS_RATE" display="text" text="불량율"/>
+						<cell col="8" colid="LEAD_TIME" display="text" text="소요일"/>
+						<cell col="9" colid="STANDARD_UNIT_PRICE" display="text" text="표준단가"/>
+						<cell col="10" colid="DESCRIPTION" display="text" text="설명"/>
+					</head>
+					<body>
+						<cell col="0" colid="I" display="text"/>
+						<cell col="1" display="text"/>
+						<cell col="2" display="text"/>
+						<cell col="3" display="text"/>
+						<cell col="4" display="text"/>
+						<cell col="5" display="text"/>
+						<cell col="6" display="text"/>
+						<cell col="7" display="text"/>
+						<cell col="8" display="text"/>
+						<cell col="9" display="text"/>
+						<cell col="10" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+function btn_registerBom_OnClick(obj)
+{
+	
+}
+]]></Script>
+</Window>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="400" Id="CodeDialogform" Left="8" OnLoadCompleted="CodeDialogform_OnLoadCompleted" PidAttrib="7" Title="코드창" Top="8" Ver="1.0" Width="400" WorkArea="true">
+		<Grid AutoFit="TRUE" BindDataset="gds_codeDetail" BkColor2="default" BoldHead="true" Bottom="388" Enable="true" EndLineColor="default" Height="380" Id="grid_codeDialog" InputPanel="FALSE" Left="8" LineColor="default" MinWidth="100" OnCellClick="grid_codeDialog_OnCellClick" Right="388" Style="BUTTON_STYLE" TabOrder="1" TabStop="true" Top="8" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="380">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell align="center" col="0" display="text" font="맑은&#32;고딕,10" text="코드이름"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="DETAIL_CODE_NAME" display="text" font="맑은&#32;고딕&#32;Semilight,10"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+function CodeDialogform_OnLoadCompleted(obj)
+{
+	
+	var divisionCode = parent.Code;
+	gds_codeDetail.Filter("DIVISION_CODE_NO='"+divisionCode+"'");
+}
+
+function grid_codeDialog_OnCellClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	var codeName = gds_codeDetail.GetColumn(nRow,"DETAIL_CODE_NAME");
+	var code = gds_codeDetail.GetColumn(nRow,"DIVISION_CODE_NO");
+	var codeDetail = gds_codeDetail.GetColumn(nRow,"DETAIL_CODE");
+	if(code=="CO-01"){
+	parent.edt_componyName.text=codeName;
+	parent.edt_companyCode.text=codeDetail;
+	
+	close();
+	return;
+	}
+	if(code=="CO-02"){
+	parent.edt_workplaceName.text=codeName;
+	parent.edt_workCode.text=codeDetail;
+	
+	close();
+	return;
+	}
+
+}
+]]></Script>
+</Window>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="376" Id="OrderDialog" Left="8" OnLoadCompleted="OrderDialog_OnLoadCompleted" PidAttrib="7" Title="발주확인창" Top="8" Ver="1.0" Width="712" WorkArea="true">
+		<Grid AutoFit="TRUE" BindDataset="gds_orderDetail" BkColor2="default" BoldHead="true" Bottom="352" Editable="TRUE" Enable="true" EndLineColor="default" HeadHeight="25" Height="336" Id="giveOrderItemGrid" InputPanel="FALSE" Left="16" LineColor="default" MinWidth="100" OnCellDBLClick="giveOrderItemGrid_OnCellDblClick" Right="696" RowHeight="25" TabOrder="1" TabStop="true" Top="16" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="680">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="100"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="발주상세번호"/>
+						<cell col="1" display="text" text="품목명"/>
+						<cell col="2" display="text" text="입고예정일"/>
+						<cell col="3" display="text" text="발주수량"/>
+						<cell col="4" display="text" text="입고상태여부"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="ORDER_DETAIL_NO" display="text"/>
+						<cell align="center" col="1" colid="ITEM_NAME" display="text"/>
+						<cell align="center" col="2" colid="DELIVERY_SCHEDULE_DATE" display="date"/>
+						<cell align="center" col="3" colid="ORDER_AMOUNT" display="text"/>
+						<cell align="center" col="4" colid="WEARING_STATUS" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+function giveOrderItemGrid_OnCellDblClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{	
+	var day = Today();
+	var itemCode = gds_orderDetail.GetColumn(nRow,"ITEM_CODE");
+	var amount = gds_orderDetail.GetColumn(nRow,"ORDER_AMOUNT");
+	var orderDetailNo = gds_orderDetail.GetColumn(nRow,"ORDER_DETAIL_NO");
+	var orderNo = gds_orderDetail.GetColumn(nRow,"ORDER_NO");
+	gds_orderDetail.DeleteRow(nRow);
+	var arr  = [day,itemCode,amount,orderDetailNo,orderNo];
+	close(arr);
+}
+
+function OrderDialog_OnLoadCompleted(obj)
+{
+	gds_orderDetail.Filter("WEARING_STATUS=='N'");
+}
+]]></Script>
+</Window>

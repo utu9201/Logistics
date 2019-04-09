@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="520" Id="AddressForm" Left="8" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="600" WorkArea="true">
+		<Static Align="Center" BKColor="user2" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,18" Height="39" Id="Static0" Left="8" TabOrder="1" Text="주소검색" Top="8" VAlign="Middle" Width="584"></Static>
+		<Tab BKSelColor="user3" Border="Raised" Font="한컴&#32;백제&#32;B,13" Height="429" Id="Tab0" Left="17" TabOrder="2" Top="69" Width="561">
+			<Contents>
+				<TabPage BorderColor="black" Height="401" Id="tab1" Left="2" TabOrder="3" Text="도로명검색" Top="26" Width="557">
+					<Static Align="Center" BKColor="user0" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,15" Height="36" Id="Static0" Left="45" TabOrder="1" Text="시/도&#32;선택" Top="15" VAlign="Middle" Width="136"></Static>
+					<Static Align="Center" BKColor="user0" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,15" Height="36" Id="Static1" Left="45" TabOrder="2" Text="시/군/구" Top="55" VAlign="Middle" Width="136"></Static>
+					<Static Align="Center" BKColor="user0" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,15" Height="36" Id="Static2" Left="45" TabOrder="3" Text="도로명" Top="95" VAlign="Middle" Width="136"></Static>
+					<Combo Height="36" Id="Combo0" Left="187" TabOrder="4" Top="14" Width="220"></Combo>
+					<Combo Height="36" Id="Combo1" Left="187" TabOrder="5" Top="54" Width="220"></Combo>
+					<Edit Height="36" Id="Edit0" Left="187" TabOrder="6" Top="94" Width="162"></Edit>
+					<Button BKColor="user1" Color="WINDOW" Height="36" Id="Button0" Left="347" TabOrder="7" Text="검색" Top="92" Width="58"></Button>
+					<Grid BkColor2="default" BoldHead="true" Bottom="362" Enable="true" EndLineColor="default" Height="217" Id="Grid0" InputPanel="FALSE" Left="44" LineColor="default" Right="512" TabOrder="8" TabStop="true" Top="145" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="468"></Grid>
+				</TabPage>
+				<TabPage BorderColor="black" Height="401" Id="tab2" Left="2" TabOrder="3" Text="지번" Top="26" Width="557">
+					<Static Align="Center" BKColor="user0" Border="SunkenEdge" Font="한컴&#32;백제&#32;M,13" Height="36" Id="Static0" Left="50" TabOrder="1" Text="읍/면/동" Top="45" VAlign="Middle" Width="136"></Static>
+					<Edit Height="36" Id="Edit0" Left="190" TabOrder="2" Top="45" Width="215"></Edit>
+					<Button BKColor="user1" Color="WINDOW" Height="36" Id="Button0" Left="413" TabOrder="3" Text="검색" Top="42" Width="77"></Button>
+					<Grid BkColor2="default" BoldHead="true" Bottom="359" Enable="true" EndLineColor="default" Height="256" Id="Grid0" InputPanel="FALSE" Left="43" LineColor="default" Right="511" TabOrder="4" TabStop="true" Top="103" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="468"></Grid>
+				</TabPage>
+			</Contents>
+		</Tab>
+	</Form>
+	<Script></Script>
+</Window>

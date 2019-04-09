@@ -1,0 +1,23 @@
+	<select id="takeSerialCode" parameterClass="map" resultClass="string">
+
+	SELECT TO_CHAR(SYSDATE,'YYMMDD')||'-'||LPAD
+		<isEqual property="findSeq" compareValue="WH_SEQ" >
+	 (WH_SEQ.NEXTVAL,2,0) FROM DUAL
+		</isEqual>
+		<isEqual property="findSeq" compareValue="CONT_SEQ" >
+	 (CONT_SEQ.NEXTVAL,2,0) FROM DUAL
+		</isEqual>
+				<isEqual property="findSeq" compareValue="ESTI_SEQ" >
+	 (ESTI_SEQ.NEXTVAL,2,0) FROM DUAL
+		</isEqual>
+				<isEqual property="findSeq" compareValue="WIT_SEQ" >
+	 (WIT_SEQ.NEXTVAL,2,0) FROM DUAL
+		</isEqual>
+		<isEqual property="findSeq" compareValue="MPS_SEQ" >
+	 (MPS_SEQ.NEXTVAL,2,0) FROM DUAL
+		</isEqual>
+		<isEqual property="findSeq" compareValue="MRP_SEQ" >
+	 (MRP_SEQ.NEXTVAL,2,0) FROM DUAL
+		</isEqual>
+
+	</select>

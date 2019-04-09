@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="766" Id="Warehousing" Left="8" OnLoadCompleted="Warehousing_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1330" WorkArea="true">
+		<Static Align="Center" BKColor="goldenrod" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="44" Id="Static6" Left="8" TabOrder="1" Text="발주목록" Top="16" VAlign="Middle" Width="90"></Static>
+		<Static Align="Center" BKColor="goldenrod" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="44" Id="Static0" Left="648" TabOrder="2" Text="미입고&#32;발주품목" Top="16" VAlign="Middle" Width="152"></Static>
+		<Grid AutoFit="TRUE" BindDataset="gds_orderInfo" BkColor2="default" BoldHead="true" Bottom="296" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="226" Id="grd_orderInfo" InputPanel="FALSE" Left="8" LineColor="default" MinWidth="100" OnCellDBLClick="grd_orderInfo_OnCellDblClick" Right="605" RowHeight="25" TabOrder="3" TabStop="true" Top="70" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="597">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="104"/>
+						<col width="80"/>
+						<col width="69"/>
+						<col width="58"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="발주번호"/>
+						<cell col="1" display="text" text="업체"/>
+						<cell col="2" display="text" text="발주일자"/>
+						<cell col="3" display="text" text="담당자"/>
+					</head>
+					<body>
+						<cell col="0" colid="ORDER_NO" display="text"/>
+						<cell col="1" colid="CUSTOMER_CODE" display="text"/>
+						<cell col="2" colid="ORDER_DATE" display="text"/>
+						<cell col="3" colid="PERSON_CODE_IN_CHARGE" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Grid AutoFit="TRUE" BindDataset="gds_orderDetail" BkColor2="default" BoldHead="true" Bottom="298" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="226" Id="grd_orderDetail" InputPanel="FALSE" Left="648" LineColor="default" MinWidth="100" OnCellDBLClick="grd_orderDetail_OnCellDblClick" Right="1287" RowHeight="25" TabOrder="4" TabStop="true" Top="72" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="639">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="120"/>
+						<col width="54"/>
+						<col width="50"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="품명"/>
+						<cell col="1" display="text" text="발주수량"/>
+						<cell col="2" display="text" text="단위"/>
+						<cell col="3" display="text" text="입고예정일"/>
+					</head>
+					<body>
+						<cell col="0" colid="ITEM_CODE" combocol="ITEM_CODE" combodataset="gds_item" combotext="ITEM_NAME" display="combo"/>
+						<cell col="1" colid="ORDER_AMOUNT" display="text"/>
+						<cell col="2" colid="UNIT_OF_ORDER" display="text"/>
+						<cell col="3" colid="DELIVERY_SCHEDULE_DATE" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Grid AutoEnter="TRUE" AutoFit="TRUE" AutoSelect="TRUE" BindDataset="gds_warehousing" BkColor2="default" BoldHead="true" Bottom="744" Editable="TRUE" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="362" Id="grd_warehousing" InputPanel="FALSE" LineColor="default" MinWidth="100" OnCellPosChanged="grd_warhousing_OnCellPosChanged" Right="1284" RowHeight="25" TabOrder="5" TabStop="true" Top="382" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1284">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="80"/>
+						<col width="123"/>
+						<col width="123"/>
+						<col width="54"/>
+						<col width="58"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="62"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="코드"/>
+						<cell col="1" display="text" text="발주/생산번호"/>
+						<cell col="2" display="text" text="품명"/>
+						<cell col="3" display="text" text="발주수량"/>
+						<cell col="4" display="text" text="입고수량"/>
+						<cell col="5" display="text" text="입고일"/>
+						<cell col="6" display="text" text="업체/공정"/>
+						<cell col="7" display="text" text="입고상태"/>
+					</head>
+					<body>
+						<cell col="0" colid="ITEM_CODE" display="text"/>
+						<cell col="1" colid="ORDER_NO" display="text"/>
+						<cell col="2" colid="ITEM_CODE" combocol="ITEM_CODE" combodataset="gds_item" combotext="ITEM_NAME" display="combo"/>
+						<cell col="3" colid="ORDER_AMOUNT" display="text"/>
+						<cell col="4" colid="WAREHOUSING_AMOUNT" display="text" edit="number"/>
+						<cell col="5" colid="WAREHOUSING_DATE" display="text"/>
+						<cell col="6" colid="CUSTOMER" display="text"/>
+						<cell col="7" colid="DESCRIPTION" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button BKColor="goldenrod" Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="btn_registWarehousing" Left="1176" OnClick="btn_registWarehousing_OnClick" TabOrder="6" Text="입고품등록" Top="328" Width="112"></Button>
+		<Static Align="Center" BKColor="goldenrod" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="44" Id="Static1" Left="8" TabOrder="7" Text="입고내역" Top="328" VAlign="Middle" Width="90"></Static>
+		<Button BKColor="goldenrod" Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="Button0" Left="1041" OnClick="Button0_OnClick" TabOrder="8" Text="전체&#32;입고내역" Top="328" Width="120"></Button>
+	</Form>
+	<Script><![CDATA[#include "Script::serialTempleteCode.js"
+function Warehousing_OnLoadCompleted(obj) {
+
+    grd_orderInfo.Redraw = false;
+    grd_orderDetail.Redraw = false;
+    grd_warehousing.Redraw = false;
+    http.Sync = true;
+
+
+
+    transaction("findOrderInfoList",
+        "svcPurchase::order.do?method=findOrderInfoList",
+        "",
+        "gds_orderInfo=gds_orderInfo",
+        "",
+        "callback");
+
+    transaction("findOrderDetailList",
+        "svcPurchase::order.do?method=findOrderDetailList",
+        "",
+        "gds_orderDetail=gds_orderDetail",
+        "",
+        "callback");
+
+    transaction("findStockList",
+        "svcPurchase::stock.do?method=findStockList",
+        "",
+        "gds_stock=gds_stock",
+        "",
+        "callback");
+
+
+    transaction("findWarehousingList",
+        "svcPurchase::stock.do?method=findWarehousingList",
+        "",
+        "gds_warehousing=gds_warehousing",
+        "",
+        "callback");
+
+
+    gds_orderInfo.Filter("DESCRIPTION!='Y'");
+    gds_orderDetail.Filter("ITEM_CODE='XX'");
+    gds_warehousing.Filter("ITEM_CODE='XX'");
+    grd_orderInfo.Redraw = true;
+    grd_orderDetail.Redraw = true;
+    grd_warehousing.Redraw = true;
+    http.Sync = false;
+
+
+
+
+}
+
+
+var customerCode;
+
+var orderRow;
+
+var orderNo;
+
+
+
+function grd_orderInfo_OnCellDblClick(obj, nRow, nCell, nX, nY, nPivotIndex) {
+
+    orderRow = gds_orderInfo.rowposition;
+
+    orderNo = gds_orderInfo.GetColumn(nRow, "ORDER_NO");
+
+    customerCode = gds_orderInfo.GetColumn(nRow, "CUSTOMER_CODE");
+
+    gds_orderDetail.Filter("ORDER_NO='" + orderNo + "'");
+
+
+}
+
+
+
+
+var warehousingRow;
+
+
+function grd_warhousing_OnCellPosChanged(obj, nRow, nCell, nX, nY, nPivotIndex) {
+
+    var orderAmount = gds_warehousing.getColumn(nRow, "ORDER_AMOUNT");
+    var wareAmount = gds_warehousing.getColumn(nRow, "WAREHOUSING_AMOUNT");
+    trace("orderAmount : " + orderAmount);
+    trace("wareAmount : " + wareAmount);
+    if (parseint(orderAmount) < parseint(wareAmount)) {
+        gds_warehousing.SetColumn(nRow, "WAREHOUSING_AMOUNT", orderAmount);
+        trace("91orderAmount : " + orderAmount);
+    }
+    else {
+        var ordNo = gds_warehousing.getColumn(nRow, "ORDER_NO");
+        var ordRow = gds_orderDetail.SearchRowNF("ORDER_DETAIL_NO='" + ordNo + "'");
+        trace("96 : " + ordNo);
+        gds_orderDetail.SetColumnNF(ordRow, "ORDER_AMOUNT", parseint(orderAmount) - parseint(wareAmount));
+        trace("98 : " + ordRow);
+        gds_orderDetail.SetColumnNF(ordRow, "ORDER_DETAIL_STATUS", "Y");
+        gds_warehousing.SetColumn(nRow, "DESCRIPTION", "Y");
+        stockChange(ordRow);
+    }
+}
+function stockChange(ordRow) {
+    var odItemCode = gds_orderDetail.GetColumnNF(ordRow, "ITEM_CODE");
+
+    // 창고 ITEMCODE ROW 구함
+    var findStock = gds_stock.FindRow("ITEM_CODE", odItemCode);
+
+
+    var odAmount = gds_orderDetail.GetColumn(ordRow, "ORDER_AMOUNT");
+
+    var stockAmount = gds_stock.GetColumn(findStock, "STOCK_AMOUNT");
+
+    var amount0 = parseInt(stockAmount) + parseInt(odAmount);
+
+    gds_stock.SetColumn(findStock, "STOCK_AMOUNT", amount0);
+
+}
+
+
+function grd_orderDetail_OnCellDblClick(obj, nRow, nCell, nX, nY, nPivotIndex) {
+
+   
+    
+    trace(nRow);
+
+
+    var odItemCode = gds_orderDetail.GetColumn(nRow, "ITEM_CODE");
+
+    // 창고 ITEMCODE ROW 구함
+    var findStock = gds_stock.FindRow("ITEM_CODE", odItemCode);
+
+
+    var odAmount = gds_orderDetail.GetColumn(nRow, "ORDER_AMOUNT");
+
+    var stockAmount = gds_stock.GetColumn(findStock, "STOCK_AMOUNT");
+
+    var amount0 = parseInt(stockAmount) + parseInt(odAmount);
+
+    var day = Today();
+gds_orderDetail.SetColumn(nRow, "DELIVERY_SCHEDULE_DATE", day);
+    gds_orderDetail.SetColumn(nRow, "ORDER_DETAIL_STATUS", 'Y');
+    gds_orderDetail.SetColumn(nRow, "WAREHOUSING_STATUS", 'Y');
+    var itemCode = gds_orderDetail.getColumn(nRow, "ITEM_CODE");
+    var itemName = gds_orderDetail.getColumn(nRow, "ITEM_NAME");
+    var orderNo0 = gds_orderDetail.getColumn(nRow, "ORDER_DETAIL_NO");
+    var orderAmount = gds_orderDetail.getColumn(nRow, "ORDER_AMOUNT");
+    var unitWarehousing = gds_orderDetail.getColumn(nRow, "UNIT_OF_ORDER");
+
+    var warehousingRow = gds_warehousing.AddRow();
+
+    gds_warehousing.SetColumn(warehousingRow, "ITEM_CODE", itemCode);
+    gds_warehousing.SetColumn(warehousingRow, "ORDER_NO", orderNo0);
+    gds_warehousing.SetColumn(warehousingRow, "ITEM_NAME", itemName);
+    gds_warehousing.SetColumn(warehousingRow, "ORDER_AMOUNT", orderAmount);
+    gds_warehousing.SetColumn(warehousingRow, "WAREHOUSING_AMOUNT", orderAmount);
+    gds_warehousing.SetColumn(warehousingRow, "UNIT_WAREHOUSING", unitWarehousing);
+    gds_warehousing.SetColumn(warehousingRow, "CUSTOMER", customerCode);
+    gds_warehousing.SetColumn(warehousingRow, "WAREHOUSING_DATE", day);
+    gds_warehousing.SetColumn(warehousingRow, "DESCRIPTION", 'Y');
+
+
+    gds_stock.SetColumn(findStock, "STOCK_AMOUNT", amount0);
+    gds_warehousing.SetColumn(warehousingRow, "WAREHOUSING_NO", seqSerialNo("WHN", "WH_SEQ"));
+
+    gds_orderDetail.Filter("ORDER_DETAIL_STATUS!='Y' && ORDER_NO='" + orderNo + "'");
+
+
+    if (gds_orderDetail.count = 0) {
+
+        gds_orderInfo.SetColumn(orderRow, "DESCRIPTION", 'Y');
+
+
+        gds_orderInfo.Filter("DESCRIPTION!='Y'");
+
+
+    }
+
+
+}
+
+
+function btn_registWarehousing_OnClick(obj) {
+    var allWarRow = gds_warehousing.GetRowCount();
+    var ordAmount = 0;
+    var warAmount = 0;
+    for (var ix = 0; ix < allWarRow; ix++) {
+        ordAmount = ordAmount + parseInt(gds_warehousing.GetColumn(ix, "ORDER_AMOUNT"));
+        warAmount = warAmount + parseInt(gds_warehousing.GetColumn(ix, "WAREHOUSING_AMOUNT"));
+    }
+    if (confirm("입고를 등록하시겠습니까?")) {
+        http.Sync = true;
+        grd_orderInfo.Redraw = false;
+        grd_orderDetail.Redraw = false;
+        grd_warehousing.Redraw = false;
+        if (ordAmount - warAmount= 0) {
+            gds_orderInfo.SetColumn(orderRow, "DESCRIPTION", 'Y');
+        }
+
+        transaction(
+            "registWarehousing",
+            "svcPurchase::stock.do?method=registWarehousing",
+            "gds_orderInfo=gds_orderInfo:u gds_orderDetail=gds_orderDetail:u gds_stock=gds_stock:u gds_warehousing=gds_warehousing:u",
+            "gds_stock=gds_stock gds_warehousing=gds_warehousing",
+            "",
+            "callback");
+
+
+        gds_warehousing.Filter("DESCRIPTION!='Y'");
+
+        gds_orderInfo.Filter("DESCRIPTION!='Y'");
+        http.Sync = false;
+
+
+    }
+
+
+}
+
+
+
+function callback(trid, ErrorCode, ErrorMsg) {
+
+
+    if (trid == "registWarehousing") {
+        if (ErrorCode >= 0) {
+            alert("저장이 완료되었습니다");
+            Reload();
+        }
+    }
+}
+
+function Button0_OnClick(obj) {
+    gds_warehousing.UnFilter();
+}
+
+]]></Script>
+</Window>

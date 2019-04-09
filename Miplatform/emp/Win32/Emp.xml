@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="776" Id="Emp" Left="8" OnLoadCompleted="Emp_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1334" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="ds_gender">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="ds_education">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsImg">
+				<Contents>
+					<colinfo id="EMP_FILE_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo encrypt="base64" id="IMG_FILE_DATA" size="256" summ="default" type="BLOB"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Image Height="175" Id="img_emp" Left="1004" Style="BUTTON_STYLE" TabOrder="6" Top="53" Width="146"></Image>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,18" Height="37" Id="Static0" Left="6" Style="BUTTON_STYLE" TabOrder="1" Text="사원관리" Top="2" VAlign="Middle" Width="1287"></Static>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="37" Id="Static1" Left="162" Style="BUTTON_STYLE" TabOrder="2" Text="성명" Top="61" VAlign="Middle" Width="64"></Static>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="29" Id="Static2" Left="999" Style="BUTTON_STYLE" TabOrder="3" Text="사원코드" Top="244" VAlign="Middle" Width="86"></Static>
+		<Edit BindDataset="gds_employee" Column="EMP_CODE" Enable="FALSE" Height="29" Id="edt_empCode" Left="1080" TabOrder="4" Top="244" Width="160"></Edit>
+		<Grid BindDataset="gds_employee" BkColor2="default" BoldHead="true" Bottom="408" Enable="true" EndLineColor="default" HeadHeight="24" Height="304" Id="grd_detailEmp" InputPanel="FALSE" Left="160" LineColor="default" OnCellClick="detailEmpGrid_OnCellClick" Right="760" RowHeight="24" Style="BUTTON_STYLE" TabOrder="5" TabStop="true" Top="104" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="600">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="97"/>
+						<col width="121"/>
+						<col width="102"/>
+						<col width="127"/>
+						<col width="145"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="사원코드"/>
+						<cell col="1" display="text" text="사원명"/>
+						<cell col="2" display="text" text="직급"/>
+						<cell col="3" display="text" text="부서명"/>
+						<cell col="4" display="text" text="이메일"/>
+					</head>
+					<body>
+						<cell col="0" colid="EMP_CODE" display="text"/>
+						<cell col="1" colid="EMP_NAME" display="text"/>
+						<cell col="2" colid="POSITION_CODE" combocol="POSITION_CODE" combodataset="gds_position" combotext="POSITION_NAME" display="text"/>
+						<cell col="3" colid="DEPT_CODE" combocol="DEPT_CODE" combodataset="gds_dept" combotext="DEPT_NAME" display="combo"/>
+						<cell col="4" colid="EMAIL" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button Font="한컴&#32;바겐세일&#32;M,11" Height="24" Id="btn_selectImg" Left="1160" OnClick="btn_selectImg_OnClick" TabOrder="7" Text="사진찾기" Top="168" Width="87"></Button>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="29" Id="Static4" Left="999" Style="BUTTON_STYLE" TabOrder="8" Text="사원명" Top="292" VAlign="Middle" Width="86"></Static>
+		<Edit BindDataset="gds_employee" Column="EMP_NAME" Height="29" Id="edt_empName" Left="1080" TabOrder="9" Top="291" Width="160"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="29" Id="Static5" Left="999" Style="BUTTON_STYLE" TabOrder="10" Text="부서명" Top="386" VAlign="Middle" Width="86"></Static>
+		<Combo BindDataset="gds_employee" CodeColumn="DEPT_CODE" Column="DEPT_CODE" DataColumn="DEPT_NAME" Height="29" Id="cbo_deptName" InnerDataset="gds_dept" Left="1080" TabOrder="11" Top="384" Width="160"></Combo>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="29" Id="Static7" Left="1000" Style="BUTTON_STYLE" TabOrder="12" Text="직급" Top="432" VAlign="Middle" Width="86"></Static>
+		<Combo BindDataset="gds_employee" CodeColumn="POSITION_CODE" Column="POSITION_CODE" DataColumn="POSITION_NAME" Height="29" Id="cbo_position" InnerDataset="gds_position" Left="1080" TabOrder="13" Top="432" Width="160"></Combo>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="29" Id="Static8" Left="999" Style="BUTTON_STYLE" TabOrder="14" Text="생년월일" Top="529" VAlign="Middle" Width="86"></Static>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="29" Id="Static10" Left="999" Style="BUTTON_STYLE" TabOrder="15" Text="비밀번호" Top="481" VAlign="Middle" Width="86"></Static>
+		<Edit BindDataset="gds_employee" Column="USER_PW" Height="29" Id="edt_userPw" Left="1080" TabOrder="16" Top="480" Width="160"></Edit>
+		<Edit BindDataset="gds_employee" Column="PHONE_NUMBER" Height="36" Id="edt_phoneNumber" Left="258" Style="BUTTON_STYLE" TabOrder="18" Top="411" Width="256"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="37" Id="Static11" Left="154" Style="BUTTON_STYLE" TabOrder="17" Text="휴대폰번호" Top="411" VAlign="Middle" Width="110"></Static>
+		<Combo BindDataset="gds_employee" CodeColumn="DETAIL_CODE_NAME" Column="GENDER" DataColumn="DETAIL_CODE_NAME" Height="36" Id="cbo_gender" INDEX="0" InnerDataset="ds_gender" Left="442" Style="BUTTON_STYLE" TabOrder="20" Top="450" Width="64"></Combo>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="37" Id="Static12" Left="370" Style="BUTTON_STYLE" TabOrder="19" Text="성별" Top="450" VAlign="Middle" Width="70"></Static>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="37" Id="Static14" Left="154" Style="BUTTON_STYLE" TabOrder="21" Text="우편번호" Top="451" VAlign="Middle" Width="78"></Static>
+		<Edit BindDataset="gds_employee" Column="ZIP_CODE" Enable="FALSE" Height="36" Id="edt_zipCode" Left="226" Style="BUTTON_STYLE" TabOrder="22" Top="451" Width="90"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="37" Id="Static15" Left="154" Style="BUTTON_STYLE" TabOrder="23" Text="주소" Top="498" VAlign="Middle" Width="78"></Static>
+		<Edit BindDataset="gds_employee" Column="BASIC_ADDRESS" Enable="FALSE" Height="36" Id="edt_basicAddress" Left="226" Style="BUTTON_STYLE" TabOrder="24" Top="497" Width="534"></Edit>
+		<Edit BindDataset="gds_employee" Column="DETAIL_ADDRESS" Height="36" Id="edt_detailAddress" Left="226" Style="BUTTON_STYLE" TabOrder="26" Top="537" Width="534"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="37" Id="Static16" Left="154" Style="BUTTON_STYLE" TabOrder="25" Text="상세주소" Top="537" VAlign="Middle" Width="78"></Static>
+		<Button Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="36" Id="btn_address" Left="312" Style="BUTTON_STYLE" TabOrder="27" Text="검색" Top="451" Width="50"></Button>
+		<Edit Height="36" Id="edt_findEmpName" Left="220" Style="BUTTON_STYLE" TabOrder="28" Top="62" Width="160"></Edit>
+		<Button Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="36" Id="btn_fineEmpName" Left="384" OnClick="btn_fineEmpName_OnClick" Style="BUTTON_STYLE" TabOrder="29" Text="검색" Top="63" Width="48"></Button>
+		<Button Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="36" Id="btn_addEmp" Left="572" Style="BUTTON_STYLE" TabOrder="30" Text="사원추가" Top="64" Width="84"></Button>
+		<Button Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="36" Id="btn_batchEmp" Left="660" OnClick="btn_batchEmp_OnClick" Style="BUTTON_STYLE" TabOrder="31" Text="저장" Top="64" Width="48"></Button>
+		<Button Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="36" Id="btn_delEmp" Left="712" Style="BUTTON_STYLE" TabOrder="32" Text="삭제" Top="64" Width="48"></Button>
+		<Calendar BindDataset="gds_employee" Column="BIRTH_DATE" Height="29" Id="cal_birthDate" Left="1080" SaturdayTextColor="blue" SundayTextColor="red" TabOrder="33" Top="530" Width="160"></Calendar>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="37" Id="Static13" Left="525" Style="BUTTON_STYLE" TabOrder="34" Text="최종학력" Top="450" VAlign="Middle" Width="78"></Static>
+		<Combo BindDataset="gds_employee" CodeColumn="DETAIL_CODE_NAME" Column="LEVEL_OF_EDUCATION" DataColumn="DETAIL_CODE_NAME" Height="36" Id="cbo_levelOfEducation" INDEX="0" InnerDataset="ds_education" Left="600" Style="BUTTON_STYLE" TabOrder="35" Top="450" Width="160"></Combo>
+		<Combo BindDataset="gds_employee" CodeColumn="WORKPLACE_CODE" Column="WORKPLACE_CODE" DataColumn="WORKPLACE_NAME" Height="29" Id="cbo_workplacName" InnerDataset="gds_workplace" Left="1080" TabOrder="37" Top="337" Width="160"></Combo>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="29" Id="Static17" Left="999" Style="BUTTON_STYLE" TabOrder="36" Text="사업장" Top="339" VAlign="Middle" Width="86"></Static>
+		<Edit BindDataset="gds_employee" Column="SOCIAL_SECURITY_NUMBER" Height="36" Id="edt_socialSecurityNumber" Left="600" Style="BUTTON_STYLE" TabOrder="39" Top="411" Width="160"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,11" Height="37" Id="Static18" Left="528" Style="BUTTON_STYLE" TabOrder="38" Text="주민번호" Top="411" VAlign="Middle" Width="78"></Static>
+		<FileDialog Bottom="228" FilePath="C:\apache2.2\htdocs\worldMiplatform\EMP-IMG\noimage.jpg" Height="24" Id="imgFileOpen" Left="1166" Right="1190" TabOrder="40" Top="204" Width="24"></FileDialog>
+		<File Bottom="228" Height="24" Id="imgFile" Left="1192" Right="1216" TabOrder="40" Top="204" Width="24"></File>
+		<Image Border="SunkenEdge" FillType="STRETCH" Height="190" Id="empImg" Left="998" Style="BUTTON_STYLE" TabOrder="40" Top="42" Width="150"></Image>
+	</Form>
+	<Script><![CDATA[//이미지 불러오기 & 등록
+var imgFile;
+var imgFileOpen;
+var empImg;
+function Emp_OnLoadCompleted(obj)
+{
+	
+		transaction("findEmployeeList",
+				"svcEmp::employee.do?method=findEmployeeList",
+				"",
+				"gds_employee=gds_employee",
+				"",
+				"callback");
+	imgFile=Emp.imgFile;
+	imgFileOpen=Emp.imgFileOpen;
+	empImg=Emp.empImg;
+	detailCodeFilter();
+}
+
+
+function detailCodeFilter(){
+
+	gds_codeDetail.Filter("DIVISION_CODE_NO='GE-01'");
+	ds_gender.copyF(gds_codeDetail);
+	
+	gds_codeDetail.Filter("DIVISION_CODE_NO='LO-01'");
+	ds_education.copyF(gds_codeDetail);	
+	
+	gds_codeDetail.Unfilter();
+
+}
+
+function btn_fineEmpName_OnClick(obj)
+{
+
+	var name = edt_findEmpName.Text;
+	var sFilter;
+	if(name = ""){
+		gds_employee.UnFilter();
+	}else{
+		if(name.trim().length > 0 ) 
+			sFilter += " || pos(EMP_NAME," + quote(name) + ") >= 0";
+			
+			gds_employee.Filter(sFilter);
+	}
+	
+}
+
+function btn_selectImg_OnClick(obj)
+{
+	http.Sync=true;
+	//파일 불러올 dialog창 부름
+	imgFileOpen.open();
+	//dialog.filepath -> 선택된 경로... (마지막 / 까지 \\ \/ 넣는 것.. 경로/선택한 파일명)
+	var fileName=imgFileOpen.FilePath + "\\" + imgFileOpen.FileName;
+	
+	alert("fileName"+fileName); //-> 파일 경로가 뜬다.
+	
+	imgFile.FileName=fileName; // file에도 이름을 넣고 
+	
+	empImg.ImageID=fileName;      // Img에도 이름을 넣어 준다.(표시할 이미지 )
+	empImg.FillType="STRETCH";   //이미지를 영역에 맞도록 늘려 준다.
+	http.Sync=false;
+	saveImg();
+}
+
+function detailEmpGrid_OnCellClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	//선택한 사원의 이름 사원크드 직급코드 담는다.
+	
+	var empImgName=gds_employee.getColumn(nRow,'IMAGE');
+	
+	//alert("empImgName-----"+empImgName);
+	
+	if(Length(empImgName)!=0){	
+      empImg.ImageID="http://localhost:8282/HOHZERP/Photos/empPhoto/"+empImgName+"?time="+timem();   
+      empImg.FillType="STRETCH";  
+	}else{
+      alert("이미지 호출 실패!");
+      empImg.ImageID="http://localhost:8282/HOHZERP/Photos/empPhoto/EMP-04.jpg?time="+timem();
+    } 
+	
+}
+
+function saveImg()
+{
+	http.Sync=true;
+	//empFilename=imgFileOpen.Filename;   
+	
+	
+	// 사원 번호로 파일 이름을 만든다.[추가부분]
+	var fileExtend = SubStr(imgFileOpen.fileName, IndexOf(imgFileOpen.fileName,"."));
+	
+	empFileName =  edt_empCode.text + fileExtend;
+	
+	//alert(empFileName);//확장자 얻어 옴 .jpg 등 
+	// 사원 선택 해서 들어 오면 여기 받아온다 사원 번호
+	
+	
+	//여기까지 이름변경 해 보려고[추가부분]
+	
+	imgFile.Open("rb");
+
+    var empImgFile=imgFile.ReadBinary(); //Binary 형식으로 읽기
+   
+	dsImg.AddRow();  // file 이름과 data를 넣을 dataset 에 row를 추가함
+	
+	//이미지 데이터 셋에. 
+	dsImg.SetColumn(dsImg.GetCurrow(),"EMP_FILE_NAME",empFilename);
+	dsImg.SetColumn(dsImg.GetCurrow(),"IMG_FILE_DATA",empImgFile);
+	//사원상세 정보의 이미지 경로를 창에 이미지 이름을 저장해 둔다.
+	gds_employee.SetColumn(gds_employee.row,"IMAGE",empFilename);
+	//저장되는 이름을 확인!!
+	alert("사진경로:::"+empFilename);
+	//이미지 저장 메서드 호출 !!
+	//alert("웹로직 할 때 생성 되는지 확인 가능 함");
+	Transaction("saveEmpImg","svcEmp::/employee.do?method=saveEmpImg","dsImg=dsImg:u","","","callback");
+	//웹로직 연결시 생성되는지 확인 가능 [나중에 할 것!!]
+	http.Sync=false;
+}
+
+
+
+function btn_batchEmp_OnClick(obj)
+{
+	
+	if(confirm("저장 하시겠습니까?")){
+		transaction(
+			"batchEmployee",
+			"svcEmp::/employee.do?method=batchEmployeeList",
+			"gds_employee=gds_employee:u" ,
+			"",
+			"",
+			"callback");
+				saveImg();
+	}
+	Reload();
+}
+]]></Script>
+</Window>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="776" Id="DeptForm" Left="8" PidAttrib="7" Title="부서관리" Top="8" Ver="1.0" Width="1334" WorkArea="true">
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="맑은&#32;고딕,14,Bold" Height="40" Id="Static0" Left="4" Style="BUTTON_STYLE" TabOrder="1" Text="부서&#32;관리" Top="12" VAlign="Middle" Width="1319"></Static>
+		<Grid AutoFit="TRUE" BindDataset="gds_dept" BkColor2="default" BoldHead="true" Bottom="568" Enable="true" EndLineColor="default" Font="함초롬바탕&#32;확장,14" HeadHeight="25" Height="504" Id="Grid0" InputPanel="FALSE" Left="16" LineColor="default" MinWidth="100" Right="952" RowHeight="25" Style="BUTTON_STYLE" TabOrder="2" TabStop="true" Top="64" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="936">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="169"/>
+						<col width="121"/>
+						<col width="124"/>
+						<col width="130"/>
+						<col width="144"/>
+						<col width="153"/>
+					</columns>
+					<head>
+						<cell align="center" col="0" display="text" text="사업장코드"/>
+						<cell align="center" col="1" display="text" text="부서코드"/>
+						<cell align="center" col="2" display="text" text="부서명"/>
+						<cell align="center" col="3" display="text" text="사업장명"/>
+						<cell align="center" col="4" display="text" text="회사코드"/>
+						<cell align="center" col="5" display="text" text="회사명"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="WORKPLACE_CODE" display="text" font="맑은&#32;고딕,10"/>
+						<cell align="center" col="1" colid="DEPT_CODE" display="text" font="맑은&#32;고딕,10"/>
+						<cell align="center" col="2" colid="DEPT_NAME" display="text" font="맑은&#32;고딕,10"/>
+						<cell align="center" col="3" colid="WORKPLACE_NAME" display="text" font="맑은&#32;고딕,10"/>
+						<cell align="center" col="4" colid="COMPANY_CODE" display="text" font="맑은&#32;고딕,10"/>
+						<cell align="center" col="5" colid="COMPANY_NAME" display="text" font="맑은&#32;고딕,10"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button Appearance="FLAT" BorderColor="user2" Font="맑은&#32;고딕,12" Height="40" Id="btn_del" Left="1075" OnClick="btn_del_OnClick" Style="BUTTON_STYLE" TabOrder="4" Text="삭제" Top="64" Width="70"></Button>
+		<Button Appearance="FLAT" BorderColor="user2" Font="맑은&#32;고딕,12" Height="40" Id="btn_save" Left="1159" OnClick="btn_save_OnClick" Style="BUTTON_STYLE" TabOrder="3" Text="저장" Top="64" Width="70"></Button>
+		<Button Appearance="FLAT" BorderColor="user2" Font="맑은&#32;고딕,12" Height="40" Id="btn_addDept" Left="991" OnClick="btn_addDept_OnClick" Style="BUTTON_STYLE" TabOrder="5" Text="추가" Top="64" Width="70"></Button>
+		<Static Align="Center" Border="SunkenEdge" Font="맑은&#32;고딕,10" Height="31" Id="Static1" Left="992" Style="BUTTON_STYLE" TabOrder="6" Text="사업장코드" Top="120" VAlign="Middle" Width="94"></Static>
+		<Edit Align="CENTER" BindDataset="gds_dept" Column="WORKPLACE_CODE" Font="맑은&#32;고딕,11" Height="30" Id="edt_workCode" Left="1088" Style="BUTTON_STYLE" TabOrder="7" Top="120" Width="134"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Font="맑은&#32;고딕,10" Height="31" Id="Static2" Left="992" Style="BUTTON_STYLE" TabOrder="8" Text="부서코드" Top="173" VAlign="Middle" Width="94"></Static>
+		<Edit Align="CENTER" BindDataset="gds_dept" Column="DEPT_CODE" Font="맑은&#32;고딕,11" Height="30" Id="Edit1" Left="1088" Style="BUTTON_STYLE" TabOrder="9" Top="173" Width="134"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Font="맑은&#32;고딕,10" Height="31" Id="Static3" Left="992" Style="BUTTON_STYLE" TabOrder="10" Text="부서명" Top="234" VAlign="Middle" Width="94"></Static>
+		<Edit Align="CENTER" BindDataset="gds_dept" Column="DEPT_NAME" Font="맑은&#32;고딕,11" Height="30" Id="Edit2" Left="1088" Style="BUTTON_STYLE" TabOrder="11" Top="234" Width="134"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Font="맑은&#32;고딕,10" Height="31" Id="Static4" Left="992" Style="BUTTON_STYLE" TabOrder="12" Text="사업장명" Top="295" VAlign="Middle" Width="94"></Static>
+		<Edit Align="CENTER" BindDataset="gds_dept" Column="WORKPLACE_NAME" Font="맑은&#32;고딕,11" Height="30" Id="edt_workplaceName" Left="1088" Style="BUTTON_STYLE" TabOrder="13" Top="295" Width="134"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Font="맑은&#32;고딕,10" Height="31" Id="Static5" Left="992" Style="BUTTON_STYLE" TabOrder="14" Text="회사코드" Top="356" VAlign="Middle" Width="94"></Static>
+		<Edit Align="CENTER" BindDataset="gds_dept" Column="COMPANY_CODE" Font="맑은&#32;고딕,11" Height="30" Id="edt_companyCode" Left="1088" Style="BUTTON_STYLE" TabOrder="15" Top="356" Width="134"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Font="맑은&#32;고딕,10" Height="31" Id="Static6" Left="992" Style="BUTTON_STYLE" TabOrder="16" Text="회사명" Top="408" VAlign="Middle" Width="94"></Static>
+		<Edit Align="CENTER" BindDataset="gds_dept" Column="COMPANY_NAME" Font="맑은&#32;고딕,11" Height="30" Id="edt_componyName" Left="1088" Style="BUTTON_STYLE" TabOrder="17" Top="408" Width="134"></Edit>
+		<Static Align="Center" Border="SunkenEdge" Font="맑은&#32;고딕,10" Height="31" Id="Static7" Left="992" Style="BUTTON_STYLE" TabOrder="18" Text="부서&#32;신선일" Top="464" VAlign="Middle" Width="94"></Static>
+		<Static Align="Center" Border="SunkenEdge" Font="맑은&#32;고딕,10" Height="31" Id="Static8" Left="992" Style="BUTTON_STYLE" TabOrder="19" Text="부서&#32;해체일" Top="515" VAlign="Middle" Width="94"></Static>
+		<Calendar BindDataset="gds_dept" Column="DEPT_START_DATE" Height="30" Id="Calendar0" Left="1088" SaturdayTextColor="blue" Style="BUTTON_STYLE" SundayTextColor="red" TabOrder="20" Top="462" Width="134"></Calendar>
+		<Calendar BindDataset="gds_dept" Column="DEPT_END_DATE" Height="30" Id="Calendar1" Left="1088" SaturdayTextColor="blue" Style="BUTTON_STYLE" SundayTextColor="red" TabOrder="21" Top="515" Width="134"></Calendar>
+		<Button Appearance="FLAT" BKColor="user0" BorderColor="SCROLLBAR" Height="24" Id="btn_workplace" ImageID="button" Left="1192" OnClick="btn_workplace_OnClick" Style="BUTTON_STYLE" TabOrder="22" Text="검색" Top="122" Width="24"></Button>
+		<Button Appearance="FLAT" BKColor="user0" BorderColor="SCROLLBAR" Height="24" Id="btn_compnay" ImageID="button" Left="1192" OnClick="btn_compnay_OnClick" Style="BUTTON_STYLE" TabOrder="23" Text="검색" Top="359" Width="24"></Button>
+	</Form>
+	<Script><![CDATA[
+function btn_del_OnClick(obj)
+{
+	gds_dept.DeleteRow(gds_dept.row);
+}
+
+function btn_addDept_OnClick(obj)
+{
+	gds_dept.AddRow();
+}
+
+function btn_save_OnClick(obj)
+{
+	
+	Transaction("registdept","svcManagement::dept.do?method=batchDepartmentList","gds_dept=gds_dept:u","gds_dept=gds_dept","","callback");
+       trace(http.SendHttpStr);
+      
+}
+
+
+function callback(trid , ErorrCode , ErorrMsg){
+	
+	if(trid=="registdept"){
+		if(ErorrCode >= 0 ){
+			alert("저장완료");
+		}
+		
+	}
+	 Reload();
+	
+}
+var Code;
+function btn_compnay_OnClick(obj)
+{
+	Code = "CO-01";
+	
+	dialog("Base::CodeDialog.xml","",200,200);
+	
+}
+
+function btn_workplace_OnClick(obj)
+{
+	Code = "CO-02";
+	
+	dialog("Base::CodeDialog.xml","",200,200);
+	
+}
+]]></Script>
+</Window>

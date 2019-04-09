@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="540" Id="CodeForm" Left="8" OnLoadCompleted="CodeForm_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="760" WorkArea="true">
+		<Static Align="Center" BKColor="user2" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,18" Height="37" Id="Static0" Left="6" TabOrder="1" Text="코드관리" Top="2" VAlign="Middle" Width="743"></Static>
+		<Static Align="Center" BKColor="user3" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,13" Height="37" Id="Static1" Left="8" TabOrder="2" Text="구분코드&#32;리스트" Top="80" VAlign="Middle" Width="365"></Static>
+		<Static Align="Center" BKColor="user3" Border="SunkenEdge" Font="한컴&#32;바겐세일&#32;M,13" Height="37" Id="Static2" Left="382" TabOrder="3" Text="상세&#32;코드&#32;리스트" Top="80" VAlign="Middle" Width="365"></Static>
+		<Grid BindDataset="gds_code" BkColor2="default" BoldHead="true" Bottom="518" Enable="true" EndLineColor="default" Height="398" Id="grd_divisionCode" InputPanel="FALSE" Left="8" LineColor="default" OnCellClick="grd_divisionCode_OnCellClick" Right="370" TabOrder="4" TabStop="true" Top="120" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="362">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="구분코드"/>
+						<cell col="1" display="text" text="코드타입"/>
+						<cell col="2" display="text" text="코드명"/>
+						<cell col="3" display="text" text="변경가능여부"/>
+					</head>
+					<body>
+						<cell col="0" colid="DIVISION_CODE_NO" display="text"/>
+						<cell col="1" colid="CODE_TYPE" display="text"/>
+						<cell col="2" colid="DIVISION_CODE_NAME" display="text"/>
+						<cell col="3" colid="CODE_CHANGE_AVAILABLE" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Grid BindDataset="gds_codeDetail" BkColor2="default" BoldHead="true" Bottom="518" Enable="true" EndLineColor="default" Height="398" Id="grd_detailCode" InputPanel="FALSE" Left="384" LineColor="default" OnCellDBLClick="grd_detailCode_OnCellDblClick" Right="746" TabOrder="5" TabStop="true" Top="120" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="362">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="구분코드"/>
+						<cell col="1" display="text" text="상세코드"/>
+						<cell col="2" display="text" text="상세코드명"/>
+						<cell col="3" display="text" text="사용여부"/>
+					</head>
+					<body>
+						<cell col="0" colid="DIVISION_CODE_NO" display="text"/>
+						<cell col="1" colid="DETAIL_CODE" display="text" edit="normal"/>
+						<cell col="2" colid="DETAIL_CODE_NAME" display="text" edit="normal"/>
+						<cell col="3" colid="CODE_USE_CHECK" display="text" edit="normal"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button BKColor="user1" Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="28" Id="btn_addDetailCode" Left="548" OnClick="btn_addDetailCode_OnClick" TabOrder="6" Text="추가" Top="46" Width="60"></Button>
+		<Button BKColor="user1" Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="28" Id="btn_delDetailCode" Left="614" OnClick="btn_delDetailCode_OnClick" TabOrder="7" Text="삭제" Top="46" Width="60"></Button>
+		<Button BKColor="user1" Color="WINDOW" Font="한컴&#32;바겐세일&#32;M,11" Height="28" Id="btn_batchDetailCode" Left="680" OnClick="btn_batchDetailCode_OnClick" TabOrder="8" Text="저장" Top="46" Width="60"></Button>
+	</Form>
+	<Script><![CDATA[
+
+function CodeForm_OnLoadCompleted(obj) // 코드폼이 완성되면동작 
+{
+  // http.sync=true;
+  // Transaction("codeList","svcBase::code.do?method=findCodeList","","gds_code=gds_code","","callback");
+  // Transaction("codeDetailList","svcBase::codeDetail.do?method=findCodeDetailList","","gds_codeDetail=gds_codeDetail","","callback");
+  // http.sync=false;
+  
+ 
+   
+   var nRow=this.gds_code.rowposition; //nRow는 gds_code의 현재 선택된 행 번호이다
+   var scode=this.gds_code.GetColumn(nRow,"DIVISION_CODE_NO"); // 위의 행 번호로 gds_code 데이터셋의  DIVISION_CODE_NO를 얻는다.
+   this.gds_codeDetail.Filter(" DIVISION_CODE_NO=='"+scode+ "'"); //.Filter 함수는 이번 프로젝트 전반에 걸쳐 출현빈도가 높다.
+
+}
+
+function grd_divisionCode_OnCellClick(obj,nRow,nCell,nX,nY,nPivotIndex) //grd_divisionCode 의 셀클릭 이벤트
+{
+
+	var divisionCode = gds_code.GetColumn(nRow,"DIVISION_CODE_NO"); //nRow 매개변수는 클릭된 로우이다.(jq그리드와 동일)
+	gds_codeDetail.Filter("DIVISION_CODE_NO='"+divisionCode+"'");// grd_divisionCode 를 클릴할때마다 우측의 세부코드 항목 필터가 재 셋팅된다
+	grd_detailCode.Editable = false;//일단 모든열을 수정불가능하게 셋팅.
+	
+}
+
+function btn_addDetailCode_OnClick(obj) // 세부코드 추가버튼
+{
+	var codeChangeAvailable=gds_code.GetColumn(gds_code.row,"CODE_CHANGE_AVAILABLE"); ////데이터셋.row 현재 선택된 행의 인덱스를 가져옴
+		
+	if(codeChangeAvailable=="변경불가능"){
+		alert("수정가능한 코드군이 아닙니다");
+	}else{
+		var rowNum = gds_codeDetail.GetRowCount(); //.GetRowCount() 총 몇행인가를 알려줌
+		gds_codeDetail.AddRow(); // 1줄 추가 jq그리드와 달리 추가할 행번호까지 지정할 필요는 없는듯.
+		
+		var code=gds_code.GetColumn(gds_code.row,"DIVISION_CODE_NO");
+		gds_codeDetail.SetColumn(rowNum,"DIVISION_CODE_NO",code); // 하지만 새로생긴 열에 데이터를 넣으려면 결국 몇번째열인가는 알아야한다
+	}
+}
+
+function grd_detailCode_OnCellDblClick(obj,nRow,nCell,nX,nY,nPivotIndex) //위와 동일한 방법으로 변경가능여부 체크후 에디터블을 셋팅
+{
+	var codeChangeAvailable=gds_code.GetColumn(gds_code.row,"CODE_CHANGE_AVAILABLE");
+		
+	if(codeChangeAvailable=="변경불가능"){
+		alert("수정가능한 코드군이 아닙니다");
+		
+	}else{
+		grd_detailCode.Editable = true;
+	}
+}
+
+
+function btn_delDetailCode_OnClick(obj) //위와 동일한 방법으로 변경가능여부 체크후 행 삭제
+{
+	var codeChangeAvailable=gds_code.GetColumn(gds_code.row,"CODE_CHANGE_AVAILABLE");
+		
+	if(codeChangeAvailable=="변경불가능"){
+		alert("수정가능한 코드군이 아닙니다");
+	}else{
+		gds_codeDetail.DeleteRow(gds_codeDetail.row);
+	}
+	
+
+	
+}
+
+
+
+function btn_batchDetailCode_OnClick(obj)
+{
+		if(confirm("코드를 저장하시겠습니까?")){
+		transaction("batchDetailCode",
+		"svcBase::/codeDetail.do?method=batchDetailCode",
+		"gds_codeDetail=gds_codeDetail:u",
+		"gds_codeDetail=gds_codeDetail",
+		"",
+		"callback");
+	}
+
+}
+
+
+function callback(trid, ErrorCode, ErrorMsg){
+	if(trid=="batchDetailCode"){
+		if(ErrorCode >= 0){
+			alert("저장이 완료되었습니다");
+		}
+	}
+}
+]]></Script>
+</Window>

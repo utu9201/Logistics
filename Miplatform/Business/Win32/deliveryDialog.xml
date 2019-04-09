@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="192" Id="deliveryDialog" Left="8" PidAttrib="7" Title="deliveryDialog" Top="8" Ver="1.0" Width="416" WorkArea="true">
+		<Static Align="Center" BKColor="INACTIVECAPTION" Font="Consolas,12" Height="32" Id="Static0" Left="10" TabOrder="1" Text="실제로&#32;납품할&#32;수량과&#32;사유를&#32;입력하시오." Top="8" VAlign="Middle" Width="392"></Static>
+		<Div Height="127" Id="Div0" Left="10" TabOrder="2" Text="Div0" Top="55" Width="392">
+			<Contents>
+				<Static Align="Center" Border="SunkenEdge" Font="맑은&#32;고딕,10,Bold" Height="40" Id="Static0" Left="8" TabOrder="1" Text="수량" Top="13" VAlign="Middle" Width="86"></Static>
+				<Static Align="Center" Border="SunkenEdge" Font="맑은&#32;고딕,10,Bold" Height="40" Id="Static1" Left="8" TabOrder="2" Text="사유" Top="73" VAlign="Middle" Width="86"></Static>
+				<Edit Height="40" Id="txt_amount" ImeMode="none" Left="102" TabOrder="3" Top="13" Width="170"></Edit>
+				<Edit Height="40" Id="txt_cause" Left="102" TabOrder="4" Top="73" Width="170"></Edit>
+				<Button Height="40" Id="btn_regist" Left="301" OnClick="Div0_btn_regist_OnClick" TabOrder="5" Text="등록" Top="73" Width="70"></Button>
+			</Contents>
+		</Div>
+	</Form>
+	<Script><![CDATA[
+function Div0_btn_regist_OnClick(obj)
+{
+	Trace(Div0.txt_amount.Text);
+	Trace(div0.txt_cause.Text);
+	close(Div0.txt_amount.Text + "+" + div0.txt_cause.Text);
+}
+]]></Script>
+</Window>

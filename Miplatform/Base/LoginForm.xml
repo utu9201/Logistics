@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gold" Height="344" Id="LoginForm" Left="8" OnInit="LoginForm_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="352" WorkArea="true">
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="돋움,11" Height="27" Id="Static0" Left="40" TabOrder="1" Text="회사명" Top="112" VAlign="Middle" Width="102"></Static>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="돋움,11" Height="27" Id="Static2" Left="40" TabOrder="2" Text="사업장명" Top="144" VAlign="Middle" Width="102"></Static>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="돋움,11" Height="27" Id="Static3" Left="40" TabOrder="3" Text="사원명" Top="176" VAlign="Middle" Width="102"></Static>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="돋움,11" Height="27" Id="Static4" Left="40" TabOrder="4" Text="비밀번호" Top="208" VAlign="Middle" Width="102"></Static>
+		<Edit Enable="FALSE" Height="27" Id="edt_company" Left="152" TabOrder="5" Top="112" Width="161"></Edit>
+		<Edit Enable="FALSE" Height="27" Id="edt_workplace" Left="152" TabOrder="6" Top="144" Width="161"></Edit>
+		<Edit Enable="FALSE" Height="27" Id="edt_empName" Left="152" TabOrder="7" Top="176" Width="161"></Edit>
+		<Edit Height="27" Id="edt_password" Left="152" OnKeyDown="login_OnKeyDown" TabOrder="8" Top="208" Width="161"></Edit>
+		<Button BKColor="darkgoldenrod" Color="WINDOW" Height="24" Id="btn_findWorkplace" Left="264" OnClick="btn_findWorkplace_OnClick" TabOrder="9" Text="검색" Top="146" Width="48"></Button>
+		<Button BKColor="darkgoldenrod" Color="WINDOW" Height="24" Id="btn_findCompany" Left="264" OnClick="btn_findCompany_OnClick" TabOrder="10" Text="검색" Top="114" Width="48"></Button>
+		<Button BKColor="darkgoldenrod" Color="WINDOW" Font="돋움,11" Height="32" Id="btn_login" Left="61" OnClick="btn_login_OnClick" TabOrder="11" Text="로그인" Top="285" Width="107"></Button>
+		<Button BKColor="darkgoldenrod" Color="WINDOW" Font="돋움,11" Height="32" Id="btn_cancel" Left="184" TabOrder="12" Text="취소" Top="285" Width="107"></Button>
+		<Static Align="Center" Font="한컴&#32;솔잎&#32;B,36" Height="92" Id="Static5" Left="40" TabOrder="13" Text="HOHZ&#32;ERP" Top="8" VAlign="Middle" Width="274"></Static>
+		<Button BKColor="darkgoldenrod" Color="WINDOW" Height="24" Id="btn_findEmpName" Left="264" OnClick="btn_findEmpName_OnClick" TabOrder="14" Text="검색" Top="178" Width="48"></Button>
+	</Form>
+	<Script><![CDATA[
+var userPw; //사원이름이 선택됨과 동시에 서버에서 불려와  셋팅됨 
+
+function btn_login_OnClick(obj){
+
+	if(edt_company==""){
+		alert("회사를 선택해주세요");
+		return;
+	}
+	if(edt_workplace==""){
+		alert("사업장을 선택해주세요");
+		return;
+	}
+	if(edt_empName==""){
+		alert("사원명을 적어주세요"); // 글로벌 변수로 셋팅된 이름과 텍스트필드의 이름을 비교후 패스워드를 비교.
+		//따라서 이 구조하에선 사업장.회사는 장식품이다.
+	}else if(edt_empName.Text==global_empName){
+			if(edt_password.Text==userPw){
+				initSession(true);
+				alert(global_empName+"님 환영합니다"); 				
+				go("Base::MainForm.xml");//로그인 성공시 메인폼으로 이동
+			}else{
+				alert("비밀번호가 일치 하지 않습니다");
+			}
+	
+	}
+	
+}
+
+function LoginForm_OnLoadCompleted(obj) // jq그리드의 로드컴플릿과 같은 옵션
+{
+	
+	http.Sync=true;
+	
+	transaction("findCompanyList",
+				"svcManagement::company.do?method=findCompanyList", // 시작과 동시에 모든 회사,사업장,직원의 리스트를 가져온다...;;
+				"",
+				"gds_company=gds_company",
+				"",
+				"callback");
+				
+	transaction("findWorkplaceList",
+				"svcManagement::workplace.do?method=findWorkplaceList",
+				"",
+				"gds_workplace=gds_workplace",
+				"",
+				"callback");
+				
+	transaction("findEmployeeList",
+				"svcEmp::employee.do?method=findEmployeeList",
+				"",
+				"gds_employee=gds_employee",
+				"",
+				"callback");
+	
+	
+	
+				
+	initSession(false);
+	http.Sync=false;		
+			
+			
+			
+}
+
+
+
+function btn_findCompany_OnClick(obj) //회사검색버튼
+{
+	
+	edt_empName.text=""; // 강제로 사원이름을 초기화해버림..;;
+	edt_password.text="";
+	initSession(true);
+	dialog("LogisticsBase::CompanyDialog.xml","");  //회사 선택 다이얼로그 출력
+	initSession(false);
+	
+}
+
+function btn_findWorkplace_OnClick(obj) // 위와 동일
+{
+	edt_empName.text="";
+	edt_password.text="";
+	initSession(true);
+	dialog("LogisticsBase::WorkplaceDialog.xml","");
+	initSession(false);
+	
+}
+
+function btn_findEmpName_OnClick(obj)
+{
+	initSession(true);
+	dialog("Emp::EmployeeDialog.xml",""); // 사원선택 다이얼로그 출력 이후 액션이 pw 변수에 영향
+	initSession(false);
+}
+
+function setPassword(password)
+{
+	userPw = password;
+	
+}
+
+function login_OnKeyDown(obj, objSenderObj, nChar, bShift, bControl, bAlt, nLLParam, nHLParam){
+	trace("a"+obj);
+	trace("b"+objSenderObj); // login_OnKeyDown 갑갑해서 달았음. 자바스크립트와 똑같이 13번이 엔터.
+	trace("c"+nChar);
+	trace("d"+bShift);
+	if(objSenderObj=13){ 
+	btn_login_OnClick(obj);
+	}// <---자바 스크립트랑 똑같이 13번이 엔터임
+	
+}
+
+
+
+function edt_empName_OnChanged(obj,strText)
+{
+	
+}
+]]></Script>
+</Window>

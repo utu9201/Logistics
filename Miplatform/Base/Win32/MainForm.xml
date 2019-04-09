@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="1000" Id="MainForm" Left="8" OnLoadCompleted="MainForm_OnLoadCompleted" PidAttrib="7" Title="Logistics" Top="8" Ver="1.0" Width="1600" WorkArea="true">
+		<TreeView BindDataset="gds_menu" Border="Flat" Font="한컴산뜻돋움,11" Height="688" Id="tree_view" Left="15" LevelColumn="MENU_ORDER" OnClick="tree_view_OnClick" Style="BUTTON_STYLE" TabOrder="2" TEXTColumn="MENU_NAME" Top="272" Width="217"></TreeView>
+		<MenuBar BorderColor="-1" CaptionCol="MENU_NAME" EnableCol="enable" EndColor="antiquewhite" Font="한컴산뜻돋움,12" GradationMode="Horizontal" Height="32" HighlightBKColor="#3399ff" IconCol="Icon" Id="menuBar_main" IDCol="URL" Left="240" LevelCol="MENU_ORDER" MainTextColor="black" MenuDataset="gds_menu" OnMenuClick="menuBar_main_OnMenuClick" PopupBoard3D="True" PopupLeftMargin="12" PopupTextColor="black" Selection3D="False" StartColor="antiquewhite" Style="BUTTON_STYLE" TabOrder="14" Top="11" Width="1208"></MenuBar>
+		<Static Border="Flat" Font="한컴산뜻돋움,11" Height="215" Id="Static0" Left="15" Style="BUTTON_STYLE" TabOrder="1" Top="49" Width="217"></Static>
+		<Div Border="Flat" Height="912" Id="div_mainView" Left="240" Style="BUTTON_STYLE" TabOrder="3" Text="Div0" Top="48" Width="1288">
+			<Contents></Contents>
+		</Div>
+		<Static Font="한컴산뜻돋움,11,Bold" Height="199" Id="Static1" Left="29" Style="BUTTON_STYLE" TabOrder="4" Text="로그인&#32;정보" Top="56" Type="Groupbox" Width="189"></Static>
+		<Static Align="Center" Border="Flat" Font="한컴산뜻돋움,11,Bold" Height="32" Id="Static2" Left="37" Style="BUTTON_STYLE" TabOrder="5" Text="부서명" Top="79" VAlign="Middle" Width="60"></Static>
+		<Edit Align="CENTER" Border="Flat" Font="한컴산뜻돋움,11,Bold" Height="32" Id="edt_deptName" Left="104" Style="BUTTON_STYLE" TabOrder="6" Top="79" Width="108"></Edit>
+		<Edit Align="CENTER" BindDataset="__VARBIND__" Border="Flat" Column="global_empName" Font="한컴산뜻돋움,11,Bold" Height="32" Id="edt_empName" Left="103" Style="BUTTON_STYLE" TabOrder="8" Top="171" Width="108"></Edit>
+		<Static Align="Center" Border="Flat" Font="한컴산뜻돋움,11,Bold" Height="32" Id="Static3" Left="37" Style="BUTTON_STYLE" TabOrder="7" Text="사원명" Top="171" VAlign="Middle" Width="60"></Static>
+		<Edit Align="CENTER" Border="Flat" Font="한컴산뜻돋움,11,Bold" Height="32" Id="edt_positionName" Left="103" Style="BUTTON_STYLE" TabOrder="10" Top="124" Width="108"></Edit>
+		<Static Align="Center" Border="Flat" Font="한컴산뜻돋움,11,Bold" Height="32" Id="Static4" Left="37" Style="BUTTON_STYLE" TabOrder="9" Text="직급" Top="125" VAlign="Middle" Width="60"></Static>
+		<Button Appearance="FLAT" Color="WINDOW" Font="한컴산뜻돋움,11" Height="32" Id="btn_logout" Left="37" OnClick="btn_logout_OnClick" Style="BUTTON_STYLE" TabOrder="11" Text="로그아웃" Top="214" Width="87"></Button>
+		<Button Appearance="FLAT" Color="WINDOW" Font="한컴산뜻돋움,11" Height="32" Id="btn_exit" Left="130" OnClick="btn_exit_OnClick" Style="BUTTON_STYLE" TabOrder="12" Text="종료" Top="214" Width="81"></Button>
+		<Static Align="Center" Font="한컴산뜻돋움,20,Bold" Height="40" Id="Static5" Left="24" Style="BUTTON_STYLE" TabOrder="13" Text="Logistics" VAlign="Middle" Width="200"></Static>
+	</Form>
+	<Script><![CDATA[#include "Script::basic.js"
+function MainForm_OnLoadCompleted(obj){
+
+ //  div_mainView.Url="Base::welcome.xml";
+   window.Width=1550;
+   window.Height=1000;
+   window.Left=0;
+   window.top=0;
+   basicTransaction();
+     
+   var deptRow = gds_dept.FindRow("DEPT_CODE",global_deptCode);
+   var dept = gds_dept.GetColumn(deptRow , "DEPT_NAME");   
+   this.edt_deptName.text = dept;
+   trace(global_empCode);
+  
+  
+   var empRow = gds_employee.FindRow("EMP_CODE",global_empCode);
+   var empName = gds_employee.GetColumn(empRow ,"EMP_NAME"); 
+  trace(gds_employee.GetRowCount());
+  trace(empName);
+   var positionCode = gds_employee.GetColumn(empRow , "POSITION_CODE"); 
+   var positionRow = gds_position.FindRow("POSITION_CODE",positionCode);
+   var positionName = gds_position.GetColumn(positionRow,"POSITION_NAME");
+   this.edt_positionName.text = positionName;
+   this.edt_empName.text = empName;
+
+}
+
+
+function tree_view_OnClick(obj,nOldRow,nNewRow)
+{
+	var url = gds_menu.GetColumn(nNewRow, "URL");
+	//if(nNewRow.Length() != 0)
+		div_mainView.URL = url;
+}
+
+
+
+function menuBar_main_OnMenuClick(obj, strID)
+{
+	if(length(strID)!=0){
+	div_mainView.url = strID;
+	}
+}
+
+function btn_exit_OnClick(obj)
+{
+	exit();
+}
+
+function btn_logout_OnClick(obj)
+{
+	exit();
+}
+]]></Script>
+</Window>

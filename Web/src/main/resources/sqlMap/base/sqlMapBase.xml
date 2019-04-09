@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="base">
+
+<!-- codeDAO -->
+  	<typeAlias alias="codeTO" type="net.plang.base.to.CodeTO"/>
+
+	<resultMap class="codeTO" id="codeResult">
+
+	<result property="divisionCodeNo" column="DIVISION_CODE_NO"/>
+	<result property="codeType" column="CODE_TYPE"/>
+	<result property="divisionCodeName" column="DIVISION_CODE_NAME"/>
+	<result property="codeChangeAvailable" column="CODE_CHANGE_AVAILABLE"/>
+	<result property="description" column="DESCRIPTION"/>
+
+	</resultMap>
+ 	<select id="selectCodeList" resultMap="codeResult">
+
+		SELECT
+		DIVISION_CODE_NO, CODE_TYPE, DIVISION_CODE_NAME
+		,CODE_CHANGE_AVAILABLE, DESCRIPTION
+		FROM CODE ORDER BY DIVISION_CODE_NO
+	</select>
+	<select id="takeSerialCode" remapResults="true" parameterClass="map" resultClass="string" >
+
+		select case when
+		<isEqual property="findSeq" compareValue="WIT_SEQ" >
+		length(WIT_SEQ.NEXTVAL)>3 then to_char(sysdate,'yymmdd')||'-'||lpad(WIT_SEQ.currval,2,0) else to_char(sysdate,'yymmdd')||'-'||WIT_SEQ.currval end from dual
+		</isEqual>
+		<isEqual property="findSeq" compareValue="SERIAL_SEQ" >
+		length(SERIAL_SEQ.NEXTVAL)>3 then to_char(sysdate,'yymmdd')||'-'||lpad(SERIAL_SEQ.currval,2,0) else to_char(sysdate,'yymmdd')||'-'||SERIAL_SEQ.currval end from dual
+		</isEqual>
+		<isEqual property="findSeq" compareValue="PRM_SEQ" >
+		length(PRM_SEQ.NEXTVAL)>3 then to_char(sysdate,'yymmdd')||'-'||lpad(PRM_SEQ.currval,2,0) else to_char(sysdate,'yymmdd')||'-'||PRM_SEQ.currval end from dual
+		</isEqual>
+		<isEqual property="findSeq" compareValue="WH_SEQ" >
+	 	length(WH_SEQ.NEXTVAL)>3 then to_char(sysdate,'yymmdd')||'-'||lpad(WH_SEQ.currval,2,0) else to_char(sysdate,'yymmdd')||'-'||WH_SEQ.currval end from dual
+		</isEqual>
+		<isEqual property="findSeq" compareValue="RWH_SEQ" >
+	 	length(RWH_SEQ.NEXTVAL)>3 then to_char(sysdate,'yymmdd')||'-'||lpad(RWH_SEQ.currval,2,0) else to_char(sysdate,'yymmdd')||'-'||RWH_SEQ.currval end from dual
+		</isEqual>
+	</select>
+</sqlMap>

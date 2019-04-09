@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="766" Id="MPSManagement" Left="8" OnLoadCompleted="MPSManagement_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1330" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="ds_mps">
+				<Contents>
+					<colinfo id="MPS_NO" size="256" summ="default" type="STRING"/>
+					<colinfo id="MPS_PLAN_CLASSIFICATION" size="256" summ="default" type="STRING"/>
+					<colinfo id="CONTRACT_DETAIL_NO" size="256" summ="default" type="STRING"/>
+					<colinfo id="SALES_PLAN_NO" size="256" summ="default" type="STRING"/>
+					<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="UNIT_OF_MPS" size="256" summ="default" type="STRING"/>
+					<colinfo id="MPS_PLAN_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="MPS_PLAN_AMOUNT" size="256" summ="default" type="STRING"/>
+					<colinfo id="DUE_DATE_OF_MPS" size="256" summ="default" type="STRING"/>
+					<colinfo id="SCHEDULED_END_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="MRP_APPLY_STATUS" size="256" summ="default" type="STRING"/>
+					<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Align="Center" BKColor="user0" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,11,Bold" Height="44" Id="Static6" Left="22" TabOrder="1" Text="수주일자" Top="16" VAlign="Middle" Width="90"></Static>
+		<Calendar DayFont="한컴산뜻돋움,9" Font="한컴산뜻돋움,11" HeaderFont="한컴산뜻돋움,11" Height="36" Id="Calendar0" Left="136" LeftMargin="15" SaturdayTextColor="blue" SelectedDayFont="한컴산뜻돋움,11" SundayTextColor="red" TabOrder="2" Top="21" WeeksFont="한컴산뜻돋움,9" Width="146"></Calendar>
+		<Calendar DayFont="한컴산뜻돋움,9" Font="한컴산뜻돋움,11" HeaderFont="한컴산뜻돋움,11" Height="36" Id="Calendar1" Left="314" LeftMargin="15" SaturdayTextColor="blue" SelectedDayFont="한컴산뜻돋움,11" SundayTextColor="red" TabOrder="3" Top="21" WeeksFont="한컴산뜻돋움,9" Width="146"></Calendar>
+		<Static Align="Center" Font="한컴산뜻돋움,11,Bold" Height="17" Id="Static0" Left="281" TabOrder="4" Text="~" Top="33" VAlign="Middle" Width="29"></Static>
+		<Button BKColor="user1" Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="Button1" Left="480" OnClick="Button1_OnClick" TabOrder="5" Text="조회" Top="15" Width="65"></Button>
+		<Grid AutoFit="TRUE" BindDataset="gds_contractDetail" BkColor2="default" BoldHead="true" Bottom="310" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="246" Id="grd_contractDetailManagement" InputPanel="FALSE" Left="8" LineColor="default" MinWidth="100" Right="1315" RowHeight="25" TabOrder="6" TabStop="true" Top="64" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1307">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="147"/>
+						<col width="143"/>
+						<col width="62"/>
+						<col width="63"/>
+						<col width="100"/>
+						<col width="80"/>
+						<col width="90"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="수주상세일련번호"/>
+						<cell col="1" display="text" text="품목명"/>
+						<cell col="2" display="text" text="단위"/>
+						<cell col="3" display="text" text="수주수량"/>
+						<cell col="4" display="text" text="납기일"/>
+						<cell col="5" display="text" text="MPS적용상태"/>
+						<cell col="6" display="text" text="납품여부"/>
+					</head>
+					<body>
+						<cell col="0" colid="CONTRACT_DETAIL_NO" display="text"/>
+						<cell col="1" colid="ITEM_NAME" display="text"/>
+						<cell col="2" colid="UNIT_OF_CONTRACT" display="text"/>
+						<cell col="3" colid="CONTRACT_AMOUNT" display="text"/>
+						<cell col="4" colid="DUE_DATE_OF_CONTRACT" display="text" Mask="####-##-##"/>
+						<cell col="5" colid="MPS_APPLY_STATUS" display="text"/>
+						<cell col="6" colid="DELIVERY_STATUS" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Grid AutoFit="TRUE" BindDataset="gds_mps" BkColor2="default" BoldHead="true" Bottom="756" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="380" Id="grd_mpsManagement" InputPanel="FALSE" Left="8" LineColor="default" MinWidth="100" Right="1317" RowHeight="25" TabOrder="7" TabStop="true" Top="376" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1309">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="112"/>
+						<col width="139"/>
+						<col width="43"/>
+						<col width="58"/>
+						<col width="89"/>
+						<col width="89"/>
+						<col width="93"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="수주상세일련번호"/>
+						<cell col="1" display="text" text="품목명"/>
+						<cell col="2" display="text" text="단위"/>
+						<cell col="3" display="text" text="계획수량"/>
+						<cell col="4" display="text" text="계획일자"/>
+						<cell col="5" display="text" text="완료예정일자"/>
+						<cell col="6" display="text" text="납기일"/>
+						<cell col="7" display="text" text="MRP적용상태"/>
+					</head>
+					<body>
+						<cell col="0" colid="CONTRACT_DETAIL_NO" display="text"/>
+						<cell col="1" colid="ITEM_NAME" display="text"/>
+						<cell col="2" colid="UNIT_OF_MPS" display="text"/>
+						<cell col="3" colid="MPS_PLAN_AMOUNT" display="text"/>
+						<cell col="4" colid="MPS_PLAN_DATE" display="text"/>
+						<cell col="5" colid="SCHEDULED_END_DATE" display="text"/>
+						<cell col="6" colid="DUE_DATE_OF_MPS" display="text"/>
+						<cell col="7" colid="MRP_APPLY_STATUS" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button BKColor="user1" Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="btn_addMps" Left="665" OnClick="btn_addMps_OnClick" TabOrder="9" Text="▼" Top="324" Width="63"></Button>
+		<Button BKColor="user1" Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="btn_registerMps" Left="1208" OnClick="btn_registerMps_OnClick" TabOrder="8" Text="MPS적용" Top="324" Width="103"></Button>
+	</Form>
+	<Script><![CDATA[#include "Script::serialTempleteCode.js"
+function MPSManagement_OnLoadCompleted(obj)
+{
+
+http.Sync=true;		//1219추가
+//gds_contractDetail.Filter("MPS_APPLY_STATUS!='Y'"||"DELIVERY_STATUS!='Y'");
+		Transaction("findContractDetailList",
+				"svcBusiness::contract.do?method=findContractDetailList",
+				"",
+				"gds_contractDetail=gds_contractDetail",
+				"",
+				"callback");
+				
+
+//gds_contractDetail.Filter("MPS_APPLY_STATUS!='Y' && DELIVERY_STATUS!='Y'");
+	//gds_contractDetail.Filter("MPS_APPLY_STATUS!='Y'");
+	//gds_contractDetail.Filter("DELIVERY_STATUS!='Y'");
+	
+	//1219추가
+	Transaction("findStockList",
+				"svcPurchase::stock.do?method=findStockList",
+				"",
+				"gds_stock=gds_stock",
+				"",
+				"callback"
+			);
+gds_contractDetail.Filter("MPS_APPLY_STATUS!='Y' && DELIVERY_STATUS!='Y'");	
+http.Sync=false;
+
+}
+
+function btn_addMps_OnClick(obj)
+{
+	
+	var rCnt = gds_contractDetail.rowcount;
+	var rNum = gds_contractDetail.rowposition;
+	var itemName = gds_contractDetail.GetColumn(rNum,"ITEM_NAME");
+	var contractAmount = gds_contractDetail.GetColumn(rNum,"CONTRACT_AMOUNT");
+	alert(itemName );
+	//alert(rCnt + "\n"  +rNum  +"\n"+ itemName );
+	
+	var stockRow = gds_stock.GetRowPosition();
+	var stockItemName="";
+	var stockAmount="";
+	var safetyAmount="";
+	
+	//alert(stockRow);
+	for(var i = 0 ; i <= stockRow ; i++){
+		gds_stock.Filter("ITEM_NAME='"+itemName +"'");
+		stockItemName = gds_stock.getColumn(i,"ITEM_NAME");
+		safetyAmount=gds_stock.GetColumn(i,"SAFETY_ALLOWANCE_AMOUNT");
+		stockAmount = gds_stock.getColumn(i,"STOCK_AMOUNT");
+		alert("창고 현재 재고량 " +"\n"+stockItemName + " : " + stockAmount +"개");
+		gds_stock.UnFilter();
+		
+		if(parseInt(stockAmount)-parseInt(contractAmount)>parseInt(safetyAmount)){
+			alert("재고있음");
+		
+			if(confirm("재고가 존재합니다."+"\n"+"납품페이지로 이동하시겠습니까?")){
+			//트리뷰 선택되는거까지 아직 파악 못함
+				div_mainView.Url="Business::Delivery.xml";
+			}else{
+				alert("그냥 생산해");
+				
+			}
+			
+		}
+		else{
+		
+		alert("no");
+		}
+	}
+	
+	
+
+	
+	if(rCnt!=0){
+
+	gds_contractDetail.SetColumn(rNum,"MPS_APPLY_STATUS","Y");
+	
+	
+	// MPS번호 생성
+	var mpsRowNum = gds_mps.AddRow();
+	
+	
+	var contractDateilNo = gds_contractDetail.GetColumn(rNum,"CONTRACT_DETAIL_NO");
+	gds_mps.SetColumn(mpsRowNum,"CONTRACT_DETAIL_NO",contractDateilNo);
+	
+	gds_mps.SetColumn(mpsRowNum,"MPS_PLAN_CLASSIFICATION","수주");
+	
+	var itemCode = gds_contractDetail.GetColumn(rNum,"ITEM_CODE");
+	gds_mps.SetColumn(mpsRowNum,"ITEM_CODE",itemCode);
+	
+	var itemName = gds_contractDetail.GetColumn(rNum,"ITEM_NAME");
+	gds_mps.SetColumn(mpsRowNum,"ITEM_NAME",itemName);
+	
+	var unitOfMps = gds_contractDetail.GetColumn(rNum,"UNIT_OF_CONTRACT");
+	gds_mps.SetColumn(mpsRowNum,"UNIT_OF_MPS",unitOfMps);
+	
+	//var dueDateOfMps = gds_contractDetail.GetColumn(rNum,"DUE_DATE_OF_CONTRACT");
+	//gds_mps.SetColumn(mpsRowNum,"DUE_DATE_OF_MPS",dueDateOfMps);
+	
+	var dueDateOfMps = gds_contractDetail.GetColumn(rNum,"DUE_DATE_OF_CONTRACT");
+	gds_mps.SetColumn(mpsRowNum,"DUE_DATE_OF_MPS",dueDateOfMps);	
+	
+	var mpsPlanAmount = gds_contractDetail.GetColumn(rNum,"CONTRACT_AMOUNT");
+	gds_mps.SetColumn(mpsRowNum,"MPS_PLAN_AMOUNT",mpsPlanAmount);	
+	
+	
+	var mpsPlanDate = parseDateTime(parseInt(dueDateOfMps))-parseDateTime(9);
+	gds_mps.SetColumn(mpsRowNum,"MPS_PLAN_DATE",mpsPlanDate);
+	
+	var scheduledEndDate = parseDateTime(parseInt(dueDateOfMps))-parseDateTime(2);
+	gds_mps.SetColumn(mpsRowNum,"SCHEDULED_END_DATE",scheduledEndDate);
+	
+	var day = today();
+	trace(day);
+	var addMpsNo = 1;
+	
+	gds_mps.SetColumn(mpsRowNum,"MPS_NO",mpsNo(today()));
+	trace(gds_mps.getColumn(mpsRowNum,"MPS_NO"));
+	
+	gds_contractDetail.Filter("MPS_APPLY_STATUS!='Y' && DELIVERY_STATUS!='Y'");
+	//gds_contractDetail.Filter("MPS_APPLY_STATUS!='Y'");
+	//gds_contractDetail.Filter("DELIVERY_STATUS!='Y'");
+	}
+	else {
+		alert("더이상 추가할 내용이 없습니다");
+	}
+	
+}
+
+function btn_registerMps_OnClick(obj)
+{
+	
+	http.Sync=true;
+	
+	if(confirm("MPS를 등록하시겠습니까?")){
+		transaction(
+		"registerMps",
+		"svcProduction::/mps.do?method=registerMps",
+		"gds_mps=gds_mps:u gds_contractDetail=gds_contractDetail:u",
+		"gds_mps=gds_mps gds_contractDetail=gds_contractDetail",
+		"",
+		"callback");
+	}
+	
+	http.Sync=false;
+	
+	gds_mps.Filter("MPS_NO='XX'");
+	
+	
+}
+
+
+
+function callback(trid, ErrorCode, ErrorMsg){
+
+
+
+
+	if(trid=="registerMps"){
+		if(ErrorCode >= 0){
+			alert("저장이 완료되었습니다");
+			reload();
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 12월 19일 변경 전
+
+// #include "Script::serialTempleteCode.js"
+// function MPSManagement_OnLoadCompleted(obj)
+// {
+
+// gds_contractDetail.Filter("MPS_APPLY_STATUS!='Y'");
+	
+// }
+
+// function btn_addMps_OnClick(obj)
+// {
+	// var rCnt = gds_contractDetail.rowcount;
+	// var rNum = gds_contractDetail.rowposition;
+	// if(rCnt!=0){
+
+	// gds_contractDetail.SetColumn(rNum,"MPS_APPLY_STATUS","Y");
+	
+	
+	//MPS번호 생성
+	// var mpsRowNum = gds_mps.AddRow();
+	
+	
+	// var contractDateilNo = gds_contractDetail.GetColumn(rNum,"CONTRACT_DETAIL_NO");
+	// gds_mps.SetColumn(mpsRowNum,"CONTRACT_DETAIL_NO",contractDateilNo);
+	
+	// gds_mps.SetColumn(mpsRowNum,"MPS_PLAN_CLASSIFICATION","수주");
+	
+	// var itemCode = gds_contractDetail.GetColumn(rNum,"ITEM_CODE");
+	// gds_mps.SetColumn(mpsRowNum,"ITEM_CODE",itemCode);
+	
+	// var itemName = gds_contractDetail.GetColumn(rNum,"ITEM_NAME");
+	// gds_mps.SetColumn(mpsRowNum,"ITEM_NAME",itemName);
+	
+	// var unitOfMps = gds_contractDetail.GetColumn(rNum,"UNIT_OF_CONTRACT");
+	// gds_mps.SetColumn(mpsRowNum,"UNIT_OF_MPS",unitOfMps);
+	
+	//var dueDateOfMps = gds_contractDetail.GetColumn(rNum,"DUE_DATE_OF_CONTRACT");
+	//gds_mps.SetColumn(mpsRowNum,"DUE_DATE_OF_MPS",dueDateOfMps);
+	
+	// var dueDateOfMps = gds_contractDetail.GetColumn(rNum,"DUE_DATE_OF_CONTRACT");
+	// gds_mps.SetColumn(mpsRowNum,"DUE_DATE_OF_MPS",dueDateOfMps);	
+	
+	// var mpsPlanAmount = gds_contractDetail.GetColumn(rNum,"CONTRACT_AMOUNT");
+	// gds_mps.SetColumn(mpsRowNum,"MPS_PLAN_AMOUNT",mpsPlanAmount);	
+	
+	
+	// var mpsPlanDate = parseDateTime(parseInt(dueDateOfMps))-parseDateTime(9);
+	// gds_mps.SetColumn(mpsRowNum,"MPS_PLAN_DATE",mpsPlanDate);
+	
+	// var scheduledEndDate = parseDateTime(parseInt(dueDateOfMps))-parseDateTime(2);
+	// gds_mps.SetColumn(mpsRowNum,"SCHEDULED_END_DATE",scheduledEndDate);
+	
+	// var day = today();
+	// trace(day);
+	// var addMpsNo = 1;
+	
+	// gds_mps.SetColumn(mpsRowNum,"MPS_NO",mpsNo(today()));
+	// trace(gds_mps.getColumn(mpsRowNum,"MPS_NO"));
+	
+	// gds_contractDetail.Filter("MPS_APPLY_STATUS!='Y'");	
+	// }
+	// else {
+		// alert("더이상 추가할 내용이 없습니다");
+	// }
+	
+		
+// }
+
+// function btn_registerMps_OnClick(obj)
+// {
+	
+	// http.Sync=true;
+	
+	// if(confirm("MPS를 등록하시겠습니까?")){
+		// transaction(
+		// "registerMps",
+		// "svcProduction::/mps.do?method=registerMps",
+		// "gds_mps=gds_mps:u gds_contractDetail=gds_contractDetail:u",
+		// "gds_mps=gds_mps gds_contractDetail=gds_contractDetail",
+		// "",
+		// "callback");
+	// }
+	
+	// http.Sync=false;
+	
+	// gds_mps.Filter("MPS_NO='XX'");
+	
+	
+// }
+
+
+
+// function callback(trid, ErrorCode, ErrorMsg){
+
+
+
+
+	// if(trid=="registerMps"){
+		// if(ErrorCode >= 0){
+			// alert("저장이 완료되었습니다");
+			// reload();
+		// }
+	// }
+// }
+
+]]></Script>
+</Window>

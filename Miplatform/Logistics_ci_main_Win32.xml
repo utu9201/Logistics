@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ConnectGroup BkColor="APPWORKSPACE" device="Win32&#32;(800x600)" FixedMenu="true" Font="Default,0" height="600" HideFrame="true" ReSize="false" SessionURL="Base::LoginForm" Statusbar="true" Style="BUTTON_STYLE" Title="Logistics" titlebar="true" version="1.0" width="1080" work_height="543" work_width="800">
+	<container Version="1000">
+		<Component Height="21" Id="Spin" Image="10" Name="cySpin" Title="Spin" Version="1000" Width="121"/>
+		<Component Height="21" Id="MaskEdit" Image="19" Name="cyMaskedit" Title="MaskEdit" Version="1000" Width="121"/>
+		<Component Height="21" Id="Button" Image="2" Name="cyButton" Title="Button" Version="1000" Width="104"/>
+		<Component Height="13" Id="Static" Image="8" Name="cyStatic" Title="Static" Version="1000" Width="40"/>
+		<Component Height="21" Id="Edit" Image="3" Name="cyEdit" Title="Edit" Version="1000" Width="121"/>
+		<Component Height="65" Id="Shape" Image="28" Name="cyShape" Title="Shape" Version="1000" Width="65"/>
+		<Component Height="65" Id="Pie" Image="30" Name="cyPie" Title="Pie" Version="1000" Width="65"/>
+		<Component Height="21" Id="Checkbox" Image="4" Name="cyCheckBox" Title="Check&#32;Box" Version="1000" Width="97"/>
+		<Component Height="24" Id="FileDialog" Image="18" Name="cyFileDialog" Title="File&#32;Dialog" Version="1000" Width="24"/>
+		<Component Height="24" Id="File" Image="25" Name="cyFile" Title="File" Version="1000" Width="24"/>
+		<Component Height="97" Id="List" Image="6" Name="cyListBox" Title="List" Version="1000" Width="145"/>
+		<Component Height="21" Id="Combo" Image="5" Name="cyComboEx" Title="ComboBox" Version="1000" Width="145"/>
+		<Component Height="21" Id="Radio" Image="7" Name="cyRadio" Title="Radio" Version="1000" Width="113"/>
+		<Component Height="72" Id="TextArea" Image="16" Name="cyTextArea" Title="Text&#32;Area" Version="1000" Width="185"/>
+		<Component Height="17" Id="Progressbar" Image="31" Name="cyProgressbar" Title="Progressbar" Version="1000" Width="150"/>
+		<Component Height="97" Id="TreeView" Image="11" Module="CyTreeView" Name="cyTreeView" Title="Tree&#32;View" Version="1000" Width="121"/>
+		<Component Height="120" Id="Grid" Image="1" Module="CyGrid" Name="cyGrid" Title="Grid" Version="1000" Width="320"/>
+		<Component Height="105" Id="Image" Image="9" Name="cyImage" Title="Image" Version="1000" Width="105"/>
+		<Component Height="21" Id="Calendar" Image="13" Module="CyCalendarEx" Name="cyCalendarEx" Title="Calendar" Version="1000" Width="145"/>
+		<Component Height="193" Id="Div" Image="20" Name="cyDiv" Title="Division" Version="1000" Width="289"/>
+		<Component Id="PopupDiv" Image="54" Name="CyPopupDiv" Title="Popup&#32;Div" Version="1000"/>
+		<Component Height="193" Id="Tab" Image="12" Name="cyTab" Title="Tab" Version="1000" Width="289"/>
+		<Component Height="260" Id="WebBrowser" Image="24" Module="CyWebBrowser" Name="cyWebBrowser" Title="WebBrowser" Version="1000" Width="364"/>
+		<Component Height="168" Id="swFlash" Image="27" Module="CySWFlash" Name="cySWFlash" Title="Flash" Version="1000" Width="248"/>
+		<Component Height="24" Id="MenuBar" Image="32" Module="CyMenuBar" Name="cyMenuBar" Title="MenuBar" Version="1000" Width="192"/>
+		<Component Height="50" Id="Split" Image="55" Module="CySplit" Name="cySplit" Title="Split" Version="1000" Width="8"/>
+		<Component Height="8" Id="SplitJoint" Image="56" Module="CySplitU" Name="cySplitJoint" Title="SplitJoint" Version="1000" Width="8"/>
+		<Component Height="50" Id="Sign" Image="57" Module="CySign" Name="cySign" Title="Sign" Version="1000" Width="50"/>
+	</container>
+	<protocols version="1000">
+		<protocol id="file" name="cyHttpAdp" version="1000"/>
+		<protocol id="http" name="cyHttpAdp" version="1000"/>
+		<protocol id="https" name="cyHttpAdp" version="1000"/>
+	</protocols>
+	<AppGroups>
+		<AppGroup CacheLevel="none" CodePage="utf-8" Language="1042" Prefix="Base" Type="Form" Version="1000">
+			<Script Baseurl=".\Base\win32\" CacheLevel="none" ScriptUrl=".\Base\win32\"/>
+		</AppGroup>
+		<AppGroup CodePage="utf-8" Language="1042" Prefix="Emp" Type="form" Version="1000">
+			<Script Baseurl=".\Emp\win32\" ScriptUrl=".\Emp\win32\"/>
+		</AppGroup>
+		<AppGroup CodePage="utf-8" Language="1042" Prefix="Business" Type="form" Version="1000">
+			<Script Baseurl=".\Business\win32\" ScriptUrl=".\Business\win32\"/>
+		</AppGroup>
+		<AppGroup CodePage="utf-8" Language="1042" Prefix="LogisticsBase" Type="form" Version="1000">
+			<Script Baseurl=".\LogisticsBase\win32\" ScriptUrl=".\LogisticsBase\win32\"/>
+		</AppGroup>
+		<AppGroup CodePage="utf-8" Language="1042" Prefix="Production" Type="form" Version="1000">
+			<Script Baseurl=".\Production\win32\" ScriptUrl=".\Production\win32\"/>
+		</AppGroup>
+		<AppGroup CodePage="utf-8" Language="1042" Prefix="Purchase" Type="form" Version="1000">
+			<Script Baseurl=".\Purchase\win32\" ScriptUrl=".\Purchase\win32\"/>
+		</AppGroup>
+		<AppGroup CodePage="utf-8" Language="1042" Prefix="Script" Type="js" Version="1000">
+			<Script Baseurl=".\Script\"/>
+		</AppGroup>
+		<DataGroup Baseurl="http://localhost:8282/Logistics/base/" CacheLevel="none" CodePage="utf-8" KeepAliveTime="1" Language="0" Prefix="svcBase" Streamver="4000" TrMethod="normal" Type="JSP" Version="1000"/>
+		<DataGroup Baseurl="http://localhost:8282/Logistics/hr/emp/" CacheLevel="none" CodePage="utf-8" Language="0" Prefix="svcEmp" Streamver="4000" TrMethod="normal" Type="JSP" Version="1000"/>
+		<DataGroup Baseurl="http://localhost:8282/Logistics/logistics/base/" CacheLevel="none" CodePage="utf-8" Language="0" Prefix="svcManagement" Streamver="4000" TrMethod="normal" Type="JSP" Version="1000"/>
+		<DataGroup Baseurl="http://localhost:8282/Logistics/logistics/purchase/" CacheLevel="none" CodePage="utf-8" Language="0" Prefix="svcPurchase" Streamver="4000" TrMethod="normal" Type="JSP" Version="1000"/>
+		<DataGroup Baseurl="http://localhost:8282/Logistics/logistics/business/" CacheLevel="none" CodePage="utf-8" Language="0" Prefix="svcBusiness" Streamver="4000" TrMethod="normal" Type="JSP" Version="1000"/>
+		<DataGroup Baseurl="http://localhost:8282/Logistics/logistics/production/" CacheLevel="none" CodePage="utf-8" Language="0" Prefix="svcProduction" Streamver="4000" TrMethod="normal" Type="JSP" Version="1001"/>
+	</AppGroups>
+	<UserColor User0="burlywood" User1="BACKGROUND" User2="cadetblue" User3="coral"/>
+	<Datasets>
+		<Dataset DataSetType="Dataset" Id="gds_code">
+			<Contents>
+				<colinfo id="DIVISION_CODE_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="CODE_TYPE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DIVISION_CODE_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="CODE_CHANGE_AVAILABLE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_codeDetail">
+			<Contents>
+				<colinfo id="DIVISION_CODE_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="CODE_USE_CHECK" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_dept">
+			<Contents>
+				<colinfo id="WORKPLACE_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DEPT_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DEPT_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORKPLACE_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="COMPANY_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="COMPANY_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="DEPT_START_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DEPT_END_DATE" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_employee">
+			<Contents>
+				<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="COMPANY_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORKPLACE_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DEPT_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="POSITION_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="SOCIAL_SECURITY_NUMBER" size="256" summ="default" type="STRING"/>
+				<colinfo id="BIRTH_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="GENDER" size="256" summ="default" type="STRING"/>
+				<colinfo id="EMAIL" size="256" summ="default" type="STRING"/>
+				<colinfo id="PHONE_NUMBER" size="256" summ="default" type="STRING"/>
+				<colinfo id="IMAGE" size="256" summ="default" type="STRING"/>
+				<colinfo id="USER_PW" size="256" summ="default" type="STRING"/>
+				<colinfo id="ZIP_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="BASIC_ADDRESS" size="256" summ="default" type="STRING"/>
+				<colinfo id="DETAIL_ADDRESS" size="256" summ="default" type="STRING"/>
+				<colinfo id="LEVEL_OF_EDUCATION" size="256" summ="default" type="STRING"/>
+				<colinfo id="USER_OR_NOT" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_company">
+			<Contents>
+				<colinfo id="COMPANY_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="COMPANY_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="COMPANY_DIVISION" size="256" summ="default" type="STRING"/>
+				<colinfo id="BUSINESS_LICENSE_NUMBER" size="256" summ="default" type="STRING"/>
+				<colinfo id="CORPORATION_LICENSE_NUMBER" size="256" summ="default" type="STRING"/>
+				<colinfo id="COMPANY_CEO_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="COMPANY_BUSINESS_CONDITIONS" size="256" summ="default" type="STRING"/>
+				<colinfo id="COMPANY_BUSINESS_ITEMS" size="256" summ="default" type="STRING"/>
+				<colinfo id="COMPANY_ZIP_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="COMPANY_BASIC_ADDRESS" size="256" summ="default" type="STRING"/>
+				<colinfo id="COMPANY_DETAIL_ADDRESS" size="256" summ="default" type="STRING"/>
+				<colinfo id="COMPANY_TEL_NUMBER" size="256" summ="default" type="STRING"/>
+				<colinfo id="COMPANY_FAX_NUMBER" size="256" summ="default" type="STRING"/>
+				<colinfo id="COMPANY_ESTABLISHMENT_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="COMPANY_OPEN_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="HOMEPAGE" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_workplace">
+			<Contents>
+				<colinfo id="WORKPLACE_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="COMPANY_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORKPLACE_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="BUSINESS_LICENSE_NUMBER" size="256" summ="default" type="STRING"/>
+				<colinfo id="CORPORATION_LICENSE_NUMBER" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORKPLACE_CEO_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORKPLACE_BUSINESS_CONDITIONS" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORKPLACE_BUSINESS_ITEMS" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORKPLACE_ZIP_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORKPLACE_BASIC_ADDRESS" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORKPLACE_DETAIL_ADDRESS" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORKPLACE_TEL_NUMBER" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORKPLACE_FAX_NUMBER" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORKPLACE_ESTABLISH_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORKPLACE_OPEN_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORKPLACE_CLOSE_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="IS_MAIN_OFFICE" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_menu">
+			<Contents>
+				<colinfo id="WORKPLACE_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="MENU_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="PARENT_MENU_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="MENU_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="MENU_ORDER" size="256" summ="default" type="STRING"/>
+				<colinfo id="URL" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_item">
+			<Contents>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_GROUP_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CLASSIFICATION" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_OF_STOCK" size="256" summ="default" type="STRING"/>
+				<colinfo id="LOSS_RATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="LEAD_TIME" size="256" summ="default" type="STRING"/>
+				<colinfo id="STANDARD_UNIT_PRICE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+				<colinfo id="LEV" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_position">
+			<Contents>
+				<colinfo id="WORKPLACE_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DEPT_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="POSITION_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="POSITION_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_bom">
+			<Contents>
+				<colinfo id="NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="PARENT_ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="NET_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+				<colinfo id="LEV" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_estimate">
+			<Contents>
+				<colinfo id="ESTIMATE_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="CUSTOMER_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ESTIMATE_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="CONTRACT_STATUS" size="256" summ="default" type="STRING"/>
+				<colinfo id="ESTIMATE_REQUESTER" size="256" summ="default" type="STRING"/>
+				<colinfo id="EFFECTIVE_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="PERSON_CODE_IN_CHARGE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_estimateDetail">
+			<Contents>
+				<colinfo id="ESTIMATE_DETAIL_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ESTIMATE_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_OF_ESTIMATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DUE_DATE_OF_ESTIMATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ESTIMATE_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_PRICE_OF_ESTIMATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="SUM_PRICE_OF_ESTIMATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_contract">
+			<Contents>
+				<colinfo id="CONTRACT_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ESTIMATE_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="CONTRACT_TYPE" size="256" summ="default" type="STRING"/>
+				<colinfo id="CUSTOMER_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="CONTRACT_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="CONTRACT_REQUESTER" size="256" summ="default" type="STRING"/>
+				<colinfo id="PERSON_CODE_IN_CHARGE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+				<colinfo id="DELIVERY_RESULT_STATUS" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_contractDetail">
+			<Contents>
+				<colinfo id="CONTRACT_DETAIL_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="CONTRACT_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_OF_CONTRACT" size="256" summ="default" type="STRING"/>
+				<colinfo id="DUE_DATE_OF_CONTRACT" size="256" summ="default" type="STRING"/>
+				<colinfo id="CONTRACT_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_PRICE_OF_CONTRACT" size="256" summ="default" type="STRING"/>
+				<colinfo id="SUM_PRICE_OF_CONTRACT" size="256" summ="default" type="STRING"/>
+				<colinfo id="MPS_APPLY_STATUS" size="256" summ="default" type="STRING"/>
+				<colinfo id="DELIVERY_STATUS" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_GROUP_CODE" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_customer">
+			<Contents>
+				<colinfo id="CUSTOMER_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORKPLACE_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="CUSTOMER_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="CUSTOMER_TYPE" size="256" summ="default" type="STRING"/>
+				<colinfo id="CUSTOMER_CEO" size="256" summ="default" type="STRING"/>
+				<colinfo id="BUSINESS_LICENSE_NUMBER" size="256" summ="default" type="STRING"/>
+				<colinfo id="SOCIAL_SECURITY_NUMBER" size="256" summ="default" type="STRING"/>
+				<colinfo id="CUSTOMER_BUSINESS_CONDITIONS" size="256" summ="default" type="STRING"/>
+				<colinfo id="CUSTOMER_BUSINESS_ITEMS" size="256" summ="default" type="STRING"/>
+				<colinfo id="CUSTOMER_ZIP_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="CUSTOMER_BASIC_ADDRESS" size="256" summ="default" type="STRING"/>
+				<colinfo id="CUSTOMER_DETAIL_ADDRESS" size="256" summ="default" type="STRING"/>
+				<colinfo id="CUSTOMER_TEL_NUMBER" size="256" summ="default" type="STRING"/>
+				<colinfo id="CUSTOMER_FAX_NUMBER" size="256" summ="default" type="STRING"/>
+				<colinfo id="CUSTOMER_NOTE" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_mps">
+			<Contents>
+				<colinfo id="MPS_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="MPS_PLAN_CLASSIFICATION" size="256" summ="default" type="STRING"/>
+				<colinfo id="CONTRACT_DETAIL_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="SALES_PLAN_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_OF_MPS" size="256" summ="default" type="STRING"/>
+				<colinfo id="MPS_PLAN_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="MPS_PLAN_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="DUE_DATE_OF_MPS" size="256" summ="default" type="STRING"/>
+				<colinfo id="SCHEDULED_END_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="MRP_APPLY_STATUS" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_mrp">
+			<Contents>
+				<colinfo id="MRP_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="MPS_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="MRP_GATHERING_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CLASSIFICATION" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_OF_MRP" size="256" summ="default" type="STRING"/>
+				<colinfo id="REQUIRED_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="ORDER_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="REQUIRED_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="MRP_GATHERING_STATUS" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_mrpGathering">
+			<Contents>
+				<colinfo id="MRP_GATHERING_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ORDER_OR_PRODUCTION_STATUS" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_OF_MRP_GATHERING" size="256" summ="default" type="STRING"/>
+				<colinfo id="NECESSARY_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="DUE_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="CLAIM_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ON_GOING_PROCESS_STATUS" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_bomDeploy">
+			<Contents>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="PARENT_ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="LEAD_TIME" size="256" summ="default" type="STRING"/>
+				<colinfo id="LOSS_RATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="NET_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="STANDARD_UNIT_PRICE" size="256" summ="default" type="STRING"/>
+				<colinfo id="PARENT_ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CLASSIFICATION" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_orderInfo">
+			<Contents>
+				<colinfo id="ORDER_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="CUSTOMER_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ORDER_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="PERSON_CODE_IN_CHARGE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_orderDetail">
+			<Contents>
+				<colinfo id="ORDER_DETAIL_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ORDER_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_OF_ORDER" size="256" summ="default" type="STRING"/>
+				<colinfo id="DELIVERY_SCHEDULE_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ORDER_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_PRICE_OF_ORDER" size="256" summ="default" type="STRING"/>
+				<colinfo id="SUM_PRICE_OF_ORDER" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+				<colinfo id="MRP_GATHERING_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ORDER_DETAIL_STATUS" size="256" summ="default" type="STRING"/>
+				<colinfo id="ORDER_GATHERING_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ORDER_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="WAREHOUSING_STATUS" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_orderGathering">
+			<Contents>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_OF_ORDER" size="256" summ="default" type="STRING"/>
+				<colinfo id="DELIVERY_SCHEDULE_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="ORDER_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="ORDER_DETAIL_STATUS" size="256" summ="default" type="STRING"/>
+				<colinfo id="ORDER_GATHERING_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ORDER_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="NEED_AMOUNT" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_stock">
+			<Contents>
+				<colinfo id="WAREHOUSE_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DELIVERY_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="PRODUCTION_RESULT_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="INPUT_ITEM_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_OF_STOCK" size="256" summ="default" type="STRING"/>
+				<colinfo id="SAFETY_ALLOWANCE_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="STOCK_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_workInstruction">
+			<Contents>
+				<colinfo id="WORK_INSTRUCTION_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="MRP_GATHERING_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="INSTRUCTION_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_OF_WORK_INSTRUCTION" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORK_INSTRUCTION_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="PRODUCTION_STATUS" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORK_INSTRUCTION_STATUS" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_materialPayment">
+			<Contents>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="PAYMENT_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORK_INSTRUCTION_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="PAYMENT_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_PAYMENT" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+				<colinfo id="RELREASE_NO" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_prm">
+			<Contents>
+				<colinfo id="PRODUCTION_RESULT_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORK_INSTRUCTION_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="PRODUCTION_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="PRODUCTION_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_OF_PRODUCTION_RESULT" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_warehousing">
+			<Contents>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ORDER_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="ORDER_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="WAREHOUSING_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_WAREHOUSING" size="256" summ="default" type="STRING"/>
+				<colinfo id="CUSTOMER" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+				<colinfo id="WAREHOUSING_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="WAREHOUSING_NO" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_deliveryResult">
+			<Contents>
+				<colinfo id="DELIVERY_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="CONTRACT_DETAIL_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="WAREHOUSE_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_OF_DELIVERY_RESULT" size="256" summ="default" type="STRING"/>
+				<colinfo id="DELIVERY_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DELIVERY_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+				<colinfo id="CUSTOMER_CODE" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_mrpOpenTemp">
+			<Contents>
+				<colinfo id="MPS_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="BOM_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CLASSIFICATION" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_OF_MRP" size="256" summ="default" type="STRING"/>
+				<colinfo id="PLAN_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="ORDER_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="REQUIRED_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="TOTAL_LOSS_RATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="CACULATED_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="REQUIRED_AMOUNT" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_mrpGathering2">
+			<Contents>
+				<colinfo id="MRP_GATHERING_NO" size="256" summ="default" type="STRING"/>
+				<colinfo id="ORDER_OR_PRODUCTION_STATUS" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_OF_MRP_GATHERING" size="256" summ="default" type="STRING"/>
+				<colinfo id="NECESSARY_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="DUE_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="CLAIM_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="MRP_NO" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_addBom">
+			<Contents>
+				<colinfo id="ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="PARENT_ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_GROUP_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="NET_AMOUNT" size="256" summ="default" type="STRING"/>
+				<colinfo id="ITEM_CLASSIFICATION" size="256" summ="default" type="STRING"/>
+				<colinfo id="UNIT_OF_STOCK" size="256" summ="default" type="STRING"/>
+				<colinfo id="LOSS_RATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="LEAD_TIME" size="256" summ="default" type="STRING"/>
+				<colinfo id="STANDARD_UNIT_PRICE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_inOut"></Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_post">
+			<Contents>
+				<colinfo id="zip_no" size="256" summ="default" type="STRING"/>
+				<colinfo id="inm_adres" size="256" summ="default" type="STRING"/>
+				<colinfo id="rn_adres" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+	</Datasets>
+	<Variables>
+		<Var Id="global_company" Type="Global"/>
+		<Var Id="global_deptCode" Type="Global"/>
+		<Var Id="global_empCode" Type="Global"/>
+		<Var Id="global_empName" Type="Global"/>
+		<Var Id="global_estimate" Type="Global"/>
+		<Var Id="global_mrpGno" Type="Global"/>
+		<Var Id="global_positionCode" Type="Global"/>
+		<Var Id="global_workplace" Type="Global"/>
+		<Var Id="globalDong" Type="Global"/>
+		<Var Id="globalPage" Type="Global"/>
+	</Variables>
+	<Resource CacheLevel="session" Ext="res" Url="images\back.res" Version="1000"/>
+	<Script></Script>
+	<GlobalStyle>
+		<style Font="맑은&#32;고딕,8" ID="BASE_STYLE"/>
+		<style BorderColor="user1" ButtonColor="burlywood" DisablebkColor="darkgoldenrod" DisableColor="darkgoldenrod" DkshadowColor="user1" Font="돋움,9" Formcolor="antiquewhite" ID="BUTTON_STYLE" ShadowColor="user1" TextColor="BACKGROUND" WindowColor="bisque"/>
+	</GlobalStyle>
+</ConnectGroup>

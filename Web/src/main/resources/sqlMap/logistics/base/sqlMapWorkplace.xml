@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="workplace">
+    <!-- workplaceDAO -->
+
+    <typeAlias alias="workplaceTO"
+               type="net.plang.logistics.base.to.WorkplaceTO"/>
+
+    <resultMap class="workplaceTO" id="workplaceResult">
+
+        <result property="workplaceCode" column="WORKPLACE_CODE"/>
+        <result property="companyCode" column="COMPANY_CODE"/>
+        <result property="workplaceName" column="WORKPLACE_NAME"/>
+        <result property="businessLicenseNumber"
+                column="BUSINESS_LICENSE_NUMBER"/>
+        <result property="corporationLicenseNumber"
+                column="CORPORATION_LICENSE_NUMBER"/>
+        <result property="workplaceCeoName" column="WORKPLACE_CEO_NAME"/>
+        <result property="workplaceBusinessConditions"
+                column="WORKPLACE_BUSINESS_CONDITIONS"/>
+        <result property="workplaceBusinessItems"
+                column="WORKPLACE_BUSINESS_ITEMS"/>
+        <result property="workplaceZipCode" column="WORKPLACE_ZIP_CODE"/>
+        <result property="workplaceBasicAddress"
+                column="WORKPLACE_BASIC_ADDRESS"/>
+        <result property="workplaceDetailAddress"
+                column="WORKPLACE_DETAIL_ADDRESS"/>
+        <result property="workplaceTelNubmer"
+                column="WORKPLACE_TEL_NUMBER"/>
+        <result property="workplaceFaxNumber"
+                column="WORKPLACE_FAX_NUMBER"/>
+        <result property="workplaceEstablishDate"
+                column="WORKPLACE_ESTABLISH_DATE"/>
+        <result property="workplaceOpenDate"
+                column="WORKPLACE_OPEN_DATE"/>
+        <result property="workplaceCloseDate"
+                column="WORKPLACE_CLOSE_DATE"/>
+        <result property="isMainOffice" column="IS_MAIN_OFFICE"/>
+
+    </resultMap>
+    <select id="selectWorkplaceList" resultMap="workplaceResult">
+
+        SELECT WORKPLACE_CODE,
+               COMPANY_CODE,
+               WORKPLACE_NAME,
+               BUSINESS_LICENSE_NUMBER
+                ,
+               CORPORATION_LICENSE_NUMBER,
+               WORKPLACE_CEO_NAME,
+               WORKPLACE_BUSINESS_CONDITIONS
+                ,
+               WORKPLACE_BUSINESS_ITEMS,
+               WORKPLACE_ZIP_CODE,
+               WORKPLACE_BASIC_ADDRESS,
+               WORKPLACE_DETAIL_ADDRESS
+                ,
+               WORKPLACE_TEL_NUMBER,
+               WORKPLACE_FAX_NUMBER,
+               WORKPLACE_ESTABLISH_DATE,
+               WORKPLACE_OPEN_DATE
+                ,
+               WORKPLACE_CLOSE_DATE,
+               IS_MAIN_OFFICE
+        FROM WORKPLACE
+
+    </select>
+    <insert id="insertWorkplace" parameterClass="workplaceTO">
+    <![CDATA[
+        INSERT INTO WORKPLACE
+        (WORKPLACE_CODE, COMPANY_CODE, WORKPLACE_NAME, BUSINESS_LICENSE_NUMBER, CORPORATION_LICENSE_NUMBER,
+         WORKPLACE_CEO_NAME, WORKPLACE_BUSINESS_CONDITIONS, WORKPLACE_BUSINESS_ITEMS, WORKPLACE_ZIP_CODE,
+         WORKPLACE_BASIC_ADDRESS, WORKPLACE_DETAIL_ADDRESS, WORKPLACE_TEL_NUMBER, WORKPLACE_FAX_NUMBER,
+         WORKPLACE_ESTABLISH_DATE, WORKPLACE_OPEN_DATE, WORKPLACE_CLOSE_DATE, IS_MAIN_OFFICE)
+
+        VALUES (#workplaceCode#, #companyCode#, #workplaceName#, #businessLicenseNumber#, #corporationLicenseNumber#,
+                #workplaceCeoName#, #workplaceBusinessConditions#, #workplaceBusinessItems#, #workplaceZipCode#,
+                #workplaceBasicAddress#, #workplaceDetailAddress#, #workplaceTelNubmer#, #workplaceFaxNumber#,
+                #workplaceEstablishDate#, #workplaceOpenDate#, #workplaceCloseDate#, #isMainOffice#)
+        ]]>
+	</insert>
+
+    <update id="updateWorkplace" parameterClass="workplaceTO">
+        UPDATE WORKPLACE
+        SET WORKPLACE_CODE                =#workplaceCode#,
+            COMPANY_CODE                  =#companyCode#,
+            WORKPLACE_NAME                =#workplaceName#,
+            BUSINESS_LICENSE_NUMBER       =#businessLicenseNumber#,
+            CORPORATION_LICENSE_NUMBER    =#corporationLicenseNumber#,
+            WORKPLACE_CEO_NAME            =#workplaceCeoName#,
+            WORKPLACE_BUSINESS_CONDITIONS =#workplaceBusinessConditions#,
+            WORKPLACE_BUSINESS_ITEMS      =#workplaceBusinessItems#,
+            WORKPLACE_ZIP_CODE            =#workplaceZipCode#,
+            WORKPLACE_BASIC_ADDRESS       =#workplaceBasicAddress#,
+            WORKPLACE_DETAIL_ADDRESS      =#workplaceDetailAddress#,
+            WORKPLACE_TEL_NUMBER          =#workplaceTelNubmer#,
+            WORKPLACE_FAX_NUMBER          =#workplaceFaxNumber#,
+            WORKPLACE_ESTABLISH_DATE      =#workplaceEstablishDate#,
+            WORKPLACE_OPEN_DATE           =#workplaceOpenDate#,
+            WORKPLACE_CLOSE_DATE          =#workplaceCloseDate#,
+            IS_MAIN_OFFICE                =#isMainOffice#,
+            WHERE WORKPLACE_CODE = #workplaceCode#
+    </update>
+    <delete id="deleteWorkplace" parameterClass="workplaceTO">
+        DELETE
+        FROM WORKPLACE
+        WHERE WORKPLACE_CODE = #workplaceCode#
+    </delete>
+
+</sqlMap>

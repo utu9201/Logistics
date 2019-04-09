@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="mrp">
+    <!-- mrpDAO -->
+    <typeAlias alias="mrpTO" type="net.plang.logistics.production.to.MrpTO"/>
+    <resultMap class="mrpTO" id="mrpResult">
+
+        <result property="mrpNo" column="MRP_NO"/>
+        <result property="mpsNo" column="MPS_NO"/>
+        <result property="mrpGatheringNo" column="MRP_GATHERING_NO"/>
+        <result property="itemClassifcation" column="ITEM_CLASSIFICATION"/>
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="itemName" column="ITEM_NAME"/>
+        <result property="unitOfMrp" column="UNIT_OF_MRP"/>
+        <result property="requiredAmount" column="REQUIRED_AMOUNT"/>
+        <result property="orderDate" column="ORDER_DATE"/>
+        <result property="requiredDate" column="REQUIRED_DATE"/>
+        <result property="mrpGatheringStatus" column="MRP_GATHERING_STATUS"/>
+    </resultMap>
+
+    <select id="selectMrpList" resultMap="mrpResult">
+
+        SELECT MRP_NO
+             , MPS_NO
+             , MRP_GATHERING_NO
+             , ITEM_CLASSIFICATION
+             , ITEM_CODE
+             , ITEM_NAME
+             , UNIT_OF_MRP
+             , REQUIRED_AMOUNT
+             , ORDER_DATE
+             , REQUIRED_DATE
+             , MRP_GATHERING_STATUS
+        FROM MRP
+
+    </select>
+    <insert id="insertMrp" parameterClass="mrpTO">
+
+        INSERT INTO MRP
+        VALUES ( #mrpNo#
+               , #mpsNo#
+               , #mrpGatheringNo#
+               , #itemClassifcation#
+               , #itemCode#
+               , #itemName#
+               , #unitOfMrp#
+               , #requiredAmount#
+               , #orderDate#
+               , #requiredDate#
+               , #mrpGatheringStatus#)
+
+    </insert>
+    <update id="updateMrp" parameterClass="mrpTO">
+
+        UPDATE MRP
+        SET MRP_GATHERING_NO     = #mrpGatheringNo#
+          , MRP_GATHERING_STATUS = #mrpGatheringStatus#
+        WHERE MRP_NO = #mrpNo#
+
+    </update>
+    <!-- MrpOpenTemp -->
+
+    <typeAlias alias="MrpOpenTempTO" type="net.plang.logistics.production.to.MrpOpenTempTO"/>
+
+    <resultMap id="MrpOpenTempResult" class="MrpOpenTempTO">
+        <result property="mpsNo" column="MPS_NO"/>
+        <result property="bomNo" column="BOM_NO"/>
+        <result property="itemClassification" column="ITEM_CLASSIFICATION"/>
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="itemName" column="ITEM_NAME"/>
+        <result property="unitOfMrp" column="UNIT_OF_MRP"/>
+        <result property="planAmount" column="PLAN_AMOUNT"/>
+        <result property="orderDate" column="ORDER_DATE"/>
+        <result property="requiredDate" column="REQUIRED_DATE"/>
+        <result property="totalLossRate" column="TOTAL_LOSS_RATE"/>
+        <result property="caculatedAmount" column="CACULATED_AMOUNT"/>
+        <result property="requiredAmount" column="REQUIRED_AMOUNT"/>
+    </resultMap>
+
+    <parameterMap id="MrpOpenTempParameter" class="map">
+        <parameter property="mpsNo" typeHandler="net.plang.common.util.OracleCallBackHandler" mode="IN"/>
+        <parameter property="errorCode" jdbcType="DECIMAL" javaType="java.lang.Integer" mode="OUT"/>
+        <parameter property="errorMsg" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT"/>
+        <parameter property="result" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT"/>
+    </parameterMap>
+
+    <procedure id="MrpOpenTempProcessList" remapResults="true" parameterMap="MrpOpenTempParameter"
+               resultMap="MrpOpenTempResult">
+        <![CDATA[
+        {call P_MRP(?,?,?,?)}
+    ]]>
+    </procedure>
+
+
+    <parameterMap id="MrpInsert" class="map">
+        <parameter property="errorCode" jdbcType="DECIMAL" javaType="java.lang.Integer" mode="OUT"/>
+        <parameter property="errorMsg" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT"/>
+    </parameterMap>
+    <procedure id="MrpInsertProcess" parameterMap="MrpInsert">
+        <![CDATA[
+        {call MRP_PKG.P_MRP(?,?)}
+    ]]>
+    </procedure>
+</sqlMap>

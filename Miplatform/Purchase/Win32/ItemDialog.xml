@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="500" Id="ItemDialog" Left="8" OnLoadCompleted="ItemDialog_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="500" WorkArea="true">
+		<Grid AutoFit="TRUE" BindDataset="gds_item" BkColor2="default" BoldHead="true" Bottom="488" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="472" Id="grd_itemDialog" InputPanel="FALSE" Left="8" LineColor="default" MinWidth="100" OnCellDBLClick="grd_itemDialog_OnCellDblClick" Right="488" RowHeight="25" TabOrder="1" TabStop="true" Top="16" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="480">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="80"/>
+						<col width="126"/>
+						<col width="50"/>
+						<col width="91"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="품목코드"/>
+						<cell col="1" display="text" text="품목명"/>
+						<cell col="2" display="text" text="단위"/>
+						<cell col="3" display="text" text="표준단가"/>
+					</head>
+					<body>
+						<cell col="0" colid="ITEM_CODE" display="text"/>
+						<cell col="1" colid="ITEM_NAME" display="text"/>
+						<cell col="2" colid="UNIT_OF_STOCK" display="text"/>
+						<cell col="3" colid="STANDARD_UNIT_PRICE" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+function ItemDialog_OnLoadCompleted(obj)
+{
+	
+	http.Sync=true;
+	
+	transaction("findItemList",
+				"svcPurchase::item.do?method=findItemList",
+				"",
+				"gds_item=gds_item",
+				"",
+				"callback");
+
+			
+	//initSession(false);
+	http.Sync=false;	
+	
+	gds_item.filter("ITEM_CLASSIFICATION!='IT-MA'");
+}
+
+
+function grd_itemDialog_OnCellDblClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	
+	var array ;
+	
+	var itemCode = gds_item.GetColumn(nRow, "ITEM_CODE");	
+	var itemName = gds_item.GetColumn(nRow, "ITEM_NAME");
+	var unitOfStock = gds_item.GetColumn(nRow, "UNIT_OF_STOCK");
+	var standardUnitPrice = gds_item.GetColumn(nRow, "STANDARD_UNIT_PRICE");
+	
+	array = [itemCode,itemName,unitOfStock,standardUnitPrice];
+	gds_item.unfilter();
+	close(array);
+	
+}
+]]></Script>
+</Window>

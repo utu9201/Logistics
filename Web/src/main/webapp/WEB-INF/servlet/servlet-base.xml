@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="baseUrlHandlerMapping"
+          class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="order" value="1"/>
+        <property name="alwaysUseFullPath" value="false"/>
+        <property name="mappings">
+            <props>
+                <prop key="code.do">codeController</prop>
+                <prop key="codeDetail.do">codeDetailController</prop>
+                <prop key="menu.do">menuController</prop>
+                <prop key="login.do">MemberLoginController</prop>
+                <prop key="postList.do">PostListController</prop>
+                <prop key="mail.do">mailController</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="codeController" class="net.plang.base.controller.CodeController"
+          p:baseServiceFacade-ref="baseServiceFacade"
+    />
+
+    <bean id="MemberLoginController" class="net.plang.base.controller.MemberLoginController"
+          p:baseServiceFacade-ref="baseServiceFacade"
+    />
+
+    <bean id="menuController" class="net.plang.base.controller.MenuController"
+          p:baseServiceFacade-ref="baseServiceFacade"
+    />
+
+    <bean id="codeDetailController" class="net.plang.base.controller.CodeDetailController"
+          p:baseServiceFacade-ref="baseServiceFacade"
+    />
+
+    <bean id="PostListController" class="net.plang.base.controller.PostListController"
+    />
+    <bean id="mailController" class="net.plang.base.controller.MailController"
+          p:mailServiceFacade-ref="mailServiceFacade"
+    />
+</beans>

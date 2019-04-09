@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="344" Id="LoginForm" Left="8" OnInit="LoginForm_OnLoadCompleted" PidAttrib="7" Title="환영합니다" Top="8" Ver="1.0" Width="352" WorkArea="true">
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="돋움,11" Height="27" Id="Static0" Left="40" Style="BUTTON_STYLE" TabOrder="1" Text="회사명" Top="112" VAlign="Middle" Width="102"></Static>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="돋움,11" Height="27" Id="Static2" Left="40" Style="BUTTON_STYLE" TabOrder="2" Text="부서명" Top="144" VAlign="Middle" Width="102"></Static>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="돋움,11" Height="27" Id="Static3" Left="40" Style="BUTTON_STYLE" TabOrder="3" Text="사원ID" Top="176" VAlign="Middle" Width="102"></Static>
+		<Static Align="Center" Border="SunkenEdge" Color="WINDOWTEXT" Font="돋움,11" Height="27" Id="Static4" Left="40" Style="BUTTON_STYLE" TabOrder="4" Text="비밀번호" Top="208" VAlign="Middle" Width="102"></Static>
+		<Edit Height="27" Id="edt_company" Left="152" OnClick="btn_findCompany_OnClick" Style="BUTTON_STYLE" TabOrder="5" Top="112" Width="161"></Edit>
+		<Edit Height="27" Id="edt_dept" Left="152" OnClick="btn_dept_OnClick" Style="BUTTON_STYLE" TabOrder="6" Top="144" Width="161"></Edit>
+		<Edit Height="27" Id="edt_empCode" Left="152" Style="BUTTON_STYLE" TabOrder="7" Top="176" Width="161"></Edit>
+		<Edit Height="27" Id="edt_password" Left="152" OnKeyDown="login_OnKeyDown" Password="TRUE" Style="BUTTON_STYLE" TabOrder="8" Top="208" Width="161"></Edit>
+		<Button Color="WINDOW" Height="24" Id="btn_findWorkplace" Left="264" OnClick="btn_dept_OnClick" Style="BUTTON_STYLE" TabOrder="9" Text="검색" Top="146" Width="48"></Button>
+		<Button Color="WINDOW" Height="24" Id="btn_findCompany" Left="264" OnClick="btn_findCompany_OnClick" Style="BUTTON_STYLE" TabOrder="10" Text="검색" Top="114" Width="48"></Button>
+		<Button Color="WINDOW" Font="돋움,11" Height="32" Id="btn_login" Left="64" OnClick="btn_login_OnClick" Style="BUTTON_STYLE" TabOrder="11" Text="로그인" Top="288" Width="107"></Button>
+		<Button Color="WINDOW" Font="돋움,11" Height="32" Id="btn_cancel" Left="184" Style="BUTTON_STYLE" TabOrder="12" Text="취소" Top="285" Width="107"></Button>
+	</Form>
+	<Script><![CDATA[var deptCode;
+var empCode;
+var userPw; //사원이름이 선택됨과 동시에 서버에서 불려와  셋팅됨 
+
+function btn_login_OnClick(obj){
+
+	transaction("login",
+				"svcBase::login.do?method=accessToAuthority", 
+				"",
+				"gds_menu=gds_menu",
+				"empCode ='" + edt_empCode.Text +"' empPassword ='" +edt_password.Text+"' deptCode ='" + edt_dept.Text +"'",
+				"callback");
+				
+	
+}
+
+function LoginForm_OnLoadCompleted(obj) // jq그리드의 로드컴플릿과 같은 옵션
+{
+	
+	http.Sync=true;
+	
+	transaction("findCompanyList",
+				"svcManagement::company.do?method=findCompanyList", // 시작과 동시에 모든 회사,사업장,직원의 리스트를 가져온다...;;
+				"",
+				"gds_company=gds_company",
+				"",
+				"callback");
+				
+	transaction("findDeptList",
+				"svcManagement::dept.do?method=findDeptList",
+				"",
+				"gds_dept=gds_dept",
+				"",
+				"callback");
+				
+	transaction("findEmployeeList",
+				"svcEmp::employee.do?method=findEmployeeList",
+				"",
+				"gds_employee=gds_employee",
+				"",
+				"callback");
+	
+	
+	
+				
+	http.Sync=false;		
+			
+			
+			
+}
+
+
+
+function btn_findCompany_OnClick(obj) //회사검색버튼
+{
+	
+
+	initSession(true);
+	dialog("LogisticsBase::CompanyDialog.xml","");  //회사 선택 다이얼로그 출력
+	//initSession(false);
+	
+}
+
+function btn_dept_OnClick(obj) // 위와 동일
+{
+
+	initSession(true);
+	dialog("Base::deptDialog.xml","");
+	//initSession(false);
+	
+}
+
+
+
+function login_OnKeyDown(obj, objSenderObj, nChar, bShift, bControl, bAlt, nLLParam, nHLParam){
+	if(objSenderObj=13){ 
+	btn_login_OnClick(obj);
+	}// <---자바 스크립트랑 똑같이 13번이 엔터임
+	
+}
+function callback(trid, ErrorCode, ErrorMsg){
+			if(trid=="login"){
+			if(ErrorCode >= 0){
+			   global_deptCode=deptCode;
+			   global_empCode=empCode;
+			   trace(global_empCode);
+			go("Base::MainForm.xml");
+		}
+	}
+}
+
+
+]]></Script>
+</Window>

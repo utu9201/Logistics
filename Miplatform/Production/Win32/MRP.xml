@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="766" Id="mrpform" Left="8" OnInit="frm_mrp_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1330" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="ds_yn" LastLoadDataOnly="1">
+				<Contents>
+					<colinfo id="YorN" size="256" summ="default" type="STRING"/>
+					<record>
+						<YorN>Y</YorN>
+					</record>
+					<record>
+						<YorN>N</YorN>
+					</record>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Align="Center" Border="SunkenEdge" Font="한컴산뜻돋움,18,Bold" Height="39" Id="Static0" Left="8" Style="BUTTON_STYLE" TabOrder="1" Text="소요량전개" Top="8" VAlign="Middle" Width="1298"></Static>
+		<Grid AutoFit="TRUE" BindDataset="gds_mps" BkColor2="default" BoldHead="true" Bottom="323" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="211" Id="grd_mps" InputPanel="FALSE" Left="24" LineColor="default" MinWidth="100" Right="1307" RowHeight="25" Style="BUTTON_STYLE" TabOrder="2" TabStop="true" Top="112" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1283">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="104"/>
+						<col width="120"/>
+						<col width="128"/>
+						<col width="39"/>
+						<col width="49"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="주생산계획번호"/>
+						<cell col="1" display="text" text="수주상세일련번호"/>
+						<cell col="2" display="text" text="품목명"/>
+						<cell col="3" display="text" text="단위"/>
+						<cell col="4" display="text" text="계획수량"/>
+						<cell col="5" display="text" text="계획일자"/>
+						<cell col="6" display="text" text="완료예정일자"/>
+						<cell col="7" display="text" text="MRP적용상태"/>
+					</head>
+					<body>
+						<cell col="0" colid="MPS_NO" display="text"/>
+						<cell col="1" colid="CONTRACT_DETAIL_NO" display="text"/>
+						<cell col="2" colid="ITEM_NAME" display="text" expr="trim(ITEM_NAME)"/>
+						<cell col="3" colid="UNIT_OF_MPS" display="text"/>
+						<cell col="4" colid="MPS_PLAN_AMOUNT" display="text"/>
+						<cell col="5" colid="MPS_PLAN_DATE" display="text"/>
+						<cell col="6" colid="SCHEDULED_END_DATE" display="text"/>
+						<cell col="7" colid="MRP_APPLY_STATUS" display="text"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="btn_batchMrpGathering" Left="1216" OnClick="btn_batchMrpGathering_OnClick" Style="BUTTON_STYLE" TabOrder="3" Text="소요량취합" Top="328" Width="90"></Button>
+		<Button Color="WINDOW" Font="한컴산뜻돋움,11,Bold" Height="44" Id="btn_mrpbatch" Left="1184" OnClick="btn_mrpbatch_OnClick" Style="BUTTON_STYLE" TabOrder="5" Text="소요량일괄전개" Top="64" Width="106"></Button>
+		<Tab Font="한컴산뜻돋움,13,Bold" Height="373" Id="Tab0" Left="16" Style="BUTTON_STYLE" TabOrder="4" Top="352" Width="1289">
+			<Contents>
+				<TabPage BorderColor="black" Height="336" Id="tab1" Left="2" TabOrder="17" Text="소요량전개내역" Top="35" Width="1285">
+					<Grid AutoFit="TRUE" BindDataset="gds_mrp" BkColor2="default" BoldHead="true" Bottom="334" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="329" Id="grd_mrp" InputPanel="FALSE" Left="6" LineColor="default" MinWidth="100" Right="1286" RowHeight="25" TabOrder="1" TabStop="true" Top="5" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1280">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="179"/>
+									<col width="157"/>
+									<col width="115"/>
+									<col width="45"/>
+									<col width="61"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="117"/>
+								</columns>
+								<head>
+									<cell col="0" display="text" text="소요량전개번호"/>
+									<cell col="1" display="text" text="주생산계획번호"/>
+									<cell col="2" display="text" text="품목명"/>
+									<cell col="3" display="text" text="단위"/>
+									<cell col="4" display="text" text="필요수량"/>
+									<cell col="5" display="text" text="발주일자"/>
+									<cell col="6" display="text" text="소요일자"/>
+									<cell col="7" display="text" text="소요량취합상태"/>
+								</head>
+								<body>
+									<cell col="0" colid="MRP_NO" display="text"/>
+									<cell col="1" colid="MPS_NO" display="text"/>
+									<cell col="2" colid="ITEM_NAME" display="text" expr="trim(ITEM_NAME)"/>
+									<cell col="3" colid="UNIT_OF_MRP" display="text"/>
+									<cell col="4" colid="REQUIRED_AMOUNT" display="text"/>
+									<cell col="5" colid="ORDER_DATE" display="text"/>
+									<cell col="6" colid="REQUIRED_DATE" display="text"/>
+									<cell col="7" colid="MRP_GATHERING_STATUS" display="text"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+				</TabPage>
+				<TabPage BorderColor="black" Height="336" Id="tab2" Left="2" TabOrder="17" Text="소요량취합내역" Top="35" Width="1285">
+					<Static Align="Center" BKColor="user0" Border="SunkenEdge" Font="한컴산뜻돋움,11,Bold" Height="40" Id="Static0" Left="1021" TabOrder="1" Text="공정진행여부필터" Top="7" VAlign="Middle" Width="168"></Static>
+					<Combo CodeColumn="YorN" DataColumn="YorN" Font="한컴산뜻돋움,11,Bold" Height="32" Id="comb_mrpg" InnerDataset="ds_yn" Left="1200" OnChanged="comb_mrpg_OnChanged" TabOrder="2" Top="10" Width="64"></Combo>
+					<Grid AutoFit="TRUE" BindDataset="gds_mrpGathering" BkColor2="default" BoldHead="true" Bottom="360" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="307" Id="grd_mrpGathering" InputPanel="FALSE" Left="6" LineColor="default" MinWidth="100" OnCellClick="grd_mrpGathering_OnCellClick" Right="1274" RowHeight="25" TabOrder="3" TabStop="true" Top="53" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1268">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="109"/>
+									<col width="93"/>
+									<col width="102"/>
+									<col width="44"/>
+									<col width="68"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="88"/>
+								</columns>
+								<head>
+									<cell col="0" display="text" text="소요량취합번호"/>
+									<cell col="1" display="text" text="구매/생산여부"/>
+									<cell col="2" display="text" text="품목명"/>
+									<cell col="3" display="text" text="단위"/>
+									<cell col="4" display="text" text="필요수량"/>
+									<cell col="5" display="text" text="지시일"/>
+									<cell col="6" display="text" text="납기일"/>
+									<cell col="7" display="text" text="공정진행여부"/>
+								</head>
+								<body>
+									<cell col="0" colid="MRP_GATHERING_NO" display="text"/>
+									<cell col="1" colid="ORDER_OR_PRODUCTION_STATUS" display="text"/>
+									<cell align="left" col="2" colid="ITEM_NAME" display="text" expr="trim(ITEM_NAME)"/>
+									<cell col="3" colid="UNIT_OF_MRP_GATHERING" display="text"/>
+									<cell col="4" colid="NECESSARY_AMOUNT" display="text"/>
+									<cell col="5" colid="CLAIM_DATE" display="text"/>
+									<cell col="6" colid="DUE_DATE" display="text"/>
+									<cell col="7" colid="ON_GOING_PROCESS_STATUS" display="text"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+				</TabPage>
+			</Contents>
+		</Tab>
+	</Form>
+	<Script><![CDATA[
+function frm_mrp_OnLoadCompleted(obj) {
+    grd_mps.Redraw = false;
+    tab0.tab1.grd_mrp.Redraw = false;
+    http.Sync = true;
+    transaction("findMrpGatheringList",
+        "svcProduction::mrp.do?method=findMrpGatheringList",
+        "",
+        "gds_mrpGathering=gds_mrpGathering",
+        "",
+        "callback");
+
+    transaction("findMpsList",
+        "svcProduction::mps.do?method=findMpsList",
+        "",
+        "gds_mps=gds_mps",
+        "",
+        "callback");
+    grd_mps.Redraw = true;
+    tab0.tab1.grd_mrp.Redraw = true;
+    http.Sync = false;
+    gds_mps.Filter("MRP_APPLY_STATUS!='Y'");
+    gds_mrp.Filter("MRP_GATHERING_STATUS!='Y'");
+
+    create("dataset", "ds_mps");
+    ds_mps.copyF("gds_mps");
+    gds_mps.copy(ds_mps);
+
+    create("dataset", "ds_mrp");
+    ds_mrp.copyF("gds_mrp");
+    gds_mrp.copy(ds_mrp);
+
+}
+
+function comb_mrpg_OnChanged(obj, strCode, strText, nOldIndex, nNewIndex) {
+    gds_mrpGathering.filter("ON_GOING_PROCESS_STATUS='" + strText + "'");
+}
+function comb_mps_OnChanged(obj, strCode, strText, nOldIndex, nNewIndex) {
+    gds_mps.filter("MRP_GATHERING_STATUS='" + strText + "'");
+}
+
+function btn_mrpOpenTemp_OnClick(obj) {
+
+    var mpsRow = gds_mps.rowposition;
+
+    var mpsNo = gds_mps.GetColumn(mpsRow, "MPS_NO");
+
+    if (confirm("소요량 단독 전개를 진행하시겠습니까?")) {
+        transaction("findMrpOpenTempProcessList",
+            "svcProduction::/mrp.do?method=findMrpOpenTempProcessList",
+            "",
+            "gds_mrpOpenTemp=gds_mrpOpenTemp",
+            "mpsNo ='" + mpsNo + "'",
+            "callback"
+        );
+    }
+
+    dialog("Production::MrpDialog.xml", "");
+
+
+}
+
+
+
+function btn_batchMrpGathering_OnClick(obj) {
+
+    if (confirm("소요량 취합을 진행하시겠습니까?")) {
+        transaction("registMrpGathering",
+            "svcProduction::/mrp.do?method=registMrpGathering",
+            "gds_mrp=gds_mrp",
+            "",
+            "",
+            "callback"
+        );
+    }
+}
+
+function callback(trid, ErrorCode, ErrorMsg) {
+
+
+    if (trid == "registMrpGathering") {
+        if (ErrorCode >= 0) {
+
+            alert("저장이 완료되었습니다");
+            Reload();
+        }
+    }
+    if (trid == "findMrpOpenTempProcessList" || "findMrpOpenTempProcessList") {
+        if (ErrorCode >= 0) {
+            alert("저장이 완료되었습니다");
+            if (dialog("Production::MrpDialog.xml", "")) {
+                Reload();
+
+            }
+        } ELSE{ ALERT(ErrorMsg); }
+        if (trid == "findMrpGatheringList") {
+            alert("저장이 완료되었습니다");
+            Reload();
+
+        }
+
+    }
+
+    transaction("findMrpList",
+        "svcProduction::mrp.do?method=findMrpList",
+        "",
+        "gds_mrp=gds_mrp",
+        "",
+        "Mrpcallback");
+
+}
+
+
+function grd_mrpGathering_OnCellClick(obj, nRow, nCell, nX, nY, nPivotIndex) {
+
+    global_mrpGno = gds_mrpGathering.GetColumn(nRow, "MRP_GATHERING_NO");
+
+
+    dialog("Production::findMrpDialog.xml", "mrpGno=" + global_mrpGno);
+
+}
+
+function Button3_OnClick(obj) {
+    gds_mps.UnFilter();
+}
+
+function btn_mrpbatch_OnClick(obj) {
+
+    if (confirm("소요량 일괄 전개를 진행하시겠습니까?")) {
+        http.Sync = true;
+        transaction("findMrpOpenTempProcessList",
+            "svcProduction::/mrp.do?method=findMrpOpenTempList",
+            "gds_mps=gds_mps",
+            "gds_mrpOpenTemp=gds_mrpOpenTemp",
+            "",
+            "callback"
+        );
+        http.Sync = false;
+    }
+}
+]]></Script>
+</Window>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="460" Id="EstimateDialog" Left="8" OnLoadCompleted="EstimateDialog_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="680" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="ds_estimateDialog">
+				<Contents>
+					<colinfo id="ESTIMATE_NO" size="256" summ="default" type="STRING"/>
+					<colinfo id="CUSTOMER_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="ESTIMATE_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="CONTRACT_STATUS" size="256" summ="default" type="STRING"/>
+					<colinfo id="ESTIMATE_REQUESTER" size="256" summ="default" type="STRING"/>
+					<colinfo id="EFFECTIVE_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="PERSON_CODE_IN_CHARGE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DESCRIPTION" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Grid BindDataset="gds_estimate" BkColor2="default" BoldHead="true" Bottom="448" Enable="true" EndLineColor="default" Height="424" Id="grd_estimateDialog" InputPanel="FALSE" Left="8" LineColor="default" OnCellClick="grd_estimateDialog_OnCellClick" Right="664" TabOrder="1" TabStop="true" Top="24" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="656">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="121"/>
+						<col width="116"/>
+						<col width="116"/>
+						<col width="80"/>
+						<col width="102"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell col="0" display="text" text="견적일렬번호"/>
+						<cell col="1" display="text" text="거래처명"/>
+						<cell col="2" display="text" text="견적일자"/>
+						<cell col="3" display="text" text="견적요청자"/>
+						<cell col="4" display="text" text="유효일자"/>
+						<cell col="5" display="text" text="담당자"/>
+					</head>
+					<body>
+						<cell col="0" colid="ESTIMATE_NO" display="text"/>
+						<cell col="1" colid="CUSTOMER_CODE" combocol="DETAIL_CODE" combodataset="gds_codeDetail" combotext="DETAIL_CODE_NAME" display="combo"/>
+						<cell col="2" colid="ESTIMATE_DATE" display="text"/>
+						<cell col="3" colid="ESTIMATE_REQUESTER" display="text"/>
+						<cell col="4" colid="EFFECTIVE_DATE" display="text"/>
+						<cell col="5" colid="PERSON_CODE_IN_CHARGE" combocol="EMP_CODE" combodataset="gds_employee" combotext="EMP_NAME" display="combo"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+function EstimateDialog_OnLoadCompleted(obj)
+{
+	http.Sync=true;
+	
+	transaction("findEstimateDialog",
+	"svcBusiness::estimate.do?method=findEstimateDialog",
+	"",
+	"gds_estimate=gds_estimate",
+	"",
+	"callback");
+
+	http.Sync=false;
+		
+	//alert(ds_estimateDialog.GetColumn(0, "CUSTOMER_CODE"));
+	
+}
+
+function grd_estimateDialog_OnCellClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	
+	
+	
+	var customerCode = gds_estimate.GetColumn(nRow, "CUSTOMER_CODE");
+	var estimateNo = gds_estimate.GetColumn(nRow, "ESTIMATE_NO");
+	var personCodeInCharge = gds_estimate.GetColumn(nRow, "PERSON_CODE_IN_CHARGE");
+	
+	parent.customerCode = customerCode;
+	parent.estimateNo = estimateNo;	
+	parent.personCodeInCharge = personCodeInCharge;
+	
+	var day = toDay();
+	
+	var rowNum = gds_contract.GetRowCount();
+		
+	gds_contract.AddRow();
+	
+	gds_contract.SetColumn(rowNum,"ESTIMATE_NO",estimateNo);
+	
+	
+	gds_contract.Filter("ESTIMATE_NO='"+estimateNO+"'");
+	
+	close("true");
+	
+}
+]]></Script>
+</Window>

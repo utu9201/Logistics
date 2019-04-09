@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="workInstruction">
+    <!-- workInstructionDAO -->
+
+    <typeAlias alias="workInstructionTO" type="net.plang.logistics.production.to.WorkInstructionTO"/>
+    <typeAlias alias="materialCheckTempTO" type="net.plang.logistics.production.to.MaterialCheckTempTO"/>
+    <resultMap class="workInstructionTO" id="workInstructionResult">
+
+        <result property="workInstructionNo" column="WORK_INSTRUCTION_NO"/>
+        <result property="mrpGatheringNo" column="MRP_GATHERING_NO"/>
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="itemName" column="ITEM_NAME"/>
+        <result property="instructionDate" column="INSTRUCTION_DATE"/>
+        <result property="unitOfWorkInstruction" column="UNIT_OF_WORK_INSTRUCTION"/>
+        <result property="workInstructionAmount" column="WORK_INSTRUCTION_AMOUNT"/>
+        <result property="productionStatus" column="PRODUCTION_STATUS"/>
+        <result property="description" column="DESCRIPTION"/>
+        <result property="workInstructionStatus" column="WORK_INSTRUCTION_STATUS"/>
+
+    </resultMap>
+    <select id="selectWorkInstructionList" resultMap="workInstructionResult">
+
+        SELECT WORK_INSTRUCTION_NO
+             , MRP_GATHERING_NO
+             , ITEM_CODE
+             , ITEM_NAME
+             , INSTRUCTION_DATE
+             , UNIT_OF_WORK_INSTRUCTION
+             , WORK_INSTRUCTION_AMOUNT
+             , PRODUCTION_STATUS
+             , DESCRIPTION
+             , WORK_INSTRUCTION_STATUS
+        FROM PRODUCTION_WORK_INSTRUCTION
+
+    </select>
+    <insert id="insertWorkInstruction" parameterClass="workInstructionTO">
+
+        INSERT INTO PRODUCTION_WORK_INSTRUCTION
+        VALUES ( #workInstructionNo#
+               , #mrpGatheringNo#
+               , #itemCode#
+               , #itemName#
+               , #instructionDate#
+               , #unitOfWorkInstruction#
+               , #workInstructionAmount#
+               , #productionStatus#
+               , #description#
+               , #workInstructionStatus#)
+
+    </insert>
+    <update id="updateWorkInstruction" parameterClass="workInstructionTO">
+
+        UPDATE PRODUCTION_WORK_INSTRUCTION
+        SET ITEM_CODE                = #itemCode#
+          , ITEM_NAME                = #itemName#
+          , INSTRUCTION_DATE         = #instructionDate#
+          , UNIT_OF_WORK_INSTRUCTION = #unitOfWorkInstruction#
+          , WORK_INSTRUCTION_AMOUNT  = #workInstructionAmount#
+          , PRODUCTION_STATUS        = #productionStatus#
+          , DESCRIPTION              = #description#
+          , WORK_INSTRUCTION_STATUS  = #workInstructionStatus#
+        WHERE WORK_INSTRUCTION_NO = #workInstructionNo#
+          AND MRP_GATHERING_NO = #mrpGatheringNo#
+
+    </update>
+    <delete id="deleteWorkInstruction" parameterClass="workInstructionTO">
+
+        DELETE
+        FROM PRODUCTION_WORK_INSTRUCTION
+        WHERE WORK_INSTRUCTION_NO = #workInstructionNo#
+          AND MRP_GATHERING_NO = #mrpGatheringNo#
+    </delete>
+    <resultMap id="materialCheckResult" class="materialCheckTempTO">
+        <result property="itemCode" column="ITEM_CODE"/>
+        <result property="itemName" column="ITEM_NAME"/>
+        <result property="stocktaking" column="STOCKTAKING"/>
+        <result property="safetyStocktaking" column="SAFETY_STOCKTAKING"/>
+        <result property="stockStatus" column="STOCK_STATUS"/>
+        <result property="safetyStockStatus" column="SAFETY_STOCK_STATUS"/>
+
+    </resultMap>
+    <parameterMap id="materialCheckParameter" class="map">
+        <parameter property="mpsNo" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN"/>
+        <parameter property="errorCode" jdbcType="DECIMAL" javaType="java.lang.Integer" mode="OUT"/>
+        <parameter property="errorMsg" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT"/>
+        <parameter property="result" jdbcType="ORACLECURSOR" javaType="java.sql.ResultSet" mode="OUT"/>
+    </parameterMap>
+
+    <procedure id="materialCheckTempList" parameterMap="materialCheckParameter" resultMap="materialCheckResult">
+        <![CDATA[
+        {call P_MATERIAL_CHECK_OPEN(?,?,?,?)}
+    ]]>
+    </procedure>
+</sqlMap>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="estimateDetail">
+<!-- estimateDetailDAO -->
+
+	<typeAlias alias="estimateDetailTO" type="net.plang.logistics.business.to.EstimateDetailTO"/>
+	<resultMap class="estimateDetailTO" id="estimateDetailResult">
+
+	<result property="estimateDetailNo" column="ESTIMATE_DETAIL_NO"/>
+	<result property="estimateNo" column="ESTIMATE_NO"/>
+	<result property="itemCode" column="ITEM_CODE"/>
+	<result property="itemName" column="ITEM_NAME"/>
+	<result property="unitOfEstimate" column="UNIT_OF_ESTIMATE"/>
+	<result property="dueDateOfEstimate" column="DUE_DATE_OF_ESTIMATE"/>
+	<result property="estimateAmount" column="ESTIMATE_AMOUNT"/>
+	<result property="unitPriceOfEstimate" column="UNIT_PRICE_OF_ESTIMATE"/>
+
+	<result property="sumPriceOfEstimate" column="SUM_PRICE_OF_ESTIMATE"/>
+	<result property="description" column="DESCRIPTION"/>
+
+	</resultMap>
+
+	<select id="selectEstimateDetailList" resultMap="estimateDetailResult">
+
+		SELECT
+		ESTIMATE_DETAIL_NO, ESTIMATE_NO, ITEM_CODE
+		, ITEM_NAME, UNIT_OF_ESTIMATE, DUE_DATE_OF_ESTIMATE
+		, ESTIMATE_AMOUNT, UNIT_PRICE_OF_ESTIMATE
+		, SUM_PRICE_OF_ESTIMATE, SUM_PRICE_OF_ESTIMATE
+		, DESCRIPTION
+		FROM ESTIMATE_DETAIL
+
+	</select>
+	<insert id="insertEstimateDetail" parameterClass="estimateDetailTO">
+		INSERT INTO ESTIMATE_DETAIL
+		VALUES
+		( #estimateDetailNo#
+		, #estimateNo#
+		, #itemCode#
+		, #itemName#
+		, #unitOfEstimate#
+		, #dueDateOfEstimate#
+		, #estimateAmount#
+		, #unitPriceOfEstimate#
+		, #sumPriceOfEstimate#
+		, #description#
+		 )
+
+	</insert>
+	<update id="updateEstimateDetail" parameterClass="estimateDetailTO">
+
+		UPDATE ESTIMATE_DETAIL SET
+		 ESTIMATE_DETAIL_NO = #estimateDetailNo#
+     	,ESTIMATE_NO = #estimateNo#
+     	,ITEM_CODE = #itemCode#
+		,ITEM_NAME = #itemName#
+		,UNIT_OF_ESTIMATE = #unitOfEstimate#
+		,DUE_DATE_OF_ESTIMATE = #dueDateOfEstimate#
+		,ESTIMATE_AMOUNT = #estimateAmount#
+		,UNIT_PRICE_OF_ESTIMATE = #unitPriceOfEstimate#
+		,SUM_PRICE_OF_ESTIMATE = #sumPriceOfEstimate#
+		,DESCRIPTION = #description#
+		WHERE	ESTIMATE_DETAIL_NO = #estimateDetailNo#
+
+	</update>
+	<delete id="deleteEstimateDetail" parameterClass="estimateDetailTO">
+
+		DELETE FROM ESTIMATE_DETAIL
+		WHERE ESTIMATE_DETAIL_NO = #estimateDetailNo#
+		AND ESTIMATE_NO = #estimateNo#
+
+	</delete>
+</sqlMap>

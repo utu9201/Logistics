@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="766" Id="MPS" Left="8" OnLoadCompleted="MPS_OnLoadCompleted" PidAttrib="7" Title="New&#32;Form" Top="8" Ver="1.0" Width="1330" WorkArea="true">
+		<Tab BKSelColor="user3" Border="SunkenEdge" Font="한컴산뜻돋움,13,Bold" Height="731" Id="Tab0" Left="9" OnChanged="Tab0_OnChanged" SelColor="default" TabOrder="1" Top="21" Width="1310">
+			<Contents>
+				<TabPage BorderColor="black" Height="698" Id="tab1" Left="2" TabOrder="1" Text="주생산계획(MPS)&#32;작성" Top="31" Width="1306">
+					<Div Font="돋움체,8" Height="697" Id="Div0" Left="8" TabOrder="1" Text="Div0" Top="7" Url="Production::MPSManagement" Width="1298">
+						<Contents></Contents>
+					</Div>
+				</TabPage>
+				<TabPage BorderColor="black" Height="698" Id="tab2" Left="2" TabOrder="1" Text="내역조회" Top="31" Width="1306">
+					<Div Font="굴림체,8" Height="458" Id="Div0" Left="9" TabOrder="1" Text="Div0" Top="10" Url="Production::ApplyMPS" Width="1298">
+						<Contents></Contents>
+					</Div>
+				</TabPage>
+			</Contents>
+		</Tab>
+	</Form>
+	<Script><![CDATA[
+function MPS_OnLoadCompleted(obj)
+{
+	
+		
+	http.Sync=true;
+		// transaction("findContractDetailList",
+				// "svcBusiness::contract.do?method=findContractDetailList",
+				// "",
+				// "gds_contractDetail=gds_contractDetail",
+				// "",
+				// "callback");
+	
+	transaction("findMpsList",
+				"svcproduction::mps.do?method=findMpsList",
+				"",
+				"gds_mps=gds_mps",
+				"",
+				"callback");	
+	
+	http.Sync=false;
+
+	//gds_contractDetail.Filter("MPS_APPLY_STATUS!='Y'");
+	gds_contractDetail.Filter("MPS_APPLY_STATUS!='Y' && DELIVERY_STATUS!='Y'");
+	
+	gds_mps.Filter("MRP_APPLY_STATUS!='Y'");
+	
+	//reload();
+}
+
+
+
+
+
+
+function Tab0_OnChanged(obj,nOldIndex,nNewindex)
+{
+	
+	
+	if(nNewindex==1){
+	gds_mps.UnFilter();
+	}else{
+	gds_mps.Filter("MPS_NO='XX'");
+	}
+}
+
+
+]]></Script>
+</Window>
