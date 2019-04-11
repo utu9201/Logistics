@@ -14,18 +14,18 @@ import net.plang.base.to.MenuTO;
 
 public interface BaseApplicationService {
 
-    List<CodeTO> findCodeList();
+    List<CodeTO> getCodeList();
     // 코드리스트 조회
 
-    List<CodeDetailTO> findCodeDetailList();
+    List<CodeDetailTO> getCodeDetailList();
     // 상세코드리스트 조회
 
     void batchDetailCode(List<CodeDetailTO> codeDetailList);
     // DetailCode 변경저장
 
-    List<MenuTO> findMenuList();
+    List<MenuTO> getMenuList();
 
-    String takeSerialCode(String findSeq);
+    String getSerialCode(String findSeq);
 
     HashMap<String, Object> accessToAuthority(String empCode, String empPassword, String deptCode) throws IdNotFoundException, DeptCodeNotFoundException, PwMissmatchException, DataAccessException;
 }

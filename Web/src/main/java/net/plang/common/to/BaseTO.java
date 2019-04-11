@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class BaseTO {
 
-    private String status = "noraml";
+    private String status = "normal";
 }

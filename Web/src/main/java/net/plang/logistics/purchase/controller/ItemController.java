@@ -2,37 +2,32 @@ package net.plang.logistics.purchase.controller;
 
 import java.util.List;
 
-import com.tobesoft.platform.data.PlatformData;
-import net.plang.common.controller.MiplatformController;
+import com.tobesoft.xplatform.data.PlatformData;
+import net.plang.common.mapper.DatasetBeanMapper;
 import net.plang.logistics.purchase.sf.PurchaseServiceFacade;
 import net.plang.logistics.purchase.to.ItemTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-public class ItemController extends MiplatformController {
-
-
+public class ItemController {
+    @Autowired
     private PurchaseServiceFacade purchaseServiceFacade;
+    @Autowired
+    private DatasetBeanMapper datasetBeanMapper;
 
+    @RequestMapping("/logistics/purchase/getItemList.do")
+    public void getItemList(@RequestAttribute("inData") PlatformData inData, @RequestAttribute("outData") PlatformData outData) throws Exception {
+        List<ItemTO> itemList = purchaseServiceFacade.getItemList();
 
-    public void setPurchaseServiceFacade(PurchaseServiceFacade purchaseServiceFacade) {
-        this.purchaseServiceFacade = purchaseServiceFacade;
-    }
-
-    public void findItemList(PlatformData inData, PlatformData outData) throws Exception {
-        List<ItemTO> itemList = purchaseServiceFacade.findItemList();
         datasetBeanMapper.beansToDataset(outData, itemList, ItemTO.class);
-
     }
 
-    public void batchItem(PlatformData inData, PlatformData outData) throws Exception {
-
+    @RequestMapping("/logistics/purchase/batchItem.do")
+    public void batchItem(@RequestAttribute("inData") PlatformData inData, @RequestAttribute("outData") PlatformData outData) throws Exception {
         List<ItemTO> itemList = datasetBeanMapper.datasetToBeans(inData, ItemTO.class);
 
         purchaseServiceFacade.batchItem(itemList);
-
-        findItemList(inData, outData);
-
-
+        getItemList(inData, outData);
     }
-
-
 }

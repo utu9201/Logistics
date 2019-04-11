@@ -13,19 +13,17 @@ import net.plang.logistics.purchase.to.OrderGatheringTO;
 import net.plang.logistics.purchase.to.OrderInfoTO;
 import net.plang.logistics.purchase.to.StockTO;
 import net.plang.logistics.purchase.to.WarehousingTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PurchaseServiceFacadeImpl implements PurchaseServiceFacade {
-
+    @Autowired
     private PurchaseApplicationService purchaseApplicationService;
 
-    public void setPurchaseApplicationService(PurchaseApplicationService purchaseApplicationService) {
-        this.purchaseApplicationService = purchaseApplicationService;
-    }
-
     @Override
-    public List<ItemTO> findItemList() {
-
-        return purchaseApplicationService.findItemList();
+    public List<ItemTO> getItemList() {
+        return purchaseApplicationService.getItemList();
     }
 
     @Override
@@ -34,23 +32,23 @@ public class PurchaseServiceFacadeImpl implements PurchaseServiceFacade {
     }
 
     @Override
-    public List<BomTO> findBomList() {
-        return purchaseApplicationService.findBomList();
+    public List<BomTO> getBomList() {
+        return purchaseApplicationService.getBomList();
     }
 
     @Override
-    public List<BomDeployTO> findBomDeployList(String itemCode, String deployCondition) {
-        return purchaseApplicationService.findBomDeployList(itemCode, deployCondition);
+    public List<BomDeployTO> getBomDeployList(String itemCode, String deployCondition) {
+        return purchaseApplicationService.getBomDeployList(itemCode, deployCondition);
     }
 
     @Override
-    public List<OrderInfoTO> findOrderInfoList() {
-        return purchaseApplicationService.findOrderInfoList();
+    public List<OrderInfoTO> getOrderInfoList() {
+        return purchaseApplicationService.getOrderInfoList();
     }
 
     @Override
-    public List<OrderDetailTO> findOrderDetailList() {
-        return purchaseApplicationService.findOrderDetailList();
+    public List<OrderDetailTO> getOrderDetailList() {
+        return purchaseApplicationService.getOrderDetailList();
     }
 
     @Override
@@ -60,13 +58,13 @@ public class PurchaseServiceFacadeImpl implements PurchaseServiceFacade {
     }
 
     @Override
-    public List<OrderGatheringTO> findOrderGatheringList() {
-        return purchaseApplicationService.findOrderGatheringList();
+    public List<OrderGatheringTO> getOrderGatheringList() {
+        return purchaseApplicationService.getOrderGatheringList();
     }
 
     @Override
-    public List<StockTO> findStockList() {
-        return purchaseApplicationService.findStockList();
+    public List<StockTO> getStockList() {
+        return purchaseApplicationService.getStockList();
     }
 
     @Override
@@ -75,8 +73,8 @@ public class PurchaseServiceFacadeImpl implements PurchaseServiceFacade {
     }
 
     @Override
-    public List<MaterialPaymentTO> findMaterialPaymentList() {
-        return purchaseApplicationService.findMaterialPaymentList();
+    public List<MaterialPaymentTO> getMaterialPaymentList() {
+        return purchaseApplicationService.getMaterialPaymentList();
     }
 
     @Override
@@ -85,8 +83,8 @@ public class PurchaseServiceFacadeImpl implements PurchaseServiceFacade {
     }
 
     @Override
-    public List<WarehousingTO> findWarehousingList() {
-        return purchaseApplicationService.findWarehousingList();
+    public List<WarehousingTO> getWarehousingList() {
+        return purchaseApplicationService.getWarehousingList();
     }
 
     @Override

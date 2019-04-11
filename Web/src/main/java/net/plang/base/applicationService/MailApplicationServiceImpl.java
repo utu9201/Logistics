@@ -6,9 +6,11 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -16,9 +18,11 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.List;
 
-
+@Component
 public class MailApplicationServiceImpl implements MailApplicationServce {
+    @Autowired
     private JavaMailSender javaMailSender;
+    @Autowired
     private ReportDAO reportDAO;
 
     @Override
@@ -30,7 +34,7 @@ public class MailApplicationServiceImpl implements MailApplicationServce {
             InputStream jrxmlStream = this.getClass().getResourceAsStream("/pdfTemplate/Contract.jrxml");
             JasperDesign jasperDesign = JRXmlLoader.load(jrxmlStream);
 
-            List<ContractReportTO> contractReport = reportDAO.getContractReport(contractNo);
+            List<ContractReportTO> contractReport = reportDAO.selectContractReport(contractNo);
 
             System.out.println(contractReport.size());
             JRDataSource jrDataSource = new JRBeanCollectionDataSource(contractReport);
@@ -59,13 +63,5 @@ public class MailApplicationServiceImpl implements MailApplicationServce {
             e.printStackTrace();
         }
 
-    }
-
-    public void setJavaMailSender(JavaMailSender javaMailSender) {
-        this.javaMailSender = javaMailSender;
-    }
-
-    public void setReportDAO(ReportDAO reportDAO) {
-        this.reportDAO = reportDAO;
     }
 }

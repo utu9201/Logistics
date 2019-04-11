@@ -23,7 +23,10 @@ import net.plang.logistics.purchase.applicationService.PurchaseApplicationServic
 import net.plang.logistics.purchase.to.MaterialPaymentTO;
 import net.plang.logistics.purchase.to.StockTO;
 import net.plang.logistics.purchase.to.WarehousingTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductionApplicationServiceImpl implements ProductionApplicationService {
 
     private MpsDAO mpsDAO;
@@ -36,10 +39,11 @@ public class ProductionApplicationServiceImpl implements ProductionApplicationSe
 
     private PrmDAO prmDAO;
 
-    private PurchaseApplicationService pruchaseApplicationSerivce;
+    @Autowired
+    private PurchaseApplicationService purchaseApplicationSerivce;
 
-    public void setPruchaseApplicationSerivce(PurchaseApplicationService pruchaseApplicationSerivce) {
-        this.pruchaseApplicationSerivce = pruchaseApplicationSerivce;
+    public void setPurchaseApplicationSerivce(PurchaseApplicationService purchaseApplicationSerivce) {
+        this.purchaseApplicationSerivce = purchaseApplicationSerivce;
     }
 
     public void setPrmDAO(PrmDAO prmDAO) {
@@ -69,7 +73,7 @@ public class ProductionApplicationServiceImpl implements ProductionApplicationSe
     }
 
     @Override
-    public List<MpsTO> findMpsList() {
+    public List<MpsTO> getMpsList() {
         return mpsDAO.selectMpsList();
     }
 
@@ -100,17 +104,17 @@ public class ProductionApplicationServiceImpl implements ProductionApplicationSe
     }
 
     @Override
-    public List<MrpTO> findMrpList() {
+    public List<MrpTO> getMrpList() {
         return mrpDAO.selectMrpList();
     }
 
     @Override
-    public List<MrpGatheringTO> findMrpGatheringList() {
+    public List<MrpGatheringTO> getMrpGatheringList() {
         return mrpGatheringDAO.selectMrpGatheringList();
     }
 
     @Override
-    public List<WorkInstructionTO> findWorkInstructionList() {
+    public List<WorkInstructionTO> getWorkInstructionList() {
         return workInstructionDAO.selectWorkInstructionList();
     }
 
@@ -161,17 +165,17 @@ public class ProductionApplicationServiceImpl implements ProductionApplicationSe
         }
 
         if (materialPaymentList != null) {
-            pruchaseApplicationSerivce.registMaterialPayment(materialPaymentList);
+            purchaseApplicationSerivce.registMaterialPayment(materialPaymentList);
         }
 
         if (stockList != null) {
-            pruchaseApplicationSerivce.batchStock(stockList);
+            purchaseApplicationSerivce.batchStock(stockList);
         }
 
     }
 
     @Override
-    public List<PrmTO> findPrmList() {
+    public List<PrmTO> getPrmList() {
         return prmDAO.selectPrmList();
     }
 
@@ -192,13 +196,13 @@ public class ProductionApplicationServiceImpl implements ProductionApplicationSe
 
         registWorkInstruction(workInstructionList, null, null, null);
 
-        pruchaseApplicationSerivce.batchStock(stockList);
+        purchaseApplicationSerivce.batchStock(stockList);
 
-        pruchaseApplicationSerivce.registWarehousing(null, null, null, warehousingList);
+        purchaseApplicationSerivce.registWarehousing(null, null, null, warehousingList);
     }
 
     @Override
-    public List<MrpOpenTempTO> findMrpOpenTempProcessList(String mpsNo) {
+    public List<MrpOpenTempTO> getMrpOpenTempProcessList(String mpsNo) {
         System.out.println("프로시저 어플리케이션 시작");
         MpsTO mpsTO = new MpsTO();
         mpsTO.setMpsNo(mpsNo);
@@ -233,7 +237,7 @@ public class ProductionApplicationServiceImpl implements ProductionApplicationSe
     }
 
     @Override
-    public List<MrpGatheringTO2> findMrpGatheringList2(List<MrpTO> mrplist) {
+    public List<MrpGatheringTO2> getMrpGatheringList2(List<MrpTO> mrplist) {
 
         String mrpNo = "";
 
@@ -286,7 +290,7 @@ public class ProductionApplicationServiceImpl implements ProductionApplicationSe
     ////////여기부터 실험대상들
     @SuppressWarnings("unchecked")
     @Override
-    public List<MrpOpenTempTO> findMrpOpenTempProcessList(HashMap<String, Object> paramMap) {
+    public List<MrpOpenTempTO> getMrpOpenTempProcessList(HashMap<String, Object> paramMap) {
         return mrpDAO.MrpOpenTempProcessList(paramMap);
     }
 
@@ -304,7 +308,7 @@ public class ProductionApplicationServiceImpl implements ProductionApplicationSe
     }
 
     @Override
-    public List<MaterialCheckTempTO> findMaterialCheckTempList(Map<String, Object> paramMap) {
+    public List<MaterialCheckTempTO> getMaterialCheckTempList(Map<String, Object> paramMap) {
         return null;
     }
 }

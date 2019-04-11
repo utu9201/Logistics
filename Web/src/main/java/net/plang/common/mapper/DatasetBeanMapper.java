@@ -2,27 +2,130 @@ package net.plang.common.mapper;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.tobesoft.platform.PlatformConstants;
-import com.tobesoft.platform.data.Dataset;
-import com.tobesoft.platform.data.DatasetList;
-import com.tobesoft.platform.data.PlatformData;
-import com.tobesoft.platform.data.Variant;
-
+import org.apache.commons.lang.WordUtils;
+import com.tobesoft.xplatform.data.DataSet;
+import com.tobesoft.xplatform.data.DataSetList;
+import com.tobesoft.xplatform.data.DataTypes;
+import com.tobesoft.xplatform.data.PlatformData;
 import net.plang.common.annotation.Column;
+import net.plang.common.annotation.Dataset;
 import net.plang.common.annotation.Remove;
 
 public class DatasetBeanMapper {
+    public <T> List<T> datasetToBeans(PlatformData inData, Class<T> classType) throws Exception {
+        String datasetName = getDataSetName(classType);
+        DataSet dataset = inData.getDataSet(datasetName);
+        List<T> beanList = new ArrayList<T>();
+        T bean = null;
+        int rowCount = dataset.getRowCount();
+        for (int rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+            bean = getBean(dataset, classType, rowIndex);
+            beanList.add(bean);
+        }
+        rowCount = dataset.getRemovedRowCount();
+        for (int rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+            bean = getDeletedBean(dataset, classType, rowIndex);
+            beanList.add(bean);
+        }
+        return beanList;
+    }
 
-    /* 반환형 앞의 <T>는 제네릭메서드 이다 */
-    private <T> String getDatasetName(Class<T> classType) {
-        /* 해당클래스의 annotation이 있으면 클래스의 annotation 을 반환 그렇지않으면 null을 반환 */
-        return classType.getAnnotation(net.plang.common.annotation.Dataset.class).name();
+    public <T> T datasetToBean(PlatformData inData, Class<T> classType) throws Exception {
+        T bean = null;
+        String datasetName = getDataSetName(classType);
+        DataSet dataset = inData.getDataSet(datasetName);
+        if (dataset.getRemovedRowCount() == 0)
+            bean = getBean(dataset, classType, 0);
+        else
+            bean = getDeletedBean(dataset, classType, 0);
+        return bean;
+    }
+
+    public <T> void beansToDataset(PlatformData outData, List<T> beanList, Class<T> classType) throws Exception {
+        Map<String, String> nameMap = new HashMap<String, String>();
+        DataSetList datasetList = outData.getDataSetList();
+        String datasetName = getDataSetName(classType);
+        DataSet dataset = new DataSet(datasetName);
+        datasetList.add(dataset);
+        Method[] methods = classType.getDeclaredMethods();
+        for (Method method : methods)
+            setColumnName(dataset, nameMap, method);
+        for (T bean : beanList)
+            setColumnValue(dataset, nameMap, bean);
+    }
+
+    public <T> void beanToDataset(PlatformData outData, T bean, Class<T> classType) throws Exception {
+        Map<String, String> nameMap = new HashMap<String, String>();
+        DataSetList datasetList = outData.getDataSetList();
+        String datasetName = getDataSetName(classType);
+        DataSet dataset = new DataSet(datasetName);
+        datasetList.add(dataset);
+        if (bean != null) {
+            Method[] methods = classType.getDeclaredMethods();
+            for (Method method : methods)
+                setColumnName(dataset, nameMap, method);
+            setColumnValue(dataset, nameMap, bean);
+        }
+    }
+
+    public void mapToDataset(PlatformData outData, List<Map<String, Object>> mapList, String datasetName) throws Exception {
+        DataSetList datasetList = outData.getDataSetList();
+        DataSet dataset = new DataSet(datasetName);
+        datasetList.add(dataset);
+        for (String key : mapList.get(0).keySet()) {
+            String columnName = key.toLowerCase();
+            dataset.addColumn(columnName, DataTypes.STRING, 256);
+        }
+        int rowIndex = 0;
+        for (Map<String, Object> map : mapList) {
+            rowIndex = dataset.newRow();
+            for (String key : map.keySet()) {
+                Object columnValue = map.get(key);
+                dataset.set(rowIndex, key.toLowerCase(), columnValue);
+            }
+        }
+    }
+
+    public List<Map<String, Object>> datasetToMap(PlatformData inData, String datasetName) throws Exception {
+        List<Map<String, Object>> mapList = new ArrayList<>();
+        DataSet dataset = inData.getDataSet(datasetName);
+        int rowCount = dataset.getRowCount();
+        for (int rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("status", dataset.getRowTypeName(rowIndex));
+            for (int colIndex = 0; colIndex < dataset.getColumnCount(); colIndex++) {
+                String key = dataset.getColumn(colIndex).getName();
+                Object value = dataset.getObject(rowIndex, key);
+                map.put(formattingToCamel(key), value);
+            }
+            mapList.add(map);
+        }
+        rowCount = dataset.getRemovedRowCount();
+        for (int rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("status", dataset.getRowTypeName(rowIndex));
+            for (int colIndex = 0; colIndex < dataset.getColumnCount(); colIndex++) {
+                String key = dataset.getColumn(colIndex).getName();
+                Object value = dataset.getObject(rowIndex, key);
+                map.put(formattingToCamel(key), value);
+            }
+            mapList.add(map);
+        }
+        return mapList;
+    }
+
+    private <T> String getDataSetName(Class<T> classType) {
+        if (classType.isAnnotationPresent(Dataset.class))
+            return classType.getAnnotation(Dataset.class).name();
+        else
+            return "ds" + classType.getName().replace("Bean", "");
     }
 
     private String getColumnName(Method method) {
@@ -30,213 +133,119 @@ public class DatasetBeanMapper {
         Annotation[] annotations = method.getAnnotations();
         for (Annotation annotation : annotations) {
             if (annotation instanceof Column) {
-                String annoValue = ((Column) annotation).name();
-                columnName = annoValue;
+                String annotaionName = ((Column) annotation).name();
+                columnName = annotaionName;
             }
         }
-
         if (annotations.length == 0)
             columnName = formattingToSnake(method.getName());
         return columnName;
+    }
+
+    private void setColumnName(DataSet dataset, Map<String, String> nameMap, Method method) {
+        if (method.getName().startsWith("get")) {
+            Column column = method.getAnnotation(Column.class);
+            Remove remove = method.getAnnotation(Remove.class);
+            if (column != null) {
+                dataset.addColumn(column.name(), getDataType(method));
+                nameMap.put(column.name(), method.getName());
+            } else if (column == null && remove == null) {
+                String columnName = formattingToSnake(method.getName());
+                dataset.addColumn(columnName, getDataType(method));
+                nameMap.put(columnName, method.getName());
+            }
+        }
+    }
+
+    private <T> void setColumnValue(DataSet dataset, Map<String, String> nameMap, T bean) throws Exception {
+        int rowIndex = dataset.newRow();
+        for (String columnName : nameMap.keySet()) {
+            String methodName = nameMap.get(columnName);
+            Method method = bean.getClass().getDeclaredMethod(methodName);
+            Object value = method.invoke(bean);
+            dataset.set(rowIndex, columnName, value);
+        }
+    }
+
+    private <T> T getBean(DataSet dataset, Class<T> classType, int rowIndex) throws Exception {
+        T bean = classType.newInstance();
+        Method[] methods = classType.getDeclaredMethods();
+        Method statusMethod = classType.getMethod("setStatus", String.class);
+        String rowType = null;
+        switch (dataset.getRowTypeName(rowIndex)) {
+            case "inserted":
+                rowType = "insert";
+                break;
+            case "updated":
+                rowType = "update";
+                break;
+        }
+        statusMethod.invoke(bean, rowType);
+        for (Method method : methods) {
+            if (method.getName().startsWith("set")) {
+                String columnName = getColumnName(method);
+                if (columnName != null) {
+                    Object columnValue = dataset.getObject(rowIndex, columnName);
+                    if (columnValue != null)
+                        method.invoke(bean, columnValue);
+                }
+            }
+        }
+        return bean;
+    }
+
+    private <T> T getDeletedBean(DataSet dataset, Class<T> classType, int rowIndex) throws Exception {
+        T bean = classType.newInstance();
+        Method[] methods = classType.getDeclaredMethods();
+        Method statusMethod = classType.getMethod("setStatus", String.class);
+        statusMethod.invoke(bean, "delete");
+        for (Method method : methods) {
+            if (method.getName().startsWith("set")) {
+                String columnName = getColumnName(method);
+                if (columnName != null) {
+                    Object columnValue = dataset.getRemovedData(rowIndex, columnName);
+                    if (columnValue != null)
+                        method.invoke(bean, columnValue);
+                }
+            }
+        }
+        return bean;
+    }
+
+    private int getDataType(Method method) {
+        Class<?> returnType = method.getReturnType();
+        if (returnType == Date.class)
+            return DataTypes.DATE;
+        else if (returnType == String.class)
+            return DataTypes.STRING;
+        else if (returnType == int.class || returnType == boolean.class)
+            return DataTypes.INT;
+        else if (returnType == BigDecimal.class)
+            return DataTypes.BIG_DECIMAL;
+        else if (returnType == double.class)
+            return DataTypes.DOUBLE;
+        else if (returnType == byte[].class)
+            return DataTypes.BLOB;
+        else
+            return DataTypes.NULL;
     }
 
     private String formattingToSnake(String name) {
         String regex = "([a-z])([A-Z])";
         String replacement = "$1_$2";
 
-        name = name.substring(3);
+        if (name.startsWith("set") || name.startsWith("get"))
+            name = name.substring(3);
+        // aA -> a_A
         name = name.replaceAll(regex, replacement);
-        return name.toLowerCase();
+        // return A_A
+        return name.toUpperCase();
     }
 
-    @SuppressWarnings("unused")
     private String formattingToCamel(String name) {
-        String regex = "([a-z])([A-Z])";
-
-        return name;
-    }
-
-    private void setColumnName(Dataset dataset, Method method, Map<String, String> nameMapper) {
-        if (method.getName().startsWith("get")) {
-            Column column = method.getAnnotation(Column.class);
-            Remove remove = method.getAnnotation(Remove.class);
-
-            if (column != null) {
-                dataset.addStringColumn(column.name());
-                nameMapper.put(column.name(), method.getName());
-            } else if (column == null && remove == null) {
-                String columnName = formattingToSnake(method.getName());
-
-                dataset.addStringColumn(columnName);
-                nameMapper.put(columnName, method.getName());
-            }
-        }
-    }
-
-    private <T> void setColumn(Dataset dataset, Map<String, String> nameMapper, T bean) throws Exception {
-        int rowIndex = dataset.appendRow();
-
-        for (String columnName : nameMapper.keySet()) {
-            String methodName = nameMapper.get(columnName);
-
-            Method method = bean.getClass().getDeclaredMethod(methodName);
-            Variant variant = new Variant(method.invoke(bean));
-            dataset.setColumn(rowIndex, columnName, variant);
-        }
-    }
-
-    private <T> T setBean(Dataset dataset, Class<T> classType, int rowIndex) throws Exception {
-        T bean = classType.newInstance();
-        Method[] methods = classType.getDeclaredMethods();
-        Method statusSetMethod = classType.getMethod("setStatus", String.class);
-        statusSetMethod.invoke(bean, dataset.getRowStatus(rowIndex));
-
-        for (Method method : methods) {
-            if (method.getName().startsWith("set")) {
-                String columnName = getColumnName(method);
-                System.out.println("\n컬럼명::" + columnName);
-                if (columnName != null) {
-                    int columnIndex = dataset.getColumnIndex(columnName);
-                    System.out.println("\n칼럼인덱스::" + columnIndex);
-                    Variant variant = dataset.getColumn(rowIndex, columnIndex);
-                    System.out.println("\n변수::" + variant);
-                    if (variant != null) {
-                        method.invoke(bean, variant.getString());
-                        System.out.println("\n메서드실행::");
-                    }
-                }
-            }
-        }
-        return bean;
-    }
-
-    private <T> T setDeleteBean(Dataset dataset, Class<T> classType, int rowIndex) throws Exception {
-        T bean = classType.newInstance();
-        Method[] methods = classType.getDeclaredMethods();
-        Method statusSetMethod = classType.getMethod("setStatus", String.class);
-        statusSetMethod.invoke(bean, "delete");
-
-        for (Method method : methods) {
-            if (method.getName().startsWith("set")) {
-                String columnName = getColumnName(method);
-                if (columnName != null) {
-                    Variant columnValue = dataset.getDeleteColumn(rowIndex, columnName);
-                    if (columnValue != null)
-                        method.invoke(bean, columnValue.getString());
-                }
-            }
-        }
-        return bean;
-    }
-
-    public <T> List<T> datasetToBeans(PlatformData inData, Class<T> classType) throws Exception {
-        List<T> beanList = new ArrayList<T>();
-        String datasetName = getDatasetName(classType);
-        Dataset dataset = inData.getDataset(datasetName);
-        T bean = null;
-        int rowCount = dataset.getRowCount();
-        for (int rowIndex = 0; rowIndex < rowCount; rowIndex++) {
-            bean = setBean(dataset, classType, rowIndex);
-            beanList.add(bean);
-        }
-        rowCount = dataset.getDeleteRowCount();
-        for (int rowIndex = 0; rowIndex < rowCount; rowIndex++) {
-            bean = setDeleteBean(dataset, classType, rowIndex);
-            beanList.add(bean);
-        }
-        return beanList;
-    }
-
-    public <T> void beansToDataset(PlatformData outData, List<T> beanList, Class<T> classType) throws Exception {
-        Map<String, String> nameMapper = new HashMap<String, String>();
-        DatasetList datasetList = outData.getDatasetList();
-
-        String datasetName = getDatasetName(classType);
-        System.out.println(datasetName);
-        Dataset dataset = new Dataset(datasetName, PlatformConstants.CHARSET_UTF8, false, false);
-        datasetList.addDataset(dataset);
-
-        Method[] methods = classType.getDeclaredMethods();
-        for (Method method : methods) {
-            setColumnName(dataset, method, nameMapper);
-        }
-        for (T bean : beanList)
-            setColumn(dataset, nameMapper, bean);
-
-    }
-
-    public <T> T datasetToBean(PlatformData inData, Class<T> classType) throws Exception {
-        T bean = null;
-
-        String datasetName = getDatasetName(classType);
-        Dataset dataset = inData.getDataset(datasetName);
-
-        System.out.println(dataset + "\nbeanMapper입니다!");
-
-        if (dataset.getDeleteRowCount() == 0)
-            bean = setBean(dataset, classType, 0);
-        else
-            bean = setDeleteBean(dataset, classType, 0);
-
-        return bean;
-    }
-
-    public <T> void beanToDataset(PlatformData outData, T bean, Class<T> classType) throws Exception {
-        Map<String, String> nameMapper = new HashMap<String, String>();
-        DatasetList datasetList = outData.getDatasetList();
-
-        String datasetName = getDatasetName(classType);
-        Dataset dataset = new Dataset(datasetName, PlatformConstants.CHARSET_UTF8, false, false);
-
-        datasetList.addDataset(dataset);
-
-        if (bean != null) {
-            Method[] methods = classType.getDeclaredMethods();
-            for (Method method : methods)
-                setColumnName(dataset, method, nameMapper);
-        }
-        setColumn(dataset, nameMapper, bean);
-    }
-
-    public void mapToDataset(PlatformData outData, String datasetName, List<Map<String, Object>> mapList) throws Exception {
-        DatasetList datasetList = outData.getDatasetList();
-        Dataset dataset = new Dataset(datasetName, PlatformConstants.CHARSET_UTF8, false, false);
-        datasetList.addDataset(dataset);
-
-        int rowIndex = 0;
-        for (Map<String, Object> map : mapList) {
-            rowIndex = dataset.appendRow();
-            for (String key : map.keySet()) {
-                String columnName = key; // formattingToSnake(key);
-
-                dataset.addStringColumn(columnName);
-                Variant variant = new Variant(map.get(key));
-                dataset.setColumn(rowIndex, columnName, variant);
-            }
-        }
-        dataset.printDataset();
-    }
-
-    public List<Map<String, Object>> datasetToMap(PlatformData inData, String datasetName) throws Exception {
-        List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
-
-        Dataset dataset = inData.getDataset(datasetName);
-        int rowCount = dataset.getRowCount();
-
-        for (int rowIndex = 0; rowIndex < rowCount; rowIndex++) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("status", dataset.getRowStatus(rowIndex));
-
-            for (int colIndex = 0; colIndex < dataset.getColumnCount(); colIndex++) {
-                String key = dataset.getColumnId(colIndex);
-                Variant variant = new Variant(dataset.getColumn(rowIndex, colIndex));
-                variant.setType(Variant.VT_OBJECT);
-                Object value = variant.getObject();
-                map.put(key, value);
-            }
-            mapList.add(map);
-        }
-
-        return mapList;
+        if (name.startsWith("set") || name.startsWith("get"))
+            name = name.substring(3);
+        String camel = WordUtils.capitalizeFully(name, new char[]{'_'}).replaceAll("_", "");
+        return camel.substring(0, 1).toLowerCase() + camel.substring(1);
     }
 }

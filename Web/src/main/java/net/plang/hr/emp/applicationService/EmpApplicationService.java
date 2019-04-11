@@ -6,7 +6,7 @@ import net.plang.hr.emp.to.EmployeeTO;
 
 public interface EmpApplicationService {
 
-    List<EmployeeTO> findEmployeeList();
+    List<EmployeeTO> getEmployeeList();
 
     void batchEmployeeList(List<EmployeeTO> employeeList);
 }

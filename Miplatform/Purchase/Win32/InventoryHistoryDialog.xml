@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Window>
-	<Form Height="720" Id="InventoryHistoryDialog" Left="8" OnInit="InventoryHistory_OnLoadCompleted" PidAttrib="7" Title="InventoryHistoryDialog" Top="8" Ver="1.0" Width="1200" WorkArea="true">
+	<Form Height="720" Id="InventoryHistoryDialog" Left="8" OnInit="InventoryHistory_OnLoadCompleted" PidAttrib="7" Title="재고이력조회" Top="8" Ver="1.0" Width="1200" WorkArea="true">
 		<Static Align="Center" BKColor="goldenrod" Border="SunkenEdge" Color="WINDOWTEXT" Font="한컴산뜻돋움,12,Bold" Height="44" Id="Static6" Left="14" TabOrder="1" Text="재고이력조회" Top="8" VAlign="Middle" Width="157"></Static>
 		<Grid BindDataset="gds_materialPayment" BkColor2="default" BoldHead="true" Bottom="704" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="25" Height="640" Id="grd_invenHistory" InputPanel="FALSE" Left="10" LineColor="default" Right="1184" RowHeight="25" TabOrder="2" TabStop="true" Top="64" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="1174">
 			<contents>

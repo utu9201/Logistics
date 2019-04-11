@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Window>
-	<Form Height="192" Id="deliveryDialog" Left="8" PidAttrib="7" Title="deliveryDialog" Top="8" Ver="1.0" Width="416" WorkArea="true">
+	<Form Height="192" Id="deliveryDialog" Left="8" PidAttrib="7" Title="납품&#32;수량" Top="8" Ver="1.0" Width="416" WorkArea="true">
 		<Static Align="Center" BKColor="INACTIVECAPTION" Font="Consolas,12" Height="32" Id="Static0" Left="10" TabOrder="1" Text="실제로&#32;납품할&#32;수량과&#32;사유를&#32;입력하시오." Top="8" VAlign="Middle" Width="392"></Static>
 		<Div Height="127" Id="Div0" Left="10" TabOrder="2" Text="Div0" Top="55" Width="392">
 			<Contents>

@@ -1,39 +1,40 @@
 package net.plang.base.controller;
 
+import com.tobesoft.xplatform.data.PlatformData;
+import net.plang.base.sf.BaseServiceFacade;
+import net.plang.base.to.MenuTO;
+import net.plang.common.mapper.DatasetBeanMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.HashMap;
 import java.util.List;
 
-import net.plang.common.controller.MiplatformController;
-import org.springframework.context.MessageSource;
-import org.springframework.ui.ModelMap;
+@Controller
+public class MemberLoginController {
 
-import net.plang.base.sf.BaseServiceFacade;
-import net.plang.base.to.MenuTO;
-import com.tobesoft.platform.data.PlatformData;
-
-public class MemberLoginController extends MiplatformController {
-
+    @Autowired
     private BaseServiceFacade baseServiceFacade;
-    private MessageSource messageSource;
-    private ModelMap modelMap = new ModelMap();
+    @Autowired
+    private DatasetBeanMapper datasetBeanMapper;
+//    @Autowired
+//    private MessageSource messageSource;
 
-    public void setBaseServiceFacade(BaseServiceFacade baseServiceFacade) {
-        this.baseServiceFacade = baseServiceFacade;
-    }
+//    private ModelMap modelMap = new ModelMap();
 
-    public void setMessageSource(MessageSource messageSource) {
-        this.messageSource = messageSource;
-    }
-
-    public void accessToAuthority(PlatformData inData, PlatformData outData) throws Exception {
+    @RequestMapping("/base/accessToAuthority.do")
+    public void accessToAuthority(@RequestAttribute("inData") PlatformData inData, @RequestAttribute("outData") PlatformData outData) throws Exception {
         System.out.println(inData);
-        String empCode = inData.getVariable("empCode").getValue().asString().toUpperCase();
-        String empPassword = inData.getVariable("empPassword").getValue().asString();
-        String deptCode = inData.getVariable("deptCode").getValue().asString().toUpperCase();
+        String empCode = inData.getVariable("empCode").getString().toUpperCase();
+        String empPassword = inData.getVariable("empPassword").getString();
+        String deptCode = inData.getVariable("deptCode").getString().toUpperCase();
+
         HashMap<String, Object> result = baseServiceFacade.accessToAuthority(empCode, empPassword, deptCode);
         List<MenuTO> menuList = (List<MenuTO>) result.get("masterMenuList");
-        outData.getVariableList().addStr("empCode", empCode);
-        outData.getVariableList().addStr("deptCode", deptCode);
+        outData.getVariableList().add("empCode", empCode);
+        outData.getVariableList().add("deptCode", deptCode);
         datasetBeanMapper.beansToDataset(outData, menuList, MenuTO.class);
 
     }

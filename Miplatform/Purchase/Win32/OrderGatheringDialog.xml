@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Window>
-	<Form Height="776" Id="OrderGatheringDialog" Left="8" OnLoadCompleted="OrderGatheringDialog_OnLoadCompleted" PidAttrib="7" Title="OrderGatheringDialog" Top="8" Ver="1.0" Width="1330" WorkArea="true">
+	<Form Height="776" Id="OrderGatheringDialog" Left="8" OnLoadCompleted="OrderGatheringDialog_OnLoadCompleted" PidAttrib="7" Title="발주취합" Top="8" Ver="1.0" Width="1330" WorkArea="true">
 		<Datasets>
 			<Dataset DataSetType="Dataset" Id="ds_orderGathering">
 				<Contents>

@@ -3,9 +3,11 @@ package net.plang.logistics.business.to;
 import lombok.Data;
 import net.plang.common.annotation.Dataset;
 import net.plang.common.to.BaseTO;
+import org.apache.ibatis.type.Alias;
 
 @Data
 @Dataset(name = "gds_estimateDetail")
+@Alias("EstimateDetailTO")
 public class EstimateDetailTO extends BaseTO {
 
     private String estimateDetailNo;

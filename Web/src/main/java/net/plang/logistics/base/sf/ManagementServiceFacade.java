@@ -9,13 +9,13 @@ import net.plang.logistics.base.to.WorkplaceTO;
 
 public interface ManagementServiceFacade {
 
-    List<DeptTO> findDeptList();
+    List<DeptTO> getDeptList();
 
-    List<CompanyTO> findCompanyList();
+    List<CompanyTO> getCompanyList();
 
-    List<WorkplaceTO> findWorkplaceList();
+    List<WorkplaceTO> getWorkplaceList();
 
-    List<PositionTO> findPositionList();
+    List<PositionTO> getPositionList();
 
     void batchDepartmentList(List<DeptTO> registDeptList);
 

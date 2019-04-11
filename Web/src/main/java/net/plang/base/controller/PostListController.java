@@ -1,10 +1,19 @@
 package net.plang.base.controller;
 
-import com.tobesoft.platform.data.PlatformData;
-
+import com.tobesoft.xplatform.data.PlatformData;
 import net.plang.base.to.PostTO;
-import net.plang.common.controller.MiplatformController;
+import net.plang.common.mapper.DatasetBeanMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.StringReader;
@@ -14,19 +23,16 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+@Controller
+@RequestMapping("/base/postList.do")
+public class PostListController {
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
+    @Autowired
+    private DatasetBeanMapper datasetBeanMapper;
 
-public class PostListController extends MiplatformController {
-
-    public void findPostList(PlatformData inData, PlatformData outData) throws Exception {
-        String dong = inData.getVariable("dong").getValue().getString();
-        String page = inData.getVariable("page").getValue().getString();
+    public void getPostList(@RequestAttribute("inData") PlatformData inData, @RequestAttribute("outData") PlatformData outData) throws Exception {
+        String dong = inData.getVariable("dong").getString();
+        String page = inData.getVariable("page").getString();
         List<PostTO> postList = searchAddress(dong, page);
         try {
             datasetBeanMapper.beansToDataset(outData, postList, PostTO.class);

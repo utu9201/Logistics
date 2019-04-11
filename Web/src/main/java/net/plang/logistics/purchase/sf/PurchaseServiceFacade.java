@@ -15,31 +15,31 @@ import net.plang.logistics.purchase.to.WarehousingTO;
 
 public interface PurchaseServiceFacade {
 
-    List<ItemTO> findItemList();
+    List<ItemTO> getItemList();
 
     List<ItemTO> batchItem(List<ItemTO> itemList);
 
-    List<BomTO> findBomList();
+    List<BomTO> getBomList();
 
-    List<BomDeployTO> findBomDeployList(String itemCode, String deployCondition);
+    List<BomDeployTO> getBomDeployList(String itemCode, String deployCondition);
 
-    List<OrderInfoTO> findOrderInfoList();
+    List<OrderInfoTO> getOrderInfoList();
 
-    List<OrderDetailTO> findOrderDetailList();
+    List<OrderDetailTO> getOrderDetailList();
 
-    List<OrderGatheringTO> findOrderGatheringList();
+    List<OrderGatheringTO> getOrderGatheringList();
 
     void registOrder(List<OrderInfoTO> orderInfoList, List<OrderDetailTO> orderDetailList, List<OrderGatheringTO> orderGatheringList);
 
-    List<StockTO> findStockList();
+    List<StockTO> getStockList();
 
     void batchStock(List<StockTO> stockList);
 
-    List<MaterialPaymentTO> findMaterialPaymentList();
+    List<MaterialPaymentTO> getMaterialPaymentList();
 
     void registMaterialPayment(List<MaterialPaymentTO> WarehousingList);
 
-    List<WarehousingTO> findWarehousingList();
+    List<WarehousingTO> getWarehousingList();
 
     void registWarehousing(List<OrderInfoTO> orderInfoList, List<OrderDetailTO> orderDetailList, List<StockTO> stockList, List<WarehousingTO> warehousingList);
 

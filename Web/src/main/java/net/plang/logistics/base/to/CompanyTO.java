@@ -3,9 +3,11 @@ package net.plang.logistics.base.to;
 import lombok.Data;
 import net.plang.common.annotation.Dataset;
 import net.plang.common.to.BaseTO;
+import org.apache.ibatis.type.Alias;
 
 @Data
 @Dataset(name = "gds_company")
+@Alias("CompanyTO")
 public class CompanyTO extends BaseTO {
 
     private String companyCode;

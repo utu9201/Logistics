@@ -12,31 +12,31 @@ import net.plang.logistics.business.to.EstimateTO;
 
 public interface BusinessServiceFacade {
 
-    List<EstimateTO> findEstimateList(String empCode);
+    List<EstimateTO> getEstimateList(String empCode);
 
-    List<EstimateTO> findEstimateDialog();
+    List<EstimateTO> getEstimateDialog();
 
     void registEstimateDetail(List<EstimateTO> estimateList, List<EstimateDetailTO> estimateDetailList);
 
-    List<EstimateDetailTO> findEstimateDetailList();
+    List<EstimateDetailTO> getEstimateDetailList();
 
-    List<ContractTO> findContractList();
+    List<ContractTO> getContractList();
 
-    List<ContractDetailTO> findContractDetailList();
+    List<ContractDetailTO> getContractDetailList();
 
     void registContract(List<ContractTO> contractList, List<ContractDetailTO> contractDetailList);
 
-    List<CustomerTO> findCustomerList();
+    List<CustomerTO> getCustomerList();
 
-    List<DeliveryResultTO> findDeliveryResultList();
+    List<DeliveryResultTO> getDeliveryResultList();
 
-    List<CompleteDeliveryResultTO> findCompleteDeliveryResultList();
+    List<CompleteDeliveryResultTO> getCompleteDeliveryResultList();
 
     void registDeliveryResult(List<DeliveryResultTO> deliveryResultList);
 
     void batchCustomerList(List<CustomerTO> batchCustomerList);
 
-    List<ContractDetailTO> findRangedContractDetailList(String fromDate, String toDate);
+    List<ContractDetailTO> getRangedContractDetailList(String fromDate, String toDate);
 
 
 }

@@ -4,9 +4,12 @@ import java.util.List;
 
 import net.plang.hr.emp.dao.EmployeeDAO;
 import net.plang.hr.emp.to.EmployeeTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EmpApplicationServiceImpl implements EmpApplicationService {
-
+    @Autowired
     private EmployeeDAO employeeDAO;
 
     public void setEmployeeDAO(EmployeeDAO employeeDAO) {
@@ -14,7 +17,7 @@ public class EmpApplicationServiceImpl implements EmpApplicationService {
     }
 
     @Override
-    public List<EmployeeTO> findEmployeeList() {
+    public List<EmployeeTO> getEmployeeList() {
         return employeeDAO.selectEmployeeList();
     }
 

@@ -1,30 +1,24 @@
 package net.plang.base.controller;
 
+import com.tobesoft.xplatform.data.PlatformData;
 import net.plang.base.sf.MailServiceFacade;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Controller
-@RequestMapping("/mail.do")
-public class MailController extends MultiActionController {
+public class MailController {
+    @Autowired
     private MailServiceFacade mailServiceFacade;
 
-    @RequestMapping(method = RequestMethod.GET)
-    protected ModelAndView sendContractReport(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+    @RequestMapping("/base/sendContractReport.do")
+    protected ModelAndView sendContractReport(@RequestAttribute("inData") PlatformData inData) throws Exception {
 
-        String contractNo = httpServletRequest.getParameter("contractNo");
+        String contractNo = inData.getVariable("contractNo").getString();
         mailServiceFacade.sendContractReport(contractNo);
 
         return null;
-    }
-
-    public void setMailServiceFacade(MailServiceFacade mailServiceFacade) {
-        this.mailServiceFacade = mailServiceFacade;
     }
 }

@@ -1,8 +1,10 @@
 package net.plang.base.to;
 
 import lombok.Data;
+import org.apache.ibatis.type.Alias;
 
 @Data
+@Alias("ContractReportTO")
 public class ContractReportTO {
     private String contractNo;
     private String contractDate;

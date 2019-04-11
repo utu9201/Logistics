@@ -17,17 +17,17 @@ import net.plang.logistics.production.to.WorkInstructionTO;
 import net.plang.logistics.purchase.to.MaterialPaymentTO;
 import net.plang.logistics.purchase.to.StockTO;
 import net.plang.logistics.purchase.to.WarehousingTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProductionServiceFacadeImpl implements ProductionServiceFacade {
+    @Autowired
     private ProductionApplicationService productionApplicationService;
-
-    public void setProductionApplicationService(ProductionApplicationService productionApplicationService) {
-        this.productionApplicationService = productionApplicationService;
-    }
-
+    
     @Override
-    public List<MpsTO> findMpsList() {
-        return productionApplicationService.findMpsList();
+    public List<MpsTO> getMpsList() {
+        return productionApplicationService.getMpsList();
     }
 
     @Override
@@ -36,19 +36,19 @@ public class ProductionServiceFacadeImpl implements ProductionServiceFacade {
     }
 
     @Override
-    public List<MrpTO> findMrpList() {
-        return productionApplicationService.findMrpList();
+    public List<MrpTO> getMrpList() {
+        return productionApplicationService.getMrpList();
     }
 
     ////////여기부터 실험대상들
     @Override
-    public List<MrpGatheringTO> findMrpGatheringList() {
-        return productionApplicationService.findMrpGatheringList();
+    public List<MrpGatheringTO> getMrpGatheringList() {
+        return productionApplicationService.getMrpGatheringList();
     }
 
     @Override
-    public List<WorkInstructionTO> findWorkInstructionList() {
-        return productionApplicationService.findWorkInstructionList();
+    public List<WorkInstructionTO> getWorkInstructionList() {
+        return productionApplicationService.getWorkInstructionList();
     }
 
     @Override
@@ -66,8 +66,8 @@ public class ProductionServiceFacadeImpl implements ProductionServiceFacade {
     }
 
     @Override
-    public List<PrmTO> findPrmList() {
-        return productionApplicationService.findPrmList();
+    public List<PrmTO> getPrmList() {
+        return productionApplicationService.getPrmList();
     }
 
     @Override
@@ -76,18 +76,18 @@ public class ProductionServiceFacadeImpl implements ProductionServiceFacade {
     }
 
     @Override
-    public List<MrpOpenTempTO> findMrpOpenTempProcessList(String mpsNo) {
-        return productionApplicationService.findMrpOpenTempProcessList(mpsNo);
+    public List<MrpOpenTempTO> getMrpOpenTempProcessList(String mpsNo) {
+        return productionApplicationService.getMrpOpenTempProcessList(mpsNo);
     }
 
     @Override
-    public List<MrpGatheringTO2> findMrpGatheringList2(List<MrpTO> mrpList) {
-        return productionApplicationService.findMrpGatheringList2(mrpList);
+    public List<MrpGatheringTO2> getMrpGatheringList2(List<MrpTO> mrpList) {
+        return productionApplicationService.getMrpGatheringList2(mrpList);
     }
 
     @Override
-    public List<MrpOpenTempTO> findMrpOpenTempProcessList(HashMap<String, Object> paramMap) {
-        return productionApplicationService.findMrpOpenTempProcessList(paramMap);
+    public List<MrpOpenTempTO> getMrpOpenTempProcessList(HashMap<String, Object> paramMap) {
+        return productionApplicationService.getMrpOpenTempProcessList(paramMap);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class ProductionServiceFacadeImpl implements ProductionServiceFacade {
     }
 
     @Override
-    public List<MaterialCheckTempTO> findMaterialCheckTempList(Map<String, Object> paramMap) {
+    public List<MaterialCheckTempTO> getMaterialCheckTempList(Map<String, Object> paramMap) {
         return null;
     }
 }

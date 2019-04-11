@@ -16,7 +16,7 @@
         <!-- MappingJackson2JsonView 사용시 스프링 버전을 3.1.2 이상 설정 -->
         <!-- RequsetMappingHandlerMapping 등 사용시 스프링 버전을 3.1 이상 설정 -->
         <!-- 웹로직 연동시 스프링 버전을 변경해야 할 수도 있음 : 구글링 검색 -->
-        <org.springframework-version>3.2.16.RELEASE</org.springframework-version>
+        <org.springframework-version>5.1.6.RELEASE</org.springframework-version>
 
         <!-- AOP 기능을 지원하는 aspectj , 로깅 인터페이스 라이브러리인 slf4j 버전 설정 -->
         <org.aspectj-version>1.9.1</org.aspectj-version>
@@ -49,15 +49,6 @@
             <artifactId>javax.mail</artifactId>
             <version>1.6.2</version>
         </dependency>
-
-        <!-- miplatform -->
-       <dependency>
-        <groupId>com.heo</groupId>
-        <artifactId>miplatform</artifactId>
-        <version>3.2</version>
-        <scope>system</scope>
-        <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/miplatform-3.2.jar</systemPath>
-    </dependency>
 
         <!-- https://mvnrepository.com/artifact/cn.easyproject/orai18n 프로시저 배열지원
             dbcp는 버전이 낮아 우선 높은것을 놔둬봄 -->
@@ -398,6 +389,14 @@
         </dependency>
 
         <!-- 마이바티스 & 스프링 연동 -->
+        <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+
+
         <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
         <dependency>
             <groupId>org.mybatis</groupId>

@@ -9,6 +9,6 @@ public interface CodeDAO {
     List<CodeTO> selectCodeList();
     // 코드 리스트 조회
 
-    String takeSerialCode(String findSeq);
+    String getSerialCode(String findSeq);
 
 }

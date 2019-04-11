@@ -1,89 +1,46 @@
 package net.plang.logistics.business.applicationService;
 
+import net.plang.logistics.business.dao.*;
+import net.plang.logistics.business.to.*;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import net.plang.logistics.business.dao.ContractDAO;
-import net.plang.logistics.business.dao.ContractDetailDAO;
-import net.plang.logistics.business.dao.CustomerDAO;
-import net.plang.logistics.business.dao.DeliveryResultDAO;
-import net.plang.logistics.business.dao.EstimateDAO;
-import net.plang.logistics.business.dao.EstimateDetailDAO;
-import net.plang.logistics.business.to.CompleteDeliveryResultTO;
-import net.plang.logistics.business.to.ContractDetailTO;
-import net.plang.logistics.business.to.ContractTO;
-import net.plang.logistics.business.to.CustomerTO;
-import net.plang.logistics.business.to.DeliveryResultTO;
-import net.plang.logistics.business.to.EstimateDetailTO;
-import net.plang.logistics.business.to.EstimateTO;
-import net.plang.logistics.purchase.applicationService.PurchaseApplicationService;
-
+@Component
 public class BusinessApplicationServiceImpl implements BusinessApplicationService {
-
     private EstimateDAO estimateDAO;
-
     private EstimateDetailDAO estimateDetailDAO;
-
     private ContractDAO contractDAO;
-
     private ContractDetailDAO contractDetailDAO;
-
     private CustomerDAO customerDAO;
-
     private DeliveryResultDAO deliveryResultDAO;
 
-    private PurchaseApplicationService purchaseApplicationService;
-
-    public void setPurchaseApplicationService(PurchaseApplicationService purchaseApplicationService) {
-        this.purchaseApplicationService = purchaseApplicationService;
-    }
-
-    public void setDeliveryResultDAO(DeliveryResultDAO deliveryResultDAO) {
-        this.deliveryResultDAO = deliveryResultDAO;
-    }
-
-    public void setCustomerDAO(CustomerDAO customerDAO) {
-        this.customerDAO = customerDAO;
-    }
-
-    public void setContractDAO(ContractDAO contractDAO) {
-        this.contractDAO = contractDAO;
-    }
-
-    public void setContractDetailDAO(ContractDetailDAO contractDetailDAO) {
-        this.contractDetailDAO = contractDetailDAO;
-    }
-
-    public void setEstimateDetailDAO(EstimateDetailDAO estimateDetailDAO) {
-        this.estimateDetailDAO = estimateDetailDAO;
-    }
-
-    public void setEstimateDAO(EstimateDAO estimateDAO) {
-        this.estimateDAO = estimateDAO;
-    }
+//    @Autowired
+//    private PurchaseApplicationService purchaseApplicationService;
 
     @Override
-    public List<EstimateTO> findEstimateList(String empCode) {
+    public List<EstimateTO> getEstimateList(String empCode) {
         return estimateDAO.selectEstimateList(empCode);
     }
 
     @Override
-    public List<EstimateDetailTO> findEstimateDetailList() {
+    public List<EstimateDetailTO> getEstimateDetailList() {
         return estimateDetailDAO.selectEstimateDetailList();
     }
 
     @Override
-    public List<ContractTO> findContractList() {
+    public List<ContractTO> getContractList() {
         return contractDAO.selectContractList();
     }
 
     @Override
-    public List<ContractDetailTO> findContractDetailList() {
+    public List<ContractDetailTO> getContractDetailList() {
         return contractDetailDAO.selectContractDetailList();
     }
 
     @Override
-    public List<CustomerTO> findCustomerList() {
+    public List<CustomerTO> getCustomerList() {
         return customerDAO.selectCustomerList();
     }
 
@@ -152,7 +109,7 @@ public class BusinessApplicationServiceImpl implements BusinessApplicationServic
     }
 
     @Override
-    public List<EstimateTO> findEstimateDialog() {
+    public List<EstimateTO> getEstimateDialog() {
         return estimateDAO.selectEstimateDialog();
     }
 
@@ -246,7 +203,7 @@ public class BusinessApplicationServiceImpl implements BusinessApplicationServic
     }
 
     @Override
-    public List<DeliveryResultTO> findDeliveryResultList() {
+    public List<DeliveryResultTO> getDeliveryResultList() {
         return deliveryResultDAO.selectDeliveryResultList();
     }
 
@@ -292,13 +249,13 @@ public class BusinessApplicationServiceImpl implements BusinessApplicationServic
     }
 
     @Override
-    public List<ContractDetailTO> findRangedContractDetailList(String fromDate, String toDate) {
+    public List<ContractDetailTO> getRangedContractDetailList(String fromDate, String toDate) {
         return contractDetailDAO.selectRangedContractDetailList(fromDate, toDate);
     }
 
 
     @Override
-    public List<CompleteDeliveryResultTO> findCompleteDeliveryResultList() {
+    public List<CompleteDeliveryResultTO> getCompleteDeliveryResultList() {
         return deliveryResultDAO.selectCompleteDeliveryResultList();
     }
 }

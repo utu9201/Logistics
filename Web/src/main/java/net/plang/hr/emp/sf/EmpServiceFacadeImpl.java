@@ -4,9 +4,12 @@ import java.util.List;
 
 import net.plang.hr.emp.applicationService.EmpApplicationService;
 import net.plang.hr.emp.to.EmployeeTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EmpServiceFacadeImpl implements EmpServiceFacade {
-
+    @Autowired
     private EmpApplicationService empApplicationService;
 
     public void setEmpApplicationService(EmpApplicationService empApplicationService) {
@@ -14,9 +17,9 @@ public class EmpServiceFacadeImpl implements EmpServiceFacade {
     }
 
     @Override
-    public List<EmployeeTO> findEmployeeList() {
+    public List<EmployeeTO> getEmployeeList() {
 
-        return empApplicationService.findEmployeeList();
+        return empApplicationService.getEmployeeList();
 
     }
 

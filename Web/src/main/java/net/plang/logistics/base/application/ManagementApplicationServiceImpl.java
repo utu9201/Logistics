@@ -10,12 +10,18 @@ import net.plang.logistics.base.to.CompanyTO;
 import net.plang.logistics.base.to.DeptTO;
 import net.plang.logistics.base.to.PositionTO;
 import net.plang.logistics.base.to.WorkplaceTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ManagementApplicationServiceImpl implements ManagementApplicationService {
-
+    @Autowired
     private DeptDAO deptDAO;
+    @Autowired
     private CompanyDAO companyDAO;
+    @Autowired
     private WorkplaceDAO workplaceDAO;
+    @Autowired
     private PositionDAO positionDAO;
 
     public void setDeptDAO(DeptDAO deptDAO) {
@@ -35,22 +41,22 @@ public class ManagementApplicationServiceImpl implements ManagementApplicationSe
     }
 
     @Override
-    public List<DeptTO> findDeptList() {
+    public List<DeptTO> getDeptList() {
         return deptDAO.selectDeptList();
     }
 
     @Override
-    public List<CompanyTO> findCompanyList() {
+    public List<CompanyTO> getCompanyList() {
         return companyDAO.selectCompanyList();
     }
 
     @Override
-    public List<WorkplaceTO> findWorkplaceList() {
+    public List<WorkplaceTO> getWorkplaceList() {
         return workplaceDAO.selectWorkplaceList();
     }
 
     @Override
-    public List<PositionTO> findPositionList() {
+    public List<PositionTO> getPositionList() {
         return positionDAO.selectPositionList();
     }
 

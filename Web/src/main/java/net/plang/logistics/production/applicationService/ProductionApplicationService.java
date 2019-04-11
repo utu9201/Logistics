@@ -18,34 +18,34 @@ import net.plang.logistics.purchase.to.StockTO;
 import net.plang.logistics.purchase.to.WarehousingTO;
 
 public interface ProductionApplicationService {
-    List<MpsTO> findMpsList();
+    List<MpsTO> getMpsList();
 
     void registMps(List<MpsTO> mpsList, List<ContractDetailTO> contractDetailList);
 
-    List<MrpTO> findMrpList();
+    List<MrpTO> getMrpList();
 
-    List<MrpGatheringTO> findMrpGatheringList();
+    List<MrpGatheringTO> getMrpGatheringList();
 
-    List<WorkInstructionTO> findWorkInstructionList();
+    List<WorkInstructionTO> getWorkInstructionList();
 
     void batchMrpGathering(List<MrpGatheringTO> mrpGatheringList);
 
     void registWorkInstruction(List<WorkInstructionTO> workInstructionList, List<MrpGatheringTO> mrpGatheringList, List<MaterialPaymentTO> materialPaymentList, List<StockTO> stockList);
 
-    List<PrmTO> findPrmList();
+    List<PrmTO> getPrmList();
 
     void registPrm(List<WorkInstructionTO> workInstructionList, List<PrmTO> prmList, List<StockTO> stockList, List<WarehousingTO> warehousingList);
 
-    List<MrpOpenTempTO> findMrpOpenTempProcessList(String mpsNo);
+    List<MrpOpenTempTO> getMrpOpenTempProcessList(String mpsNo);
 
-    List<MrpGatheringTO2> findMrpGatheringList2(List<MrpTO> mrpList);
+    List<MrpGatheringTO2> getMrpGatheringList2(List<MrpTO> mrpList);
 
     void registMrp(Map<String, Object> paramMap);
 
     void registMrpGathering(Map<String, Object> paramMap);
 
-    List<MaterialCheckTempTO> findMaterialCheckTempList(Map<String, Object> paramMap);
+    List<MaterialCheckTempTO> getMaterialCheckTempList(Map<String, Object> paramMap);
 
-    List<MrpOpenTempTO> findMrpOpenTempProcessList(HashMap<String, Object> paramMap);
+    List<MrpOpenTempTO> getMrpOpenTempProcessList(HashMap<String, Object> paramMap);
 
 }

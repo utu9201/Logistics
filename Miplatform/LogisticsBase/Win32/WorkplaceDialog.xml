@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Window>
-	<Form Height="320" Id="WorkplaceDialog" Left="8" PidAttrib="7" Title="WorkplaceDialog" Top="8" Ver="1.0" Width="464" WorkArea="true">
+	<Form Height="320" Id="WorkplaceDialog" Left="8" PidAttrib="7" Title="사업장선택" Top="8" Ver="1.0" Width="464" WorkArea="true">
 		<Grid AutoEnterType="Key" AutoSelect="TRUE" BindDataset="gds_workplace" BoldHead="true" Bottom="286" Enable="true" EndLineColor="default" HeadHeight="25" Height="271" Id="grd_workplace" InputPanel="FALSE" Left="8" LineColor="default" OnCellClick="grd_workplace_OnCellDblClick" OnCellDBLClick="grd_workplace_OnCellDblClick" Right="353" RowHeight="25" Style="BUTTON_STYLE" TabOrder="1" TabStop="true" Top="15" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="345">
 			<contents>
 				<format id="Default">

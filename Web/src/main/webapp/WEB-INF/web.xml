@@ -2,89 +2,27 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/context/applicationContext*.xml</param-value>
+    <param-value>/WEB-INF/context/applicationContext-myBatis.xml</param-value>
   </context-param>
+
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+
   <servlet>
-    <servlet-name>base</servlet-name>
+    <servlet-name>dispatcherServlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>/WEB-INF/servlet/servlet-base.xml</param-value>
+      <param-value>/WEB-INF/servlet/servlet.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
-    <servlet-name>base</servlet-name>
-    <url-pattern>/base/*</url-pattern>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <url-pattern>/*</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>emp</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <init-param>
-      <param-name>contextConfigLocation</param-name>
-      <param-value>/WEB-INF/servlet/servlet-emp.xml</param-value>
-    </init-param>
-    <load-on-startup>2</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>emp</servlet-name>
-    <url-pattern>/hr/emp/*</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>management</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <init-param>
-      <param-name>contextConfigLocation</param-name>
-      <param-value>/WEB-INF/servlet/servlet-management.xml</param-value>
-    </init-param>
-    <load-on-startup>3</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>management</servlet-name>
-    <url-pattern>/logistics/base/*</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>purchase</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <init-param>
-      <param-name>contextConfigLocation</param-name>
-      <param-value>/WEB-INF/servlet/servlet-purchase.xml</param-value>
-    </init-param>
-    <load-on-startup>4</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>purchase</servlet-name>
-    <url-pattern>/logistics/purchase/*</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>business</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <init-param>
-      <param-name>contextConfigLocation</param-name>
-      <param-value>/WEB-INF/servlet/servlet-business.xml</param-value>
-    </init-param>
-    <load-on-startup>5</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>business</servlet-name>
-    <url-pattern>/logistics/business/*</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>production</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <init-param>
-      <param-name>contextConfigLocation</param-name>
-      <param-value>/WEB-INF/servlet/servlet-production.xml</param-value>
-    </init-param>
-    <load-on-startup>6</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>production</servlet-name>
-    <url-pattern>/logistics/production/*</url-pattern>
-  </servlet-mapping>
+
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>

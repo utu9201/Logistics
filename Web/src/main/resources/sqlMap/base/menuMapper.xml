@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.plang.base.dao.MenuDAO">
+    <resultMap type="menuTO" id="menuResult">
+
+        <result property="workplaceCode" column="WORKPLACE_CODE"/>
+        <result property="menuCode" column="MENU_CODE"/>
+        <result property="parentMenuCode" column="PARENT_MENU_CODE"/>
+        <result property="menuName" column="MENU_NAME"/>
+        <result property="menuOrder" column="MENU_ORDER"/>
+        <result property="url" column="URL"/>
+        <result property="description" column="DESCRIPTION"/>
+
+    </resultMap>
+    <select id="selectMenuList" resultMap="menuResult">
+
+        SELECT
+            WORKPLACE_CODE, MENU_CODE, PARENT_MENU_CODE
+             , MENU_NAME, MENU_ORDER, URL, DESCRIPTION
+        FROM MENU
+        ORDER BY MENU_CODE
+    </select>
+</mapper>

@@ -5,6 +5,8 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="datasetBeanMapper" class="net.plang.common.mapper.DatasetBeanMapper" />
+
     <!-- properties 파일 읽어오기 -->
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
@@ -26,9 +28,8 @@
         <property name="mapperLocations" value="classpath:/sqlMap/**/sqlMap*.xml"/>
     </bean>
 
-    <bean id="mapperFactoryBean" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-
-        <property name="basePackage" value="net.plang"/>
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="net.plang.**.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 

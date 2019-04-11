@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Window>
-	<Form Height="543" Id="WarehousingDialog" Left="8" PidAttrib="7" Title="WarehousingDialog" Top="8" Ver="1.0" Width="800" WorkArea="true">
+	<Form Height="543" Id="WarehousingDialog" Left="8" PidAttrib="7" Title="입고" Top="8" Ver="1.0" Width="800" WorkArea="true">
 		<Grid AutoFit="TRUE" BindDataset="gds_orderDetail" BkColor2="default" BoldHead="true" Bottom="522" Enable="true" EndLineColor="default" Font="한컴산뜻돋움,11" HeadHeight="30" Height="410" Id="grd_orderDetail" InputPanel="FALSE" Left="8" LineColor="default" MinWidth="100" Right="783" RowHeight="25" TabOrder="1" TabStop="true" Top="112" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="775">
 			<contents>
 				<format id="Default">

@@ -14,7 +14,9 @@ import net.plang.logistics.purchase.to.OrderGatheringTO;
 import net.plang.logistics.purchase.to.OrderInfoTO;
 import net.plang.logistics.purchase.to.StockTO;
 import net.plang.logistics.purchase.to.WarehousingTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PurchaseApplicationServiceImpl implements PurchaseApplicationService {
 
     private ItemDAO itemDAO;
@@ -42,12 +44,6 @@ public class PurchaseApplicationServiceImpl implements PurchaseApplicationServic
         this.stockDAO = stockDAO;
     }
 
-    private ProductionApplicationService productionApplicationService;
-
-    public void setProductionApplicationService(ProductionApplicationService productionApplicationService) {
-        this.productionApplicationService = productionApplicationService;
-    }
-
     public void setOrderInfoDAO(OrderInfoDAO orderInfoDAO) {
         this.orderInfoDAO = orderInfoDAO;
     }
@@ -65,7 +61,7 @@ public class PurchaseApplicationServiceImpl implements PurchaseApplicationServic
     }
 
     @Override
-    public List<ItemTO> findItemList() {
+    public List<ItemTO> getItemList() {
         return itemDAO.selectItemList();
     }
 
@@ -75,22 +71,22 @@ public class PurchaseApplicationServiceImpl implements PurchaseApplicationServic
     }
 
     @Override
-    public List<BomTO> findBomList() {
+    public List<BomTO> getBomList() {
         return bomDAO.selectBomList();
     }
 
     @Override
-    public List<BomDeployTO> findBomDeployList(String itemCode, String deployCondition) {
+    public List<BomDeployTO> getBomDeployList(String itemCode, String deployCondition) {
         return bomDAO.selectBomDeployList(itemCode, deployCondition);
     }
 
     @Override
-    public List<OrderInfoTO> findOrderInfoList() {
+    public List<OrderInfoTO> getOrderInfoList() {
         return orderInfoDAO.selectOrderInfoList();
     }
 
     @Override
-    public List<OrderDetailTO> findOrderDetailList() {
+    public List<OrderDetailTO> getOrderDetailList() {
         return orderDetailDAO.selectOrderDetailList();
     }
 
@@ -126,13 +122,13 @@ public class PurchaseApplicationServiceImpl implements PurchaseApplicationServic
     }
 
     @Override
-    public List<OrderGatheringTO> findOrderGatheringList() {
+    public List<OrderGatheringTO> getOrderGatheringList() {
 
         return orderGatheringDAO.selectOrderGatheringList();
     }
 
     @Override
-    public List<StockTO> findStockList() {
+    public List<StockTO> getStockList() {
         return stockDAO.selectStockList();
     }
 
@@ -153,7 +149,7 @@ public class PurchaseApplicationServiceImpl implements PurchaseApplicationServic
     }
 
     @Override
-    public List<MaterialPaymentTO> findMaterialPaymentList() {
+    public List<MaterialPaymentTO> getMaterialPaymentList() {
         return materialPaymentDAO.selectMaterialPaymentList();
     }
 
@@ -174,7 +170,7 @@ public class PurchaseApplicationServiceImpl implements PurchaseApplicationServic
     }
 
     @Override
-    public List<WarehousingTO> findWarehousingList() {
+    public List<WarehousingTO> getWarehousingList() {
         return warehousingDAO.selectWarehousingList();
     }
 

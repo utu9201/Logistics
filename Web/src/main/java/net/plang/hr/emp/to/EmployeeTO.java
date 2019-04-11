@@ -3,9 +3,11 @@ package net.plang.hr.emp.to;
 import lombok.Data;
 import net.plang.common.annotation.Dataset;
 import net.plang.common.to.BaseTO;
+import org.apache.ibatis.type.Alias;
 
 @Data
 @Dataset(name = "gds_employee")
+@Alias("EmployeeTo")
 public class EmployeeTO extends BaseTO {
 
     private String empCode;

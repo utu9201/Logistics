@@ -5,5 +5,5 @@ import net.plang.base.to.ContractReportTO;
 import java.util.List;
 
 public interface ReportDAO {
-    List<ContractReportTO> getContractReport(String contractNo);
+    List<ContractReportTO> selectContractReport(String contractNo);
 }

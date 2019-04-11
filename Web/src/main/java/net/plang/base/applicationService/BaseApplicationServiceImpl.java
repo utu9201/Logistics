@@ -4,6 +4,7 @@ package net.plang.base.applicationService;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
 import net.plang.base.dao.CodeDAO;
@@ -17,12 +18,17 @@ import net.plang.base.to.CodeTO;
 import net.plang.base.to.MenuTO;
 import net.plang.hr.emp.dao.EmployeeDAO;
 import net.plang.hr.emp.to.EmployeeTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BaseApplicationServiceImpl implements BaseApplicationService {
-
+    @Autowired
     private CodeDAO codeDAO;
+    @Autowired
     private CodeDetailDAO codeDetailDAO;
+    @Autowired
     private MenuDAO menuDAO;
+    @Autowired
     private EmployeeDAO employeeDAO;
 
     public void setEmployeeDAO(EmployeeDAO employeeDAO) {
@@ -42,12 +48,12 @@ public class BaseApplicationServiceImpl implements BaseApplicationService {
     }
 
     @Override
-    public List<CodeTO> findCodeList() {
+    public List<CodeTO> getCodeList() {
         return codeDAO.selectCodeList();
     }
 
     @Override
-    public List<CodeDetailTO> findCodeDetailList() {
+    public List<CodeDetailTO> getCodeDetailList() {
         return codeDetailDAO.selectCodeDetailList();
     }
 
@@ -73,13 +79,13 @@ public class BaseApplicationServiceImpl implements BaseApplicationService {
     }
 
     @Override
-    public List<MenuTO> findMenuList() {
+    public List<MenuTO> getMenuList() {
         return menuDAO.selectMenuList();
     }
 
     @Override
-    public String takeSerialCode(String findSeq) {
-        return codeDAO.takeSerialCode(findSeq);
+    public String getSerialCode(String findSeq) {
+        return codeDAO.getSerialCode(findSeq);
     }
 
     @Override
